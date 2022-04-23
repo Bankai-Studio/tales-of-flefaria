@@ -1,2 +1,2 @@
 # miniature-palm-tree
-2D Platform game
+The project's scope is to create a 2D platform-like game for educational purposes.
