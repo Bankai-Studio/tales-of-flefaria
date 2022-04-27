@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="8">
  <tileset firstgid="1" source="NormalTerrain.tsx"/>
- <layer id="1" name="Tile Layer 1" width="20" height="10">
+ <layer id="1" name="Terrain" width="20" height="10">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -15,4 +15,16 @@
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
 </data>
  </layer>
+ <objectgroup id="2" name="Objects">
+  <object id="4" x="32" y="160">
+   <polygon points="0,0 96,0 96,-32 0,-32"/>
+  </object>
+  <object id="5" x="288" y="160">
+   <polygon points="0,0 192,0 192,-32 0,-32"/>
+  </object>
+  <object id="6" x="0" y="224">
+   <polygon points="0,0 0,96 640,96 640,0"/>
+  </object>
+  <object id="7" name="Player" x="160" y="160" width="32" height="32"/>
+ </objectgroup>
 </map>

@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mpt.handlers.MapHandler;
+import com.mpt.objects.player.Player;
+import sun.jvm.hotspot.runtime.posix.POSIXSignals;
 
 import static com.mpt.constants.Constants.PPM;
 
@@ -27,19 +29,20 @@ public class GameScreen extends ScreenAdapter {
     private Box2DDebugRenderer box2DDebugRenderer;
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private MapHandler mapHandler;
+    private Player player;
     private int screenWidth, screenHeight;
 
     public GameScreen() {
         this.camera = new OrthographicCamera();
         this.batch = new SpriteBatch();
-        this.world = new World(new Vector2(0, 0), false);
+        this.world = new World(new Vector2(0, -25f), false);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         this.screenWidth = Gdx.graphics.getWidth();
         this.screenHeight = Gdx.graphics.getHeight();
 
         this.camera.setToOrtho(false, screenWidth, screenHeight);
 
-        this.mapHandler = new MapHandler();
+        this.mapHandler = new MapHandler(this);
         this.orthogonalTiledMapRenderer = mapHandler.setup();
     }
 
@@ -65,10 +68,23 @@ public class GameScreen extends ScreenAdapter {
 
         batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
+        player.update();
     }
 
     private void cameraUpdate() {
-        camera.position.set(new Vector3(0, 0, 0));
+        Vector3 position = camera.position;
+        position.x = Math.round(player.getBody().getPosition().x * PPM * 10) / 10f;
+        position.y = Math.round(player.getBody().getPosition().y * PPM * 10) / 10f;
+        camera.position.set(position);
         camera.update();
     }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 }
