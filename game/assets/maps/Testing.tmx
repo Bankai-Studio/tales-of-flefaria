@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="32">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="38">
  <tileset firstgid="1" source="NormalTerrain.tsx"/>
  <tileset firstgid="101" source="ObjectsTileset.tsx"/>
  <layer id="4" name="BackgroundAssets" width="56" height="38">
@@ -59,9 +59,6 @@
   <object id="26" x="448" y="864">
    <polygon points="0,0 0,32 96,32 96,0"/>
   </object>
-  <object id="28" name="Player" x="160" y="896">
-   <polygon points="0,0 0,32 32,32 32,0"/>
-  </object>
   <object id="29" x="32" y="960">
    <polygon points="0,0 0,-960 -32,-960 -32,0"/>
   </object>
@@ -71,6 +68,7 @@
   <object id="31" x="1792" y="896">
    <polygon points="0,0 0,-896 -32,-896 -32,0"/>
   </object>
+  <object id="37" name="Player" x="192" y="896" width="32" height="32"/>
  </objectgroup>
  <layer id="3" name="BackgroundNature" width="56" height="38">
   <data encoding="base64" compression="zlib">
