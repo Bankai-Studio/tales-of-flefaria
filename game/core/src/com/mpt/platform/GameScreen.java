@@ -72,8 +72,8 @@ public class GameScreen extends ScreenAdapter {
 
     private void cameraUpdate() {
         Vector3 position = camera.position;
-        position.x = Math.round(player.getBody().getPosition().x * PPM * 10) / 10f;
-        position.y = Math.round(player.getBody().getPosition().y * PPM * 10) / 10f;
+        position.x = Math.round(player.getBody().getPosition().x * PPM * 100) / 100f;
+        position.y = Math.round(player.getBody().getPosition().y * PPM * 100) / 100f;
         camera.position.set(position);
         camera.update();
     }
