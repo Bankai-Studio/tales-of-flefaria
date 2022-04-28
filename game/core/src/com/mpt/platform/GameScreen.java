@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mpt.handlers.MapHandler;
 import com.mpt.objects.player.Player;
-import sun.jvm.hotspot.runtime.posix.POSIXSignals;
 
 import static com.mpt.constants.Constants.PPM;
 
