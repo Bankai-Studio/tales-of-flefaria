@@ -33,11 +33,11 @@ public class Player extends GameEntity{
 
     private void checkUserInput() {
         velX = 0;
-        if(Gdx.input.isKeyPressed(Input.Keys.D))
+        if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             velX = 1;
-        if(Gdx.input.isKeyPressed(Input.Keys.A))
+        if(Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT))
             velX = -1;
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && jumpCounter < 2) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)) && jumpCounter < 2) {
             float force = body.getMass() * 9;
             body.setLinearVelocity(body.getLinearVelocity().x, 0);
             body.applyLinearImpulse(new Vector2(0, force), body.getPosition(), true);
