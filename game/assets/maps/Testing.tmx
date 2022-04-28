@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="32">
  <tileset firstgid="1" source="NormalTerrain.tsx"/>
  <tileset firstgid="101" source="ObjectsTileset.tsx"/>
  <layer id="4" name="BackgroundAssets" width="56" height="38">
@@ -7,6 +7,71 @@
    eJzt1sEOgjAMBuCePfsQnj179m6iSAD1+dSXdA0uzoUCbsNmy/8lvbAE+rOSQQQAAAAAAAAAkFZjaq/dxEKOpg7vqkztdNtJqqVPNrcqzaYSu9Bwxk6zqYRWJO9ho9hXKu6M3qjMWeU9XNPwPpaSkdmcftarZlML8b9L3sMN9edJrviM5wxb+j4X/crRWJ5f890n1tvwNoOdqe+9pvh8Ep5xfo8nYf0hXPff13Ni3Td37+z5Ecrep464R8xzU83nnOf8k/QPI81rLty5HcuYaz6AEr0AdHAxNw==
   </data>
  </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="8" x="1216" y="992">
+   <polygon points="0,0 96,96 0,96"/>
+  </object>
+  <object id="9" x="0" y="960">
+   <polygon points="0,0 320,0 320,256 0,256"/>
+  </object>
+  <object id="10" x="352" y="928">
+   <polygon points="0,0 0,32 -32,32"/>
+  </object>
+  <object id="11" x="320" y="960">
+   <polygon points="0,0 32,0 32,256 0,256"/>
+  </object>
+  <object id="12" x="352" y="928">
+   <polygon points="0,0 96,0 96,288 0,288"/>
+  </object>
+  <object id="13" x="448" y="1056">
+   <polygon points="0,0 96,0 96,160 0,160"/>
+  </object>
+  <object id="14" x="544" y="928">
+   <polygon points="0,0 128,0 128,288 0,288"/>
+  </object>
+  <object id="15" x="672" y="992">
+   <polygon points="0,0 0,224 544,224 544,0"/>
+  </object>
+  <object id="16" x="1216" y="1088">
+   <polygon points="0,0 96,0 96,128 0,128"/>
+  </object>
+  <object id="17" x="1312" y="1088">
+   <polygon points="0,0 480,0 480,128 0,128"/>
+  </object>
+  <object id="18" x="1472" y="992">
+   <polygon points="0,0 0,32 128,32 128,0"/>
+  </object>
+  <object id="21" x="1632" y="960">
+   <polygon points="0,0 0,32 32,32 32,0"/>
+  </object>
+  <object id="22" x="1696" y="896">
+   <polygon points="0,0 0,32 96,32 96,0"/>
+  </object>
+  <object id="23" x="1632" y="832">
+   <polygon points="0,0 0,32 32,32 32,0"/>
+  </object>
+  <object id="24" x="1568" y="768">
+   <polygon points="0,0 0,32 32,32 32,0"/>
+  </object>
+  <object id="25" x="1408" y="704">
+   <polygon points="0,0 0,32 128,32 128,0"/>
+  </object>
+  <object id="26" x="448" y="864">
+   <polygon points="0,0 0,32 96,32 96,0"/>
+  </object>
+  <object id="28" name="Player" x="160" y="896">
+   <polygon points="0,0 0,32 32,32 32,0"/>
+  </object>
+  <object id="29" x="32" y="960">
+   <polygon points="0,0 0,-960 -32,-960 -32,0"/>
+  </object>
+  <object id="30" x="1792" y="1088">
+   <polygon points="0,0 0,-160 -32,-160 -32,0"/>
+  </object>
+  <object id="31" x="1792" y="896">
+   <polygon points="0,0 0,-896 -32,-896 -32,0"/>
+  </object>
+ </objectgroup>
  <layer id="3" name="BackgroundNature" width="56" height="38">
   <data encoding="base64" compression="zlib">
    eJztzqsNACAQREGq5pPQEU1iEEgQQEhmzJ1Y8UIAAAAAAABgR3sd8Kk0/XFhn8etB1rghvI6ANjSAW+RAwY=
