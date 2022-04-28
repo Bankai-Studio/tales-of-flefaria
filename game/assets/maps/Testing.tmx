@@ -1,30 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="8">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
  <tileset firstgid="1" source="NormalTerrain.tsx"/>
- <layer id="1" name="Terrain" width="20" height="10">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,6,7,8,0,0,0,0,0,6,7,7,7,7,8,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-36,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,
-4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
-</data>
+ <tileset firstgid="101" source="ObjectsTileset.tsx"/>
+ <layer id="4" name="BackgroundAssets" width="56" height="38">
+  <data encoding="base64" compression="zlib">
+   eJzt1sEOgjAMBuCePfsQnj179m6iSAD1+dSXdA0uzoUCbsNmy/8lvbAE+rOSQQQAAAAAAAAAkFZjaq/dxEKOpg7vqkztdNtJqqVPNrcqzaYSu9Bwxk6zqYRWJO9ho9hXKu6M3qjMWeU9XNPwPpaSkdmcftarZlML8b9L3sMN9edJrviM5wxb+j4X/crRWJ5f890n1tvwNoOdqe+9pvh8Ep5xfo8nYf0hXPff13Ni3Td37+z5Ecrep464R8xzU83nnOf8k/QPI81rLty5HcuYaz6AEr0AdHAxNw==
+  </data>
  </layer>
- <objectgroup id="2" name="Objects">
-  <object id="4" x="32" y="160">
-   <polygon points="0,0 96,0 96,-32 0,-32"/>
-  </object>
-  <object id="5" x="288" y="160">
-   <polygon points="0,0 192,0 192,-32 0,-32"/>
-  </object>
-  <object id="6" x="0" y="224">
-   <polygon points="0,0 0,96 640,96 640,0"/>
-  </object>
-  <object id="7" name="Player" x="160" y="160" width="32" height="32"/>
- </objectgroup>
+ <layer id="3" name="BackgroundNature" width="56" height="38">
+  <data encoding="base64" compression="zlib">
+   eJztzqsNACAQREGq5pPQEU1iEEgQQEhmzJ1Y8UIAAAAAAABgR3sd8Kk0/XFhn8etB1rghvI6ANjSAW+RAwY=
+  </data>
+ </layer>
+ <layer id="2" name="PlatformAssets" width="56" height="38">
+  <data encoding="base64" compression="zlib">
+   eJzt1lEKgCAQRVF3HVQ7qJaSaStshhCC+iiasvAeeD+C8pBBdA4AAAAAAAAoR5TMuUsA2BkNz6oljaQ1PBPnBcl0cc8g6SWdfZ3HpK7a/WjWdA6r9+rc4nMXMKYzGHOX+Kn0R7J8k7FKd6uzGTbretfe8T8FvmIBtH4QmA==
+  </data>
+ </layer>
+ <layer id="1" name="Platform" width="56" height="38">
+  <data encoding="base64" compression="zlib">
+   eJztlcsKwjAQRYMWFayPtWsfqMUHuhN3gnXjh/nVztAMhhBJGqOi3AOHlNhOZjJpVQoAAAAAAAAAAAAAAPAvbMitdvflXEAa9t9OACQhZR9bZJvsJIwJwpBvbOj39UauyYa2af1+JXOyS/YS5ZiKCTlWVd58zTnmxpx4JOfaixWjJDNyQZ4+krUb1/u3VFVuAz0WepQ5dqgetbFnK0ZpPDNV1d7IXpl7Jz2WPcyte0xXnlpC/+czj1Kv1Mmj3aO+59lhwDocd6Tl+w8BNYbgW9cl90h6wOMsIkbhmJPzItcpapTYSxVXqyvPGJ+tzzWa51bOvW3usPdCvnXqqnOvq07z3fDFTbXf7+5nzDqxZ/CXvQPPaBMs
+  </data>
+ </layer>
 </map>
