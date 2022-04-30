@@ -1,5 +1,6 @@
-package com.mpt.platform;
+package com.mpt.interfaces;
 
+/*
 import com.badlogic.gdx.Game;
 
 public class Menu extends Game {
@@ -8,3 +9,4 @@ public class Menu extends Game {
         this.setScreen(new LoginScreen(this));
     }
 }
+*/
