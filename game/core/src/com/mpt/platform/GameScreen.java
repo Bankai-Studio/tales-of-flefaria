@@ -5,11 +5,14 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.MapHandler;
 import com.mpt.handlers.OrthogonalBleedingHandler;
 import com.mpt.objects.player.Player;
@@ -30,20 +33,23 @@ public class GameScreen extends ScreenAdapter {
     private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private MapHandler mapHandler;
     private Player player;
+    private Viewport viewport;
     private int screenWidth, screenHeight;
 
     public GameScreen() {
-        this.camera = new OrthographicCamera();
-        this.batch = new SpriteBatch();
-        this.world = new World(new Vector2(0, -25f), false);
-        this.box2DDebugRenderer = new Box2DDebugRenderer();
-        this.screenWidth = Gdx.graphics.getWidth();
-        this.screenHeight = Gdx.graphics.getHeight();
+        batch = new SpriteBatch();
+        world = new World(new Vector2(0, -25f), false);
+        box2DDebugRenderer = new Box2DDebugRenderer();
+        screenWidth = Gdx.graphics.getWidth();
+        screenHeight = Gdx.graphics.getHeight();
 
-        this.camera.setToOrtho(false, screenWidth, screenHeight);
+        mapHandler = new MapHandler(this);
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch);
 
-        this.mapHandler = new MapHandler(this);
-        this.orthogonalTiledMapRenderer = mapHandler.setup(1f, batch);
+        viewport = new ExtendViewport(30 * PPM, 20 * PPM);
+        camera = (OrthographicCamera) viewport.getCamera();
+        camera.setToOrtho(false, screenWidth, screenHeight);
+
     }
 
     @Override
@@ -53,6 +59,8 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        viewport.apply();
+
         batch.begin();
         orthogonalTiledMapRenderer.render();
         // Render the batch of sprites here
@@ -60,6 +68,11 @@ public class GameScreen extends ScreenAdapter {
 
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
 
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        viewport.update(width, height);
     }
 
     private void update() {
@@ -73,8 +86,8 @@ public class GameScreen extends ScreenAdapter {
 
     private void cameraUpdate() {
         Vector3 position = camera.position;
-        position.x = Math.round(player.getBody().getPosition().x * PPM);
-        position.y = Math.round(player.getBody().getPosition().y * PPM);
+        position.x = player.getBody().getPosition().x * PPM;
+        position.y = player.getBody().getPosition().y * PPM;
         camera.position.set(position);
         camera.update();
     }
