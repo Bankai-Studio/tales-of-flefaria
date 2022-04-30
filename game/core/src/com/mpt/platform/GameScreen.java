@@ -96,8 +96,11 @@ public class GameScreen extends ScreenAdapter {
         return world;
     }
 
+    public SpriteBatch getBatch() {
+        return batch;
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
-
 }
