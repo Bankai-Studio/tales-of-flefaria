@@ -1,16 +1,18 @@
-package com.mpt.game;
+package com.mpt.platform;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.mpt.game.Game;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setForegroundFPS(60);
 
-		config.setTitle("miniature-palm-tree");
-		new Lwjgl3Application(new Game(), config);
+		config.setTitle("Tales of Flefaria");
+		config.useVsync(true);
+		config.setForegroundFPS(Lwjgl3ApplicationConfiguration.getDisplayMode().refreshRate);
+		config.setWindowedMode(1600, 900);
+
+		new Lwjgl3Application(new PlatformGame(), config);
 	}
 }
