@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mpt.handlers.MapHandler;
+import com.mpt.handlers.OrthogonalBleedingHandler;
 import com.mpt.objects.player.Player;
 
 import static com.mpt.constants.Constants.PPM;
@@ -26,7 +27,7 @@ public class GameScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
-    private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
+    private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private MapHandler mapHandler;
     private Player player;
     private int screenWidth, screenHeight;
@@ -42,7 +43,7 @@ public class GameScreen extends ScreenAdapter {
         this.camera.setToOrtho(false, screenWidth, screenHeight);
 
         this.mapHandler = new MapHandler(this);
-        this.orthogonalTiledMapRenderer = mapHandler.setup();
+        this.orthogonalTiledMapRenderer = mapHandler.setup(1f, batch);
     }
 
     @Override
@@ -52,8 +53,8 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        orthogonalTiledMapRenderer.render();
         batch.begin();
+        orthogonalTiledMapRenderer.render();
         // Render the batch of sprites here
         batch.end();
 
@@ -72,8 +73,8 @@ public class GameScreen extends ScreenAdapter {
 
     private void cameraUpdate() {
         Vector3 position = camera.position;
-        position.x = Math.round(player.getBody().getPosition().x * PPM * 100) / 100f;
-        position.y = Math.round(player.getBody().getPosition().y * PPM * 100) / 100f;
+        position.x = Math.round(player.getBody().getPosition().x * PPM);
+        position.y = Math.round(player.getBody().getPosition().y * PPM);
         camera.position.set(position);
         camera.update();
     }

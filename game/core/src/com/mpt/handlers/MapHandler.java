@@ -1,5 +1,6 @@
 package com.mpt.handlers;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
@@ -26,10 +27,10 @@ public class MapHandler {
         this.gameScreen = gameScreen;
     }
 
-    public OrthogonalTiledMapRenderer setup() {
+    public OrthogonalBleedingHandler setup(float unitScale, SpriteBatch batch) {
         tiledMap = new TmxMapLoader().load("maps/Testing.tmx");
         parseMapObjects(tiledMap.getLayers().get("Objects").getObjects());
-        return new OrthogonalTiledMapRenderer(tiledMap);
+        return new OrthogonalBleedingHandler(tiledMap, unitScale, batch);
     }
 
     private void parseMapObjects(MapObjects mapObjects) {
