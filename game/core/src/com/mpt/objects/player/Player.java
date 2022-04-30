@@ -61,8 +61,8 @@ public class Player extends GameEntity{
             velX = 1;
         if(Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT))
             velX = -1;
-        if((!running || body.getLinearVelocity().y != 0) && speed > 10f) speed-=0.2;
-        if((running && body.getLinearVelocity().y == 0) && speed<= 16f) speed += 0.4;
+        if((!running || body.getLinearVelocity().y != 0) && speed > 10f) speed-=0.2f;
+        if((running && body.getLinearVelocity().y == 0) && speed<= 16f) speed += 0.4f;
         if((Gdx.input.isKeyJustPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)) && jumpCounter < 2) {
             float force = body.getMass() * 9;
             body.setLinearVelocity(body.getLinearVelocity().x, 0);
