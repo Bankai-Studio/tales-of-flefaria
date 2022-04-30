@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="45">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="46">
  <tileset firstgid="1" source="NormalTerrain.tsx"/>
  <tileset firstgid="101" source="ObjectsTileset.tsx"/>
- <layer id="4" name="BackgroundAssets" width="56" height="38">
-  <data encoding="base64" compression="zlib">
-   eJzt1sEOgjAMBuCePfsQnj179m6iSAD1+dSXdA0uzoUCbsNmy/8lvbAE+rOSQQQAAAAAAAAAkFZjaq/dxEKOpg7vqkztdNtJqqVPNrcqzaYSu9Bwxk6zqYRWJO9ho9hXKu6M3qjMWeU9XNPwPpaSkdmcftarZlML8b9L3sMN9edJrviM5wxb+j4X/crRWJ5f890n1tvwNoOdqe+9pvh8Ep5xfo8nYf0hXPff13Ni3Td37+z5Ecrep464R8xzU83nnOf8k/QPI81rLty5HcuYaz6AEr0AdHAxNw==
-  </data>
- </layer>
+ <tileset firstgid="179" source="Sky.tsx"/>
  <objectgroup id="5" name="Objects">
   <object id="9" x="0" y="960">
    <polygon points="0,0 320,0 320,256 0,256"/>
@@ -57,7 +53,13 @@
   <object id="44" x="1312" y="1088">
    <polygon points="0,0 480,0 480,128 0,128"/>
   </object>
+  <object id="45" name="Sky" gid="179" x="-3.00668" y="1218" width="1798.01" height="896"/>
  </objectgroup>
+ <layer id="4" name="BackgroundAssets" width="56" height="38">
+  <data encoding="base64" compression="zlib">
+   eJzt1sEOgjAMBuCePfsQnj179m6iSAD1+dSXdA0uzoUCbsNmy/8lvbAE+rOSQQQAAAAAAAAAkFZjaq/dxEKOpg7vqkztdNtJqqVPNrcqzaYSu9Bwxk6zqYRWJO9ho9hXKu6M3qjMWeU9XNPwPpaSkdmcftarZlML8b9L3sMN9edJrviM5wxb+j4X/crRWJ5f890n1tvwNoOdqe+9pvh8Ep5xfo8nYf0hXPff13Ni3Td37+z5Ecrep464R8xzU83nnOf8k/QPI81rLty5HcuYaz6AEr0AdHAxNw==
+  </data>
+ </layer>
  <layer id="3" name="BackgroundNature" width="56" height="38">
   <data encoding="base64" compression="zlib">
    eJztzqsNACAQREGq5pPQEU1iEEgQQEhmzJ1Y8UIAAAAAAABgR3sd8Kk0/XFhn8etB1rghvI6ANjSAW+RAwY=
