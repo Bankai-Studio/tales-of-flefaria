@@ -12,11 +12,30 @@ public class Player extends GameEntity{
 
     private int jumpCounter;
     private boolean running;
+    public boolean playerDead = false;
+    private int damageToEnemy; //danni al nemico
+    private int minDmg = 50;  //50 di attacco
+    private int maxDmg = 150; //150 di attacco
+    private int player_health;
+    private int damageValue;
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
         this.speed = 10f;
         this.jumpCounter = 0;
+        player_health = 3; //3 vite all'inizio del livello
+        damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg);
+    }
+
+    public void attackEnemy(Enemy enemy){
+        damageValue = damageToEnemy;
+        enemy.getDamaged(damageValue);
+    }
+
+    public void playerGetDamaged(int damageV){
+        player_health -= damageV;
+        if(health == 0)
+            playerDead = true;
     }
 
     @Override
