@@ -1,5 +1,6 @@
-package com.mpt.platform;
+package com.mpt.interfaces;
 
+/*
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -55,3 +56,4 @@ public class LoginScreen implements Screen {
 
     }
 }
+*/
