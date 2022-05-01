@@ -20,7 +20,7 @@ public class Player extends GameEntity{
     private int damageValue;
     private final int MAXSTM = 100;
     private int stamina = MAXSTM;
-    private final int STMXJ = 10;
+    private final int STMXJ = 15;
     private final float TSTM = 0.03f;
     private float timer = 0f;
     private boolean stmRealoding = false;
@@ -55,7 +55,6 @@ public class Player extends GameEntity{
             stamina++;
             timer = 0;
         }
-        System.out.println("stm:"+stamina);
 
         checkUserInput();
     }
