@@ -24,7 +24,7 @@ public class Player extends GameEntity{
     private final float TSTM = 0.03f;
     private float timer = 0f;
     private boolean stmRealoding = false;
-    private int minStm2Sprint = 100;
+    private int minStm2Sprint = MAXSTM;
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
