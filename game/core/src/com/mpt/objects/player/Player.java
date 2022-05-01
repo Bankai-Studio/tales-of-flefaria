@@ -6,30 +6,39 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
+import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
 
 public class Player extends GameEntity{
 
-    private int jumpCounter;
-    private boolean running;
+    private int jumpCounter = 0; //number of jumps done
+    private boolean running; //true if left shift is pressed
     public boolean playerDead = false;
     private int damageToEnemy; //danni al nemico
     private int minDmg = 50;  //50 di attacco
     private int maxDmg = 150; //150 di attacco
-    private int player_health;
+    private int player_health = 3; //3 vite all'inizio del livello
     private int damageValue;
-    private final int MAXSTM = 100;
-    private int stamina = MAXSTM;
-    private final int STMXJ = 10;
-    private final float TSTM = 0.02f;
-    private float timer = 0f;
+    private final int MAXSTM = 100; //Maximum of stamina
+    private int stamina = MAXSTM; //Current stamina
+    private final int STMXJ = 10; //Stamina reduction for every jump
+    private final float TSTM = 0.03f; //Stamina reloading speed
+    private float timerStm = 0f; //Timer used to regenerate stamina
+    private boolean sprintReloading = false; //True if the sprinting is in reloading
+    private int minStm2Sprint = MAXSTM; //Stamina required to sprint again
+    private boolean doubleJumpReady = true; //True if the double jump is ready
+    private float timerDoubleJump = 0f; //Timer used to reload the double jump
+    private final float TDJMP = 2f; //Time required to reload the double jump
+    private boolean lastFrameVelYWas0 = false; //True if in the last frame the Y velocity was 0
+    private final float MAXSPEED = 14f; //Maximum of speed
+    private final float WALKSPEED = 8f; //Walking speed
+    private final float SPEEDREDUCTION = 0.2f; //Speed decreasing every cycle while not springing
+    private final float SPEEDGAIN = 0.4f; //Speed increasing for every cycle while springing
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
-        this.speed = 10f;
-        this.jumpCounter = 0;
-        player_health = 3; //3 vite all'inizio del livello
-        damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg);
+        this.speed = WALKSPEED;
+        damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg); //??????
     }
 
     public void attackEnemy(Enemy enemy){
@@ -48,11 +57,18 @@ public class Player extends GameEntity{
         x = body.getPosition().x * PPM;
         y = body.getPosition().y * PPM;
 
-        timer += Gdx.graphics.getDeltaTime();
-        if((!running || body.getLinearVelocity().x == 0) && stamina < MAXSTM && timer > TSTM){
+        //Stamina reloading system
+        timerStm += Gdx.graphics.getDeltaTime();
+        if((!running || body.getLinearVelocity().x == 0 || sprintReloading) && stamina < MAXSTM && timerStm > TSTM){
             stamina++;
-            timer = 0;
+            timerStm = 0f;
         }
+        if(DEBUGGING) System.out.println(stamina);
+
+        //Double jump reloading system
+        timerDoubleJump += Gdx.graphics.getDeltaTime();
+        if(!doubleJumpReady && timerDoubleJump > TDJMP)
+            doubleJumpReady = true;
 
         checkUserInput();
     }
@@ -64,27 +80,34 @@ public class Player extends GameEntity{
 
     private void checkUserInput() {
         velX = 0;
-        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
-            running = true;
-        else
-            running = false;
+        running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
         if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             velX = 1;
         if(Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT))
             velX = -1;
-        if((!running || body.getLinearVelocity().y != 0) && speed > 8f) speed -= 0.2f;
-        if((running && body.getLinearVelocity().y == 0) && speed<= 14f && stamina > 0) speed += 0.4f;
-        if(running && body.getLinearVelocity().x != 0 && body.getLinearVelocity().y == 0 && stamina > 0) stamina -= 1;
-        if((Gdx.input.isKeyJustPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)) && jumpCounter < 2 && stamina >= STMXJ) {
-            float force = body.getMass() * 9;
-            body.setLinearVelocity(body.getLinearVelocity().x, 0);
-            body.applyLinearImpulse(new Vector2(0, force), body.getPosition(), true);
-            jumpCounter++;
-            stamina -= STMXJ;
+        if(stamina == 0 && running) sprintReloading = true;
+        if(sprintReloading && stamina >= minStm2Sprint) sprintReloading = false;
+        if((!running || body.getLinearVelocity().y != 0 || sprintReloading) && speed > WALKSPEED) speed -= SPEEDREDUCTION;
+        if((running && body.getLinearVelocity().y == 0) && speed<= MAXSPEED && stamina > 0 && !sprintReloading) speed += SPEEDGAIN;
+        if(running && body.getLinearVelocity().x != 0 && body.getLinearVelocity().y == 0 && stamina > 0 && !sprintReloading) stamina -= 1;
+        if((Gdx.input.isKeyJustPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)) && stamina >= STMXJ) {
+            if(jumpCounter == 0 || (jumpCounter == 1 && doubleJumpReady)){
+                if(jumpCounter == 1){
+                    doubleJumpReady = false;
+                    timerDoubleJump = 0f;
+                }
+                float force = body.getMass() * 9;
+                body.setLinearVelocity(body.getLinearVelocity().x, 0);
+                body.applyLinearImpulse(new Vector2(0, force), body.getPosition(), true);
+                jumpCounter++;
+                stamina -= STMXJ;
+            }
         }
 
-        if(body.getLinearVelocity().y == 0)
-            jumpCounter = 0;
+        if(body.getLinearVelocity().y == 0){
+            if(lastFrameVelYWas0) jumpCounter = 0;
+            else lastFrameVelYWas0 = true;
+        } else lastFrameVelYWas0 = false;
 
         body.setLinearVelocity(velX * speed, body.getLinearVelocity().y < 25 ? body.getLinearVelocity().y : 25);
     }
