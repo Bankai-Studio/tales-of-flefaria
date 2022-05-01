@@ -20,11 +20,12 @@ public class Player extends GameEntity{
     private int damageValue;
     private final int MAXSTM = 100;
     private int stamina = MAXSTM;
-    private final int STMXJ = 15;
-    private final float TSTM = 0.03f;
-    private float timer = 0f;
-    private boolean stmRealoding = false;
-    private int minStm2Sprint = MAXSTM;
+    private final int STMXJ = 10;
+    private final float TSTM = 0.02f;
+    private float timerStm = 0f;
+    private boolean doubleJumpReady = true;
+    private float timerDoubleJump = 0f;
+    private final float TDJMP = 2f;
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
@@ -50,11 +51,15 @@ public class Player extends GameEntity{
         x = body.getPosition().x * PPM;
         y = body.getPosition().y * PPM;
 
-        timer += Gdx.graphics.getDeltaTime();
-        if((!running || body.getLinearVelocity().x == 0 || stmRealoding) && stamina < MAXSTM && timer > TSTM){
+        timerStm += Gdx.graphics.getDeltaTime();
+        if((!running || body.getLinearVelocity().x == 0) && stamina < MAXSTM && timerStm > TSTM){
             stamina++;
-            timer = 0;
+            timerStm = 0f;
         }
+
+        timerDoubleJump += Gdx.graphics.getDeltaTime();
+        if(!doubleJumpReady && timerDoubleJump > TDJMP)
+            doubleJumpReady = true;
 
         checkUserInput();
     }
@@ -74,17 +79,21 @@ public class Player extends GameEntity{
             velX = 1;
         if(Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT))
             velX = -1;
-        if(stamina == 0 && running) stmRealoding = true;
-        if(stmRealoding && stamina >= minStm2Sprint) stmRealoding = false;
-        if((!running || body.getLinearVelocity().y != 0 || stmRealoding) && speed > 8f) speed -= 0.2f;
-        if((running && body.getLinearVelocity().y == 0) && speed<= 14f && stamina > 0 && !stmRealoding) speed += 0.4f;
-        if(running && body.getLinearVelocity().x != 0 && body.getLinearVelocity().y == 0 && stamina > 0 && !stmRealoding) stamina -= 1;
-        if((Gdx.input.isKeyJustPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)) && jumpCounter < 2 && stamina >= STMXJ) {
-            float force = body.getMass() * 9;
-            body.setLinearVelocity(body.getLinearVelocity().x, 0);
-            body.applyLinearImpulse(new Vector2(0, force), body.getPosition(), true);
-            jumpCounter++;
-            stamina -= STMXJ;
+        if((!running || body.getLinearVelocity().y != 0) && speed > 8f) speed -= 0.2f;
+        if((running && body.getLinearVelocity().y == 0) && speed<= 14f && stamina > 0) speed += 0.4f;
+        if(running && body.getLinearVelocity().x != 0 && body.getLinearVelocity().y == 0 && stamina > 0) stamina -= 1;
+        if((Gdx.input.isKeyJustPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)) && stamina >= STMXJ) {
+            if(jumpCounter == 0 || (jumpCounter == 1 && doubleJumpReady)){
+                if(jumpCounter == 1 && doubleJumpReady){
+                    doubleJumpReady = false;
+                    timerDoubleJump = 0f;
+                }
+                float force = body.getMass() * 9;
+                body.setLinearVelocity(body.getLinearVelocity().x, 0);
+                body.applyLinearImpulse(new Vector2(0, force), body.getPosition(), true);
+                jumpCounter++;
+                stamina -= STMXJ;
+            }
         }
 
         if(body.getLinearVelocity().y == 0)
