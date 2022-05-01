@@ -17,6 +17,7 @@ import com.mpt.handlers.MapHandler;
 import com.mpt.handlers.OrthogonalBleedingHandler;
 import com.mpt.objects.player.Player;
 
+import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
 
 /*
@@ -66,7 +67,7 @@ public class GameScreen extends ScreenAdapter {
         // Render the batch of sprites here
         batch.end();
 
-        box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+        if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
 
     }
 
