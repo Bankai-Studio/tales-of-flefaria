@@ -5,11 +5,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.mpt.objects.GameEntity;
+import com.mpt.objects.enemy.Enemy;
 
 import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
 
-public class Player extends GameEntity{
+public class Player extends GameEntity {
 
     private int jumpCounter = 0; //number of jumps done
     private boolean running; //true if left shift is pressed
