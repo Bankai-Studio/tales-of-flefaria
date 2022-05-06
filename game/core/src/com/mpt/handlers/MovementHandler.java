@@ -82,8 +82,6 @@ public class MovementHandler {
         player.setX(player.getBody().getPosition().x * PPM);
         player.setY(player.getBody().getPosition().y * PPM);
 
-        System.out.println(player.getPlayerStamina());
-
         regenStamina(delta);
         reloadDoubleJump(delta);
 
