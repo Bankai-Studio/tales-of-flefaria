@@ -37,12 +37,8 @@ public class Enemy extends GameEntity {
     }
 
     @Override
-    public void update() {
-
-    }
+    public void update(float delta) {}
 
     @Override
-    public void render(SpriteBatch batch) {
-
-    }
+    public void render(SpriteBatch batch) {}
 }

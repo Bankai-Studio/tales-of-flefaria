@@ -1,6 +1,8 @@
 package com.mpt.platform;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.MapHandler;
+import com.mpt.handlers.MovementHandler;
 import com.mpt.handlers.OrthogonalBleedingHandler;
 import com.mpt.objects.player.Player;
 
@@ -23,7 +26,7 @@ ScreenAdapter is a convenience implementation of the Screen class, allows you to
     public class GameScreen implements Screen {}
 */
 
-public class GameScreen extends ScreenAdapter {
+public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     private OrthographicCamera camera;
     private SpriteBatch batch;
@@ -33,6 +36,8 @@ public class GameScreen extends ScreenAdapter {
     private MapHandler mapHandler;
     private Player player;
     private Viewport viewport;
+    private MovementHandler movementHandler;
+
     private int screenWidth, screenHeight;
 
     public GameScreen() {
@@ -49,11 +54,12 @@ public class GameScreen extends ScreenAdapter {
         camera = (OrthographicCamera) viewport.getCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
 
+        movementHandler = new MovementHandler(player);
     }
 
     @Override
     public void render(float delta) {
-        this.update();
+        this.update(delta);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -74,13 +80,62 @@ public class GameScreen extends ScreenAdapter {
         viewport.update(width, height);
     }
 
-    private void update() {
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(this);
+    }
+
+    @Override
+    public void hide() {
+        Gdx.input.setInputProcessor(null);
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A)
+            movementHandler.leftPressed();
+        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)
+            movementHandler.rightPressed();
+        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP)
+            movementHandler.spacePressed();
+        if(keycode == Input.Keys.SHIFT_LEFT)
+            movementHandler.shiftPressed();
+        return true;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A)
+            movementHandler.leftReleased();
+        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)
+            movementHandler.rightReleased();
+        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP)
+            movementHandler.spaceReleased();
+        if(keycode == Input.Keys.SHIFT_LEFT)
+            movementHandler.shiftReleased();
+        return true;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {return false;}
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {return false;}
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {return false;}
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {return false;}
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {return false;}
+    @Override
+    public boolean scrolled(float amountX, float amountY) {return false;}
+
+    private void update(float delta) {
         world.step(1/60f, 6, 2);
         this.cameraUpdate();
 
         batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
-        player.update();
+        movementHandler.update(delta);
     }
 
     private void cameraUpdate() {
@@ -91,6 +146,7 @@ public class GameScreen extends ScreenAdapter {
         camera.update();
     }
 
+    // Getters
     public World getWorld() {
         return world;
     }
@@ -102,4 +158,5 @@ public class GameScreen extends ScreenAdapter {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
 }
