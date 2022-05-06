@@ -1,9 +1,11 @@
-package com.mpt.objects.player;
+package com.mpt.objects.enemy;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.mpt.objects.player.Player;
+import com.mpt.objects.GameEntity;
 
-public class Enemy extends GameEntity{
+public class Enemy extends GameEntity {
     final double damageValueToPlayer = 0.5;
     private int health = 0;
     private int maxHealth = 350;
