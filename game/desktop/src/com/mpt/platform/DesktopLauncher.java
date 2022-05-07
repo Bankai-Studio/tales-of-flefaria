@@ -1,5 +1,6 @@
 package com.mpt.platform;
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -10,7 +11,7 @@ public class DesktopLauncher {
 
 		config.setTitle("Tales of Flefaria");
 		config.useVsync(true);
-		config.setForegroundFPS(Lwjgl3ApplicationConfiguration.getDisplayMode().refreshRate);
+		config.setForegroundFPS(60);
 		config.setWindowedMode(1600, 900);
 
 		new Lwjgl3Application(new PlatformGame(), config);
