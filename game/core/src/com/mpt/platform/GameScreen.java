@@ -19,11 +19,6 @@ import com.mpt.objects.player.Player;
 import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
 
-/*
-ScreenAdapter is a convenience implementation of the Screen class, allows you to override what you need.
-    public class GameScreen implements Screen {}
-*/
-
 public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     private OrthographicCamera camera;
