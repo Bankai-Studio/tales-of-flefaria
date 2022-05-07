@@ -54,7 +54,7 @@
    <polygon points="0,0 480,0 480,128 0,128"/>
   </object>
   <object id="45" name="Sky" gid="179" x="-3.00668" y="1218" width="1798.01" height="896"/>
-  <object id="46" name="Slime" x="352" y="864" width="32" height="32"/>
+  <object id="46" name="Slime" x="352" y="864" width="20" height="20"/>
  </objectgroup>
  <layer id="4" name="BackgroundAssets" width="56" height="38">
   <data encoding="base64" compression="zlib">

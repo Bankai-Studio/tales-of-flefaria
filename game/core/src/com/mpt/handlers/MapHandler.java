@@ -51,6 +51,19 @@ public class MapHandler {
                     );
                     gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
+
+                if(rectangleName.equals("Slime")) {
+                    Body body = BodyHandler.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            false,
+                            gameScreen.getWorld()
+                    );
+
+                }
+
             }
         }
     }
