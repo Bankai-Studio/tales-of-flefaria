@@ -47,6 +47,7 @@ public class MapHandler {
                             rectangle.getWidth(),
                             rectangle.getHeight(),
                             false,
+                            false,
                             gameScreen.getWorld()
                     );
                     gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -59,11 +60,22 @@ public class MapHandler {
                             rectangle.getWidth(),
                             rectangle.getHeight(),
                             false,
+                            false,
                             gameScreen.getWorld()
                     );
-
                 }
-
+                if(rectangleName.equals("Checkpoint")) {
+                    Body body = BodyHandler.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            true,
+                            gameScreen.getWorld()
+                    );
+                    gameScreen.setPreferencesHandler(new PreferencesHandler());
+                }
             }
         }
     }
