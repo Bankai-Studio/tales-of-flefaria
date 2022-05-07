@@ -98,6 +98,7 @@ public class OrthogonalBleedingHandler extends OrthogonalTiledMapRenderer {
                     final int rotations = cell.getRotation();
 
                     TextureRegion region = tile.getTextureRegion();
+                    removeBleeding(region);
 
                     float x1 = x + tile.getOffsetX() * unitScale;
                     float y1 = y + tile.getOffsetY() * unitScale;
