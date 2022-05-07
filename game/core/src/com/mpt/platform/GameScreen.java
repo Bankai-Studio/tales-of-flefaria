@@ -13,9 +13,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mpt.handlers.MapHandler;
-import com.mpt.handlers.MovementHandler;
-import com.mpt.handlers.OrthogonalBleedingHandler;
+import com.mpt.handlers.*;
 import com.mpt.objects.player.Player;
 
 import static com.mpt.constants.Constants.DEBUGGING;
@@ -37,6 +35,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private Player player;
     private Viewport viewport;
     private MovementHandler movementHandler;
+    private CheckpointHandler checkpointHandler;
+    private PreferencesHandler preferencesHandler;
 
     private int screenWidth, screenHeight;
 
@@ -55,6 +55,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         camera.setToOrtho(false, screenWidth, screenHeight);
 
         movementHandler = new MovementHandler(player);
+        checkpointHandler = new CheckpointHandler(preferencesHandler);
     }
 
     @Override
@@ -157,6 +158,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setPreferencesHandler(PreferencesHandler preferencesHandler) {
+        this.preferencesHandler = preferencesHandler;
     }
 
 }

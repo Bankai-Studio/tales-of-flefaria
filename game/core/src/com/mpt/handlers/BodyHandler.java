@@ -7,7 +7,7 @@ import static com.mpt.constants.Constants.PPM;
 public class BodyHandler {
     public BodyHandler() {}
 
-    public static Body createBody(float x, float y, float width, float height, boolean isStatic, World world) {
+    public static Body createBody(float x, float y, float width, float height, boolean isStatic, boolean isSensor, World world) {
         BodyDef bodyDef = new BodyDef();
 
         if(isStatic)
@@ -26,6 +26,8 @@ public class BodyHandler {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         fixtureDef.friction = 0;
+        fixtureDef.isSensor = isSensor;
+
         body.createFixture(fixtureDef);
         polygonShape.dispose();
         return body;
