@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="46">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="56" height="38" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="47">
  <tileset firstgid="1" source="NormalTerrain.tsx"/>
  <tileset firstgid="101" source="ObjectsTileset.tsx"/>
  <tileset firstgid="179" source="Sky.tsx"/>
@@ -54,6 +54,7 @@
    <polygon points="0,0 480,0 480,128 0,128"/>
   </object>
   <object id="45" name="Sky" gid="179" x="-3.00668" y="1218" width="1798.01" height="896"/>
+  <object id="46" name="Slime" x="352" y="864" width="32" height="32"/>
  </objectgroup>
  <layer id="4" name="BackgroundAssets" width="56" height="38">
   <data encoding="base64" compression="zlib">
