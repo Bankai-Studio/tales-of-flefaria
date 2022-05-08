@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
+import com.mpt.objects.enemy.Slime;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
@@ -63,6 +64,7 @@ public class MapHandler {
                             false,
                             gameScreen.getWorld()
                     );
+                    gameScreen.setSlime(new Slime(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
                 if(rectangleName.equals("Checkpoint")) {
                     Body body = BodyHandler.createBody(

@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
+import com.mpt.objects.enemy.Slime;
 import com.mpt.objects.player.Player;
 
 import static com.mpt.constants.Constants.DEBUGGING;
@@ -28,6 +29,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private MapHandler mapHandler;
     private Player player;
+    private Slime slime;
     private Viewport viewport;
     private MovementHandler movementHandler;
     private CheckpointHandler checkpointHandler;
@@ -155,8 +157,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         this.player = player;
     }
 
-    public void setPreferencesHandler(PreferencesHandler preferencesHandler) {
-        this.preferencesHandler = preferencesHandler;
-    }
+    public void setSlime(Slime slime) {this.slime = slime;}
+
+    public void setPreferencesHandler(PreferencesHandler preferencesHandler) {this.preferencesHandler = preferencesHandler;}
 
 }
