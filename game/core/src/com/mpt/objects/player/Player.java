@@ -35,8 +35,6 @@ public class Player extends GameEntity {
         state = State.IDLE;
         playerSpeed = 8f;
         playerStamina = maxPlayerStamina;
-
-        damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg); //??????
     }
 
     @Override
@@ -45,6 +43,7 @@ public class Player extends GameEntity {
     @Override
     public void render(SpriteBatch batch) {}
     public void attackEnemy(Enemy enemy){
+        damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg);
         damageValue = damageToEnemy;
         enemy.getDamaged(damageValue);
     }
@@ -54,6 +53,7 @@ public class Player extends GameEntity {
         if(health == 0)
             playerDead = true;
     }
+    
 
     // Setters
 
