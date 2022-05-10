@@ -54,6 +54,7 @@ public class Player extends GameEntity {
         if(health == 0)
             playerDead = true;
     }
+    
 
     // Setters
 
