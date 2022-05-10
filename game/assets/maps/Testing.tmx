@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="NormalTerrain.tsx"/>
  <tileset firstgid="101" source="ObjectsTileset.tsx"/>
  <tileset firstgid="179" source="Sky.tsx"/>
- <imagelayer id="11" name="Background">
+ <imagelayer id="11" name="Background" visible="0">
   <image source="Images/Sky.png" width="1792" height="1216"/>
  </imagelayer>
  <objectgroup id="5" name="Objects">
