@@ -59,7 +59,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         camera.setToOrtho(false, screenWidth, screenHeight);
 
         movementHandler = new MovementHandler(player);
-        checkpointHandler = new CheckpointHandler(preferencesHandler);
+        checkpointHandler = new CheckpointHandler(this, preferencesHandler);
     }
 
     @Override

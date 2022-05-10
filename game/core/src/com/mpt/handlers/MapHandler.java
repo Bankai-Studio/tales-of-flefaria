@@ -77,7 +77,7 @@ public class MapHandler {
                             true,
                             gameScreen.getWorld()
                     );
-                    gameScreen.addCheckpoint(new Checkpoint());
+                    gameScreen.addCheckpoint(new Checkpoint(body));
                 }
             }
         }
