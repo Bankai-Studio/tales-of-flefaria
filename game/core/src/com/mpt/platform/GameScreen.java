@@ -14,8 +14,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
+import com.mpt.objects.GameEntity;
+import com.mpt.objects.checkpoint.Checkpoint;
+import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.enemy.Slime;
 import com.mpt.objects.player.Player;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
@@ -29,7 +35,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private MapHandler mapHandler;
     private Player player;
-    private Slime slime;
+    private HashMap<String, Enemy> enemies;
+    private ArrayList<Checkpoint> checkpoints;
     private Viewport viewport;
     private MovementHandler movementHandler;
     private CheckpointHandler checkpointHandler;
@@ -52,7 +59,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         camera.setToOrtho(false, screenWidth, screenHeight);
 
         movementHandler = new MovementHandler(player);
-        checkpointHandler = new CheckpointHandler(preferencesHandler);
+        checkpointHandler = new CheckpointHandler(this, preferencesHandler);
     }
 
     @Override
@@ -157,7 +164,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         this.player = player;
     }
 
-    public void setSlime(Slime slime) {this.slime = slime;}
+    public void addEnemy(String type, Enemy enemy) {
+        enemies.put(type, enemy);
+    }
+    public void addCheckpoint(Checkpoint checkpoint) {
+        checkpoints.add(checkpoint);
+    }
 
     public void setPreferencesHandler(PreferencesHandler preferencesHandler) {this.preferencesHandler = preferencesHandler;}
 
