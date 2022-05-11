@@ -31,7 +31,9 @@ public class MovementHandler {
     private boolean wasLastFrameYVelocityZero;
     private boolean isSprintReloading;
     private float doubleJumpTimer;
-    private float staminaRegenTimer;
+    private float doubleJumpRegenTime;
+    private float staminaTimer;
+    private float staminaRegenTime;
 
     static Map<InputKeys, Boolean> inputKeys = new HashMap<InputKeys, Boolean>();
     static {
@@ -50,7 +52,9 @@ public class MovementHandler {
         wasLastFrameYVelocityZero = false;
         isSprintReloading = false;
         doubleJumpTimer = 0f;
-        staminaRegenTimer = 0f;
+        staminaTimer = 0f;
+        doubleJumpRegenTime = 0f;
+        staminaRegenTime = 0.03f;
     }
 
     public void leftPressed() {
@@ -148,16 +152,16 @@ public class MovementHandler {
     }
 
     private void regenStamina(float delta) {
-        staminaRegenTimer += delta;
-        if((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().x == 0 || isSprintReloading) && player.getPlayerStamina() < player.getPlayerMaxStamina() && staminaRegenTimer > 0.03f) {
+        staminaTimer += delta;
+        if((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().x == 0 || isSprintReloading) && player.getPlayerStamina() < player.getPlayerMaxStamina() && staminaTimer > staminaRegenTime) {
             player.setPlayerStamina(player.getPlayerStamina() + 1);
-            staminaRegenTimer = 0f;
+            staminaTimer = 0f;
         }
     }
 
     private void reloadDoubleJump(float delta) {
         doubleJumpTimer += delta;
-        if(!isDoubleJumpReady && doubleJumpTimer > 2f)
+        if(!isDoubleJumpReady && doubleJumpTimer > doubleJumpRegenTime)
             isDoubleJumpReady = true;
     }
 
