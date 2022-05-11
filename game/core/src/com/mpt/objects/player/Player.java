@@ -47,7 +47,6 @@ public class Player extends GameEntity {
         damageValue = damageToEnemy;
         enemy.getDamaged(damageValue);
     }
-
     public void playerGetDamaged(int damageV){
         player_health -= damageV;
         if(health == 0)

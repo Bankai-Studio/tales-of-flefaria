@@ -12,17 +12,33 @@ public class Enemy extends GameEntity {
     private int minHealth = 150;
     private int kill_counter;
     private int damageToPlayer;
+
+    private float x = body.getPosition().x;
+
+    private float velX;
     private boolean isDead = false;
 
     public Enemy(float width, float height, Body body) {
         super(width, height, body);
         health = (int)(Math.random()*(maxHealth-minHealth+1)+minHealth);
     }
+    @Override
+    public void update(float delta) {}
+
+    @Override
+    public void render(SpriteBatch batch) {}
+
 
     public void getDamaged(int damage){
         health = -damage;
         if(health <= 0)
             isDead = true;
+    }
+
+    boolean enemyIsDead(){
+        if(isDead)
+            return true;
+        return false;
     }
 
     public void killCounter(Player player){
@@ -36,9 +52,8 @@ public class Enemy extends GameEntity {
         player.playerGetDamaged(damageToPlayer);
     }
 
-    @Override
-    public void update(float delta) {}
+    public void move(float velX){
+        x += velX;
+    }
 
-    @Override
-    public void render(SpriteBatch batch) {}
 }
