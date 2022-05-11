@@ -43,6 +43,7 @@ public class MapHandler {
                 String rectangleName = mapObject.getName();
 
                 if(rectangleName.equals("Player")) {
+
                     Body body = BodyHandler.createBody(
                             rectangle.getX() + rectangle.getWidth() / 2,
                             rectangle.getY() + rectangle.getHeight() / 2,
@@ -54,6 +55,7 @@ public class MapHandler {
                             gameScreen.getWorld()
                     );
                     gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body));
+                    body.setTransform(gameScreen.getPreferencesHandler().getRespawnPosition(), body.getAngle());
                 }
 
                 if(rectangleName.equals("Slime")) {
@@ -64,7 +66,7 @@ public class MapHandler {
                             rectangle.getHeight(),
                             false,
                             false,
-                            1f,
+                            2f,
                             gameScreen.getWorld()
                     );
                     gameScreen.addEnemy("Slime", new Slime(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -80,7 +82,7 @@ public class MapHandler {
                             1f,
                             gameScreen.getWorld()
                     );
-                    gameScreen.addCheckpoint(new Checkpoint(body));
+                    gameScreen.addCheckpoint(new Checkpoint(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
             }
         }

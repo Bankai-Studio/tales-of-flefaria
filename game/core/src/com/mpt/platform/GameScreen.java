@@ -39,7 +39,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private ArrayList<Checkpoint> checkpoints;
     private Viewport viewport;
     private MovementHandler movementHandler;
-    private CheckpointHandler checkpointHandler;
     private PreferencesHandler preferencesHandler;
 
     private int screenWidth, screenHeight;
@@ -50,6 +49,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         enemies = new HashMap<>();
         checkpoints = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
+
+        preferencesHandler = new PreferencesHandler();
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -62,9 +63,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         camera.setToOrtho(false, screenWidth, screenHeight);
 
         movementHandler = new MovementHandler(player);
-        checkpointHandler = new CheckpointHandler(this, preferencesHandler);
 
-        world.setContactListener(new CollisionHandler());
+        world.setContactListener(new CollisionHandler(preferencesHandler));
     }
 
     @Override
@@ -165,6 +165,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return batch;
     }
 
+    public PreferencesHandler getPreferencesHandler() {
+        return preferencesHandler;
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -175,7 +179,4 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void addCheckpoint(Checkpoint checkpoint) {
         checkpoints.add(checkpoint);
     }
-
-    public void setPreferencesHandler(PreferencesHandler preferencesHandler) {this.preferencesHandler = preferencesHandler;}
-
 }

@@ -1,12 +1,15 @@
 package com.mpt.objects.player;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.mpt.handlers.PreferencesHandler;
 import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
 
+import static com.mpt.constants.Constants.PPM;
+
 public class Player extends GameEntity {
-    public boolean playerDead = false;
     private int damageToEnemy; //danni al nemico
     private int minDmg = 50;  //50 di attacco
     private int maxDmg = 150; //150 di attacco
@@ -28,17 +31,24 @@ public class Player extends GameEntity {
     // Variables
     private State state;
     private int playerStamina;
+    private Vector2 respawnPosition;
+    private boolean canRespawn;
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
-
         state = State.IDLE;
         playerSpeed = 8f;
         playerStamina = maxPlayerStamina;
+        canRespawn = true;
+
+        respawnPosition = new Vector2(body.getPosition().x, body.getPosition().y);
+        body.setUserData(this);
     }
 
     @Override
-    public void update(float delta) {}
+    public void update(float delta) {
+        checkPlayerDeath();
+    }
 
     @Override
     public void render(SpriteBatch batch) {}
@@ -50,9 +60,18 @@ public class Player extends GameEntity {
     public void playerGetDamaged(int damageV){
         player_health -= damageV;
         if(health == 0)
-            playerDead = true;
+            state = State.DYING;
     }
-    
+
+    private void checkPlayerDeath() {
+        if(state.equals(State.DYING) && canRespawn) {
+            body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
+            state = State.IDLE;
+            canRespawn = false;
+        }
+        else
+            canRespawn = true;
+    }
 
     // Setters
 
@@ -88,6 +107,8 @@ public class Player extends GameEntity {
         this.playerStamina = stamina;
     }
 
+    public void setRespawnPosition(Vector2 respawnPosition) {this.respawnPosition = respawnPosition;}
+
     // Getters
 
     public float getVelocityX() {
@@ -114,4 +135,7 @@ public class Player extends GameEntity {
         return state;
     }
 
+    public Vector2 getRespawnPosition() {
+        return respawnPosition;
+    }
 }
