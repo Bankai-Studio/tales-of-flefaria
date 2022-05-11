@@ -50,6 +50,7 @@ public class MapHandler {
                             rectangle.getHeight(),
                             false,
                             false,
+                            0f,
                             gameScreen.getWorld()
                     );
                     gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -63,6 +64,7 @@ public class MapHandler {
                             rectangle.getHeight(),
                             false,
                             false,
+                            1f,
                             gameScreen.getWorld()
                     );
                     gameScreen.addEnemy("Slime", new Slime(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -75,6 +77,7 @@ public class MapHandler {
                             rectangle.getHeight(),
                             true,
                             true,
+                            1f,
                             gameScreen.getWorld()
                     );
                     gameScreen.addCheckpoint(new Checkpoint(body));
