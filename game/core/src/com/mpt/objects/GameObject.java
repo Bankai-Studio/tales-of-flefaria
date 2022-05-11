@@ -24,4 +24,12 @@ public abstract class GameObject {
     public Body getBody() {
         return body;
     }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
 }

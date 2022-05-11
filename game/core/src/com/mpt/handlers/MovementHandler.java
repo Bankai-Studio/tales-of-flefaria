@@ -94,21 +94,21 @@ public class MovementHandler {
     }
 
     private void checkUserInput() {
-        if(inputKeys.get(InputKeys.LEFT)) {
+        if(inputKeys.get(InputKeys.LEFT) && !player.getPlayerState().equals(State.DYING)) {
             //player.setFacingLeft();
             player.setPlayerState(State.WALKING);
             player.setVelocityX(-1);
         }
-        if(inputKeys.get(InputKeys.RIGHT)) {
+        if(inputKeys.get(InputKeys.RIGHT) && !player.getPlayerState().equals(State.DYING)) {
             //player.setFacingRight();
             player.setPlayerState(State.WALKING);
             player.setVelocityX(1);
         }
-        if((inputKeys.get(InputKeys.LEFT) && inputKeys.get(InputKeys.RIGHT)) || (!inputKeys.get(InputKeys.LEFT) && !inputKeys.get(InputKeys.RIGHT))){
+        if((inputKeys.get(InputKeys.LEFT) && inputKeys.get(InputKeys.RIGHT)) || (!inputKeys.get(InputKeys.LEFT) && !inputKeys.get(InputKeys.RIGHT)) && !player.getPlayerState().equals(State.DYING)){
             player.setPlayerState(State.IDLE);
             player.setVelocityX(0);
         }
-        if(inputKeys.get(InputKeys.SPACE)) {
+        if(inputKeys.get(InputKeys.SPACE) && !player.getPlayerState().equals(State.DYING)) {
             inputKeys.put(InputKeys.SPACE, false);
             if(player.getPlayerStamina() >= 10) {
                 player.setPlayerState(State.JUMPING);
@@ -125,7 +125,7 @@ public class MovementHandler {
                 }
             }
         }
-        if(inputKeys.get(InputKeys.SHIFT)) {
+        if(inputKeys.get(InputKeys.SHIFT) && !player.getPlayerState().equals(State.DYING)) {
             player.setPlayerState(State.RUNNING);
             if(player.getPlayerStamina() == 0) isSprintReloading = true;
             if(player.getBody().getLinearVelocity().y == 0 && player.getPlayerSpeed() <= 14f && player.getPlayerStamina() > 0 && !isSprintReloading)
@@ -134,6 +134,9 @@ public class MovementHandler {
                 player.setPlayerStamina(player.getPlayerStamina() - 1);
 
         }
+
+        if(player.getPlayerState().equals(State.DYING))
+            player.setVelocityX(0);
 
         if(isSprintReloading && player.getPlayerStamina() == player.getPlayerMaxStamina())
             isSprintReloading = false;

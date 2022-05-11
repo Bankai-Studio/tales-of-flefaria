@@ -44,7 +44,7 @@ public class Enemy extends GameEntity {
     public void killCounter(Player player){
         if(isDead)
             kill_counter += 1;
-        if(player.playerDead)
+        if(player.getPlayerState().equals(Player.State.DYING))
             kill_counter = 0;
     }
 

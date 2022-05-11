@@ -23,6 +23,8 @@ public class Slime extends Enemy {
         super(width, height, body);
         xPos = body.getPosition().x; //initial position of slime
         yPos = body.getPosition().y; //initial position of slime
+
+
         setToDestroy = false;
         destroyed = false;
 
