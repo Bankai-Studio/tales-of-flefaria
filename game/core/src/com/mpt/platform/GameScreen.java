@@ -47,6 +47,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public GameScreen() {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -25f), false);
+        enemies = new HashMap<>();
+        checkpoints = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
