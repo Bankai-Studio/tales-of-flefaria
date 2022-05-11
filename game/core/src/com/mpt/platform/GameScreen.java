@@ -50,6 +50,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         enemies = new HashMap<>();
         checkpoints = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
+
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
 
@@ -62,6 +63,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         movementHandler = new MovementHandler(player);
         checkpointHandler = new CheckpointHandler(this, preferencesHandler);
+
+        world.setContactListener(new CollisionHandler());
     }
 
     @Override
