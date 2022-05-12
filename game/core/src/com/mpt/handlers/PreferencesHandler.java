@@ -5,6 +5,9 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.Vector2;
 
 public class PreferencesHandler {
+
+    private Vector2 defaultSpawn;
+
     public PreferencesHandler() {}
 
     protected Preferences getPreferences() {
@@ -18,7 +21,11 @@ public class PreferencesHandler {
     }
 
     public Vector2 getRespawnPosition() {
-        return new Vector2(getPreferences().getFloat("xRespawnPosition", 6.46875f), getPreferences().getFloat("yRespawnPosition", 9.53125f));
+        return new Vector2(getPreferences().getFloat("xRespawnPosition", defaultSpawn.x), getPreferences().getFloat("yRespawnPosition", (defaultSpawn.y)));
     }
 
+    public void setDefaultSpawn(Vector2 defaultSpawn) {
+        this.defaultSpawn = defaultSpawn;
+        System.out.println(defaultSpawn.x + " " + defaultSpawn.y);
+    }
 }
