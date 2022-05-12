@@ -12,9 +12,7 @@ public class Enemy extends GameEntity {
     private int minHealth = 150;
     private int kill_counter;
     private int damageToPlayer;
-
     private float x = body.getPosition().x;
-
     private float velX;
     private boolean isDead = false;
 

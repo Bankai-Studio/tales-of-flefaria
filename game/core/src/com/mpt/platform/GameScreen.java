@@ -22,6 +22,7 @@ import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
@@ -146,6 +147,13 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
         movementHandler.update(delta);
+        for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
+            if(enemy.getKey().equals("Slime")) {
+                Slime slime = (Slime) enemy.getValue();
+                slime.update(delta);
+            }
+        }
+
     }
 
     private void cameraUpdate() {

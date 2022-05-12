@@ -1,11 +1,10 @@
 package com.mpt.objects.enemy;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.objects.player.Player;
 
 public class Slime extends Enemy {
-
-    final static int rangeOfMovement = 450; //max position slime can reach
 
     private boolean setToDestroy = false; //boolean says if enemy still to be killed
 
@@ -15,39 +14,66 @@ public class Slime extends Enemy {
 
     private float yPos = 0; //initial yPos of slime
 
-    private float xSlime = 0; //x of pos of slime
 
-    private float velX = 10; //velocity of slime
+    private float xMaxLimitDX;
 
+
+    private float xMaxLimitSX;
+
+
+    private boolean switchDirectionToRight = false;
+
+    private boolean switchDirectionToLeft = false;
+
+    private float walkSpeed = 1;
     public Slime(float width, float height, Body body) {
         super(width, height, body);
         xPos = body.getPosition().x; //initial position of slime
         yPos = body.getPosition().y; //initial position of slime
-
-
         setToDestroy = false;
         destroyed = false;
 
 
     }
 
+    @Override
+    public void update(float delta) {
+      movementSlime();
+    }
+
+    @Override
+    public void render(SpriteBatch batch) {
+
+    }
+
 
     public void movementSlime(){
-        /*xSlime = xPos;
-        if(xSlime > rangeOfMovement){ //if slime going right side, he'll go left side
-            velX = -1; //decreasing position to left side
-            //need sprite with opposite side
-        }else
-            velX = 1; //slime return walks on right side
+        xMaxLimitDX = xPos + 1f;
+        xMaxLimitSX = xPos - 1f;
+        if(body.getPosition().x < xMaxLimitDX)
+            body.setLinearVelocity(walkSpeed * (1), body.getLinearVelocity().y);
+        else
+            switchDirectionToLeft = true;
+        if(switchDirectionToLeft && body.getPosition().x > xMaxLimitSX)
+            body.setLinearVelocity(walkSpeed * (-1), body.getLinearVelocity().y);
+
+
+
+
+        /*
+        if(xPos <= xMaxLimitDX)
+            body.setLinearVelocity(walkSpeed*-1,body.getLinearVelocity().y);
+        if(xPos >= xMaxLimitSX)
+            body.setLinearVelocity(walkSpeed*1,body.getLinearVelocity().y);
+        System.out.println(body.getPosition().x + " " + xMaxLimitSX + " " + xMaxLimitDX);
         */
     }
 
     public void getHit(Player player){
-        if(enemyIsDead())
+        if(enemyIsDead()){
             destroyed = true;
-    }
-
-    public void speedMove(){
-        move(velX);
+            killCounter(player);
+        }
+        destroyed = false;
     }
 }
