@@ -12,12 +12,8 @@ public class Checkpoint extends GameObject {
     }
 
     @Override
-    public void update(float delta) {
-
-    }
+    public void update(float delta) {}
 
     @Override
-    public void render(SpriteBatch batch) {
-
-    }
+    public void render(SpriteBatch batch) {}
 }

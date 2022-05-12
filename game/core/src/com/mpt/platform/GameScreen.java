@@ -50,10 +50,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         checkpoints = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
-        preferencesHandler = new PreferencesHandler();
-
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
+
+        preferencesHandler = new PreferencesHandler();
 
         mapHandler = new MapHandler(this);
         orthogonalTiledMapRenderer = mapHandler.setup(1f, batch);

@@ -35,6 +35,13 @@ public class MapHandler {
     }
 
     private void parseMapObjects(MapObjects mapObjects) {
+
+        if(mapObjects.get("Spawnpoint") != null && mapObjects.get("Spawnpoint") instanceof RectangleMapObject) {
+            Rectangle rectangle = (((RectangleMapObject) mapObjects.get("Spawnpoint")).getRectangle());
+            gameScreen.getPreferencesHandler().setDefaultSpawn(new Vector2(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2));
+            System.out.println(rectangle.getX() + rectangle.getWidth() / 2 + " " + rectangle.getY() + rectangle.getHeight() / 2);
+        }
+
         for(MapObject mapObject : mapObjects) {
             if(mapObject instanceof PolygonMapObject)
                 createStaticObject((PolygonMapObject) mapObject);
@@ -79,7 +86,7 @@ public class MapHandler {
                             rectangle.getHeight(),
                             true,
                             true,
-                            1f,
+                            0f,
                             gameScreen.getWorld()
                     );
                     gameScreen.addCheckpoint(new Checkpoint(rectangle.getWidth(), rectangle.getHeight(), body));
