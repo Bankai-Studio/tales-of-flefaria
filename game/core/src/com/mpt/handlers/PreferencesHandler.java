@@ -26,6 +26,5 @@ public class PreferencesHandler {
 
     public void setDefaultSpawn(Vector2 defaultSpawn) {
         this.defaultSpawn = defaultSpawn;
-        System.out.println(defaultSpawn.x + " " + defaultSpawn.y);
     }
 }

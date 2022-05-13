@@ -38,8 +38,7 @@ public class MapHandler {
 
         if(mapObjects.get("Spawnpoint") != null && mapObjects.get("Spawnpoint") instanceof RectangleMapObject) {
             Rectangle rectangle = (((RectangleMapObject) mapObjects.get("Spawnpoint")).getRectangle());
-            gameScreen.getPreferencesHandler().setDefaultSpawn(new Vector2(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2));
-            System.out.println(rectangle.getX() + rectangle.getWidth() / 2 + " " + rectangle.getY() + rectangle.getHeight() / 2);
+            gameScreen.getPreferencesHandler().setDefaultSpawn(new Vector2((rectangle.getX() + rectangle.getWidth() / 2) /  PPM, (rectangle.getY() + rectangle.getHeight() / 2) / PPM));
         }
 
         for(MapObject mapObject : mapObjects) {
