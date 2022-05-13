@@ -90,7 +90,6 @@ public class MovementHandler {
         reloadDoubleJump(delta);
 
         checkUserInput();
-        player.update(delta);
     }
 
     private void checkUserInput() {

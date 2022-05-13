@@ -48,13 +48,13 @@ public class Slime extends Enemy {
         xMaxLimitSX = xPos - 6f;
         switchDirectionToRight = true;
         if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight)
-            body.setLinearVelocity(walkSpeed * (3), body.getLinearVelocity().y);
+            body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
         else {
             switchDirectionToRight = false;
             switchDirectionToLeft = true;
         }
         if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX)
-            body.setLinearVelocity(walkSpeed * (-3), body.getLinearVelocity().y);
+            body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
         else {
             switchDirectionToLeft = false;
             switchDirectionToRight = true;
