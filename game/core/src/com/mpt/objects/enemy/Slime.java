@@ -35,7 +35,6 @@ public class Slime extends Enemy {
 
 
     }
-
     @Override
     public void update(float delta) {
       movementSlime();
@@ -58,8 +57,6 @@ public class Slime extends Enemy {
             body.setLinearVelocity(walkSpeed * (-1), body.getLinearVelocity().y);
 
 
-
-
         /*
         if(xPos <= xMaxLimitDX)
             body.setLinearVelocity(walkSpeed*-1,body.getLinearVelocity().y);
@@ -68,7 +65,6 @@ public class Slime extends Enemy {
         System.out.println(body.getPosition().x + " " + xMaxLimitSX + " " + xMaxLimitDX);
         */
     }
-
     public void getHit(Player player){
         if(enemyIsDead()){
             destroyed = true;
