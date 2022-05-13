@@ -49,4 +49,8 @@ public class Enemy extends GameEntity {
         player.playerGetDamaged(damageToPlayer);
     }
 
+    public float getEnemyHealth(){
+        return health;
+    }
+
 }

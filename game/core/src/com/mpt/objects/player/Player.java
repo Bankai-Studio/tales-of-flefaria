@@ -113,6 +113,9 @@ public class Player extends GameEntity {
 
     // Getters
 
+    public float getHealth(){
+        return health;
+    }
     public float getVelocityX() {
         return velocityX;
     }
