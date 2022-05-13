@@ -26,7 +26,6 @@ public class Enemy extends GameEntity {
     @Override
     public void render(SpriteBatch batch) {}
 
-
     public void getDamaged(int damage){
         health = -damage;
         if(health <= 0)
@@ -48,10 +47,6 @@ public class Enemy extends GameEntity {
 
     public void attackPlayer(Player player){
         player.playerGetDamaged(damageToPlayer);
-    }
-
-    public void move(float velX){
-        x += velX;
     }
 
 }

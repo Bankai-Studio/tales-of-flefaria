@@ -75,7 +75,7 @@ public class MapHandler {
                             2f,
                             gameScreen.getWorld()
                     );
-                    gameScreen.addEnemy("Slime", new Slime(rectangle.getWidth(), rectangle.getHeight(), body));
+                    gameScreen.addEnemy("Slime", new Slime(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Checkpoint")) {
                     Body body = BodyHandler.createBody(

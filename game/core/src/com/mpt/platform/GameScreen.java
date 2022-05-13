@@ -177,6 +177,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return preferencesHandler;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
