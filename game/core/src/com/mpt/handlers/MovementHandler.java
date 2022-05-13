@@ -1,10 +1,8 @@
 package com.mpt.handlers;
 
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.mpt.objects.player.Player;
 import com.mpt.objects.player.Player.State;
-import sun.tools.jconsole.AboutDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,7 +88,6 @@ public class MovementHandler {
         reloadDoubleJump(delta);
 
         checkUserInput();
-        player.update(delta);
     }
 
     private void checkUserInput() {
@@ -167,5 +164,4 @@ public class MovementHandler {
         if(!isDoubleJumpReady && doubleJumpTimer > doubleJumpRegenTime)
             isDoubleJumpReady = true;
     }
-
 }

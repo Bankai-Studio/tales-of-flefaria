@@ -52,6 +52,8 @@ public class Player extends GameEntity {
 
     @Override
     public void render(SpriteBatch batch) {}
+
+
     public void attackEnemy(Enemy enemy){
         damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg);
         damageValue = damageToEnemy;
@@ -111,6 +113,9 @@ public class Player extends GameEntity {
 
     // Getters
 
+    public float getHealth(){
+        return health;
+    }
     public float getVelocityX() {
         return velocityX;
     }

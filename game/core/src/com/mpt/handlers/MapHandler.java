@@ -35,11 +35,10 @@ public class MapHandler {
     }
 
     private void parseMapObjects(MapObjects mapObjects) {
-
+        
         if(mapObjects.get("Spawnpoint") != null && mapObjects.get("Spawnpoint") instanceof RectangleMapObject) {
             Rectangle rectangle = (((RectangleMapObject) mapObjects.get("Spawnpoint")).getRectangle());
-            gameScreen.getPreferencesHandler().setDefaultSpawn(new Vector2(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2));
-            System.out.println(rectangle.getX() + rectangle.getWidth() / 2 + " " + rectangle.getY() + rectangle.getHeight() / 2);
+            gameScreen.getPreferencesHandler().setDefaultSpawn(new Vector2((rectangle.getX() + rectangle.getWidth() / 2) /  PPM, (rectangle.getY() + rectangle.getHeight() / 2) / PPM));
         }
 
         for(MapObject mapObject : mapObjects) {
@@ -76,7 +75,7 @@ public class MapHandler {
                             2f,
                             gameScreen.getWorld()
                     );
-                    gameScreen.addEnemy("Slime", new Slime(rectangle.getWidth(), rectangle.getHeight(), body));
+                    gameScreen.addEnemy("Slime", new Slime(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Checkpoint")) {
                     Body body = BodyHandler.createBody(

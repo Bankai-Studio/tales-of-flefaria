@@ -14,7 +14,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
-import com.mpt.objects.GameEntity;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.enemy.Slime;
@@ -22,18 +21,19 @@ import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
 
 public class GameScreen extends ScreenAdapter implements InputProcessor {
 
-    private OrthographicCamera camera;
+    private final OrthographicCamera camera;
     private SpriteBatch batch;
-    private World world;
-    private Box2DDebugRenderer box2DDebugRenderer;
-    private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
-    private MapHandler mapHandler;
+    private final World world;
+    private final Box2DDebugRenderer box2DDebugRenderer;
+    private final OrthogonalBleedingHandler orthogonalTiledMapRenderer;
+    private final MapHandler mapHandler;
     private Player player;
     private HashMap<String, Enemy> enemies;
     private ArrayList<Checkpoint> checkpoints;
@@ -49,16 +49,15 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         enemies = new HashMap<>();
         checkpoints = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
+        preferencesHandler = new PreferencesHandler();
+        mapHandler = new MapHandler(this);
+        viewport = new ExtendViewport(30 * PPM, 20 * PPM);
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
 
-        preferencesHandler = new PreferencesHandler();
-
-        mapHandler = new MapHandler(this);
         orthogonalTiledMapRenderer = mapHandler.setup(1f, batch);
 
-        viewport = new ExtendViewport(30 * PPM, 20 * PPM);
         camera = (OrthographicCamera) viewport.getCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
 
@@ -145,7 +144,19 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
+
+        player.update(delta);
         movementHandler.update(delta);
+
+
+        // To be moved to map handler
+        for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
+            if(enemy.getKey().equals("Slime")) {
+                Slime slime = (Slime) enemy.getValue();
+                slime.update(delta);
+            }
+        }
+
     }
 
     private void cameraUpdate() {
@@ -167,6 +178,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public PreferencesHandler getPreferencesHandler() {
         return preferencesHandler;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public void setPlayer(Player player) {

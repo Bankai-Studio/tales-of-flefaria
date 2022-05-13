@@ -12,9 +12,7 @@ public class Enemy extends GameEntity {
     private int minHealth = 150;
     private int kill_counter;
     private int damageToPlayer;
-
     private float x = body.getPosition().x;
-
     private float velX;
     private boolean isDead = false;
 
@@ -27,7 +25,6 @@ public class Enemy extends GameEntity {
 
     @Override
     public void render(SpriteBatch batch) {}
-
 
     public void getDamaged(int damage){
         health = -damage;
@@ -52,8 +49,8 @@ public class Enemy extends GameEntity {
         player.playerGetDamaged(damageToPlayer);
     }
 
-    public void move(float velX){
-        x += velX;
+    public float getEnemyHealth(){
+        return health;
     }
 
 }
