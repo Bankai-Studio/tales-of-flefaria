@@ -85,6 +85,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     @Override
+    public void dispose() {
+        super.dispose();
+        batch.dispose();
+        world.dispose();
+        box2DDebugRenderer.dispose();
+    }
+
+    @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
     }

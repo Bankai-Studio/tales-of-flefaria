@@ -45,6 +45,7 @@ public class Enemy extends GameEntity {
             kill_counter = 0;
     }
 
+    /*
     public void attackPlayer(Player player){
         player.playerGetDamaged(damageToPlayer);
     }
@@ -52,5 +53,5 @@ public class Enemy extends GameEntity {
     public float getEnemyHealth(){
         return health;
     }
-
+    */
 }

@@ -42,8 +42,8 @@ public class Slime extends Enemy {
             movementSlime();
         else{
             //lurkPlayer(gameScreen.getPlayer());
-            hitPlayer(gameScreen.getPlayer());
-            hitByPlayer(gameScreen.getPlayer());
+            //hitPlayer(gameScreen.getPlayer());
+            //hitByPlayer(gameScreen.getPlayer());
         }
     }
 
@@ -87,6 +87,7 @@ public class Slime extends Enemy {
     }*/
 
     //function that damage player if he's still alive
+    /*
     public void hitPlayer(Player player){
         attackPlayer(player);
         System.out.println("Player health:"+player.getHealth());
@@ -102,6 +103,6 @@ public class Slime extends Enemy {
             System.out.println("Enemy health:"+ this.getEnemyHealth());
         }
     }
-
+    */
 
 }

@@ -3,21 +3,13 @@ package com.mpt.objects.player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.mpt.handlers.PreferencesHandler;
 import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
 
-import static com.mpt.constants.Constants.PPM;
-
 public class Player extends GameEntity {
-    private int damageToEnemy; //danni al nemico
-    private int minDmg = 50;  //50 di attacco
-    private int maxDmg = 150; //150 di attacco
-    private int player_health = 3; //3 vite all'inizio del livello
-    private int damageValue;
 
     // Constants
-    private int maxPlayerStamina = 100;
+    private final int maxPlayerStamina = 100;
 
     // Player States
     public enum State {
@@ -30,8 +22,9 @@ public class Player extends GameEntity {
 
     // Variables
     private State state;
-    private int playerStamina;
     private Vector2 respawnPosition;
+    private int playerStamina;
+    private int playerHealth;
     private boolean canRespawn;
 
     public Player(float width, float height, Body body) {
@@ -39,6 +32,7 @@ public class Player extends GameEntity {
         state = State.IDLE;
         playerSpeed = 8f;
         playerStamina = maxPlayerStamina;
+        playerHealth = 3;
         canRespawn = true;
 
         respawnPosition = new Vector2(body.getPosition().x, body.getPosition().y);
@@ -53,17 +47,18 @@ public class Player extends GameEntity {
     @Override
     public void render(SpriteBatch batch) {}
 
-
+    /*
     public void attackEnemy(Enemy enemy){
         damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg);
         damageValue = damageToEnemy;
         enemy.getDamaged(damageValue);
     }
     public void playerGetDamaged(int damageV){
-        player_health -= damageV;
+        playerHealth -= damageV;
         if(health == 0)
             state = State.DYING;
     }
+    */
 
     private void checkPlayerDeath() {
         if(state.equals(State.DYING) && canRespawn) {
