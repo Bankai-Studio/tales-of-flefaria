@@ -94,19 +94,4 @@ public class Enemy extends GameEntity{
         if(player.getPlayerState().equals(Player.State.DYING))
             killCounter = 0;
     }
-<<<<<<< Updated upstream
-
-    /*
-=======
->>>>>>> Stashed changes
-    public void attackPlayer(Player player){
-        if(player.getPlayerState().equals(Player.State.DYING) && playerSpotted(player)) {
-            player.playerGetDamaged(damageToPlayer);
-            enemyState = EnemyState.ATTACKING;
-        }
-    }
-    public float getEnemyHealth(){
-        return health;
-    }
-    */
 }
