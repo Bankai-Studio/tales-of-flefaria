@@ -7,6 +7,15 @@ import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
 
 public class Player extends GameEntity {
+<<<<<<< Updated upstream
+=======
+    private float damageToEnemy; //danni al nemico
+    private float minDmg = 50;  //50 di attacco
+    private float maxDmg = 150; //150 di attacco
+    private float player_health = 3; //3 vite all'inizio del livello
+    private boolean playerIsDead = false;
+    private float damageValue;
+>>>>>>> Stashed changes
 
     // Constants
     private final int maxPlayerStamina = 100;
@@ -34,6 +43,8 @@ public class Player extends GameEntity {
         playerStamina = maxPlayerStamina;
         playerHealth = 3;
         canRespawn = true;
+        playerIsDead = false;
+        player_health = 3f;
 
         respawnPosition = new Vector2(body.getPosition().x, body.getPosition().y);
         body.setUserData(this);
@@ -49,17 +60,31 @@ public class Player extends GameEntity {
 
     /*
     public void attackEnemy(Enemy enemy){
-        damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg);
-        damageValue = damageToEnemy;
-        enemy.getDamaged(damageValue);
+        damageToEnemy = (float)(Math.random()*(maxDmg-minDmg+1)+minDmg);
+        enemy.getDamaged(damageToEnemy);
     }
     public void playerGetDamaged(int damageV){
+<<<<<<< Updated upstream
         playerHealth -= damageV;
         if(health == 0)
+=======
+        player_health -= damageV;
+        if(player_health == 0){
+>>>>>>> Stashed changes
             state = State.DYING;
+            playerIsDead = true;
+        }
     }
+    public boolean playerDead(){
+        if(playerIsDead)
+            return true;
+        return false;
+    }
+<<<<<<< Updated upstream
     */
 
+=======
+>>>>>>> Stashed changes
     private void checkPlayerDeath() {
         if(state.equals(State.DYING) && canRespawn) {
             body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
@@ -109,8 +134,9 @@ public class Player extends GameEntity {
     // Getters
 
     public float getHealth(){
-        return health;
+        return player_health;
     }
+
     public float getVelocityX() {
         return velocityX;
     }
