@@ -49,15 +49,16 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         enemies = new HashMap<>();
         checkpoints = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
+
         preferencesHandler = new PreferencesHandler();
-        mapHandler = new MapHandler(this);
-        viewport = new ExtendViewport(30 * PPM, 20 * PPM);
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
 
-        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch);
+        mapHandler = new MapHandler(this);
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Testing");
 
+        viewport = new ExtendViewport(30 * PPM, 20 * PPM);
         camera = (OrthographicCamera) viewport.getCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
 
