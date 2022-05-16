@@ -77,12 +77,20 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         viewport.apply();
 
         batch.begin();
-        orthogonalTiledMapRenderer.render();
-        // Render the batch of sprites here
+            orthogonalTiledMapRenderer.render();
+            // Render the batch of sprites here
         batch.end();
 
         if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
 
+        player.render(batch);
+
+        for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
+            if(enemy.getKey().equals("Slime")) {
+                Slime slime = (Slime) enemy.getValue();
+                slime.render(batch);
+            }
+        }
     }
 
     @Override

@@ -1,21 +1,25 @@
 package com.mpt.objects.player;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.mpt.handlers.AnimationHandler;
 import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
 
 public class Player extends GameEntity {
-    private float damageToEnemy; //danni al nemico
-    private float minDmg = 50;  //50 di attacco
-    private float maxDmg = 150; //150 di attacco
-    private float player_health = 3; //3 vite all'inizio del livello
-    private boolean playerIsDead = false;
-    private float damageValue;
+    private int damageToEnemy; //danni al nemico
+    private int minDmg = 50;  //50 di attacco
+    private int maxDmg = 150; //150 di attacco
+    private int player_health = 3; //3 vite all'inizio del livello
+    private int damageValue;
 
     // Constants
-    private final int maxPlayerStamina = 100;
+    private int maxPlayerStamina = 100;
 
     // Player States
     public enum State {
@@ -28,20 +32,22 @@ public class Player extends GameEntity {
 
     // Variables
     private State state;
-    private Vector2 respawnPosition;
     private int playerStamina;
-    private int playerHealth;
+    private Vector2 respawnPosition;
     private boolean canRespawn;
+    private final AnimationHandler playerAnimations;
+    private final float FRAME_TIME = 1 / 6f;
+    private String direction;
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
-        state = State.IDLE;
         playerSpeed = 8f;
         playerStamina = maxPlayerStamina;
-        playerHealth = 3;
         canRespawn = true;
-        playerIsDead = false;
-        player_health = 3f;
+        playerAnimations = new AnimationHandler();
+
+        direction = "RIGHT";
+        loadPlayerSprites();
 
         respawnPosition = new Vector2(body.getPosition().x, body.getPosition().y);
         body.setUserData(this);
@@ -53,7 +59,30 @@ public class Player extends GameEntity {
     }
 
     @Override
-    public void render(SpriteBatch batch) {}
+    public void render(SpriteBatch batch) {
+        TextureRegion currentFrame = playerAnimations.getFrame();
+
+        if(direction.equals("LEFT") && !currentFrame.isFlipX()) currentFrame.flip(true,false);
+        if(direction.equals("RIGHT") && currentFrame.isFlipX()) currentFrame.flip(true,false);
+
+        float tX = x-15f, tY = y-17f;
+        if(direction.equals("LEFT")) tX -= 17f;
+        batch.begin();
+            batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
+        batch.end();
+    }
+
+
+    public void attackEnemy(Enemy enemy){
+        damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg);
+        damageValue = damageToEnemy;
+        enemy.getDamaged(damageValue);
+    }
+    public void playerGetDamaged(int damageV){
+        player_health -= damageV;
+        if(health == 0)
+            state = State.DYING;
+    }
 
     private void checkPlayerDeath() {
         if(state.equals(State.DYING) && canRespawn) {
@@ -65,15 +94,36 @@ public class Player extends GameEntity {
             canRespawn = true;
     }
 
+    private void loadPlayerSprites() {
+        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("./characters/Woodcutter/walk.atlas"));
+        playerAnimations.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./characters/Woodcutter/jump.atlas"));
+        playerAnimations.add("jump", new Animation<>(FRAME_TIME, charset.findRegions("jump")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./characters/Woodcutter/run.atlas"));
+        playerAnimations.add("run", new Animation<>(FRAME_TIME, charset.findRegions("run")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./characters/Woodcutter/idle.atlas"));
+        playerAnimations.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
+
+        playerAnimations.setCurrent("idle");
+        state = State.IDLE;
+    }
+
     // Setters
 
     public void setPlayerState(State state) {
         this.state = state;
     }
 
-    public void setFacingLeft() {}
+    public void setFacingLeft() {
+        direction = "LEFT";
+    }
 
-    public void setFacingRight() {}
+    public void setFacingRight() {
+        direction = "RIGHT";
+    }
 
     public void setVelocityX(float velocityValue) {
         velocityX = velocityValue;
@@ -104,9 +154,8 @@ public class Player extends GameEntity {
     // Getters
 
     public float getHealth(){
-        return player_health;
+        return health;
     }
-
     public float getVelocityX() {
         return velocityX;
     }
@@ -133,5 +182,13 @@ public class Player extends GameEntity {
 
     public Vector2 getRespawnPosition() {
         return respawnPosition;
+    }
+
+    public AnimationHandler getPlayerAnimations(){
+        return playerAnimations;
+    }
+
+    public State getState(){
+        return state;
     }
 }
