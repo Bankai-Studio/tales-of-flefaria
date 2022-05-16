@@ -12,16 +12,16 @@ public class Enemy extends GameEntity{
     private float actuallyPosY = body.getPosition().y;
     private int maxHealth = 350;
     private int minHealth = 150;
-    private float initialPosX = 0; //initial xPos of slime
-    private float initialPosY = 0; //initial yPos of slime
+    private float initialPosX; //initial xPos of slime
+    private float initialPosY; //initial yPos of slime
     private int killCounter = 0; //player's frags
     final private float distance = 2f;
     private int damageToPlayer;
-    private boolean playerHasBeenSpotted = false;
-    private boolean playerHasBeenDefeat = false;
+    private boolean playerHasBeenSpotted;
+    private boolean playerHasBeenDefeat;
     private float xMaxLimitDX; //limit position on right side
     private float xMaxLimitSX; //limit position on left side
-    private boolean switchDirectionToRight = false; //flag thats says if enemy switched direction
+    private boolean switchDirectionToRight = false; //flag that says if enemy switched direction
     private boolean switchDirectionToLeft = false;
     private float walkSpeed = 1f;
     private float x = body.getPosition().x;
@@ -34,7 +34,7 @@ public class Enemy extends GameEntity{
         DYING
     }
     private EnemyState enemyState;
-
+    protected String direction;
     public Enemy(float width, float height, Body body) {
         super(width, height, body);
         health = (int)(Math.random()*(maxHealth-minHealth+1)+minHealth);
@@ -42,6 +42,7 @@ public class Enemy extends GameEntity{
         initialPosY = body.getPosition().y; //initial position of enemy
         playerHasBeenSpotted = false;
         playerHasBeenDefeat = false;
+        direction = "RIGHT";
     }
     @Override
     public void update(float delta) {}
@@ -59,14 +60,18 @@ public class Enemy extends GameEntity{
         xMaxLimitDX = initialPosX + 2.4f;
         xMaxLimitSX = initialPosX - 5f;
         switchDirectionToRight = true;
-        if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight)
+        if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight){
             body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
+            setFacingLeft();
+        }
         else {
             switchDirectionToRight = false;
             switchDirectionToLeft = true;
         }
-        if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX)
+        if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX){
             body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
+            setFacingRight();
+        }
         else {
             switchDirectionToLeft = false;
             switchDirectionToRight = true;
@@ -75,10 +80,7 @@ public class Enemy extends GameEntity{
 
     public boolean playerSpotted(Player player) {
         //System.out.println(Math.abs(player.getBody().getPosition().x - body.getPosition().x));
-        if(Math.abs(player.getBody().getPosition().x - body.getPosition().x) < distance)
-            playerHasBeenSpotted = true;
-        else
-            playerHasBeenSpotted = false;
+        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < distance;
         return playerHasBeenSpotted;
     }
 
@@ -94,5 +96,11 @@ public class Enemy extends GameEntity{
             killCounter += 1;
         if(player.getPlayerState().equals(Player.State.DYING))
             killCounter = 0;
+    }
+    public void setFacingLeft() {
+        direction = "LEFT";
+    }
+    public void setFacingRight() {
+        direction = "RIGHT";
     }
 }

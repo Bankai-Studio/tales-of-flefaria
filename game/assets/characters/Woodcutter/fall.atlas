@@ -1,0 +1,20 @@
+
+fall.png
+size: 55, 108
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+fall
+  rotate: false
+  xy: 2, 55
+  size: 51, 51
+  orig: 51, 51
+  offset: 0, 0
+  index: -1
+fall
+  rotate: false
+  xy: 2, 2
+  size: 50, 51
+  orig: 50, 51
+  offset: 0, 0
+  index: -1
