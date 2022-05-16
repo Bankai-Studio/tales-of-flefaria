@@ -32,8 +32,9 @@ public class MovementHandler {
     private float doubleJumpRegenTime;
     private float staminaTimer;
     private float staminaRegenTime;
+    private boolean inAir = false;
 
-    static Map<InputKeys, Boolean> inputKeys = new HashMap<InputKeys, Boolean>();
+    static Map<InputKeys, Boolean> inputKeys = new HashMap<>();
     static {
         inputKeys.put(InputKeys.LEFT, false);
         inputKeys.put(InputKeys.RIGHT, false);
@@ -91,18 +92,29 @@ public class MovementHandler {
     }
 
     private void checkUserInput() {
+        AnimationHandler playerAnimations = player.getPlayerAnimations();
+
         if(inputKeys.get(InputKeys.LEFT) && !player.getPlayerState().equals(State.DYING)) {
-            //player.setFacingLeft();
-            player.setPlayerState(State.WALKING);
+            player.setFacingLeft();
+            if(player.getVelocityY()==0f && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && !inAir){
+                playerAnimations.setCurrent("walk");
+                player.setPlayerState(State.WALKING);
+            }
             player.setVelocityX(-1);
         }
         if(inputKeys.get(InputKeys.RIGHT) && !player.getPlayerState().equals(State.DYING)) {
-            //player.setFacingRight();
-            player.setPlayerState(State.WALKING);
+            player.setFacingRight();
+            if(player.getVelocityY()==0 && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && !inAir){
+                playerAnimations.setCurrent("walk");
+                player.setPlayerState(State.WALKING);
+            }
             player.setVelocityX(1);
         }
         if((inputKeys.get(InputKeys.LEFT) && inputKeys.get(InputKeys.RIGHT)) || (!inputKeys.get(InputKeys.LEFT) && !inputKeys.get(InputKeys.RIGHT)) && !player.getPlayerState().equals(State.DYING)){
-            player.setPlayerState(State.IDLE);
+            if(!inAir){
+                playerAnimations.setCurrent("idle");
+                player.setPlayerState(State.IDLE);
+            }
             player.setVelocityX(0);
         }
         if(inputKeys.get(InputKeys.SPACE) && !player.getPlayerState().equals(State.DYING)) {
@@ -110,10 +122,16 @@ public class MovementHandler {
             if(player.getPlayerStamina() >= 10) {
                 player.setPlayerState(State.JUMPING);
                 if(jumpCounter == 0 || (jumpCounter == 1 && isDoubleJumpReady)) {
+
                     if(jumpCounter == 1) {
                         isDoubleJumpReady = false;
                         doubleJumpTimer = 0f;
+                        playerAnimations.setCurrent("idle"); // To be able to reset the sprite
                     }
+                    playerAnimations.setCurrent("jump", false);
+                    player.setPlayerState(State.JUMPING);
+                    inAir = true;
+
                     float force = player.getBody().getMass() * 9;
                     player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, 0);
                     player.getBody().applyLinearImpulse(new Vector2(0, force), player.getBody().getPosition(), true);
@@ -122,14 +140,21 @@ public class MovementHandler {
                 }
             }
         }
+
         if(inputKeys.get(InputKeys.SHIFT) && !player.getPlayerState().equals(State.DYING)) {
-            player.setPlayerState(State.RUNNING);
-            if(player.getPlayerStamina() == 0) isSprintReloading = true;
+            if(player.getPlayerStamina() == 0){
+                isSprintReloading = true;
+                playerAnimations.setCurrent("walk");
+                player.setPlayerState(State.WALKING);
+            }
             if(player.getBody().getLinearVelocity().y == 0 && player.getPlayerSpeed() <= 14f && player.getPlayerStamina() > 0 && !isSprintReloading)
                 player.setPlayerSpeed(player.getPlayerSpeed() + 0.4f);
             if(player.getBody().getLinearVelocity().x != 0 && player.getBody().getLinearVelocity().y == 0 && player.getPlayerStamina() > 0 && !isSprintReloading)
                 player.setPlayerStamina(player.getPlayerStamina() - 1);
-
+            if(player.getState() != State.RUNNING  && !inAir && player.getVelocityX()!=0 && !isSprintReloading){
+                player.setPlayerState(State.RUNNING);
+                playerAnimations.setCurrent("run");
+            }
         }
 
         if(player.getPlayerState().equals(State.DYING))
@@ -142,8 +167,10 @@ public class MovementHandler {
             player.setPlayerSpeed(player.getPlayerSpeed() - 0.2f);
 
         if(player.getBody().getLinearVelocity().y == 0)
-            if(wasLastFrameYVelocityZero)
+            if(wasLastFrameYVelocityZero){
                 jumpCounter = 0;
+                inAir = false;
+            }
             else
                 wasLastFrameYVelocityZero = true;
         else
