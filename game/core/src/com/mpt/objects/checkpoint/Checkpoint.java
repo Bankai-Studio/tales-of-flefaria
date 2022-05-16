@@ -6,8 +6,11 @@ import com.mpt.objects.GameObject;
 
 public class Checkpoint extends GameObject {
 
+    private boolean isCheckpointClaimed;
+
     public Checkpoint(float width, float height, Body body) {
         super(width, height, body);
+        isCheckpointClaimed = false;
         body.setUserData(this);
     }
 
@@ -16,4 +19,16 @@ public class Checkpoint extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {}
+
+    public boolean isCheckpointClaimed() {
+        return isCheckpointClaimed;
+    }
+
+    public void setCheckpointClaimed() {
+        isCheckpointClaimed = true;
+    }
+
+    public void setCheckpointUnclaimed() {
+        isCheckpointClaimed = false;
+    }
 }

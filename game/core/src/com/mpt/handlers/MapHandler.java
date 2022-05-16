@@ -28,8 +28,8 @@ public class MapHandler {
         this.gameScreen = gameScreen;
     }
 
-    public OrthogonalBleedingHandler setup(float unitScale, SpriteBatch batch) {
-        tiledMap = new TmxMapLoader().load("maps/Testing.tmx");
+    public OrthogonalBleedingHandler setup(float unitScale, SpriteBatch batch, String mapName) {
+        tiledMap = new TmxMapLoader().load("maps/" + mapName + ".tmx");
         parseMapObjects(tiledMap.getLayers().get("Objects").getObjects());
         return new OrthogonalBleedingHandler(tiledMap, unitScale, batch);
     }

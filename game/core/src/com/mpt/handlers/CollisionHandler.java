@@ -44,8 +44,9 @@ public class CollisionHandler implements ContactListener {
         Player player = (Player) fixtureA.getBody().getUserData();
         Checkpoint checkpoint = (Checkpoint) fixtureB.getBody().getUserData();
         Vector2 checkpointPosition = new Vector2(checkpoint.getBody().getPosition().x - 2f, checkpoint.getBody().getPosition().y);
-        if(!player.getRespawnPosition().equals(checkpointPosition)) {
+        if(!player.getRespawnPosition().equals(checkpointPosition) && !checkpoint.isCheckpointClaimed()) {
             player.setRespawnPosition(checkpointPosition);
+            checkpoint.setCheckpointClaimed();
             preferencesHandler.setRespawnPosition(checkpointPosition);
         }
     }
