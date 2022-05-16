@@ -10,7 +10,7 @@ public class CombatHandler {
     public static void attackPlayer(GameEntity attacker, GameEntity victim) {
         Player player;
         Enemy enemy;
-        
+
         if(attacker instanceof Player && victim instanceof Enemy) {
             player = (Player) attacker;
             enemy = (Enemy) victim;
