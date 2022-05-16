@@ -37,10 +37,10 @@ public class Slime extends Enemy {
     public void update(float delta) {
         if(!playerSpotted(gameScreen.getPlayer())) {
             enemyMovements();
-            System.out.println("players has NOT been spotted");
+            //System.out.println("players has NOT been spotted");
         }else {
             lurkTarget(gameScreen.getPlayer());
-            System.out.println("player's health"+gameScreen.getPlayer().getHealth());
+            //System.out.println("player's health"+gameScreen.getPlayer().getHealth());
         }
     }
     @Override
