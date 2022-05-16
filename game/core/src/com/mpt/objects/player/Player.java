@@ -107,6 +107,9 @@ public class Player extends GameEntity {
         charset = new TextureAtlas(Gdx.files.internal("./characters/Woodcutter/idle.atlas"));
         playerAnimations.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
 
+        charset = new TextureAtlas(Gdx.files.internal("./characters/Woodcutter/fall.atlas"));
+        playerAnimations.add("fall", new Animation<>(FRAME_TIME, charset.findRegions("fall")));
+
         playerAnimations.setCurrent("idle");
         state = State.IDLE;
     }
@@ -154,7 +157,7 @@ public class Player extends GameEntity {
     // Getters
 
     public float getHealth(){
-        return health;
+        return player_health;
     }
     public float getVelocityX() {
         return velocityX;
