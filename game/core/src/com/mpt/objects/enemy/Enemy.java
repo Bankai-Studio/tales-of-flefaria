@@ -8,10 +8,12 @@ import com.mpt.objects.GameEntity;
 public class Enemy extends GameEntity{
     final double damageValueToPlayer = 0.5;
     private float enemyHealth;
+    private float actuallyPosX = body.getPosition().x;
+    private float actuallyPosY = body.getPosition().y;
     private int maxHealth = 350;
     private int minHealth = 150;
-    private float xPos = 0; //initial xPos of slime
-    private float yPos = 0; //initial yPos of slime
+    private float initialPosX = 0; //initial xPos of slime
+    private float initialPosY = 0; //initial yPos of slime
     private int killCounter = 0; //player's frags
     final private float distance = 2f;
     private int damageToPlayer;
@@ -24,23 +26,22 @@ public class Enemy extends GameEntity{
     private float walkSpeed = 1f;
     private float x = body.getPosition().x;
     private float velX;
-    private boolean isDead = false;
+
     // Enemy States
     public enum EnemyState {
         WALKING,
         ATTACKING,
         DYING
     }
-
     private EnemyState enemyState;
+
     public Enemy(float width, float height, Body body) {
         super(width, height, body);
         health = (int)(Math.random()*(maxHealth-minHealth+1)+minHealth);
-        xPos = body.getPosition().x; //initial position of enemy
-        yPos = body.getPosition().y; //initial position of enemy
+        initialPosX = body.getPosition().x; //initial position of enemy
+        initialPosY = body.getPosition().y; //initial position of enemy
         playerHasBeenSpotted = false;
         playerHasBeenDefeat = false;
-
     }
     @Override
     public void update(float delta) {}
@@ -50,15 +51,13 @@ public class Enemy extends GameEntity{
 
     public void getDamaged(float damage){
         enemyHealth = -damage;
-        if(enemyHealth <= 0){
-            isDead = true;
+        if(enemyHealth <= 0)
             enemyState = EnemyState.DYING;
-        }
     }
     public void enemyMovements(){
         enemyState = EnemyState.WALKING;
-        xMaxLimitDX = xPos + 2.4f;
-        xMaxLimitSX = xPos - 5f;
+        xMaxLimitDX = initialPosX + 2.4f;
+        xMaxLimitSX = initialPosX - 5f;
         switchDirectionToRight = true;
         if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight)
             body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
@@ -72,7 +71,6 @@ public class Enemy extends GameEntity{
             switchDirectionToLeft = false;
             switchDirectionToRight = true;
         }
-
     }
 
     public boolean playerSpotted(Player player) {
@@ -85,9 +83,12 @@ public class Enemy extends GameEntity{
     }
 
     public void lurkTarget(Player player){
-        //if(playerSpotted(player))
-
+        if(playerSpotted(player) && !player.getPlayerState().equals(Player.State.DYING)){
+            actuallyPosX = player.getBody().getPosition().x;
+            player.playerGetDamaged(damageToPlayer);
+        }
     }
+
     public void killCounter(Player player){
         if(enemyState.equals(EnemyState.DYING))
             killCounter += 1;

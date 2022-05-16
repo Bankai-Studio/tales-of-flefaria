@@ -20,11 +20,15 @@ public class Slime extends Enemy {
         yPos = body.getPosition().y; //initial position of slime
         this.gameScreen = gameScreen;
     }
+
     @Override
     public void update(float delta) {
-        if(!playerSpotted(gameScreen.getPlayer()))
+        if(!playerSpotted(gameScreen.getPlayer())) {
             enemyMovements();
-        else{
+            System.out.println("players has NOT been spotted");
+        }else {
+            lurkTarget(gameScreen.getPlayer());
+            System.out.println("player's health"+gameScreen.getPlayer().getHealth());
         }
     }
 
