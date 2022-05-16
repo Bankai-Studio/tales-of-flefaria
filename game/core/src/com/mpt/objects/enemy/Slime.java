@@ -58,8 +58,38 @@ public class Slime extends Enemy {
     }
 
     private void loadPlayerSprites() {
-        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("./enemies/Centipede/walk.atlas"));
+        String enemyName;
+        enemyName = "Centipede";
+
+        TextureAtlas charset;
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/attack1.atlas"));
+        animationHandler.add("attack1", new Animation<>(FRAME_TIME, charset.findRegions("attack1")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/attack2.atlas"));
+        animationHandler.add("attack2", new Animation<>(FRAME_TIME, charset.findRegions("attack2")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/attack3.atlas"));
+        animationHandler.add("attack3", new Animation<>(FRAME_TIME, charset.findRegions("attack3")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/attack4.atlas"));
+        animationHandler.add("attack4", new Animation<>(FRAME_TIME, charset.findRegions("attack4")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/death.atlas"));
+        animationHandler.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/hurt.atlas"));
+        animationHandler.add("hurt", new Animation<>(FRAME_TIME, charset.findRegions("hurt")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/idle.atlas"));
+        animationHandler.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/sneer.atlas"));
+        animationHandler.add("sneer", new Animation<>(FRAME_TIME, charset.findRegions("sneer")));
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/walk.atlas"));
         animationHandler.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
+
         animationHandler.setCurrent("walk");
     }
 }
