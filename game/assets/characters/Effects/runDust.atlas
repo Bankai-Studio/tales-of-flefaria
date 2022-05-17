@@ -1,0 +1,62 @@
+
+runDust.png
+size: 64, 42
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+runDust
+  rotate: false
+  xy: 33, 22
+  size: 29, 8
+  orig: 29, 8
+  offset: 0, 0
+  index: -1
+runDust
+  rotate: false
+  xy: 2, 22
+  size: 29, 8
+  orig: 29, 8
+  offset: 0, 0
+  index: -1
+runDust
+  rotate: false
+  xy: 33, 12
+  size: 29, 8
+  orig: 29, 8
+  offset: 0, 0
+  index: -1
+runDust
+  rotate: false
+  xy: 2, 12
+  size: 29, 8
+  orig: 29, 8
+  offset: 0, 0
+  index: -1
+runDust
+  rotate: false
+  xy: 2, 32
+  size: 29, 8
+  orig: 29, 8
+  offset: 0, 0
+  index: -1
+runDust
+  rotate: false
+  xy: 2, 2
+  size: 29, 8
+  orig: 29, 8
+  offset: 0, 0
+  index: -1
+runDust
+  rotate: false
+  xy: 33, 32
+  size: 29, 8
+  orig: 29, 8
+  offset: 0, 0
+  index: -1
+runDust
+  rotate: false
+  xy: 33, 2
+  size: 25, 8
+  orig: 25, 8
+  offset: 0, 0
+  index: -1

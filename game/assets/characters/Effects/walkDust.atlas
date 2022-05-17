@@ -1,0 +1,62 @@
+
+walkDust.png
+size: 62, 26
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+walkDust
+  rotate: false
+  xy: 22, 10
+  size: 18, 6
+  orig: 18, 6
+  offset: 0, 0
+  index: -1
+walkDust
+  rotate: false
+  xy: 2, 10
+  size: 18, 6
+  orig: 18, 6
+  offset: 0, 0
+  index: -1
+walkDust
+  rotate: false
+  xy: 22, 2
+  size: 18, 6
+  orig: 18, 6
+  offset: 0, 0
+  index: -1
+walkDust
+  rotate: false
+  xy: 2, 2
+  size: 18, 6
+  orig: 18, 6
+  offset: 0, 0
+  index: -1
+walkDust
+  rotate: false
+  xy: 2, 18
+  size: 18, 6
+  orig: 18, 6
+  offset: 0, 0
+  index: -1
+walkDust
+  rotate: false
+  xy: 42, 18
+  size: 18, 6
+  orig: 18, 6
+  offset: 0, 0
+  index: -1
+walkDust
+  rotate: false
+  xy: 22, 18
+  size: 18, 6
+  orig: 18, 6
+  offset: 0, 0
+  index: -1
+walkDust
+  rotate: false
+  xy: 42, 10
+  size: 18, 6
+  orig: 18, 6
+  offset: 0, 0
+  index: -1

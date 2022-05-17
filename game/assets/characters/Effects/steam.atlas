@@ -1,0 +1,48 @@
+
+steam.png
+size: 78, 34
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+steam
+  rotate: false
+  xy: 26, 2
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+steam
+  rotate: false
+  xy: 2, 2
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+steam
+  rotate: false
+  xy: 50, 18
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+steam
+  rotate: false
+  xy: 26, 18
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+steam
+  rotate: false
+  xy: 2, 18
+  size: 22, 14
+  orig: 22, 14
+  offset: 0, 0
+  index: -1
+steam
+  rotate: false
+  xy: 74, 18
+  size: 2, 14
+  orig: 2, 14
+  offset: 0, 0
+  index: -1
