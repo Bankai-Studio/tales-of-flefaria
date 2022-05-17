@@ -23,12 +23,14 @@ public class Slime extends Enemy {
 
     private final AnimationHandler animationHandler;
     private final float FRAME_TIME = 1 / 6f;
+    private String enemyName;
 
     public Slime(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
         xPos = body.getPosition().x; //initial position of slime
         yPos = body.getPosition().y; //initial position of slime
         animationHandler = new AnimationHandler();
+        enemyName = "Centipede";
         loadPlayerSprites();
         this.gameScreen = gameScreen;
     }
@@ -58,9 +60,6 @@ public class Slime extends Enemy {
     }
 
     private void loadPlayerSprites() {
-        String enemyName;
-        enemyName = "Centipede";
-
         TextureAtlas charset;
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/attack1.atlas"));
