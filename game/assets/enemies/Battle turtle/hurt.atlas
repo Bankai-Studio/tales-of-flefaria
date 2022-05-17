@@ -1,0 +1,20 @@
+
+hurt.png
+size: 150, 76
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+hurt
+  rotate: false
+  xy: 76, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+hurt
+  rotate: false
+  xy: 2, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
