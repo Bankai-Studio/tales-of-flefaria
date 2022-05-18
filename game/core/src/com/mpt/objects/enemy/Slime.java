@@ -16,11 +16,10 @@ import static com.mpt.constants.Constants.PPM;
 public class Slime extends Enemy {
     private boolean setToDestroy = false; //boolean says if enemy still to be killed
     private boolean destroyed = false; //boolean says its dead
-    private float xPos = 0; //initial xPos of slime
-    private float yPos = 0; //initial yPos of slime
+    private float xPos; //initial xPos of slime
+    private float yPos; //initial yPos of slime
     private GameScreen gameScreen;
     private final float distanceFromPlayer = 2f;
-
     private final AnimationHandler animationHandler;
     private final float FRAME_TIME = 1 / 6f;
     private String enemyName;
@@ -42,6 +41,7 @@ public class Slime extends Enemy {
             //System.out.println("players has NOT been spotted");
         }else {
             lurkTarget(gameScreen.getPlayer());
+            //System.out.println("player has BEEN spotted");
             //System.out.println("player's health"+gameScreen.getPlayer().getHealth());
         }
     }
