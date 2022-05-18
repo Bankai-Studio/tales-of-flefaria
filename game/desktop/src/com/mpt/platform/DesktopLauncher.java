@@ -1,5 +1,7 @@
 package com.mpt.platform;
 
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -12,6 +14,7 @@ public class DesktopLauncher {
 		config.useVsync(true);
 		config.setForegroundFPS(60);
 		config.setWindowedMode(1600, 900);
+		config.setWindowIcon("./gameIcon/TalesOfFlefariaIcon.png");
 
 		new Lwjgl3Application(new PlatformGame(), config);
 	}

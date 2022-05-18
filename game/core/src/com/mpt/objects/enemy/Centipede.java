@@ -13,7 +13,7 @@ import com.mpt.platform.GameScreen;
 
 import static com.mpt.constants.Constants.PPM;
 
-public class Slime extends Enemy {
+public class Centipede extends Enemy {
     private boolean setToDestroy = false; //boolean says if enemy still to be killed
     private boolean destroyed = false; //boolean says its dead
     private float xPos; //initial xPos of slime
@@ -24,7 +24,7 @@ public class Slime extends Enemy {
     private final float FRAME_TIME = 1 / 6f;
     private String enemyName;
 
-    public Slime(float width, float height, Body body, GameScreen gameScreen) {
+    public Centipede(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
         xPos = body.getPosition().x; //initial position of slime
         yPos = body.getPosition().y; //initial position of slime
