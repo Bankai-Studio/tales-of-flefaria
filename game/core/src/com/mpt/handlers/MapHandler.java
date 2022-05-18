@@ -72,7 +72,7 @@ public class MapHandler {
                             rectangle.getHeight(),
                             false,
                             false,
-                            2f,
+                            0f,
                             gameScreen.getWorld()
                     );
                     gameScreen.addEnemy("Slime", new Slime(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));

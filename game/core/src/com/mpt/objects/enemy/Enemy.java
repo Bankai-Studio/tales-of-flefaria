@@ -1,9 +1,13 @@
 package com.mpt.objects.enemy;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.objects.player.Player;
 import com.mpt.objects.GameEntity;
+import com.mpt.platform.GameScreen;
+
+import javax.swing.*;
 
 public class Enemy extends GameEntity{
     final double damageValueToPlayer = 0.5;
@@ -12,20 +16,45 @@ public class Enemy extends GameEntity{
     private float actuallyPosY = body.getPosition().y;
     private int maxHealth = 350;
     private int minHealth = 150;
+    //private GameScreen gameScreen;
+
+    private float playerMoveToX;
+
+    private float playerMoveToY;
+
+    private double diffY;
+
+    private double diffX;
+
+    private double angle;
+
     private float initialPosX; //initial xPos of slime
+
     private float initialPosY; //initial yPos of slime
+
     private int killCounter = 0; //player's frags
+
     final private float distance = 2f;
+
     private int damageToPlayer;
+
+    private GameScreen gameScreen;
+
     private boolean playerHasBeenSpotted;
+
     private boolean playerHasBeenDefeat;
+
     private float xMaxLimitDX; //limit position on right side
+
     private float xMaxLimitSX; //limit position on left side
+
     private boolean switchDirectionToRight = false; //flag that says if enemy switched direction
+
     private boolean switchDirectionToLeft = false;
+
     private float walkSpeed = 1f;
-    private float x = body.getPosition().x;
-    private float velX;
+
+    private float x,y;
 
     // Enemy States
     public enum EnemyState {
@@ -33,7 +62,7 @@ public class Enemy extends GameEntity{
         ATTACKING,
         DYING
     }
-    private EnemyState enemyState;
+    protected EnemyState enemyState;
     protected String direction;
     public Enemy(float width, float height, Body body) {
         super(width, height, body);
@@ -80,14 +109,19 @@ public class Enemy extends GameEntity{
 
     public boolean playerSpotted(Player player) {
         //System.out.println(Math.abs(player.getBody().getPosition().x - body.getPosition().x));
-        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < distance;
+        playerHasBeenSpotted = player.getBody().getPosition().x - body.getPosition().x < 2f;
         return playerHasBeenSpotted;
     }
 
     public void lurkTarget(Player player){
-        if(playerSpotted(player) && !player.getPlayerState().equals(Player.State.DYING)){
-            actuallyPosX = player.getBody().getPosition().x;
-            player.playerGetDamaged(damageToPlayer);
+        if(playerHasBeenSpotted) {
+            if (player.getBody().getPosition().x < this.getBody().getPosition().x) {
+                body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
+                setFacingRight();
+            } else if(player.getBody().getPosition().x > this.getBody().getPosition().x) {
+                body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
+                setFacingLeft();
+            }
         }
     }
 
