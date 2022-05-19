@@ -12,11 +12,9 @@ import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
 
 public class Player extends GameEntity {
-    private int damageToEnemy; //danni al nemico
-    private int minDmg = 50;  //50 di attacco
-    private int maxDmg = 150; //150 di attacco
-    private int player_health = 3; //3 vite all'inizio del livello
-    private int damageValue;
+    public final int MIN_DMG = 34;
+    public final int MAX_DMG = 50;
+    private int player_health = 100;
 
     // Constants
     private int maxPlayerStamina = 100;
@@ -27,7 +25,11 @@ public class Player extends GameEntity {
         WALKING,
         RUNNING,
         JUMPING,
-        DYING
+        DYING,
+        PUSHING,
+        ATTACKING,
+        HURT,
+        FALLING
     }
 
     // Variables
@@ -36,7 +38,7 @@ public class Player extends GameEntity {
     private Vector2 respawnPosition;
     private boolean canRespawn;
     private final AnimationHandler playerAnimations;
-    private final float FRAME_TIME = 1 / 6f;
+    private final float FRAME_TIME = 1 / 7f;
     private String direction;
     private int characterSelection;
 
@@ -57,6 +59,7 @@ public class Player extends GameEntity {
     @Override
     public void update(float delta) {
         checkPlayerDeath();
+        respawnOnVoidPosition();
     }
 
     @Override
@@ -73,18 +76,6 @@ public class Player extends GameEntity {
         batch.end();
     }
 
-
-    public void attackEnemy(Enemy enemy){
-        damageToEnemy = (int)(Math.random()*(maxDmg-minDmg+1)+minDmg);
-        damageValue = damageToEnemy;
-        enemy.getDamaged(damageValue);
-    }
-    public void playerGetDamaged(int damageV){
-        player_health -= damageV;
-        if(health == 0)
-            state = State.DYING;
-    }
-
     private void checkPlayerDeath() {
         if(state.equals(State.DYING) && canRespawn) {
             body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
@@ -93,6 +84,11 @@ public class Player extends GameEntity {
         }
         else
             canRespawn = true;
+    }
+
+    private void respawnOnVoidPosition() {
+        if(body.getPosition().y < 0)
+            state = State.DYING;
     }
 
     private void loadPlayerSprites() {

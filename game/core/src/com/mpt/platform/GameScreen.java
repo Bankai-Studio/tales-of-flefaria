@@ -14,9 +14,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
+import com.mpt.objects.box.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.enemy.Enemy;
-import com.mpt.objects.enemy.Slime;
+import com.mpt.objects.enemy.Centipede;
 import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private Viewport viewport;
     private MovementHandler movementHandler;
     private PreferencesHandler preferencesHandler;
+    private ArrayList<Box> boxes;
 
     private int screenWidth, screenHeight;
 
@@ -48,6 +50,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         world = new World(new Vector2(0, -25f), false);
         enemies = new HashMap<>();
         checkpoints = new ArrayList<>();
+        boxes = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         preferencesHandler = new PreferencesHandler();
@@ -56,13 +59,13 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         screenHeight = Gdx.graphics.getHeight();
 
         mapHandler = new MapHandler(this);
-        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Testing");
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map1");
 
         viewport = new ExtendViewport(30 * PPM, 20 * PPM);
         camera = (OrthographicCamera) viewport.getCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
 
-        movementHandler = new MovementHandler(player);
+        movementHandler = new MovementHandler(player, this);
 
         world.setContactListener(new CollisionHandler(preferencesHandler));
     }
@@ -86,11 +89,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         player.render(batch);
 
         for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
-            if(enemy.getKey().equals("Slime")) {
-                Slime slime = (Slime) enemy.getValue();
-                slime.render(batch);
+            if(enemy.getKey().equals("Centipede")) {
+                Centipede centipede = (Centipede) enemy.getValue();
+                centipede.render(batch);
             }
         }
+
+        for(int i=0; i<boxes.size(); i++)
+            boxes.get(i).render(batch);
     }
 
     @Override
@@ -168,9 +174,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         // To be moved to map handler
         for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
-            if(enemy.getKey().equals("Slime")) {
-                Slime slime = (Slime) enemy.getValue();
-                slime.update(delta);
+            if(enemy.getKey().equals("Centipede")) {
+                Centipede centipede = (Centipede) enemy.getValue();
+                centipede.update(delta);
             }
         }
 
@@ -211,4 +217,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void addCheckpoint(Checkpoint checkpoint) {
         checkpoints.add(checkpoint);
     }
+    public void addBox(Box box) {
+        boxes.add(box);
+    }
+    public ArrayList<Box> getBoxes(){return boxes;}
 }

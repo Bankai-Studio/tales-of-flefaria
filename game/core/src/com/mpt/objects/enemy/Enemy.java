@@ -10,12 +10,11 @@ import com.mpt.platform.GameScreen;
 import javax.swing.*;
 
 public class Enemy extends GameEntity{
-    final double damageValueToPlayer = 0.5;
+    public  int minDmg;
+    public  int maxDmg;
     private float enemyHealth;
     private float actuallyPosX = body.getPosition().x;
     private float actuallyPosY = body.getPosition().y;
-    private int maxHealth = 350;
-    private int minHealth = 150;
     //private GameScreen gameScreen;
 
     private float playerMoveToX;
@@ -66,7 +65,6 @@ public class Enemy extends GameEntity{
     protected String direction;
     public Enemy(float width, float height, Body body) {
         super(width, height, body);
-        health = (int)(Math.random()*(maxHealth-minHealth+1)+minHealth);
         initialPosX = body.getPosition().x; //initial position of enemy
         initialPosY = body.getPosition().y; //initial position of enemy
         playerHasBeenSpotted = false;
@@ -125,16 +123,13 @@ public class Enemy extends GameEntity{
         }
     }
 
-    public void killCounter(Player player){
-        if(enemyState.equals(EnemyState.DYING))
-            killCounter += 1;
-        if(player.getPlayerState().equals(Player.State.DYING))
-            killCounter = 0;
-    }
+    public void setEnemyState(EnemyState enemyState){this.enemyState=enemyState;}
     public void setFacingLeft() {
         direction = "LEFT";
     }
     public void setFacingRight() {
         direction = "RIGHT";
     }
+    public int getHealth(){return health;}
+    public void setHealth(int health){this.health=health;}
 }
