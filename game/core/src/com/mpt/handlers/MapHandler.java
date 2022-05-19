@@ -47,10 +47,13 @@ public class MapHandler {
                 createStaticObject((PolygonMapObject) mapObject);
             if(mapObject instanceof RectangleMapObject) {
                 Rectangle rectangle = ((RectangleMapObject) mapObject).getRectangle();
-                String rectangleName = mapObject.getName();
+                String rectangleName;
+                if(mapObject.getName() != null)
+                    rectangleName = mapObject.getName();
+                else
+                    throw new NullPointerException("There is a rectangle object with a null name.");
 
                 if(rectangleName.equals("Player")) {
-
                     Body body = BodyHandler.createBody(
                             rectangle.getX() + rectangle.getWidth() / 2,
                             rectangle.getY() + rectangle.getHeight() / 2,

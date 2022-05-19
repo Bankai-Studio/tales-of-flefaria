@@ -59,6 +59,7 @@ public class Player extends GameEntity {
     @Override
     public void update(float delta) {
         checkPlayerDeath();
+        respawnOnVoidPosition();
     }
 
     @Override
@@ -83,6 +84,11 @@ public class Player extends GameEntity {
         }
         else
             canRespawn = true;
+    }
+
+    private void respawnOnVoidPosition() {
+        if(body.getPosition().y < 0)
+            state = State.DYING;
     }
 
     private void loadPlayerSprites() {
