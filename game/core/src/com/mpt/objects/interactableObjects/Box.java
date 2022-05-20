@@ -1,11 +1,10 @@
-package com.mpt.objects.box;
+package com.mpt.objects.interactableObjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.objects.GameObject;
-import com.mpt.platform.GameScreen;
 
 import static com.mpt.constants.Constants.PPM;
 
