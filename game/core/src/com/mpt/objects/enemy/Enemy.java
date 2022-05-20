@@ -107,7 +107,7 @@ public class Enemy extends GameEntity{
 
     public boolean playerSpotted(Player player) {
         //System.out.println(Math.abs(player.getBody().getPosition().x - body.getPosition().x));
-        playerHasBeenSpotted = player.getBody().getPosition().x - body.getPosition().x < 2f;
+        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f;
         return playerHasBeenSpotted;
     }
 

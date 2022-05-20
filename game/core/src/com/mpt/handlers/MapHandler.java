@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.mpt.objects.box.Box;
+import com.mpt.objects.interactableObjects.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.enemy.Centipede;
 import com.mpt.objects.player.Player;

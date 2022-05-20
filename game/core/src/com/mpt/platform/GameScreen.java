@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
-import com.mpt.objects.box.Box;
+import com.mpt.objects.interactableObjects.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.enemy.Centipede;
