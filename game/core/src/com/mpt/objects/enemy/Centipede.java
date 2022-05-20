@@ -54,9 +54,8 @@ public class Centipede extends Enemy {
 
         float tX=body.getPosition().x * PPM - 35f;
         float tY=body.getPosition().y * PPM - 12f;
-        batch.begin();
-            batch.draw(currentFrame, tX, tY);
-        batch.end();
+
+        batch.draw(currentFrame, tX, tY);
     }
 
     private void loadPlayerSprites() {
