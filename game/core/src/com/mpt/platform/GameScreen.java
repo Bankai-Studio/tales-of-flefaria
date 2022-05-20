@@ -79,12 +79,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         viewport.apply();
 
-        // Render here
         batch.begin();
 
-        orthogonalTiledMapRenderer.render();
-        mapHandler.renderTiledMapTileMapObject();
-
+        mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
+        orthogonalTiledMapRenderer.render(); // Renders the map
         player.render(batch);
 
         for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
