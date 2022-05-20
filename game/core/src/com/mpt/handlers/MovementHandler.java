@@ -3,7 +3,7 @@ package com.mpt.handlers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.mpt.objects.interactableObjects.Box;
+import com.mpt.objects.interactables.Box;
 import com.mpt.objects.player.Player;
 import com.mpt.objects.player.Player.State;
 import com.mpt.platform.GameScreen;
