@@ -63,6 +63,11 @@ public abstract class InterfaceModule extends ScreenAdapter {
         Gdx.input.setInputProcessor(null);
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
+
     protected abstract void setup();
 
     protected void setBackground() {
