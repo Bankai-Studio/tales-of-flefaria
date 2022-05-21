@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
-import com.mpt.objects.interactableObjects.Box;
+import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.enemy.Centipede;
@@ -80,12 +80,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         viewport.apply();
 
         batch.begin();
-            orthogonalTiledMapRenderer.render();
-            // Render the batch of sprites here
-        batch.end();
 
-        if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
-
+        mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
+        orthogonalTiledMapRenderer.render(); // Renders the map
         player.render(batch);
 
         for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
@@ -94,9 +91,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
                 centipede.render(batch);
             }
         }
+        for(Box box : boxes)
+            box.render(batch);
 
-        for(int i=0; i<boxes.size(); i++)
-            boxes.get(i).render(batch);
+        batch.end();
+
+        if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
     }
 
     @Override
@@ -104,6 +104,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         super.dispose();
         batch.dispose();
         world.dispose();
+        for(Box box : boxes)
+            box.dispose();
         box2DDebugRenderer.dispose();
     }
 

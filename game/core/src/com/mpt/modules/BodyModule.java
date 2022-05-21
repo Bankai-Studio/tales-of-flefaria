@@ -1,11 +1,11 @@
-package com.mpt.handlers;
+package com.mpt.modules;
 
 import com.badlogic.gdx.physics.box2d.*;
 
 import static com.mpt.constants.Constants.PPM;
 
-public class BodyHandler {
-    public BodyHandler() {}
+public class BodyModule {
+    public BodyModule() {}
 
     public static Body createBody(float x, float y, float width, float height, boolean isStatic, boolean isSensor, float friction, float restitution, World world) {
         BodyDef bodyDef = new BodyDef();

@@ -4,17 +4,17 @@ import com.badlogic.gdx.Game;
 
 public class PlatformGame extends Game {
 
-	GameScreen gameScreen;
+	MenuScreen menuScreen;
 
 	@Override
 	public void create() {
-		gameScreen = new GameScreen();
-		setScreen(gameScreen);
+		menuScreen = new MenuScreen();
+		setScreen(menuScreen);
 	}
 
 	@Override
 	public void dispose() {
-		gameScreen.dispose();
+		menuScreen.dispose();
 	}
 
 	@Override
@@ -24,6 +24,6 @@ public class PlatformGame extends Game {
 
 	@Override
 	public void resize(int width, int height) {
-		gameScreen.resize(width, height);
+		menuScreen.resize(width, height);
 	}
 }

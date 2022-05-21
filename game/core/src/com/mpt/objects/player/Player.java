@@ -71,9 +71,7 @@ public class Player extends GameEntity {
 
         float tX = x-15f, tY = y-17f;
         if(direction.equals("LEFT")) tX -= 17f;
-        batch.begin();
             batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
-        batch.end();
     }
 
     private void checkPlayerDeath() {

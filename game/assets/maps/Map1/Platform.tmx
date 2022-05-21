@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="104">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="115">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="2" name="BackgroundAssets" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt2klOwzAUxvF3COiRgCOw5hCsWbNmHzGPuSOxgoVlOWk8xUP/P+kJqYLUTr4+Wy4iAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBVPUz3/1ctUD2WHgw6oTA2OUvm6LzgutOtT3Jmy8wX4+pY5P6P106yvYqNDq65lW8/6KDVANM9cF119izURoVT/uhH2W8hD58vO2E/JQXXKPOdZqh7ZezDVs25lvh8Ip/N0bH87yP/ZYuvU2ajKzp0sn3ENpQbXOJ889ZSvtRyRK3/2OheSJ1e+zO9IWvAq89jfhFyFMrOUIkdbc1Zrxrb2Kn0OgVmOntRTL3ONc61vwW/f4HNvzc9vTNWQrbXzd/MePEq5XF0Uel/X+8dkaukeb9l/+GbPzNZlwJzt/3kJcey7HXPeoa4i/tYl5F65+I4r5rkvve6bq60VyvXZSZWtpbmazqc6k3TPWNGfk5S9/CDzWA8JrpXj+eeqVPNsfW+tMqXnoHJdwz7B5rMWhVaKa78nmKc9jpbVPg99JlOiRvHLXIzU1ystxV4up9g+k7PPpc5BL5lSap/LnmtZ7DVSzLX1vZWp5nns1Wtq6Fd6vr0YSw9gRe41bes1Xb9n779SzRf55coE/eq0lV7b9s7VXn4B9XYcVA==
+   eJzt2klOwzAUxvF3COjZWHMI1qxZs48Yypw7EitYWJaTxlM85P+TniohlNrpl2fLrQgAAAAAAAAAAAAAAAAAAAAAAAAAAACO4nmql796neqx7HDQAZWpwVEqXw8Fx4V2fYo7U3a+AF/fMudntF7N+io2OrTqRrb1rI9SA0TzzHXR1bdYExFK9a9bYb+FPHS+7Iz9lBxUp8xznqXqkb0HUz3rTub7gXA6T5f2t4P8ny22Tp2Nquzcy/IZ11BqcI3zyVNP+VrLEbnyZ69zIXly5cv8jqQFZ5nH/ibkKpSZpRQ52pqzWjO2tVfpcwjMcvSknnqZa5xrfQt++wafe2s+vzFVQ7bWzt/Ne/Ak5EqJydTSPd6y//DNXmy27N+8hLj03Y4576OL+dyX/u6bq60VyvXspMrW0lxN11NdBb7fEv2cpOzlJ5nHekpwrRyff65KNc/W99YqU3oOKtc17BNsPmtRaKW49nuCedrjaFnt89BnMiVqFL/MxUh9vdJq38vF9pmcfS51DnrJlFL7XPZcy2KvkWKure+tTDXPY69eU0O/0vPtxVh6ACtyr2lbr+n6P3v/lWq+yC9XJuhXx1Z6bds7V3v5BXsjGmM=
   </data>
  </layer>
+ <objectgroup id="7" name="TileObjects">
+  <object id="108" gid="72" x="448" y="1312" width="175" height="190"/>
+  <object id="109" gid="71" x="160" y="1344" width="175" height="190"/>
+  <object id="110" gid="70" x="928" y="1280" width="124" height="129"/>
+  <object id="111" gid="71" x="1088" y="1312" width="175" height="190"/>
+  <object id="112" gid="72" x="1664" y="1312" width="175" height="190"/>
+  <object id="113" gid="70" x="1952" y="1280" width="124" height="129"/>
+  <object id="114" gid="71" x="3488" y="1280" width="175" height="190"/>
+ </objectgroup>
  <objectgroup id="3" name="Objects">
   <object id="8" x="1344" y="1344">
    <polygon points="0,0 0,256 288,256 288,0"/>
@@ -52,7 +61,7 @@
   </object>
   <object id="54" name="Checkpoint" x="864" y="1152" width="32" height="64"/>
   <object id="57" name="Checkpoint" x="2752" y="1056" width="32" height="64"/>
-  <object id="45" name="Player" x="16" y="1279" width="30" height="30"/>
+  <object id="45" name="Player" x="32" y="1280" width="22" height="30"/>
   <object id="60" x="736" y="1376">
    <polygon points="0,0 32,0 32,224 0,224"/>
   </object>
@@ -120,7 +129,7 @@
    <polygon points="0,0 32,0 32,320 0,320"/>
   </object>
   <object id="83" name="Spawnpoint" x="64" y="1280" width="32" height="32"/>
-  <object id="84" name="Centipede" x="1472" y="1312" width="25" height="25"/>
+  <object id="84" name="Centipede" x="1472" y="1312" width="20" height="20"/>
   <object id="86" x="384" y="1600">
    <polygon points="0,0 224,0 224,-288 32,-288 0,-256"/>
   </object>
