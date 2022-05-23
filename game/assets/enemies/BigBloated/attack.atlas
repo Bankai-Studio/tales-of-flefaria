@@ -1,45 +1,45 @@
 
-attack1.png
+attack.png
 size: 512, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-attack1
+attack
   rotate: false
   xy: 224, 2
   size: 72, 72
   orig: 72, 72
   offset: 0, 0
   index: -1
-attack1
+attack
   rotate: false
   xy: 76, 2
   size: 72, 72
   orig: 72, 72
   offset: 0, 0
   index: -1
-attack1
+attack
   rotate: false
   xy: 372, 2
   size: 72, 72
   orig: 72, 72
   offset: 0, 0
   index: -1
-attack1
+attack
   rotate: false
   xy: 150, 2
   size: 72, 72
   orig: 72, 72
   offset: 0, 0
   index: -1
-attack1
+attack
   rotate: false
   xy: 2, 2
   size: 72, 72
   orig: 72, 72
   offset: 0, 0
   index: -1
-attack1
+attack
   rotate: false
   xy: 298, 2
   size: 72, 72

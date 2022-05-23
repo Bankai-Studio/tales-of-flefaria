@@ -1,9 +1,6 @@
 package com.mpt.platform;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,10 +11,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
+import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
-import com.mpt.objects.enemy.Enemy;
-import com.mpt.objects.enemy.Centipede;
 import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
@@ -91,7 +87,40 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
                 Centipede centipede = (Centipede) enemy.getValue();
                 centipede.render(batch);
             }
+            if(enemy.getKey().equals("Hyena")) {
+                Hyena hyena = (Hyena) enemy.getValue();
+                hyena.render(batch);
+            }
+            if(enemy.getKey().equals("BattleTurtle")) {
+                BattleTurtle battleTurtle = (BattleTurtle) enemy.getValue();
+                battleTurtle.render(batch);
+            }
+            if(enemy.getKey().equals("BigBloated")) {
+                BigBloated bigBloated = (BigBloated) enemy.getValue();
+                bigBloated.render(batch);
+            }
+            if(enemy.getKey().equals("Deceased")) {
+                Deceased deceased = (Deceased) enemy.getValue();
+                deceased.render(batch);
+            }
+            if(enemy.getKey().equals("Mummy")) {
+                Mummy mummy = (Mummy) enemy.getValue();
+                mummy.render(batch);
+            }
+            if(enemy.getKey().equals("Scorpio")) {
+                Scorpio scorpio = (Scorpio) enemy.getValue();
+                scorpio.render(batch);
+            }
+            if(enemy.getKey().equals("Snake")) {
+                Snake snake = (Snake) enemy.getValue();
+                snake.render(batch);
+            }
+            if(enemy.getKey().equals("Vulture")) {
+                Vulture vulture = (Vulture) enemy.getValue();
+                vulture.render(batch);
+            }
         }
+
         for(Box box : boxes)
             box.render(batch);
 
@@ -180,6 +209,38 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             if(enemy.getKey().equals("Centipede")) {
                 Centipede centipede = (Centipede) enemy.getValue();
                 centipede.update(delta);
+            }
+            if(enemy.getKey().equals("Hyena")) {
+                Hyena hyena = (Hyena) enemy.getValue();
+                hyena.update(delta);
+            }
+            if(enemy.getKey().equals("BattleTurtle")) {
+                BattleTurtle battleTurtle = (BattleTurtle) enemy.getValue();
+                battleTurtle.update(delta);
+            }
+            if(enemy.getKey().equals("BigBloated")) {
+                BigBloated bigBloated = (BigBloated) enemy.getValue();
+                bigBloated.update(delta);
+            }
+            if(enemy.getKey().equals("Deceased")) {
+                Deceased deceased = (Deceased) enemy.getValue();
+                deceased.update(delta);
+            }
+            if(enemy.getKey().equals("Mummy")) {
+                Mummy mummy = (Mummy) enemy.getValue();
+                mummy.update(delta);
+            }
+            if(enemy.getKey().equals("Scorpio")) {
+                Scorpio scorpio = (Scorpio) enemy.getValue();
+                scorpio.update(delta);
+            }
+            if(enemy.getKey().equals("Snake")) {
+                Snake snake = (Snake) enemy.getValue();
+                snake.update(delta);
+            }
+            if(enemy.getKey().equals("Vulture")) {
+                Vulture vulture = (Vulture) enemy.getValue();
+                vulture.update(delta);
             }
         }
 
