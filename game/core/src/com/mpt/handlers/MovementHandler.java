@@ -38,6 +38,7 @@ public class MovementHandler {
     private float staminaTimer;
     private float staminaRegenTime;
     private GameScreen gameScreen;
+    private boolean jumpedFromBox = false;
 
     static Map<InputKeys, Boolean> inputKeys = new HashMap<>();
     static {
@@ -100,17 +101,20 @@ public class MovementHandler {
     private void checkUserInput() {
         AnimationHandler playerAnimations = player.getPlayerAnimations();
 
-        if(player.getBody().getLinearVelocity().y!=0 && player.getState() != State.JUMPING && player.getState() != State.FALLING){
-        //    player.setPlayerState(State.FALLING);
-        //    playerAnimations.setCurrent("fall", false);
+        System.out.println(player.getBody().getLinearVelocity().y);
+
+        if(playerAnimations.isFinished() && player.getState() == State.JUMPING && jumpedFromBox) jumpedFromBox = false;
+
+        if(player.getBody().getLinearVelocity().y!=0 && getNearestBoxXDistance(player.getBody().getPosition().x) > 1f && getNearestBoxYDistance(player.getBody().getPosition().y) > 1f && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING){
+            player.setPlayerState(State.FALLING);
+            playerAnimations.setCurrent("fall", false);
         }
 
-        if((playerAnimations.isFinished() && player.getState() == State.ATTACKING) || (player.getVelocityY()==0 && wasLastFrameYVelocityZero && player.getState() == State.JUMPING)){
+        if((player.getPlayerState().equals(State.PUSHING) && getNearestBoxXDistance(player.getBody().getPosition().x) > 1f) || (playerAnimations.isFinished() && player.getState() == State.ATTACKING) || (player.getBody().getLinearVelocity().y==0 && wasLastFrameYVelocityZero && player.getState() == State.JUMPING)){
             player.setPlayerState(State.IDLE);
             playerAnimations.setCurrent("idle");
         }
-
-        if(getNearestBoxXDistance(player.getBody().getPosition().x) < 1f && getNearestBoxYDistance(player.getBody().getPosition().y) < 0.1f && player.getState() != State.PUSHING && player.getVelocityX() != 0) {
+        if(getNearestBoxXDistance(player.getBody().getPosition().x) < 1f && getNearestBoxYDistance(player.getBody().getPosition().y) < 1f && player.getBody().getLinearVelocity().y == 0 && player.getState() != State.PUSHING) {
             player.setPlayerState(State.PUSHING);
             playerAnimations.setCurrent("push");
         }
@@ -143,9 +147,9 @@ public class MovementHandler {
             if(player.getPlayerStamina() >= 10) {
                 player.setPlayerState(State.JUMPING);
                 if(jumpCounter == 0 || (jumpCounter == 1 && isDoubleJumpReady)) {
-
                     if(jumpCounter == 1) {
                         isDoubleJumpReady = false;
+                        jumpedFromBox = false;
                         doubleJumpTimer = 0f;
                         playerAnimations.setCurrent("idle"); // To be able to reset the sprite
                     }
@@ -186,18 +190,24 @@ public class MovementHandler {
         if((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().y != 0 || isSprintReloading) && player.getPlayerSpeed() > DEFAULT_SPEED)
             player.setPlayerSpeed(player.getPlayerSpeed() - 0.2f);
 
-        if(getNearestBoxXDistance(player.getBody().getPosition().x) < 1f && getNearestBoxYDistance(player.getBody().getPosition().y) < 1f && player.getVelocityY()==0)
+        if(getNearestBoxXDistance(player.getBody().getPosition().x) < 1f && getNearestBoxYDistance(player.getBody().getPosition().y) < 1f && !player.getPlayerState().equals(State.IDLE) && !jumpedFromBox){
+            jumpedFromBox = true;
             jumpCounter = 0;
+            playerAnimations.setCurrent("idle");
+            player.setPlayerState(State.IDLE);
+        }
 
-        if(player.getBody().getLinearVelocity().y == 0)
-            if(wasLastFrameYVelocityZero && jumpCounter!=0 && player.getState() != State.ATTACKING){
+
+        if(player.getBody().getLinearVelocity().y == 0){
+            if(wasLastFrameYVelocityZero){
                 jumpCounter = 0;
-                player.setPlayerState(State.IDLE);
+                if(player.getState() == State.FALLING) {
+                    playerAnimations.setCurrent("idle");
+                    player.setPlayerState(State.IDLE);
+                }
             }
-            else
-                wasLastFrameYVelocityZero = true;
-        else
-            wasLastFrameYVelocityZero = false;
+            else wasLastFrameYVelocityZero = true;
+        } else wasLastFrameYVelocityZero = false;
 
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && player.getState() != State.WALKING && player.getState() != State.RUNNING && player.getState() != State.ATTACKING && player.getState() != State.PUSHING){
             playerAnimations.setCurrent("attack1", false);

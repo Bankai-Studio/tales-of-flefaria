@@ -25,7 +25,8 @@ public class Player extends GameEntity {
         PUSHING,
         ATTACKING,
         HURT,
-        FALLING
+        FALLING,
+        CLIMBING;
     }
 
     // Variables
@@ -53,6 +54,9 @@ public class Player extends GameEntity {
         direction = "RIGHT";
         loadPlayerSprites();
 
+        playerAnimations.setCurrent("idle");
+        state = State.IDLE;
+
         respawnPosition = new Vector2(body.getPosition().x, body.getPosition().y);
         body.setUserData(this);
     }
@@ -72,7 +76,7 @@ public class Player extends GameEntity {
 
         float tX = x-15f, tY = y-17f;
         if(direction.equals("LEFT")) tX -= 17f;
-            batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
+        batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
     }
 
     private void checkPlayerDeath() {
@@ -145,9 +149,6 @@ public class Player extends GameEntity {
 
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/walk.atlas"));
         playerAnimations.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
-
-        playerAnimations.setCurrent("idle");
-        state = State.IDLE;
     }
 
     // Setters

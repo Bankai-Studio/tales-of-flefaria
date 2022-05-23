@@ -45,6 +45,7 @@ public abstract class Enemy extends GameEntity{
         WALKING,
         ATTACKING,
         DYING,
+        HURT;
     }
     protected EnemyState enemyState;
     protected String direction;
