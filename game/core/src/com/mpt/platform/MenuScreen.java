@@ -44,7 +44,7 @@ public class MenuScreen extends InterfaceModule {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 playButton.addAction(Actions.fadeOut(1f));
-                stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
+                stage.addAction(Actions.sequence(Actions.fadeOut(3f), Actions.run(() -> {
                     gameScreen = new GameScreen();
                     ((Game) Gdx.app.getApplicationListener()).setScreen(gameScreen);
                 })));
