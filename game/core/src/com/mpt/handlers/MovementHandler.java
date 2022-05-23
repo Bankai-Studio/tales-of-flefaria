@@ -101,8 +101,6 @@ public class MovementHandler {
     private void checkUserInput() {
         AnimationHandler playerAnimations = player.getPlayerAnimations();
 
-        System.out.println(player.getBody().getLinearVelocity().y);
-
         if(playerAnimations.isFinished() && player.getState() == State.JUMPING && jumpedFromBox) jumpedFromBox = false;
 
         if(player.getBody().getLinearVelocity().y!=0 && getNearestBoxXDistance(player.getBody().getPosition().x) > 1f && getNearestBoxYDistance(player.getBody().getPosition().y) > 1f && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING){

@@ -14,6 +14,8 @@ import com.mpt.handlers.*;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
+import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
@@ -38,6 +40,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private MovementHandler movementHandler;
     private PreferencesHandler preferencesHandler;
     private ArrayList<Box> boxes;
+    private ArrayList<Ladder> ladders;
+    private ArrayList<Coin> coins;
 
     private int screenWidth, screenHeight;
 
@@ -47,6 +51,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         enemies = new HashMap<>();
         checkpoints = new ArrayList<>();
         boxes = new ArrayList<>();
+        ladders = new ArrayList<>();
+        coins = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         preferencesHandler = new PreferencesHandler();
@@ -121,8 +127,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             }
         }
 
-        for(Box box : boxes)
-            box.render(batch);
+        for(Box box : boxes) box.render(batch);
+        for(Coin coin : coins) coin.render(batch);
 
         batch.end();
 
@@ -134,8 +140,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         super.dispose();
         batch.dispose();
         world.dispose();
-        for(Box box : boxes)
-            box.dispose();
+        for(Box box : boxes) box.dispose();
         box2DDebugRenderer.dispose();
     }
 
@@ -281,8 +286,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void addCheckpoint(Checkpoint checkpoint) {
         checkpoints.add(checkpoint);
     }
-    public void addBox(Box box) {
-        boxes.add(box);
-    }
+    public void addBox(Box box) {boxes.add(box);}
+    public void addLadder(Ladder ladder) { ladders.add(ladder);}
+    public void addCoin(Coin coin) {coins.add(coin);}
     public ArrayList<Box> getBoxes(){return boxes;}
+    public ArrayList<Ladder> getLadders(){return ladders;}
+    public ArrayList<Coin> getCoins(){return coins;}
+
 }

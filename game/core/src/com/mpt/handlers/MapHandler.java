@@ -19,6 +19,8 @@ import com.mpt.modules.BodyModule;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
+import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
@@ -95,11 +97,39 @@ public class MapHandler {
                             rectangle.getHeight(),
                             false,
                             false,
-                            1000,
+                            1000f,
                             0f,
                             gameScreen.getWorld()
                     );
                     gameScreen.addBox(new Box(rectangle.getWidth(), rectangle.getHeight(), body));
+                }
+                if(rectangleName.equals("Ladder")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            false,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    gameScreen.addLadder(new Ladder(rectangle.getWidth(), rectangle.getHeight(), body));
+                }
+                if(rectangleName.equals("Coin")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            false,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    gameScreen.addCoin(new Coin(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
                 if(rectangleName.equals("Centipede")) {
                     Body body = createEnemyBody(rectangle);
