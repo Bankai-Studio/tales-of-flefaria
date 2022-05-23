@@ -1,5 +1,6 @@
 package com.mpt.objects.enemy;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -57,6 +58,7 @@ public class Enemy extends GameEntity{
 
     // Enemy States
     public enum EnemyState {
+        IDLE,
         WALKING,
         ATTACKING,
         DYING
@@ -112,7 +114,7 @@ public class Enemy extends GameEntity{
     }
 
     public void lurkTarget(Player player){
-        if(playerHasBeenSpotted) {
+        if(playerSpotted(player) && Math.abs((int)player.getBody().getPosition().x - (int)body.getPosition().x) != 0) {
             if (player.getBody().getPosition().x < this.getBody().getPosition().x) {
                 body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
                 setFacingRight();
@@ -120,6 +122,10 @@ public class Enemy extends GameEntity{
                 body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
                 setFacingLeft();
             }
+        }
+        else if(Math.abs((int)player.getBody().getPosition().x - (int)body.getPosition().x) == 0) {
+            this.getBody().setLinearVelocity(0, this.getBody().getLinearVelocity().y);
+            enemyState = EnemyState.IDLE;
         }
     }
 
