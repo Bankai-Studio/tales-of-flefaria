@@ -75,6 +75,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         this.update(delta);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
+        //36f/255f,61f/255f,71f/255f
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         viewport.apply();
