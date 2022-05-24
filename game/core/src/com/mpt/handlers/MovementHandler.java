@@ -103,7 +103,7 @@ public class MovementHandler {
 
         if(playerAnimations.isFinished() && player.getState() == State.JUMPING && jumpedFromBox) jumpedFromBox = false;
 
-        if(player.getBody().getLinearVelocity().y!=0 && getNearestBoxXDistance(player.getBody().getPosition().x) > 1f && getNearestBoxYDistance(player.getBody().getPosition().y) > 1f && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING){
+        if(player.getBody().getLinearVelocity().y!=0 && getNearestBoxXDistance(player.getBody().getPosition().x) > 1f && getNearestBoxYDistance(player.getBody().getPosition().y) > 1f && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING && player.getState() != State.DYING){
             player.setPlayerState(State.FALLING);
             playerAnimations.setCurrent("fall", false);
         }
