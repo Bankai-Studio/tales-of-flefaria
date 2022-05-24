@@ -110,7 +110,7 @@ public class MapHandler {
                             rectangle.getWidth(),
                             rectangle.getHeight(),
                             true,
-                            false,
+                            true,
                             0f,
                             0f,
                             gameScreen.getWorld()
@@ -124,7 +124,7 @@ public class MapHandler {
                             rectangle.getWidth(),
                             rectangle.getHeight(),
                             true,
-                            false,
+                            true,
                             0f,
                             0f,
                             gameScreen.getWorld()
