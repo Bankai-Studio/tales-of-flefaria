@@ -36,7 +36,7 @@ public class CreditsScreen extends InterfaceModule {
                 exitLabel.addAction(Actions.fadeOut(1f));
                 stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
                     //((Game) Gdx.app.getApplicationListener()).setScreen(menuScreen);
-                    
+
                 })));
             }
 
