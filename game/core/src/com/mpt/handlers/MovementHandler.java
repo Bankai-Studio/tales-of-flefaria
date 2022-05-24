@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mpt.objects.interactables.Box;
+import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 import com.mpt.objects.player.Player.State;
 import com.mpt.platform.GameScreen;
@@ -103,6 +104,11 @@ public class MovementHandler {
 
         if(playerAnimations.isFinished() && player.getState() == State.JUMPING && jumpedFromBox) jumpedFromBox = false;
 
+        if(isPlayerNearALadder(player.getBody().getPosition()) && player.getState() != State.CLIMBING){
+            player.setPlayerState(State.CLIMBING);
+            playerAnimations.setCurrent("climb");
+        }
+
         if(player.getBody().getLinearVelocity().y!=0 && getNearestBoxXDistance(player.getBody().getPosition().x) > 1f && getNearestBoxYDistance(player.getBody().getPosition().y) > 1f && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING && player.getState() != State.DYING){
             player.setPlayerState(State.FALLING);
             playerAnimations.setCurrent("fall", false);
@@ -119,7 +125,7 @@ public class MovementHandler {
 
         if(inputKeys.get(InputKeys.LEFT) && !player.getPlayerState().equals(State.DYING)) {
             player.setFacingLeft();
-            if(player.getVelocityY()==0f && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && player.getState() != State.JUMPING && player.getState() != State.ATTACKING && !inputKeys.get(InputKeys.RIGHT) && player.getState() != State.PUSHING  && player.getState() != State.FALLING){
+            if(player.getVelocityY()==0f && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && player.getState() != State.JUMPING && player.getState() != State.ATTACKING && !inputKeys.get(InputKeys.RIGHT) && player.getState() != State.PUSHING && player.getState() != State.FALLING && player.getState() != State.CLIMBING){
                 playerAnimations.setCurrent("walk");
                 player.setPlayerState(State.WALKING);
             }
@@ -127,7 +133,7 @@ public class MovementHandler {
         }
         if(inputKeys.get(InputKeys.RIGHT) && !player.getPlayerState().equals(State.DYING)) {
             player.setFacingRight();
-            if(player.getVelocityY()==0 && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && player.getState() != State.JUMPING && player.getState() != State.ATTACKING && !inputKeys.get(InputKeys.LEFT) && player.getState() != State.PUSHING  && player.getState() != State.FALLING){
+            if(player.getVelocityY()==0 && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && player.getState() != State.JUMPING && player.getState() != State.ATTACKING && !inputKeys.get(InputKeys.LEFT) && player.getState() != State.PUSHING  && player.getState() != State.FALLING && player.getState() != State.CLIMBING){
                 playerAnimations.setCurrent("walk");
                 player.setPlayerState(State.WALKING);
             }
@@ -173,7 +179,7 @@ public class MovementHandler {
                 player.setPlayerSpeed(player.getPlayerSpeed() + 0.4f);
             if(player.getBody().getLinearVelocity().x != 0 && player.getBody().getLinearVelocity().y == 0 && player.getPlayerStamina() > 0 && !isSprintReloading)
                 player.setPlayerStamina(player.getPlayerStamina() - 1);
-            if(player.getState() != State.RUNNING  && player.getState() != State.JUMPING && player.getVelocityX()!=0 && !isSprintReloading && player.getState() != State.ATTACKING && player.getState() != State.PUSHING){
+            if(player.getState() != State.RUNNING  && player.getState() != State.JUMPING && player.getVelocityX()!=0 && !isSprintReloading && player.getState() != State.ATTACKING && player.getState() != State.PUSHING && player.getState() != State.CLIMBING){
                 player.setPlayerState(State.RUNNING);
                 playerAnimations.setCurrent("run");
             }
@@ -207,11 +213,11 @@ public class MovementHandler {
             else wasLastFrameYVelocityZero = true;
         } else wasLastFrameYVelocityZero = false;
 
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && player.getState() != State.WALKING && player.getState() != State.RUNNING && player.getState() != State.ATTACKING && player.getState() != State.PUSHING){
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && player.getState() != State.WALKING && player.getState() != State.RUNNING && player.getState() != State.ATTACKING && player.getState() != State.PUSHING && player.getState() != State.CLIMBING){
             playerAnimations.setCurrent("attack1", false);
             player.setPlayerState(State.ATTACKING);
         }
-        if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && player.getState() != State.WALKING && player.getState() != State.RUNNING && player.getState() != State.ATTACKING && player.getState() != State.PUSHING){
+        if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && player.getState() != State.WALKING && player.getState() != State.RUNNING && player.getState() != State.ATTACKING && player.getState() != State.PUSHING && player.getState() != State.CLIMBING){
             playerAnimations.setCurrent("attack2", false);
             player.setPlayerState(State.ATTACKING);
         }
@@ -246,5 +252,14 @@ public class MovementHandler {
         for(int i=0; i<boxes.size(); i++)
             if(boxes.get(i).getBody().getPosition().y < minY) minY = boxes.get(i).getBody().getPosition().y;
         return Math.abs(playerY-minY);
+    }
+
+    private boolean isPlayerNearALadder(Vector2 playerPosition){
+        ArrayList<Ladder> ladders = gameScreen.getLadders();
+        for(Ladder ladder : ladders){
+            Vector2 ladderPosition = ladder.getBody().getPosition();
+            if(Math.abs(playerPosition.x - ladderPosition.x) < 1f && Math.abs(playerPosition.y - ladderPosition.y) < ladder.getHeight()/2) return true;
+        }
+        return false;
     }
 }
