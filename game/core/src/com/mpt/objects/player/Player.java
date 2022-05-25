@@ -12,10 +12,6 @@ import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
 
 public class Player extends GameEntity {
-    public final int MIN_DMG = 34;
-    public final int MAX_DMG = 50;
-    private int player_health = 100;
-
     // Constants
     private int maxPlayerStamina = 100;
 
@@ -29,7 +25,8 @@ public class Player extends GameEntity {
         PUSHING,
         ATTACKING,
         HURT,
-        FALLING
+        FALLING,
+        CLIMBING;
     }
 
     // Variables
@@ -41,9 +38,14 @@ public class Player extends GameEntity {
     private final float FRAME_TIME = 1 / 7f;
     private String direction;
     private int characterSelection;
+    private final float chargedAttackMultiplier = 1.5f;
+    private float playerSpeed;
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
+        minDamage = 34;
+        maxDamage = 50;
+        health = 100;
         playerSpeed = 8f;
         playerStamina = maxPlayerStamina;
         canRespawn = true;
@@ -51,6 +53,9 @@ public class Player extends GameEntity {
         characterSelection = 0;
         direction = "RIGHT";
         loadPlayerSprites();
+
+        playerAnimations.setCurrent("idle");
+        state = State.IDLE;
 
         respawnPosition = new Vector2(body.getPosition().x, body.getPosition().y);
         body.setUserData(this);
@@ -71,7 +76,7 @@ public class Player extends GameEntity {
 
         float tX = x-15f, tY = y-17f;
         if(direction.equals("LEFT")) tX -= 17f;
-            batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
+        batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
     }
 
     private void checkPlayerDeath() {
@@ -144,9 +149,6 @@ public class Player extends GameEntity {
 
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/walk.atlas"));
         playerAnimations.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
-
-        playerAnimations.setCurrent("idle");
-        state = State.IDLE;
     }
 
     // Setters
@@ -191,8 +193,8 @@ public class Player extends GameEntity {
 
     // Getters
 
-    public float getHealth(){
-        return player_health;
+    public int getHealth(){
+        return health;
     }
     public float getVelocityX() {
         return velocityX;

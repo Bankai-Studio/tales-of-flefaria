@@ -1,9 +1,6 @@
 package com.mpt.platform;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,10 +11,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
+import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
-import com.mpt.objects.enemy.Enemy;
-import com.mpt.objects.enemy.Centipede;
+import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
@@ -42,6 +40,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private MovementHandler movementHandler;
     private PreferencesHandler preferencesHandler;
     private ArrayList<Box> boxes;
+    private ArrayList<Ladder> ladders;
+    private ArrayList<Coin> coins;
 
     private int screenWidth, screenHeight;
 
@@ -51,6 +51,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         enemies = new HashMap<>();
         checkpoints = new ArrayList<>();
         boxes = new ArrayList<>();
+        ladders = new ArrayList<>();
+        coins = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         preferencesHandler = new PreferencesHandler();
@@ -75,6 +77,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         this.update(delta);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
+        //36f/255f,61f/255f,71f/255f
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         viewport.apply();
@@ -90,9 +93,42 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
                 Centipede centipede = (Centipede) enemy.getValue();
                 centipede.render(batch);
             }
+            if(enemy.getKey().equals("Hyena")) {
+                Hyena hyena = (Hyena) enemy.getValue();
+                hyena.render(batch);
+            }
+            if(enemy.getKey().equals("BattleTurtle")) {
+                BattleTurtle battleTurtle = (BattleTurtle) enemy.getValue();
+                battleTurtle.render(batch);
+            }
+            if(enemy.getKey().equals("BigBloated")) {
+                BigBloated bigBloated = (BigBloated) enemy.getValue();
+                bigBloated.render(batch);
+            }
+            if(enemy.getKey().equals("Deceased")) {
+                Deceased deceased = (Deceased) enemy.getValue();
+                deceased.render(batch);
+            }
+            if(enemy.getKey().equals("Mummy")) {
+                Mummy mummy = (Mummy) enemy.getValue();
+                mummy.render(batch);
+            }
+            if(enemy.getKey().equals("Scorpio")) {
+                Scorpio scorpio = (Scorpio) enemy.getValue();
+                scorpio.render(batch);
+            }
+            if(enemy.getKey().equals("Snake")) {
+                Snake snake = (Snake) enemy.getValue();
+                snake.render(batch);
+            }
+            if(enemy.getKey().equals("Vulture")) {
+                Vulture vulture = (Vulture) enemy.getValue();
+                vulture.render(batch);
+            }
         }
-        for(Box box : boxes)
-            box.render(batch);
+
+        for(Box box : boxes) box.render(batch);
+        for(Coin coin : coins) coin.render(batch);
 
         batch.end();
 
@@ -104,8 +140,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         super.dispose();
         batch.dispose();
         world.dispose();
-        for(Box box : boxes)
-            box.dispose();
+        for(Box box : boxes) box.dispose();
         box2DDebugRenderer.dispose();
     }
 
@@ -180,6 +215,38 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
                 Centipede centipede = (Centipede) enemy.getValue();
                 centipede.update(delta);
             }
+            if(enemy.getKey().equals("Hyena")) {
+                Hyena hyena = (Hyena) enemy.getValue();
+                hyena.update(delta);
+            }
+            if(enemy.getKey().equals("BattleTurtle")) {
+                BattleTurtle battleTurtle = (BattleTurtle) enemy.getValue();
+                battleTurtle.update(delta);
+            }
+            if(enemy.getKey().equals("BigBloated")) {
+                BigBloated bigBloated = (BigBloated) enemy.getValue();
+                bigBloated.update(delta);
+            }
+            if(enemy.getKey().equals("Deceased")) {
+                Deceased deceased = (Deceased) enemy.getValue();
+                deceased.update(delta);
+            }
+            if(enemy.getKey().equals("Mummy")) {
+                Mummy mummy = (Mummy) enemy.getValue();
+                mummy.update(delta);
+            }
+            if(enemy.getKey().equals("Scorpio")) {
+                Scorpio scorpio = (Scorpio) enemy.getValue();
+                scorpio.update(delta);
+            }
+            if(enemy.getKey().equals("Snake")) {
+                Snake snake = (Snake) enemy.getValue();
+                snake.update(delta);
+            }
+            if(enemy.getKey().equals("Vulture")) {
+                Vulture vulture = (Vulture) enemy.getValue();
+                vulture.update(delta);
+            }
         }
 
     }
@@ -219,8 +286,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void addCheckpoint(Checkpoint checkpoint) {
         checkpoints.add(checkpoint);
     }
-    public void addBox(Box box) {
-        boxes.add(box);
-    }
+    public void addBox(Box box) {boxes.add(box);}
+    public void addLadder(Ladder ladder) { ladders.add(ladder);}
+    public void addCoin(Coin coin) {coins.add(coin);}
     public ArrayList<Box> getBoxes(){return boxes;}
+    public ArrayList<Ladder> getLadders(){return ladders;}
+    public ArrayList<Coin> getCoins(){return coins;}
+
 }

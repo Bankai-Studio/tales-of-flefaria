@@ -14,7 +14,7 @@ public class CombatHandler {
         if(attacker instanceof Player && victim instanceof Enemy) {
             player = (Player) attacker;
             enemy = (Enemy) victim;
-            int damagePlayer = (int)(Math.random()*(player.MAX_DMG - player.MIN_DMG + 1) + player.MIN_DMG);
+            int damagePlayer = (int)(Math.random()*(player.maxDamage - player.minDamage + 1) + player.minDamage);
             // Codice player attacca nemico
             int health = enemy.getHealth()-damagePlayer;
             enemy.setHealth(health);
@@ -27,7 +27,7 @@ public class CombatHandler {
             enemy = (Enemy) attacker;
             player = (Player) victim;
 
-            int damageEnemy = (int)(Math.random()*(enemy.maxDmg - enemy.minDmg + 1) + enemy.minDmg);
+            int damageEnemy = (int)(Math.random()*(enemy.maxDamage - enemy.minDamage + 1) + enemy.minDamage);
             // Codice nemico attacca player
             int health = (int) (player.getHealth()-damageEnemy);
             enemy.setHealth(health);

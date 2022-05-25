@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="115">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="118">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="2" name="BackgroundAssets" width="150" height="50">
@@ -173,6 +173,9 @@
    <polygon points="0,0 256,0 256,256 0,256"/>
   </object>
   <object id="103" name="Box" x="297.75" y="1310" width="30" height="30"/>
+  <object id="115" name="Scorpio" x="178.182" y="1322.18" width="40" height="20"/>
+  <object id="116" name="Coin" x="1493" y="1056" width="16" height="16"/>
+  <object id="117" name="Ladder" x="4320.09" y="959.875" width="23" height="320.125"/>
  </objectgroup>
  <layer id="5" name="BackgroundNature" width="150" height="50">
   <data encoding="base64" compression="zlib">
@@ -181,7 +184,7 @@
  </layer>
  <layer id="6" name="PlatformAssets" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt1zEOgCAMBVDOZ9Bjek7j6gZCWuW9hZFPSQktBQAAAAAAAAAAAAAAAAAAAGA9W3QAgEZ7dACADv5cwJd4s+a7/7RHdAi6ub92s2uWfU4ccf5Z9XubTT+Mc9eyRodgGL3RLrpm0fsDALk9587scyiwtjM6AL9UHytAZt4qALK6AABnCfc=
+   eJzt10EKgzAQBVAP1l6g2B6z5yzuilDIoHYmyXsbN4Kf+DMkywIAAAAAAAAAAAAAAAAAAAAwn0d2AICgZ3YAunbPDsCQbg3vOHMR1dIriGrtlZl1ve1M+8oOcZIZ59VI/+9fomsW7VX1e+IZnbmqc0ez9bQfqs+rbS3X7BCE/epVT3ujiuw1y/7+t+rzij7pFcAx+3tn9XsoMLd3dgCGtO6eAJWZVQBU9QFlGwxQ
   </data>
  </layer>
  <layer id="1" name="PlarformLvl1" width="150" height="50">

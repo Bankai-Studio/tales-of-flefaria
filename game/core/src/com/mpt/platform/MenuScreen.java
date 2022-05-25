@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -92,7 +93,7 @@ public class MenuScreen extends InterfaceModule {
             public void clicked(InputEvent event, float x, float y) {
                 creditsButton.addAction(Actions.fadeOut(1f));
                 stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
-                    creditsScreen = new CreditsScreen();
+                    creditsScreen = new CreditsScreen(getMenuScreen());
                     ((Game) Gdx.app.getApplicationListener()).setScreen(creditsScreen);
                 })));
             }
@@ -145,5 +146,9 @@ public class MenuScreen extends InterfaceModule {
             gameScreen.resize(width, height);
         if(creditsScreen != null)
             creditsScreen.resize(width, height);
+    }
+
+    public MenuScreen getMenuScreen() {
+        return this;
     }
 }

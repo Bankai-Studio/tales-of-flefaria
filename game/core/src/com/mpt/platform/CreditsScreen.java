@@ -1,35 +1,86 @@
 package com.mpt.platform;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mpt.modules.InterfaceModule;
 
 public class CreditsScreen extends InterfaceModule {
-
-    public CreditsScreen() {
+    MenuScreen menuScreen;
+    public CreditsScreen(MenuScreen menuScreen) {
+        this.menuScreen = menuScreen;
         setup();
     }
 
     @Override
     protected void setup() {
+        Table root = new Table();
+        root.setFillParent(true);
+
+        Table top = new Table();
+        Label exitLabel = new Label("EXIT", textStyle);
+        top.add(exitLabel);
+        top.padTop(-250);
+        top.padBottom(250);
+        top.padRight(1500);
+
+        exitLabel.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                exitLabel.addAction(Actions.fadeOut(1f));
+                stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
+                    //((Game) Gdx.app.getApplicationListener()).setScreen(menuScreen);
+
+                })));
+            }
+
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                exitLabel.setText("< EXIT >");
+                exitLabel.setColor(Color.WHITE);
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                exitLabel.setText("EXIT");
+                exitLabel.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+            }
+        });
+
         Table main = new Table();
-        main.setFillParent(true);
 
         Label title = new Label("Game Credits", subTitleStyle);
         Label subtitle = new Label("Tales of Flefaria", smallTextStyle);
         main.add(title).row();
         main.add(subtitle).row();
 
-        Table credits = new Table();
-        credits.add(createCreditLine("Programmer", "Zaiden")).row();
-        credits.add(createCreditLine("Programmer", "Niz")).row();
-        credits.add(createCreditLine("Programmer", "MattiaSwaga")).row();
-        credits.add(createCreditLine("Programmer", "MasterK")).row();
-        credits.padTop(50);
+        Table programmers = new Table();
+        programmers.add(createCreditLine("Programmer", "Zaiden")).row();
+        programmers.add(createCreditLine("Programmer", "Niz")).row();
+        programmers.add(createCreditLine("Programmer", "MattiaSwaga")).row();
+        programmers.add(createCreditLine("Programmer", "MasterK")).row();
+        programmers.padTop(50);
 
-        main.add(credits);
 
-        stage.addActor(main);
+        Table mapDesigners = new Table();
+        mapDesigners.add(createCreditLine("Map Designer", "MattiaSwaga")).row();
+
+        Table uiDesigners = new Table();
+        uiDesigners.add(createCreditLine("UI Designer", "Zaiden")).row();
+
+        main.add(programmers).row();
+        main.add(mapDesigners).row();
+        main.add(uiDesigners).row();
+
+        root.add(top).row();
+        root.add(main).row();
+        stage.addActor(root);
     }
 
     @Override
