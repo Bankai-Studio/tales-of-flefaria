@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="118">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="119">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="2" name="BackgroundAssets" width="150" height="50">
@@ -176,6 +176,7 @@
   <object id="115" name="Scorpio" x="178.182" y="1322.18" width="40" height="20"/>
   <object id="116" name="Coin" x="1493" y="1056" width="16" height="16"/>
   <object id="117" name="Ladder" x="4320.09" y="959.875" width="23" height="320.125"/>
+  <object id="118" name="Centipede" x="1568" y="1312" width="20" height="20"/>
  </objectgroup>
  <layer id="5" name="BackgroundNature" width="150" height="50">
   <data encoding="base64" compression="zlib">

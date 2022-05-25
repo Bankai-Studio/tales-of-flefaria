@@ -34,7 +34,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private final OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private final MapHandler mapHandler;
     private Player player;
-    private HashMap<String, Enemy> enemies;
+    private ArrayList<Enemy> enemies;
     private ArrayList<Checkpoint> checkpoints;
     private Viewport viewport;
     private MovementHandler movementHandler;
@@ -48,7 +48,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public GameScreen() {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -25f), false);
-        enemies = new HashMap<>();
+        enemies = new ArrayList<>();
         checkpoints = new ArrayList<>();
         boxes = new ArrayList<>();
         ladders = new ArrayList<>();
@@ -88,45 +88,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         orthogonalTiledMapRenderer.render(); // Renders the map
         player.render(batch);
 
-        for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
-            if(enemy.getKey().equals("Centipede")) {
-                Centipede centipede = (Centipede) enemy.getValue();
-                centipede.render(batch);
-            }
-            if(enemy.getKey().equals("Hyena")) {
-                Hyena hyena = (Hyena) enemy.getValue();
-                hyena.render(batch);
-            }
-            if(enemy.getKey().equals("BattleTurtle")) {
-                BattleTurtle battleTurtle = (BattleTurtle) enemy.getValue();
-                battleTurtle.render(batch);
-            }
-            if(enemy.getKey().equals("BigBloated")) {
-                BigBloated bigBloated = (BigBloated) enemy.getValue();
-                bigBloated.render(batch);
-            }
-            if(enemy.getKey().equals("Deceased")) {
-                Deceased deceased = (Deceased) enemy.getValue();
-                deceased.render(batch);
-            }
-            if(enemy.getKey().equals("Mummy")) {
-                Mummy mummy = (Mummy) enemy.getValue();
-                mummy.render(batch);
-            }
-            if(enemy.getKey().equals("Scorpio")) {
-                Scorpio scorpio = (Scorpio) enemy.getValue();
-                scorpio.render(batch);
-            }
-            if(enemy.getKey().equals("Snake")) {
-                Snake snake = (Snake) enemy.getValue();
-                snake.render(batch);
-            }
-            if(enemy.getKey().equals("Vulture")) {
-                Vulture vulture = (Vulture) enemy.getValue();
-                vulture.render(batch);
-            }
-        }
-
+        for(Enemy enemy : enemies) {enemy.render(batch);}
         for(Box box : boxes) box.render(batch);
         for(Coin coin : coins) coin.render(batch);
 
@@ -208,46 +170,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         player.update(delta);
         movementHandler.update(delta);
 
-
         // To be moved to map handler
-        for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
-            if(enemy.getKey().equals("Centipede")) {
-                Centipede centipede = (Centipede) enemy.getValue();
-                centipede.update(delta);
-            }
-            if(enemy.getKey().equals("Hyena")) {
-                Hyena hyena = (Hyena) enemy.getValue();
-                hyena.update(delta);
-            }
-            if(enemy.getKey().equals("BattleTurtle")) {
-                BattleTurtle battleTurtle = (BattleTurtle) enemy.getValue();
-                battleTurtle.update(delta);
-            }
-            if(enemy.getKey().equals("BigBloated")) {
-                BigBloated bigBloated = (BigBloated) enemy.getValue();
-                bigBloated.update(delta);
-            }
-            if(enemy.getKey().equals("Deceased")) {
-                Deceased deceased = (Deceased) enemy.getValue();
-                deceased.update(delta);
-            }
-            if(enemy.getKey().equals("Mummy")) {
-                Mummy mummy = (Mummy) enemy.getValue();
-                mummy.update(delta);
-            }
-            if(enemy.getKey().equals("Scorpio")) {
-                Scorpio scorpio = (Scorpio) enemy.getValue();
-                scorpio.update(delta);
-            }
-            if(enemy.getKey().equals("Snake")) {
-                Snake snake = (Snake) enemy.getValue();
-                snake.update(delta);
-            }
-            if(enemy.getKey().equals("Vulture")) {
-                Vulture vulture = (Vulture) enemy.getValue();
-                vulture.update(delta);
-            }
-        }
+        for(Enemy enemy : enemies) {enemy.update(delta);}
 
     }
 
@@ -280,8 +204,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         this.player = player;
     }
 
-    public void addEnemy(String type, Enemy enemy) {
-        enemies.put(type, enemy);
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
     }
     public void addCheckpoint(Checkpoint checkpoint) {
         checkpoints.add(checkpoint);
