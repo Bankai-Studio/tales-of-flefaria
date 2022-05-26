@@ -26,8 +26,8 @@ public class CreditsScreen extends InterfaceModule {
         Table top = new Table();
         Label exitLabel = new Label("BACK", subTitleStyle);
         top.add(exitLabel);
-        top.padTop(-300);
-        top.padBottom(300);
+        top.padTop(-250);
+        top.padBottom(250);
         top.padRight(1400);
 
         exitLabel.addListener(new ClickListener() {
