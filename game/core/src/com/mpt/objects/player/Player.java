@@ -38,7 +38,7 @@ public class Player extends GameEntity {
     private final float FRAME_TIME = 1 / 7f;
     private String direction;
     private int characterSelection;
-    private final float chargedAttackMultiplier = 1.5f;
+    public final float chargedAttackMultiplier = 1.5f;
     private float playerSpeed;
     private int collectedCoins;
     public Player(float width, float height, Body body) {
