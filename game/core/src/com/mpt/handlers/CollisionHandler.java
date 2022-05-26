@@ -3,6 +3,7 @@ package com.mpt.handlers;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.objects.checkpoint.Checkpoint;
+import com.mpt.objects.interactables.Coin;
 import com.mpt.objects.player.Player;
 
 public class CollisionHandler implements ContactListener {
@@ -18,7 +19,7 @@ public class CollisionHandler implements ContactListener {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
-        checkPlayerCheckpointCollision(fixtureA, fixtureB);
+        checkCollision(fixtureA, fixtureB);
     }
 
     @Override
@@ -33,11 +34,15 @@ public class CollisionHandler implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {}
 
-    private void checkPlayerCheckpointCollision(Fixture fixtureA, Fixture fixtureB) {
+    private void checkCollision(Fixture fixtureA, Fixture fixtureB) {
         if(fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Checkpoint)
             setNewCheckpoint(fixtureA, fixtureB);
-        else if(fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Checkpoint)
+        if(fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Checkpoint)
             setNewCheckpoint(fixtureB, fixtureA);
+        if(fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Coin)
+            collectCoin(fixtureA, fixtureB);
+        if(fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Coin)
+            collectCoin(fixtureB, fixtureA);
     }
 
     private void setNewCheckpoint(Fixture fixtureA, Fixture fixtureB) {
@@ -48,6 +53,15 @@ public class CollisionHandler implements ContactListener {
             player.setRespawnPosition(checkpointPosition);
             checkpoint.setCheckpointClaimed();
             preferencesHandler.setRespawnPosition(checkpointPosition);
+        }
+    }
+
+    private void collectCoin(Fixture fixtureA, Fixture fixtureB) {
+        Player player = (Player) fixtureA.getBody().getUserData();
+        Coin coin = (Coin) fixtureB.getBody().getUserData();
+        if(!coin.getIsCollected()){
+            coin.setIsCollected(true);
+            player.setCollectedCoins(player.getCollectedCoins() + 1);
         }
     }
 }

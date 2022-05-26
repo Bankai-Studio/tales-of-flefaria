@@ -38,9 +38,9 @@ public class Player extends GameEntity {
     private final float FRAME_TIME = 1 / 7f;
     private String direction;
     private int characterSelection;
-    private final float chargedAttackMultiplier = 1.5f;
+    public final float chargedAttackMultiplier = 1.5f;
     private float playerSpeed;
-
+    private int collectedCoins;
     public Player(float width, float height, Body body) {
         super(width, height, body);
         minDamage = 34;
@@ -51,6 +51,7 @@ public class Player extends GameEntity {
         canRespawn = true;
         playerAnimations = new AnimationHandler();
         characterSelection = 0;
+        collectedCoins = 0;
         direction = "RIGHT";
         loadPlayerSprites();
 
@@ -191,6 +192,8 @@ public class Player extends GameEntity {
 
     public void setRespawnPosition(Vector2 respawnPosition) {this.respawnPosition = respawnPosition;}
 
+    public void setCollectedCoins(int collectedCoins) {this.collectedCoins = collectedCoins;}
+
     // Getters
 
     public int getHealth(){
@@ -231,4 +234,6 @@ public class Player extends GameEntity {
     public State getState(){
         return state;
     }
+
+    public int getCollectedCoins() {return collectedCoins;}
 }

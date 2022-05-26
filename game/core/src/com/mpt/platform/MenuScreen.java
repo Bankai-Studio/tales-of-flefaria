@@ -69,13 +69,13 @@ public class MenuScreen extends InterfaceModule {
         settingsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                settingsButton.addAction(Actions.fadeOut(1f));
+                //settingsButton.addAction(Actions.fadeOut(1f));
                 System.out.println("Clicked settings");
             }
 
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                settingsButton.setText("< SETTINGS >");
+                settingsButton.setText("< NOT AVAILABLE >");
                 settingsButton.setColor(Color.WHITE);
             }
 
@@ -150,5 +150,9 @@ public class MenuScreen extends InterfaceModule {
 
     public MenuScreen getMenuScreen() {
         return this;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }
