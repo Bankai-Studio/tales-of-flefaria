@@ -24,31 +24,30 @@ public class CreditsScreen extends InterfaceModule {
         root.setFillParent(true);
 
         Table top = new Table();
-        Label exitLabel = new Label("EXIT", textStyle);
+        Label exitLabel = new Label("BACK", subTitleStyle);
         top.add(exitLabel);
-        top.padTop(-250);
-        top.padBottom(250);
-        top.padRight(1500);
+        top.padTop(-300);
+        top.padBottom(300);
+        top.padRight(1400);
 
         exitLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 exitLabel.addAction(Actions.fadeOut(1f));
                 stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
-                    //((Game) Gdx.app.getApplicationListener()).setScreen(menuScreen);
-
+                    ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen());
                 })));
             }
 
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                exitLabel.setText("< EXIT >");
+                exitLabel.setText("< BACK >");
                 exitLabel.setColor(Color.WHITE);
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                exitLabel.setText("EXIT");
+                exitLabel.setText("BACK");
                 exitLabel.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
             }
         });
@@ -72,11 +71,15 @@ public class CreditsScreen extends InterfaceModule {
         mapDesigners.add(createCreditLine("Map Designer", "MattiaSwaga")).row();
 
         Table uiDesigners = new Table();
-        uiDesigners.add(createCreditLine("UI Designer", "Zaiden")).row();
+        uiDesigners.add(createCreditLine("Interface Design", "Zaiden")).row();
+
+        Table animators = new Table();
+        animators.add(createCreditLine("Animations and Assets", "MasterK")).row();
 
         main.add(programmers).row();
         main.add(mapDesigners).row();
         main.add(uiDesigners).row();
+        main.add(animators).row();
 
         root.add(top).row();
         root.add(main).row();
