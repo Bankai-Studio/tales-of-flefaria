@@ -90,7 +90,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         for(Enemy enemy : enemies) {enemy.render(batch);}
         for(Box box : boxes) box.render(batch);
-        for(Coin coin : coins) coin.render(batch);
+        for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
 
         batch.end();
 
