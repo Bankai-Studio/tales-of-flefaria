@@ -93,7 +93,7 @@ public class MenuScreen extends InterfaceModule {
             public void clicked(InputEvent event, float x, float y) {
                 creditsButton.addAction(Actions.fadeOut(1f));
                 stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
-                    creditsScreen = new CreditsScreen(getMenuScreen());
+                    creditsScreen = new CreditsScreen();
                     ((Game) Gdx.app.getApplicationListener()).setScreen(creditsScreen);
                 })));
             }
@@ -148,11 +148,43 @@ public class MenuScreen extends InterfaceModule {
             creditsScreen.resize(width, height);
     }
 
-    public MenuScreen getMenuScreen() {
-        return this;
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
     }
 
-    public Stage getStage() {
-        return stage;
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
+        return false;
     }
 }
