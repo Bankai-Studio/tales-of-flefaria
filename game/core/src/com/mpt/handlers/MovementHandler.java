@@ -109,16 +109,16 @@ public class MovementHandler {
             playerAnimations.setCurrent("climb");
         }
 
-        if(player.getBody().getLinearVelocity().y!=0 && getNearestBoxXDistance(player.getBody().getPosition().x) > 1f && getNearestBoxYDistance(player.getBody().getPosition().y) > 1f && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING && player.getState() != State.DYING){
+        if(player.getBody().getLinearVelocity().y!=0 && !isPlayerNearABox(player.getBody().getPosition()) && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING && player.getState() != State.DYING){
             player.setPlayerState(State.FALLING);
             playerAnimations.setCurrent("fall", false);
         }
 
-        if((player.getPlayerState().equals(State.PUSHING) && getNearestBoxXDistance(player.getBody().getPosition().x) > 1f) || (playerAnimations.isFinished() && player.getState() == State.ATTACKING) || (player.getBody().getLinearVelocity().y==0 && wasLastFrameYVelocityZero && player.getState() == State.JUMPING)){
+        if((player.getPlayerState().equals(State.PUSHING) && !isPlayerNearABox(player.getBody().getPosition())) || (playerAnimations.isFinished() && player.getState() == State.ATTACKING) || (player.getBody().getLinearVelocity().y==0 && wasLastFrameYVelocityZero && player.getState() == State.JUMPING)){
             player.setPlayerState(State.IDLE);
             playerAnimations.setCurrent("idle");
         }
-        if(getNearestBoxXDistance(player.getBody().getPosition().x) < 1f && getNearestBoxYDistance(player.getBody().getPosition().y) < 1f && player.getBody().getLinearVelocity().y == 0 && player.getState() != State.PUSHING) {
+        if(isPlayerNearABox(player.getBody().getPosition()) && player.getBody().getLinearVelocity().y == 0 && player.getState() != State.PUSHING) {
             player.setPlayerState(State.PUSHING);
             playerAnimations.setCurrent("push");
         }
@@ -194,7 +194,7 @@ public class MovementHandler {
         if((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().y != 0 || isSprintReloading) && player.getPlayerSpeed() > DEFAULT_SPEED)
             player.setPlayerSpeed(player.getPlayerSpeed() - 0.2f);
 
-        if(getNearestBoxXDistance(player.getBody().getPosition().x) < 1f && getNearestBoxYDistance(player.getBody().getPosition().y) < 1f && !player.getPlayerState().equals(State.IDLE) && !jumpedFromBox){
+        if(isPlayerNearABox(player.getBody().getPosition()) && !player.getPlayerState().equals(State.IDLE) && !jumpedFromBox){
             jumpedFromBox = true;
             jumpCounter = 0;
             playerAnimations.setCurrent("idle");
@@ -239,19 +239,14 @@ public class MovementHandler {
             isDoubleJumpReady = true;
     }
 
-    private float getNearestBoxXDistance(float playerX){
+    private boolean isPlayerNearABox(Vector2 playerPosition){
         ArrayList<Box> boxes = gameScreen.getBoxes();
-        float minX = 100f;
-        for(int i=0; i<boxes.size(); i++)
-            if(boxes.get(i).getBody().getPosition().x < minX) minX = boxes.get(i).getBody().getPosition().x;
-        return Math.abs(playerX-minX);
-    }
-    private float getNearestBoxYDistance(float playerY){
-        ArrayList<Box> boxes = gameScreen.getBoxes();
-        float minY = 100f;
-        for(int i=0; i<boxes.size(); i++)
-            if(boxes.get(i).getBody().getPosition().y < minY) minY = boxes.get(i).getBody().getPosition().y;
-        return Math.abs(playerY-minY);
+        for(Box box : boxes){
+            Vector2 ladderPosition = box.getBody().getPosition();
+            if((Math.abs(playerPosition.x - ladderPosition.x) < (box.getWidth()/2 /PPM + player.getWidth()/2 /PPM + 0.02)) && (Math.abs(playerPosition.y - ladderPosition.y) < (box.getHeight()/2 /PPM + player.getHeight()/2 /PPM + 0.02)))
+                return true;
+        }
+        return false;
     }
 
     private boolean isPlayerNearALadder(Vector2 playerPosition){

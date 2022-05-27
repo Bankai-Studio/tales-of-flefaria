@@ -24,10 +24,10 @@ public abstract class GameEntity {
     }
 
     public abstract void update(float delta);
-
     public abstract void render(SpriteBatch batch);
-
     public Body getBody() {
         return body;
     }
+    public float getWidth() { return width; }
+    public float getHeight() { return height; }
 }
