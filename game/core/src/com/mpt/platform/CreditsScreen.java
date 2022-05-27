@@ -26,9 +26,9 @@ public class CreditsScreen extends InterfaceModule {
         Table top = new Table();
         Label exitLabel = new Label("BACK", subTitleStyle);
         top.add(exitLabel);
-        top.padTop(-250);
-        top.padBottom(250);
-        top.padRight(1400);
+        top.padTop(-300f);
+        top.padBottom(300f);
+        top.padRight(1400f);
 
         exitLabel.addListener(new ClickListener() {
             @Override
@@ -64,7 +64,7 @@ public class CreditsScreen extends InterfaceModule {
         programmers.add(createCreditLine("Programmer", "Niz")).row();
         programmers.add(createCreditLine("Programmer", "MattiaSwaga")).row();
         programmers.add(createCreditLine("Programmer", "MasterK")).row();
-        programmers.padTop(50);
+        programmers.padTop(50f);
 
 
         Table mapDesigners = new Table();

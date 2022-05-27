@@ -37,7 +37,7 @@ public class MenuScreen extends InterfaceModule {
         title.add(subtitleLabel).row();
         Cell titleCell = main.add(title);
         titleCell.row();
-        titleCell.padBottom(80);
+        titleCell.padBottom(80f);
 
         Label playButton = new Label("PLAY", subTitleStyle);
         playButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));

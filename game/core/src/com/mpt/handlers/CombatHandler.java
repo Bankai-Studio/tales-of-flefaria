@@ -14,10 +14,9 @@ public class CombatHandler {
         if(attacker instanceof Player && victim instanceof Enemy) {
             player = (Player) attacker;
             enemy = (Enemy) victim;
-            int damage = (int)(Math.random()*(player.maxDamage - player.minDamage + 1) + player.minDamage);
+            float damage = (float) (Math.random()*(player.maxDamage - player.minDamage + 1) + player.minDamage);
             if(player.getPlayerAnimations().equals(0)) damage*=player.chargedAttackMultiplier; //TODO
-            // Codice player attacca nemico
-            int health = enemy.getHealth()-damage;
+            int health = enemy.getHealth()- (int) damage;
             enemy.setHealth(health);
             if(health<=0){
                 enemy.setEnemyState(Enemy.EnemyState.DYING);
