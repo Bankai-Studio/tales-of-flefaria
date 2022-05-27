@@ -258,7 +258,8 @@ public class MovementHandler {
         ArrayList<Ladder> ladders = gameScreen.getLadders();
         for(Ladder ladder : ladders){
             Vector2 ladderPosition = ladder.getBody().getPosition();
-            if(Math.abs(playerPosition.x - ladderPosition.x) < 1f && Math.abs(playerPosition.y - ladderPosition.y) < ladder.getHeight()/2) return true;
+            if(Math.abs(playerPosition.x - ladderPosition.x) < ladder.getWidth()/2 /PPM && Math.abs(playerPosition.y - ladderPosition.y) < ladder.getHeight()/2 /PPM)
+                return true;
         }
         return false;
     }
