@@ -13,7 +13,8 @@ public class DesktopLauncher {
 		config.setTitle("Tales of Flefaria");
 		config.useVsync(true);
 		config.setForegroundFPS(60);
-		config.setWindowedMode(1600, 900);
+		config.setWindowedMode(Lwjgl3ApplicationConfiguration.getDisplayMode().width, Lwjgl3ApplicationConfiguration.getDisplayMode().height);
+		config.setMaximized(true);
 		config.setWindowIcon("./gameIcon/TalesOfFlefariaIcon.png");
 
 		new Lwjgl3Application(new PlatformGame(), config);
