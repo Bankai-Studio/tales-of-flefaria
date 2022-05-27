@@ -193,6 +193,7 @@ public class Player extends GameEntity {
     public void setRespawnPosition(Vector2 respawnPosition) {this.respawnPosition = respawnPosition;}
 
     public void setCollectedCoins(int collectedCoins) {this.collectedCoins = collectedCoins;}
+    public void setPlayerHealth(int health){this.health = health;}
 
     // Getters
 
