@@ -125,7 +125,7 @@ public abstract class Enemy extends GameEntity{
     }
 
     public boolean enemyReadyToAttack(Player player){
-        distanceToAttackPlayer = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 0.5f;
+        distanceToAttackPlayer = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1f;
         return distanceToAttackPlayer;
     }
     public void lurkTarget(Player player){

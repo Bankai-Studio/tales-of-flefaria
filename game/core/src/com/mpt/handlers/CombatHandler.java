@@ -15,7 +15,7 @@ public class CombatHandler {
             player = (Player) attacker;
             enemy = (Enemy) victim;
             float damage = (float) (Math.random()*(player.maxDamage - player.minDamage + 1) + player.minDamage);
-            if(player.getPlayerAnimations().equals(0)) damage*=player.chargedAttackMultiplier; //TODO
+            if(player.getPlayerAnimations().isCurrent("attack2")) damage*=player.chargedAttackMultiplier;
             int health = enemy.getHealth()- (int) damage;
             enemy.setHealth(health);
             if(health<=0){
@@ -30,7 +30,9 @@ public class CombatHandler {
             int damage = (int)(Math.random()*(enemy.maxDamage - enemy.minDamage + 1) + enemy.minDamage);
             // Codice nemico attacca player
             int health = (int) (player.getHealth()-damage);
-            enemy.setHealth(health);
+            System.out.println("Health BEFORE: "+player.getHealth());
+            player.setPlayerHealth(health);
+            System.out.println("Health AFTER:  "+player.getHealth());
             if(health<=0){
                 player.setPlayerState(Player.State.DYING);
             }
