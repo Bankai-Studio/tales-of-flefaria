@@ -26,7 +26,6 @@ public abstract class Enemy extends GameEntity{
     private int killCounter; //player's frags
     private int damageToPlayer;
     private GameScreen gameScreen;
-
     private CombatHandler combatHandler;
     private boolean playerHasBeenSpotted;
     private boolean playerHasBeenDefeat;
@@ -35,6 +34,8 @@ public abstract class Enemy extends GameEntity{
     private boolean switchDirectionToRight = false; //flag that says if enemy switched direction
     private boolean switchDirectionToLeft = false;
     protected float walkSpeed;
+    private float attackTimer = 0f;
+    private final float attackDelay = 1f;
     // Enemy States
     public enum EnemyState {
         IDLE,
@@ -61,6 +62,7 @@ public abstract class Enemy extends GameEntity{
     }
     @Override
     public void update(float delta) {
+        attackTimer += Gdx.graphics.getDeltaTime();
         if (!playerSpotted(gameScreen.getPlayer()))
             enemyMovements();
         else
@@ -93,6 +95,7 @@ public abstract class Enemy extends GameEntity{
 
     public void enemyAttackPlayer(Player player) {
         if (enemyReadyToAttack(player)) {
+            attackTimer = 0;
             combatHandler.attack(this, player);
             System.out.println("Enemy is attacking PLAYER!");
         }
@@ -119,14 +122,14 @@ public abstract class Enemy extends GameEntity{
             switchDirectionToRight = true;
         }
     }
+
     public boolean playerSpotted(Player player) {
         playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f;
         return playerHasBeenSpotted;
     }
 
     public boolean enemyReadyToAttack(Player player){
-        distanceToAttackPlayer = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1f;
-        return distanceToAttackPlayer;
+        return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1f  && attackTimer >= attackDelay && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 1f);
     }
     public void lurkTarget(Player player){
         if(!enemyReadyToAttack(player)) {

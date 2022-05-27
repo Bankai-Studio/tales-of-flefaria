@@ -31,6 +31,8 @@ public class Player extends GameEntity {
 
     // Variables
     private State state;
+
+    private int playerHealth;
     private int playerStamina;
     private Vector2 respawnPosition;
     private boolean canRespawn;
@@ -45,7 +47,7 @@ public class Player extends GameEntity {
         super(width, height, body);
         minDamage = 34;
         maxDamage = 50;
-        health = 100;
+        playerHealth = 100;
         playerSpeed = 8f;
         playerStamina = maxPlayerStamina;
         canRespawn = true;
@@ -85,10 +87,13 @@ public class Player extends GameEntity {
             body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
             state = State.IDLE;
             canRespawn = false;
+            playerHealth = 100;
         }
-        else
+        else{
             canRespawn = true;
+        }
     }
+
 
     private void respawnOnVoidPosition() {
         if(body.getPosition().y < 0)
@@ -193,12 +198,12 @@ public class Player extends GameEntity {
     public void setRespawnPosition(Vector2 respawnPosition) {this.respawnPosition = respawnPosition;}
 
     public void setCollectedCoins(int collectedCoins) {this.collectedCoins = collectedCoins;}
-    public void setPlayerHealth(int health){this.health = health;}
+    public void setPlayerHealth(int health){this.playerHealth = health;}
 
     // Getters
 
     public int getHealth(){
-        return health;
+        return playerHealth;
     }
     public float getVelocityX() {
         return velocityX;
