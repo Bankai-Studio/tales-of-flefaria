@@ -1,8 +1,10 @@
 package com.mpt.platform;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -42,11 +44,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private ArrayList<Box> boxes;
     private ArrayList<Ladder> ladders;
     private ArrayList<Coin> coins;
+    //private BitmapFont font;
 
     private int screenWidth, screenHeight;
 
     public GameScreen() {
         batch = new SpriteBatch();
+        //font = new BitmapFont();
+        //font.setColor(Color.WHITE);
         world = new World(new Vector2(0, -25f), false);
         enemies = new ArrayList<>();
         checkpoints = new ArrayList<>();
@@ -92,6 +97,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         for(Box box : boxes) box.render(batch);
         for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
 
+        //font.draw(batch, "Health: " + player.getHealth(), camera.position.x + 300, camera.position.y + 300);
+
         batch.end();
 
         if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
@@ -101,6 +108,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void dispose() {
         super.dispose();
         batch.dispose();
+        //font.dispose();
         world.dispose();
         for(Box box : boxes) box.dispose();
         box2DDebugRenderer.dispose();
