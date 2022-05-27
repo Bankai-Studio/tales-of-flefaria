@@ -1,6 +1,7 @@
 package com.mpt.modules;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public abstract class InterfaceModule extends ScreenAdapter {
+public abstract class InterfaceModule extends ScreenAdapter implements InputProcessor {
     protected final Stage stage = new Stage(new FitViewport(1600, 900));
 
     protected final FreeTypeFontGenerator textFreeTypeFontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("menuAssets/fonts/Mephisto.ttf"));

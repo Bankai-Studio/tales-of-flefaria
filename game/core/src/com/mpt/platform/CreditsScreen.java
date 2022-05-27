@@ -12,9 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mpt.modules.InterfaceModule;
 
 public class CreditsScreen extends InterfaceModule {
-    MenuScreen menuScreen;
-    public CreditsScreen(MenuScreen menuScreen) {
-        this.menuScreen = menuScreen;
+    public CreditsScreen() {
         setup();
     }
 
@@ -25,6 +23,7 @@ public class CreditsScreen extends InterfaceModule {
 
         Table top = new Table();
         Label exitLabel = new Label("BACK", subTitleStyle);
+        exitLabel.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
         top.add(exitLabel);
         top.padTop(-300f);
         top.padBottom(300f);
@@ -101,11 +100,50 @@ public class CreditsScreen extends InterfaceModule {
         super.hide();
     }
 
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
+        return false;
+    }
+
     private Table createCreditLine(String key, String value) {
         Table table = new Table();
         table.add(new Label(key + "  ", textStyle));
         table.add(new Label("  " + value, smallTextStyle));
         return table;
     }
-
 }
