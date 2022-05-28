@@ -44,16 +44,25 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
 
     @Override
     public void resize(int width, int height) {
+        super.resize(width, height);
         stage.getViewport().update(width, height, true);
     }
 
     @Override
     public void show() {
+        super.show();
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void hide() {
+        super.hide();
+        Gdx.input.setInputProcessor(null);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
         titleStyle.font.dispose();
         subTitleStyle.font.dispose();
         textStyle.font.dispose();
@@ -61,12 +70,6 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
         menuBackground.dispose();
         titleFreeTypeFontGenerator.dispose();
         textFreeTypeFontGenerator.dispose();
-        Gdx.input.setInputProcessor(null);
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
     }
 
     protected abstract void setup();
