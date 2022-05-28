@@ -30,9 +30,7 @@ public class CombatHandler {
             int damage = (int)(Math.random()*(enemy.maxDamage - enemy.minDamage + 1) + enemy.minDamage);
             // Codice nemico attacca player
             int health = (int) (player.getHealth()-damage);
-            System.out.println("Health BEFORE: "+player.getHealth());
             player.setPlayerHealth(health);
-            System.out.println("Health AFTER:  "+player.getHealth());
             if(health<=0){
                 player.setPlayerState(Player.State.DYING);
             }

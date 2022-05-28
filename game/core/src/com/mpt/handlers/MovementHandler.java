@@ -3,6 +3,7 @@ package com.mpt.handlers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
@@ -115,6 +116,9 @@ public class MovementHandler {
         }
 
         if((player.getPlayerState().equals(State.PUSHING) && !isPlayerNearABox(player.getBody().getPosition())) || (playerAnimations.isFinished() && player.getState() == State.ATTACKING) || (player.getBody().getLinearVelocity().y==0 && wasLastFrameYVelocityZero && player.getState() == State.JUMPING)){
+            if(playerAnimations.isFinished() && player.getState() == State.ATTACKING){
+              //  player.combatHandler.attack(player,getNearestEnemy());
+            }
             player.setPlayerState(State.IDLE);
             playerAnimations.setCurrent("idle");
         }
@@ -258,4 +262,15 @@ public class MovementHandler {
         }
         return false;
     }
+    /*
+    private Enemy getNearestEnemy(){
+        ArrayList<Enemy> enemies = gameScreen.getEnemies();
+        for(Enemy enemy : enemies){
+            Vector2 ladderPosition = enemy.getBody().getPosition();
+            if(Math.abs(playerPosition.x - ladderPosition.x) < ladder.getWidth()/2 /PPM && Math.abs(playerPosition.y - ladderPosition.y) < ladder.getHeight()/2 /PPM)
+                return true;
+        }
+        return false;
+    }
+    */
 }
