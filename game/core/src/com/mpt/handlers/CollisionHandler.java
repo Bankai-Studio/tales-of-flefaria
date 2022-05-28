@@ -2,6 +2,7 @@ package com.mpt.handlers;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mpt.modules.MusicModule;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.interactables.Coin;
 import com.mpt.objects.player.Player;
@@ -61,6 +62,7 @@ public class CollisionHandler implements ContactListener {
         Coin coin = (Coin) fixtureB.getBody().getUserData();
         if(!coin.getIsCollected()){
             coin.setIsCollected(true);
+            MusicModule.getCollectCoinSound().play();
             player.setCollectedCoins(player.getCollectedCoins() + 1);
         }
     }
