@@ -12,7 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mpt.modules.InterfaceModule;
 
 public class CreditsScreen extends InterfaceModule {
-    public CreditsScreen() {
+    MenuScreen menuScreen;
+    public CreditsScreen(MenuScreen menuScreen) {
+        this.menuScreen = menuScreen;
         setup();
     }
 
@@ -25,8 +27,8 @@ public class CreditsScreen extends InterfaceModule {
         Label exitLabel = new Label("BACK", subTitleStyle);
         exitLabel.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
         top.add(exitLabel);
-        top.padTop(-300f);
-        top.padBottom(300f);
+        top.padTop(-250f);
+        top.padBottom(250f);
         top.padRight(1400f);
 
         exitLabel.addListener(new ClickListener() {
@@ -34,7 +36,7 @@ public class CreditsScreen extends InterfaceModule {
             public void clicked(InputEvent event, float x, float y) {
                 exitLabel.addAction(Actions.fadeOut(1f));
                 stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
-                    ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen());
+                    ((Game) Gdx.app.getApplicationListener()).setScreen(menuScreen);
                 })));
             }
 
@@ -46,8 +48,10 @@ public class CreditsScreen extends InterfaceModule {
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                exitLabel.setText("BACK");
-                exitLabel.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                if(pointer == -1) {
+                    exitLabel.setText("BACK");
+                    exitLabel.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                }
             }
         });
 
@@ -72,12 +76,16 @@ public class CreditsScreen extends InterfaceModule {
         Table uiDesigners = new Table();
         uiDesigners.add(createCreditLine("Interface Design", "Zaiden")).row();
 
+        Table gameSfx = new Table();
+        gameSfx.add(createCreditLine("Game SFX", "Zaiden")).row();
+
         Table animators = new Table();
         animators.add(createCreditLine("Animations and Assets", "MasterK")).row();
 
         main.add(programmers).row();
         main.add(mapDesigners).row();
         main.add(uiDesigners).row();
+        main.add(gameSfx).row();
         main.add(animators).row();
 
         root.add(top).row();
@@ -93,11 +101,18 @@ public class CreditsScreen extends InterfaceModule {
     @Override
     public void show() {
         super.show();
+        stage.addAction(Actions.sequence(Actions.alpha(0.0f), Actions.fadeIn(1f)));
     }
 
     @Override
     public void hide() {
         super.hide();
+        stage.addAction(Actions.fadeOut(1f));
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 
     @Override
