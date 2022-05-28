@@ -10,9 +10,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
+import com.mpt.modules.MusicModule;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
@@ -31,6 +35,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     private final OrthographicCamera camera;
     private SpriteBatch batch;
+    private Stage stage;
     private final World world;
     private final Box2DDebugRenderer box2DDebugRenderer;
     private final OrthogonalBleedingHandler orthogonalTiledMapRenderer;
@@ -38,7 +43,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private Player player;
     private ArrayList<Enemy> enemies;
     private ArrayList<Checkpoint> checkpoints;
-    private Viewport viewport;
+    private ExtendViewport extendViewport;
+    private ScreenViewport screenViewport;
     private MovementHandler movementHandler;
     private PreferencesHandler preferencesHandler;
     private ArrayList<Box> boxes;
@@ -50,8 +56,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public GameScreen() {
         batch = new SpriteBatch();
-        //font = new BitmapFont();
-        //font.setColor(Color.WHITE);
         world = new World(new Vector2(0, -25f), false);
         enemies = new ArrayList<>();
         checkpoints = new ArrayList<>();
@@ -68,13 +72,31 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         mapHandler = new MapHandler(this);
         orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map1");
 
-        viewport = new ExtendViewport(30 * PPM, 20 * PPM);
-        camera = (OrthographicCamera) viewport.getCamera();
+        extendViewport = new ExtendViewport(30 * PPM, 20 * PPM);
+        camera = (OrthographicCamera) extendViewport.getCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
+
+        screenViewport = new ScreenViewport();
+        stage = new Stage(screenViewport, batch);
+        setupInterface();
 
         movementHandler = new MovementHandler(player, this);
 
         world.setContactListener(new CollisionHandler(preferencesHandler));
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                if(MusicModule.getMainMenuMusic().isPlaying()) {
+                    if(MusicModule.getMainMenuMusic().getVolume() >= 0.01f)
+                        MusicModule.getMainMenuMusic().setVolume(Math.max(0, MusicModule.getMainMenuMusic().getVolume() - 0.01f));
+                    else {
+                        this.cancel();
+                        MusicModule.getMainMenuMusic().stop();
+                    }
+                }
+            }
+        }, 0f, 0.1f);
+
     }
 
     @Override
@@ -85,10 +107,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         //36f/255f,61f/255f,71f/255f
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        viewport.apply();
-
+        extendViewport.apply();
         batch.begin();
-
         mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
         orthogonalTiledMapRenderer.render(); // Renders the map
         player.render(batch);
@@ -96,10 +116,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         for(Enemy enemy : enemies) {enemy.render(batch);}
         for(Box box : boxes) box.render(batch);
         for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
-
-        //font.draw(batch, "Health: " + player.getHealth(), camera.position.x + 300, camera.position.y + 300);
-
         batch.end();
+
+        screenViewport.apply();
+        stage.act();
+        stage.draw();
 
         if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
     }
@@ -116,7 +137,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
+        extendViewport.update(width, height);
+        screenViewport.update(width, height);
     }
 
     @Override
@@ -189,6 +211,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         position.y = player.getBody().getPosition().y * PPM;
         camera.position.set(position);
         camera.update();
+    }
+
+    private void setupInterface() {
+
     }
 
     // Getters
