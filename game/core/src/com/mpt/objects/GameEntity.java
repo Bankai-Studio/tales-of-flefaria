@@ -10,7 +10,6 @@ public abstract class GameEntity {
     public int health, minDamage, maxDamage;
     protected float width, height;
     protected Body body;
-    public CombatHandler combatHandler;
 
     public GameEntity(float width, float height, Body body) {
         x = body.getPosition().x;
@@ -20,7 +19,6 @@ public abstract class GameEntity {
         this.body = body;
         velocityX = 0;
         velocityY = 0;
-        combatHandler = new CombatHandler();
     }
 
     public abstract void update(float delta);

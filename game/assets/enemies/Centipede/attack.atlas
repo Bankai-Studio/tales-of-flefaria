@@ -1,9 +1,30 @@
 
 attack.png
-size: 298, 76
+size: 446, 76
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+attack
+  rotate: false
+  xy: 224, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+attack
+  rotate: false
+  xy: 76, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+attack
+  rotate: false
+  xy: 372, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
 attack
   rotate: false
   xy: 150, 2
@@ -20,14 +41,7 @@ attack
   index: -1
 attack
   rotate: false
-  xy: 224, 2
-  size: 72, 72
-  orig: 72, 72
-  offset: 0, 0
-  index: -1
-attack
-  rotate: false
-  xy: 76, 2
+  xy: 298, 2
   size: 72, 72
   orig: 72, 72
   offset: 0, 0

@@ -106,6 +106,7 @@ public class MovementHandler {
         if(playerAnimations.isFinished() && player.getState() == State.JUMPING && jumpedFromBox) jumpedFromBox = false;
 
         if(isPlayerNearALadder(player.getBody().getPosition()) && player.getState() != State.CLIMBING){
+            if (inputKeys.get(InputKeys.SPACE)) player.setVelocityY(1);
             player.setPlayerState(State.CLIMBING);
             playerAnimations.setCurrent("climb");
         }
@@ -115,10 +116,9 @@ public class MovementHandler {
             playerAnimations.setCurrent("fall", false);
         }
 
-        if((player.getPlayerState().equals(State.PUSHING) && !isPlayerNearABox(player.getBody().getPosition())) || (playerAnimations.isFinished() && player.getState() == State.ATTACKING) || (player.getBody().getLinearVelocity().y==0 && wasLastFrameYVelocityZero && player.getState() == State.JUMPING)){
-            if(playerAnimations.isFinished() && player.getState() == State.ATTACKING){
-              //  player.combatHandler.attack(player,getNearestEnemy());
-            }
+        if((player.getPlayerState().equals(State.PUSHING) && !isPlayerNearABox(player.getBody().getPosition())) || (playerAnimations.isFinished() && (player.getState() == State.ATTACKING || player.getState() == State.HURT || player.getState() == State.DYING)) || (player.getBody().getLinearVelocity().y==0 && wasLastFrameYVelocityZero && player.getState() == State.JUMPING)){
+            if(playerAnimations.isFinished() && player.getState() == State.ATTACKING)
+                for(Enemy enemy : getNearEnemies(player.getBody().getPosition())) CombatHandler.attack(player, enemy);
             player.setPlayerState(State.IDLE);
             playerAnimations.setCurrent("idle");
         }
@@ -218,11 +218,11 @@ public class MovementHandler {
         } else wasLastFrameYVelocityZero = false;
 
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && player.getState() != State.WALKING && player.getState() != State.RUNNING && player.getState() != State.ATTACKING && player.getState() != State.PUSHING && player.getState() != State.CLIMBING){
-            playerAnimations.setCurrent("attack1", false);
+            playerAnimations.setCurrent("lightAttack", false);
             player.setPlayerState(State.ATTACKING);
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && player.getState() != State.WALKING && player.getState() != State.RUNNING && player.getState() != State.ATTACKING && player.getState() != State.PUSHING && player.getState() != State.CLIMBING){
-            playerAnimations.setCurrent("attack2", false);
+            playerAnimations.setCurrent("heavyAttack", false);
             player.setPlayerState(State.ATTACKING);
         }
 
@@ -262,15 +262,16 @@ public class MovementHandler {
         }
         return false;
     }
-    /*
-    private Enemy getNearestEnemy(){
+
+    private ArrayList<Enemy> getNearEnemies(Vector2 playerPosition){
+        ArrayList<Enemy> nearEnemies = new ArrayList<>();
         ArrayList<Enemy> enemies = gameScreen.getEnemies();
         for(Enemy enemy : enemies){
-            Vector2 ladderPosition = enemy.getBody().getPosition();
-            if(Math.abs(playerPosition.x - ladderPosition.x) < ladder.getWidth()/2 /PPM && Math.abs(playerPosition.y - ladderPosition.y) < ladder.getHeight()/2 /PPM)
-                return true;
+            Vector2 enemyPosition = enemy.getBody().getPosition();
+            if(Math.abs(playerPosition.x - enemyPosition.x) < (enemy.getWidth()/2 /PPM + player.getWidth() /PPM) && Math.abs(playerPosition.y - enemyPosition.y) < (enemy.getHeight()/2 /PPM + player.getHeight() /PPM))
+                nearEnemies.add(enemy);
         }
-        return false;
+        return nearEnemies;
     }
-    */
+
 }

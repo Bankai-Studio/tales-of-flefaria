@@ -26,7 +26,6 @@ public abstract class Enemy extends GameEntity{
     private int killCounter; //player's frags
     private int damageToPlayer;
     private GameScreen gameScreen;
-    private CombatHandler combatHandler;
     private boolean playerHasBeenSpotted;
     private boolean playerHasBeenDefeat;
     private float xMaxLimitDX; //limit position on right side
@@ -35,14 +34,14 @@ public abstract class Enemy extends GameEntity{
     private boolean switchDirectionToLeft = false;
     protected float walkSpeed;
     private float attackTimer = 0f;
-    private final float attackDelay = 1f;
+    private final float ATTACK_DELAY = 1f;
     // Enemy States
     public enum EnemyState {
         IDLE,
         WALKING,
         ATTACKING,
         DYING,
-        HURT;
+        HURT
     }
     protected EnemyState enemyState;
     protected String direction;
@@ -63,20 +62,31 @@ public abstract class Enemy extends GameEntity{
     @Override
     public void update(float delta) {
         attackTimer += Gdx.graphics.getDeltaTime();
-        if (!playerSpotted(gameScreen.getPlayer()))
-            enemyMovements();
-        else
-            lurkTarget(gameScreen.getPlayer());
+        if(enemyState != EnemyState.DYING){
+            if(animationHandler.isFinished() && (enemyState.equals(EnemyState.HURT) || enemyState.equals(EnemyState.ATTACKING))) {
+                if(enemyState.equals(EnemyState.ATTACKING)){
+                    attackTimer = 0;
+                    CombatHandler.attack(this, gameScreen.getPlayer());
+                }
+                enemyState = EnemyState.IDLE;
+                animationHandler.setCurrent("idle");
+            }
+            if (!playerSpotted(gameScreen.getPlayer())) enemyMovements();
+            else lurkTarget(gameScreen.getPlayer());
+        }
+        else body.setLinearVelocity(0, body.getLinearVelocity().y);
+
     }
     @Override
     public void render(SpriteBatch batch) {
         TextureRegion currentFrame = animationHandler.getFrame();
 
-        if(direction.equals("LEFT") && !currentFrame.isFlipX()) currentFrame.flip(true,false);
-        if(direction.equals("RIGHT") && currentFrame.isFlipX()) currentFrame.flip(true,false);
+        if(direction.equals("RIGHT") && !currentFrame.isFlipX()) currentFrame.flip(true,false);
+        if(direction.equals("LEFT") && currentFrame.isFlipX()) currentFrame.flip(true,false);
 
         float tX=body.getPosition().x * PPM - 35f;
         float tY=body.getPosition().y * PPM - 12f;
+        if(enemyName.equals("Scorpio") && direction.equals("RIGHT")) tX+=25f;
         batch.draw(currentFrame, tX, tY);
     }
 
@@ -85,29 +95,35 @@ public abstract class Enemy extends GameEntity{
         if(enemyState.equals(EnemyState.DYING)) {
             //body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
             enemyState = EnemyState.IDLE;
+            //animationHandler.setCurrent("idle");
         }
     }
 
     private void respawnOnVoidPosition() {
-        if(body.getPosition().y < 0)
+        if(body.getPosition().y < 0){
             enemyState= EnemyState.DYING;
+            //animationHandler.setCurrent("death", false);
+        }
     }
 
     public void enemyAttackPlayer(Player player) {
-        if (enemyReadyToAttack(player)) {
-            attackTimer = 0;
-            combatHandler.attack(this, player);
-            System.out.println("Enemy is attacking PLAYER!");
+        if (enemyReadyToAttack(player) && !enemyState.equals(EnemyState.HURT)) {
+            enemyState = EnemyState.ATTACKING;
+            animationHandler.setCurrent("attack", false);
         }
     }
     public void enemyMovements(){
-        enemyState = EnemyState.WALKING;
+        if(!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
+            enemyState = EnemyState.WALKING;
+            animationHandler.setCurrent("walk");
+        }
+
         xMaxLimitDX = initialPosX + 2.4f;
         xMaxLimitSX = initialPosX - 5f;
         switchDirectionToRight = true;
         if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight){
             body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
-            setFacingLeft();
+            setFacingRight();
         }
         else {
             switchDirectionToRight = false;
@@ -115,7 +131,7 @@ public abstract class Enemy extends GameEntity{
         }
         if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX){
             body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
-            setFacingRight();
+            setFacingLeft();
         }
         else {
             switchDirectionToLeft = false;
@@ -129,21 +145,28 @@ public abstract class Enemy extends GameEntity{
     }
 
     public boolean enemyReadyToAttack(Player player){
-        return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1f  && attackTimer >= attackDelay && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 1f);
+        return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1f  && attackTimer >= ATTACK_DELAY && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 1f);
     }
     public void lurkTarget(Player player){
         if(!enemyReadyToAttack(player)) {
             if (playerSpotted(player) && Math.abs((int) player.getBody().getPosition().x - (int) body.getPosition().x) != 0) {
                 if (player.getBody().getPosition().x < this.getBody().getPosition().x) {
                     body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
-                    setFacingRight();
+                    setFacingLeft();
                 } else if (player.getBody().getPosition().x > this.getBody().getPosition().x) {
                     body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
-                    setFacingLeft();
+                    setFacingRight();
+                }
+                if(!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
+                    enemyState = EnemyState.WALKING;
+                    animationHandler.setCurrent("walk");
                 }
             } else if (Math.abs((int) player.getBody().getPosition().x - (int) body.getPosition().x) == 0) {
                 this.getBody().setLinearVelocity(0, this.getBody().getLinearVelocity().y);
-                enemyState = EnemyState.IDLE;
+                if(!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
+                    enemyState = EnemyState.IDLE;
+                    animationHandler.setCurrent("idle");
+                }
             }
         }
        enemyAttackPlayer(player);
@@ -172,12 +195,9 @@ public abstract class Enemy extends GameEntity{
     }
 
     public void setEnemyState(EnemyState enemyState){this.enemyState=enemyState;}
-    public void setFacingLeft() {
-        direction = "LEFT";
-    }
-    public void setFacingRight() {
-        direction = "RIGHT";
-    }
-    public int getHealth(){return health;}
+    public void setFacingLeft() {direction = "LEFT";}
+    public void setFacingRight() {direction = "RIGHT";}
     public void setHealth(int health){this.health=health;}
+    public int getHealth(){return health;}
+    public AnimationHandler getAnimationHandler() {return animationHandler;}
 }

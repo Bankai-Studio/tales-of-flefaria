@@ -40,7 +40,7 @@ public class Player extends GameEntity {
     private final float FRAME_TIME = 1 / 7f;
     private String direction;
     private int characterSelection;
-    public final float chargedAttackMultiplier = 1.5f;
+    public final float heavyAttackMultiplier = 1.5f;
     private float playerSpeed;
     private int collectedCoins;
     public Player(float width, float height, Body body) {
@@ -52,7 +52,7 @@ public class Player extends GameEntity {
         playerStamina = maxPlayerStamina;
         canRespawn = true;
         playerAnimations = new AnimationHandler();
-        characterSelection = 0;
+        characterSelection = 2;
         collectedCoins = 0;
         direction = "RIGHT";
         loadPlayerSprites();
@@ -117,20 +117,14 @@ public class Player extends GameEntity {
         }
         TextureAtlas charset;
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/attack1.atlas"));
-        playerAnimations.add("attack1", new Animation<>(FRAME_TIME, charset.findRegions("attack1")));
+        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/lightAttack.atlas"));
+        playerAnimations.add("lightAttack", new Animation<>(1/8f, charset.findRegions("lightAttack")));
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/attack2.atlas"));
-        playerAnimations.add("attack2", new Animation<>(FRAME_TIME, charset.findRegions("attack2")));
-
-        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/attack3.atlas"));
-        playerAnimations.add("attack3", new Animation<>(FRAME_TIME, charset.findRegions("attack3")));
+        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/heavyAttack.atlas"));
+        playerAnimations.add("heavyAttack", new Animation<>(1/6f, charset.findRegions("heavyAttack")));
 
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/climb.atlas"));
         playerAnimations.add("climb", new Animation<>(FRAME_TIME, charset.findRegions("climb")));
-
-        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/craft.atlas"));
-        playerAnimations.add("craft", new Animation<>(FRAME_TIME, charset.findRegions("craft")));
 
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/death.atlas"));
         playerAnimations.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
