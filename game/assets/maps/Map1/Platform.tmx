@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="119">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="135">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="2" name="BackgroundAssets" width="150" height="50">
@@ -172,11 +172,25 @@
   <object id="102" x="128" y="1344">
    <polygon points="0,0 256,0 256,256 0,256"/>
   </object>
-  <object id="103" name="Box" x="297.75" y="1310" width="30" height="30"/>
-  <object id="115" name="Scorpio" x="178.182" y="1322.18" width="40" height="20"/>
+  <object id="103" name="Box" x="992" y="1248" width="30" height="30"/>
+  <object id="115" name="Scorpio" x="4672" y="1280" width="40" height="20"/>
   <object id="116" name="Coin" x="1493" y="1056" width="16" height="16"/>
   <object id="117" name="Ladder" x="4320.09" y="959.875" width="23" height="320.125"/>
-  <object id="118" name="Centipede" x="1568" y="1312" width="20" height="20"/>
+  <object id="119" name="Endpoint" x="4288" y="768" width="32" height="64"/>
+  <object id="120" name="Coin" x="1754" y="1120" width="16" height="16"/>
+  <object id="121" name="Coin" x="1228" y="1104" width="16" height="16"/>
+  <object id="122" name="Coin" x="1487" y="1265" width="16" height="16"/>
+  <object id="123" name="Coin" x="813" y="1160" width="16" height="16"/>
+  <object id="124" name="Coin" x="2213" y="1220" width="16" height="16"/>
+  <object id="125" name="Coin" x="2470" y="1156" width="16" height="16"/>
+  <object id="126" name="Coin" x="2697" y="1085" width="16" height="16"/>
+  <object id="127" name="Coin" x="2977" y="1152" width="16" height="16"/>
+  <object id="128" name="Coin" x="3271" y="1214" width="16" height="16"/>
+  <object id="129" name="Coin" x="3968" y="1056" width="16" height="16"/>
+  <object id="131" name="Coin" x="3968" y="1024" width="16" height="16"/>
+  <object id="132" name="Coin" x="4585" y="1171" width="16" height="16"/>
+  <object id="133" name="Coin" x="4512" y="917" width="16" height="16"/>
+  <object id="134" name="Coin" x="4374" y="795" width="16" height="16"/>
  </objectgroup>
  <layer id="5" name="BackgroundNature" width="150" height="50">
   <data encoding="base64" compression="zlib">
