@@ -107,7 +107,7 @@ public abstract class Enemy extends GameEntity{
     }
 
     public void enemyAttackPlayer(Player player) {
-        if (enemyReadyToAttack(player) && !enemyState.equals(EnemyState.HURT)) {
+        if (enemyReadyToAttack(player) && !enemyState.equals(EnemyState.HURT)  && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING)) {
             enemyState = EnemyState.ATTACKING;
             animationHandler.setCurrent("attack", false);
         }
@@ -200,4 +200,5 @@ public abstract class Enemy extends GameEntity{
     public void setHealth(int health){this.health=health;}
     public int getHealth(){return health;}
     public AnimationHandler getAnimationHandler() {return animationHandler;}
+    public EnemyState getEnemyState() {return enemyState;}
 }

@@ -52,7 +52,7 @@ public class Player extends GameEntity {
         playerStamina = maxPlayerStamina;
         canRespawn = true;
         playerAnimations = new AnimationHandler();
-        characterSelection = 2;
+        characterSelection = 0;
         collectedCoins = 0;
         direction = "RIGHT";
         loadPlayerSprites();
@@ -66,7 +66,6 @@ public class Player extends GameEntity {
 
     @Override
     public void update(float delta) {
-        checkPlayerDeath();
         respawnOnVoidPosition();
     }
 
@@ -82,10 +81,11 @@ public class Player extends GameEntity {
         batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
     }
 
-    private void checkPlayerDeath() {
+    public void checkPlayerDeath() {
         if(state.equals(State.DYING) && canRespawn) {
             body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
             state = State.IDLE;
+            playerAnimations.setCurrent("idle");
             canRespawn = false;
             playerHealth = 100;
         }
@@ -127,7 +127,7 @@ public class Player extends GameEntity {
         playerAnimations.add("climb", new Animation<>(FRAME_TIME, charset.findRegions("climb")));
 
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/death.atlas"));
-        playerAnimations.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
+        playerAnimations.add("death", new Animation<>(1/5f, charset.findRegions("death")));
 
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/fall.atlas"));
         playerAnimations.add("fall", new Animation<>(FRAME_TIME, charset.findRegions("fall")));

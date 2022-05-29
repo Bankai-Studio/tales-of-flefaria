@@ -97,7 +97,8 @@ public class MovementHandler {
         regenStamina(delta);
         reloadDoubleJump(delta);
 
-        checkUserInput();
+        if(!player.getPlayerState().equals(State.DYING)) checkUserInput();
+        else if(player.getPlayerAnimations().isFinished()) player.checkPlayerDeath();
     }
 
     private void checkUserInput() {
@@ -105,31 +106,31 @@ public class MovementHandler {
 
         if(playerAnimations.isFinished() && player.getState() == State.JUMPING && jumpedFromBox) jumpedFromBox = false;
 
-        if(isPlayerNearALadder(player.getBody().getPosition()) && player.getState() != State.CLIMBING){
+        if(isPlayerNearALadder(player.getBody().getPosition()) && player.getState() != State.HURT){
             if (inputKeys.get(InputKeys.SPACE)) player.setVelocityY(1);
             player.setPlayerState(State.CLIMBING);
             playerAnimations.setCurrent("climb");
         }
 
-        if(player.getBody().getLinearVelocity().y!=0 && !isPlayerNearABox(player.getBody().getPosition()) && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING && player.getState() != State.DYING){
+        if(player.getBody().getLinearVelocity().y!=0 && !isPlayerNearABox(player.getBody().getPosition()) && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING && player.getState() != State.DYING && player.getState() != State.HURT){
             player.setPlayerState(State.FALLING);
             playerAnimations.setCurrent("fall", false);
         }
 
         if((player.getPlayerState().equals(State.PUSHING) && !isPlayerNearABox(player.getBody().getPosition())) || (playerAnimations.isFinished() && (player.getState() == State.ATTACKING || player.getState() == State.HURT || player.getState() == State.DYING)) || (player.getBody().getLinearVelocity().y==0 && wasLastFrameYVelocityZero && player.getState() == State.JUMPING)){
             if(playerAnimations.isFinished() && player.getState() == State.ATTACKING)
-                for(Enemy enemy : getNearEnemies(player.getBody().getPosition())) CombatHandler.attack(player, enemy);
+                for(Enemy enemy : getNearEnemies(player.getBody().getPosition())) if(!enemy.getEnemyState().equals(Enemy.EnemyState.DYING)) CombatHandler.attack(player, enemy);
             player.setPlayerState(State.IDLE);
             playerAnimations.setCurrent("idle");
         }
-        if(isPlayerNearABox(player.getBody().getPosition()) && player.getBody().getLinearVelocity().y == 0 && player.getState() != State.PUSHING) {
+        if(isPlayerNearABox(player.getBody().getPosition()) && player.getBody().getLinearVelocity().y == 0 && player.getState() != State.PUSHING && player.getState() != State.HURT) {
             player.setPlayerState(State.PUSHING);
             playerAnimations.setCurrent("push");
         }
 
         if(inputKeys.get(InputKeys.LEFT) && !player.getPlayerState().equals(State.DYING)) {
             player.setFacingLeft();
-            if(player.getVelocityY()==0f && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && player.getState() != State.JUMPING && player.getState() != State.ATTACKING && !inputKeys.get(InputKeys.RIGHT) && player.getState() != State.PUSHING && player.getState() != State.FALLING && player.getState() != State.CLIMBING){
+            if(player.getVelocityY()==0f && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && player.getState() != State.JUMPING && player.getState() != State.ATTACKING && !inputKeys.get(InputKeys.RIGHT) && player.getState() != State.PUSHING && player.getState() != State.FALLING && player.getState() != State.CLIMBING && player.getState() != State.HURT){
                 playerAnimations.setCurrent("walk");
                 player.setPlayerState(State.WALKING);
             }
@@ -137,20 +138,20 @@ public class MovementHandler {
         }
         if(inputKeys.get(InputKeys.RIGHT) && !player.getPlayerState().equals(State.DYING)) {
             player.setFacingRight();
-            if(player.getVelocityY()==0 && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && player.getState() != State.JUMPING && player.getState() != State.ATTACKING && !inputKeys.get(InputKeys.LEFT) && player.getState() != State.PUSHING  && player.getState() != State.FALLING && player.getState() != State.CLIMBING){
+            if(player.getVelocityY()==0 && (player.getState() != State.RUNNING || !inputKeys.get(InputKeys.SHIFT)) && player.getState() != State.JUMPING && player.getState() != State.ATTACKING && !inputKeys.get(InputKeys.LEFT) && player.getState() != State.PUSHING  && player.getState() != State.FALLING && player.getState() != State.CLIMBING && player.getState() != State.HURT){
                 playerAnimations.setCurrent("walk");
                 player.setPlayerState(State.WALKING);
             }
             player.setVelocityX(1);
         }
         if((inputKeys.get(InputKeys.LEFT) && inputKeys.get(InputKeys.RIGHT)) || (!inputKeys.get(InputKeys.LEFT) && !inputKeys.get(InputKeys.RIGHT)) && !player.getPlayerState().equals(State.DYING)){
-            if(player.getState() != State.JUMPING && player.getState() != State.ATTACKING && player.getState() != State.IDLE  && player.getState() != State.FALLING){
+            if(player.getState() != State.JUMPING && player.getState() != State.ATTACKING && player.getState() != State.IDLE  && player.getState() != State.FALLING && player.getState() != State.HURT){
                 playerAnimations.setCurrent("idle");
                 player.setPlayerState(State.IDLE);
             }
             player.setVelocityX(0);
         }
-        if(inputKeys.get(InputKeys.SPACE) && !player.getPlayerState().equals(State.DYING)) {
+        if(inputKeys.get(InputKeys.SPACE) && !player.getPlayerState().equals(State.DYING) && player.getState() != State.HURT) {
             inputKeys.put(InputKeys.SPACE, false);
             if(player.getPlayerStamina() >= 10) {
                 player.setPlayerState(State.JUMPING);
@@ -173,7 +174,7 @@ public class MovementHandler {
             }
         }
 
-        if(inputKeys.get(InputKeys.SHIFT) && !player.getPlayerState().equals(State.DYING) && player.getState() != State.JUMPING && player.getState() != State.FALLING) {
+        if(inputKeys.get(InputKeys.SHIFT) && !player.getPlayerState().equals(State.DYING) && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.HURT) {
             if(player.getPlayerStamina() == 0){
                 isSprintReloading = true;
                 playerAnimations.setCurrent("walk");
