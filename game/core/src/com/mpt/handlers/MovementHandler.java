@@ -21,7 +21,7 @@ public class MovementHandler {
     // Constants
 
     private final float DEFAULT_SPEED = 8f;
-
+    private final float CLIMBING_SPEED = 4f;
     // Input Keys
     enum InputKeys {
         LEFT,
@@ -36,10 +36,10 @@ public class MovementHandler {
     private boolean wasLastFrameYVelocityZero;
     private boolean isSprintReloading;
     private float doubleJumpTimer;
-    private float doubleJumpRegenTime;
+    private final float doubleJumpRegenTime;
     private float staminaTimer;
-    private float staminaRegenTime;
-    private GameScreen gameScreen;
+    private final float staminaRegenTime;
+    private final GameScreen gameScreen;
     private boolean jumpedFromBox = false;
     static Map<InputKeys, Boolean> inputKeys = new HashMap<>();
 
@@ -113,10 +113,15 @@ public class MovementHandler {
 
         if (playerAnimations.isFinished() && player.getState() == State.JUMPING && jumpedFromBox) jumpedFromBox = false;
 
-        if (isPlayerNearALadder(player.getBody().getPosition()) && player.getState() != State.HURT && player.getState() != State.DYING) {
-            if (inputKeys.get(InputKeys.SPACE)) player.setVelocityY(1);
+        if (isPlayerNearALadder(player.getBody().getPosition()) && player.getState() != State.HURT && player.getState() != State.DYING && (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP))) {
             player.setPlayerState(State.CLIMBING);
             playerAnimations.setCurrent("climb");
+            player.setPlayerSpeed(CLIMBING_SPEED);
+        }
+
+        if (player.getState().equals(State.CLIMBING)) {
+            ladderMovement();
+            return;
         }
 
         if (player.getBody().getLinearVelocity().y != 0 && !isPlayerNearABox(player.getBody().getPosition()) && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING && player.getState() != State.DYING && player.getState() != State.HURT) {
@@ -237,6 +242,51 @@ public class MovementHandler {
         player.getBody().setLinearVelocity(player.getVelocityX() * player.getPlayerSpeed(), player.getBody().getLinearVelocity().y < 25 ? player.getBody().getLinearVelocity().y : 25);
     }
 
+    private void ladderMovement() {
+        player.setVelocityX(0);
+        player.setVelocityY(0.104f);
+        player.getPlayerAnimations().setStopped(true);
+
+        if ((Gdx.input.isKeyPressed(Input.Keys.SPACE))) {
+            player.setPlayerState(State.JUMPING);
+            player.getPlayerAnimations().setCurrent("jump",false);
+            player.setPlayerSpeed(DEFAULT_SPEED);
+        }
+        if(!isPlayerNearALadder(player.getBody().getPosition())){
+            player.setPlayerState(State.FALLING);
+            player.getPlayerAnimations().setCurrent("fall",false);
+            player.setPlayerSpeed(DEFAULT_SPEED);
+        }
+
+        if (inputKeys.get(InputKeys.LEFT)) {
+            player.setVelocityX(-1);
+            player.getPlayerAnimations().setStopped(false);
+        }
+        if (inputKeys.get(InputKeys.RIGHT)) {
+            player.setVelocityX(1);
+            player.getPlayerAnimations().setStopped(false);
+        }
+        if (inputKeys.get(InputKeys.LEFT) && inputKeys.get(InputKeys.RIGHT)){
+            player.setVelocityX(0);
+            player.getPlayerAnimations().setStopped(true);
+        }
+        if ((Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP))) {
+            player.setVelocityY(1);
+            player.getPlayerAnimations().setStopped(false);
+        }
+        if ((Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN))) {
+            if(isTheLadderOver(player.getBody().getPosition())){
+                player.setPlayerState(State.FALLING);
+                player.getPlayerAnimations().setCurrent("fall",false);
+                player.setPlayerSpeed(DEFAULT_SPEED);
+            }
+            player.setVelocityY(-1);
+            player.getPlayerAnimations().setStopped(false);
+        }
+
+        player.getBody().setLinearVelocity(player.getVelocityX() * player.getPlayerSpeed(), player.getVelocityY() * player.getPlayerSpeed());
+    }
+
     private void regenStamina(float delta) {
         staminaTimer += delta;
         if ((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().x == 0 || isSprintReloading) && player.getPlayerStamina() < player.getPlayerMaxStamina() && staminaTimer > staminaRegenTime) {
@@ -282,4 +332,14 @@ public class MovementHandler {
         return nearEnemies;
     }
 
+    private boolean isTheLadderOver(Vector2 playerPosition){
+        ArrayList<Ladder> ladders = gameScreen.getLadders();
+        for (Ladder ladder : ladders) {
+            Vector2 ladderPosition = ladder.getBody().getPosition();
+            if (Math.abs(playerPosition.x - ladderPosition.x) < ladder.getWidth() / 2 / PPM)
+                if((ladderPosition.y - ladder.getHeight() / 2 / PPM - 0.02f < playerPosition.y - player.getHeight() / 2 / PPM) && (ladderPosition.y - ladder.getHeight() / 2 / PPM + 0.02f > playerPosition.y - player.getHeight() / 2 / PPM))
+                return true;
+        }
+        return false;
+    }
 }

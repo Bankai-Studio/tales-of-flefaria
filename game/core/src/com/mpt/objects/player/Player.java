@@ -165,13 +165,9 @@ public class Player extends GameEntity {
         direction = "RIGHT";
     }
 
-    public void setVelocityX(float velocityValue) {
-        velocityX = velocityValue;
-    }
+    public void setVelocityX(float velocityValue) {velocityX = velocityValue;}
 
-    public void setVelocityY(float velocityValue) {
-        velocityX = velocityValue;
-    }
+    public void setVelocityY(float velocityValue) {velocityY = velocityValue;}
 
     public void setX(float x) {
         this.x = x;
