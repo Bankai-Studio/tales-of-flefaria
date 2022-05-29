@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="60">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="136">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="4" name="Beckground" width="150" height="50">
@@ -7,8 +7,9 @@
    eJzt1YsKgjAUAND9Qi+tDyqix///TowURMoeo+b0HBiCw3Hv3L0LAQAAAAAAAAAAAAAAAAAAAAAAACjVNncAiapQfg7wD5tmlKYfc2n1vnzwTt/6n3h+1l98V4fx/KN4hhaJaxybZ92MqjO3S1x7ykrsmY8sO2OqDiH9ntuHe330e0asvynv3StxX8ZaC22PH2t834j9uj1zMa+qNz/GXNs7po03d4yXH6wZe8wqPM+tuwe58+dz59wBZDLXvEnn7MD0nAbm1DwMu+YOYKbsO7xv6J4Hyqa+gbm5AflfCOc=
   </data>
  </layer>
+ <objectgroup id="5" name="TileObjects"/>
  <objectgroup id="3" name="Objects">
-  <object id="1" name="Player" x="96" y="1184" width="25" height="25"/>
+  <object id="1" name="Player" x="96" y="1184" width="30" height="30"/>
   <object id="2" x="0" y="1248">
    <polygon points="0,0 192,0 192,352 0,352"/>
   </object>
@@ -59,9 +60,6 @@
   </object>
   <object id="18" x="1312" y="1216">
    <polygon points="0,0 0,384 384,384 384,0"/>
-  </object>
-  <object id="19" x="1696" y="1248">
-   <polygon points="0,0 384,0 384,352 0,352"/>
   </object>
   <object id="20" x="2080" y="1216">
    <polygon points="0,0 64,0 64,384 0,384"/>
@@ -180,13 +178,71 @@
   <object id="58" x="0" y="0">
    <polygon points="0,0 32,0 32,1248 0,1248"/>
   </object>
-  <object id="59" name="Spawnpoint" x="64" y="1216">
-   <polygon points="0,0 32,0 32,32 0,32"/>
+  <object id="60" name="Checkpoint" x="1536" y="1152" width="32" height="64"/>
+  <object id="61" x="1696" y="1248">
+   <polygon points="0,0 256,0 256,352 0,352"/>
+  </object>
+  <object id="62" x="2016" y="1248">
+   <polygon points="0,0 64,0 64,352 32,352 0,352"/>
+  </object>
+  <object id="63" name="Spawnpoint" x="140" y="1216" width="32" height="32"/>
+  <object id="74" name="KillBlock" x="2624" y="1504" width="30.6666" height="30.6667"/>
+  <object id="75" name="KillBlock" x="2664.83" y="1441.33" width="19.3333" height="30.6667"/>
+  <object id="76" name="KillBlock" x="2598.17" y="1345.83" width="19.3333" height="30.6667"/>
+  <object id="77" name="KillBlock" x="2693.83" y="1377.33" width="19.3333" height="30.6667"/>
+  <object id="78" name="KillBlock" x="1061.33" y="1441" width="19.3333" height="30.6667"/>
+  <object id="79" name="KillBlock" x="1126.67" y="1441" width="19.3333" height="30.6667"/>
+  <object id="80" name="KillBlock" x="1161" y="1408.5" width="19.3333" height="30.6667"/>
+  <object id="81" name="KillBlock" x="1193.5" y="1377.67" width="19.3333" height="30.6667"/>
+  <object id="82" name="KillBlock" x="1088" y="1472" width="30.6666" height="30.6667"/>
+  <object id="84" name="KillBlock" x="416.5" y="1250.5" width="19.3333" height="30.6667"/>
+  <object id="86" name="Ladder" x="4352" y="1184" width="32" height="64"/>
+  <object id="87" name="Ladder" x="4320" y="1248" width="32" height="128"/>
+  <object id="88" name="Ladder" x="4288.5" y="1376" width="32" height="64"/>
+  <object id="90" name="KillBlock" x="4224.5" y="1504.5" width="30.6666" height="30.6667"/>
+  <object id="91" name="Endpoint" x="4736" y="1088" width="32" height="64"/>
+  <object id="92" name="Coin" x="288" y="1152" width="16" height="16"/>
+  <object id="93" name="Coin" x="429.333" y="1114.67" width="16" height="16"/>
+  <object id="94" name="Coin" x="557.333" y="1153.33" width="16" height="16"/>
+  <object id="95" name="Coin" x="893.333" y="1177.33" width="16" height="16"/>
+  <object id="96" name="Coin" x="1065.33" y="1146.67" width="16" height="16"/>
+  <object id="97" name="Coin" x="1157.33" y="1089.33" width="16" height="16"/>
+  <object id="98" name="Coin" x="1260" y="1156" width="16" height="16"/>
+  <object id="99" name="Coin" x="1972" y="1176" width="16" height="16"/>
+  <object id="100" name="Coin" x="2358.67" y="1109.33" width="16" height="16"/>
+  <object id="101" name="Coin" x="2466.67" y="1114.67" width="16" height="16"/>
+  <object id="102" name="Coin" x="2158.67" y="1140" width="16" height="16"/>
+  <object id="103" name="Coin" x="2597.33" y="1084" width="16" height="16"/>
+  <object id="104" name="Coin" x="2685.33" y="1029.33" width="16" height="16"/>
+  <object id="105" name="Coin" x="2745.33" y="1089.33" width="16" height="16"/>
+  <object id="106" name="Coin" x="2920" y="1100" width="16" height="16"/>
+  <object id="107" name="Coin" x="3046.67" y="1158.67" width="16" height="16"/>
+  <object id="114" name="Coin" x="3164" y="1196" width="16" height="16"/>
+  <object id="115" name="Coin" x="3304" y="1188" width="16" height="16"/>
+  <object id="116" name="Coin" x="3460" y="1173.33" width="16" height="16"/>
+  <object id="117" name="Coin" x="3610.67" y="1158.67" width="16" height="16"/>
+  <object id="118" name="Coin" x="3809.33" y="1128" width="16" height="16"/>
+  <object id="119" name="Coin" x="4114.67" y="1085.33" width="16" height="16"/>
+  <object id="120" name="Coin" x="4244" y="1018.67" width="16" height="16"/>
+  <object id="121" name="Coin" x="4334.67" y="1081.33" width="16" height="16"/>
+  <object id="122" name="Coin" x="4641.33" y="1108" width="16" height="16"/>
+  <object id="123" name="Coin" x="4494.67" y="1117.33" width="16" height="16"/>
+  <object id="128" name="KillBlock" x="4197.83" y="1441.17" width="19.3333" height="30.6667"/>
+  <object id="129" name="KillBlock" x="4103.33" y="1345.17" width="19.3333" height="30.6667"/>
+  <object id="132" name="KillBlock" x="1226.33" y="1345.17" width="19.3333" height="30.6667"/>
+  <object id="133" x="256" y="1184">
+   <polygon points="0,0 0,32 96,32 96,0"/>
+  </object>
+  <object id="134" x="384" y="1152">
+   <polygon points="0,0 0,32 96,32 96,0"/>
+  </object>
+  <object id="135" x="512" y="1184">
+   <polygon points="0,0 0,32 96,32 96,0"/>
   </object>
  </objectgroup>
  <layer id="1" name="Livello tile 1" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt1VFugzAQBUBu2LT3P0xbVUgowsHYC1s7M9J+hr63BndZAAAAAAAAAAAAAAAAAAAAAAAAAODPx898Zofo8Jv/sYzdAe7y2Mwo9r7xke6tUlZ317XW/T5P7b6ff591TtE5Snv5T+9i6X66+97a2/3Xi6mx97s77rNtl1KPlmfV7OXMs3tEf/OvpuW81ucf7SrqvVqn5906ui+i8h91KM1V99j2/3NPt5ZOZ9/Dlr9Rkz86a1TmqO/i6rPp6X13r+gZOfsM+5/1XEodsjNF7H+kHme6ZedqzZ+dJ2L3I3ap6ZadqadDdpaI/Y/Y46hXdp6eDtk5os5g5C57nbKz9HbIzvHu57DXKTvDO+ff9pilywwzy1nM0sMYY2rnGx5CFPo=
+   eJzt1W1ugzAMAFAu1jOsq9bd/yijmpAQ4qvESQh9T/LPOrZj0q4DAAAAAAAAAAAAAAAAAAAAAAAAgH9ffXzXLiLBq/5713YPUMp9FK2Y+8ZbereWai39dv308ezjt9B5tQ3zncbeeU9/X2vfoutYmsve3Ft7FLFnS+9T6XdrbvaPldhj7ncl3rNxL0t97HHr3p/L3typor/5tThyX0P+rVlF7dUQKbu19V5E1X/bmWsaUXczNf5/TuntSE9bezh45w6O1B9Ra8repO7V0Z2K7vdI31ui+3oE5y5de65ZzMmxV2foK/eZOXuoPddP36u13nKfl6v+2vOMmP3LFfeqxHm5eqg9z4j5t75Tc32VOu/sOWvewdX2quR5Z8959Xso1VPp+bVaf2uz+ZTIMbur3MVV+qg1O/MT0TGoXceV4w9jnxLX
   </data>
  </layer>
 </map>

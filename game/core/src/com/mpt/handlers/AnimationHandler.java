@@ -10,6 +10,7 @@ import java.util.Objects;
 public class AnimationHandler {
     private float timer = 0;
     private boolean looping = true;
+    private boolean stopped = false;
     private String current;
     private final HashMap<String, Animation<TextureRegion>> animations = new HashMap<>();
 
@@ -23,6 +24,7 @@ public class AnimationHandler {
         current = name;
         timer = 0;
         looping = true;
+        stopped = false;
     }
 
     public void setCurrent(String name, boolean looping){
@@ -42,9 +44,9 @@ public class AnimationHandler {
     public int frameIndex(){
         return animations.get(current).getKeyFrameIndex(timer);
     }
-
+    public void setStopped(boolean stopped) {this.stopped = stopped;}
     public TextureRegion getFrame(){
-        timer += Gdx.graphics.getDeltaTime();
+        if(!stopped)timer += Gdx.graphics.getDeltaTime();
         return animations.get(current).getKeyFrame(timer, looping);
     }
 

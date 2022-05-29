@@ -8,19 +8,23 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mpt.handlers.*;
+import com.mpt.modules.MusicModule;
+import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.KillBlock;
 import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
@@ -29,30 +33,36 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     private final OrthographicCamera camera;
     private SpriteBatch batch;
+    private Stage stage;
     private final World world;
     private final Box2DDebugRenderer box2DDebugRenderer;
     private final OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private final MapHandler mapHandler;
     private Player player;
-    private HashMap<String, Enemy> enemies;
+    private ArrayList<Enemy> enemies;
     private ArrayList<Checkpoint> checkpoints;
-    private Viewport viewport;
+    private Endpoint endpoint;
+    private ExtendViewport extendViewport;
+    private ScreenViewport screenViewport;
     private MovementHandler movementHandler;
     private PreferencesHandler preferencesHandler;
     private ArrayList<Box> boxes;
     private ArrayList<Ladder> ladders;
     private ArrayList<Coin> coins;
+    private ArrayList<KillBlock> killBlocks;
+    private InputMultiplexer inputMultiplexer;
 
     private int screenWidth, screenHeight;
 
     public GameScreen() {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -25f), false);
-        enemies = new HashMap<>();
+        enemies = new ArrayList<>();
         checkpoints = new ArrayList<>();
         boxes = new ArrayList<>();
         ladders = new ArrayList<>();
         coins = new ArrayList<>();
+        killBlocks = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         preferencesHandler = new PreferencesHandler();
@@ -61,15 +71,35 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         screenHeight = Gdx.graphics.getHeight();
 
         mapHandler = new MapHandler(this);
-        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map1");
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map3");
 
-        viewport = new ExtendViewport(30 * PPM, 20 * PPM);
-        camera = (OrthographicCamera) viewport.getCamera();
+        extendViewport = new ExtendViewport(30 * PPM, 20 * PPM);
+        camera = (OrthographicCamera) extendViewport.getCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
+
+        screenViewport = new ScreenViewport();
+        stage = new Stage(screenViewport, batch);
+        setupInterface();
+
+        inputMultiplexer = new InputMultiplexer(this, stage);
 
         movementHandler = new MovementHandler(player, this);
 
-        world.setContactListener(new CollisionHandler(preferencesHandler));
+        world.setContactListener(new CollisionHandler(preferencesHandler, this));
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                if(MusicModule.getMainMenuMusic().isPlaying()) {
+                    if(MusicModule.getMainMenuMusic().getVolume() >= 0.01f)
+                        MusicModule.getMainMenuMusic().setVolume(Math.max(0, MusicModule.getMainMenuMusic().getVolume() - 0.01f));
+                    else {
+                        this.cancel();
+                        MusicModule.getMainMenuMusic().stop();
+                    }
+                }
+            }
+        }, 0f, 0.1f);
+
     }
 
     @Override
@@ -80,57 +110,22 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         //36f/255f,61f/255f,71f/255f
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        viewport.apply();
-
+        extendViewport.apply();
         batch.begin();
-
         mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
         orthogonalTiledMapRenderer.render(); // Renders the map
         player.render(batch);
 
-        for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
-            if(enemy.getKey().equals("Centipede")) {
-                Centipede centipede = (Centipede) enemy.getValue();
-                centipede.render(batch);
-            }
-            if(enemy.getKey().equals("Hyena")) {
-                Hyena hyena = (Hyena) enemy.getValue();
-                hyena.render(batch);
-            }
-            if(enemy.getKey().equals("BattleTurtle")) {
-                BattleTurtle battleTurtle = (BattleTurtle) enemy.getValue();
-                battleTurtle.render(batch);
-            }
-            if(enemy.getKey().equals("BigBloated")) {
-                BigBloated bigBloated = (BigBloated) enemy.getValue();
-                bigBloated.render(batch);
-            }
-            if(enemy.getKey().equals("Deceased")) {
-                Deceased deceased = (Deceased) enemy.getValue();
-                deceased.render(batch);
-            }
-            if(enemy.getKey().equals("Mummy")) {
-                Mummy mummy = (Mummy) enemy.getValue();
-                mummy.render(batch);
-            }
-            if(enemy.getKey().equals("Scorpio")) {
-                Scorpio scorpio = (Scorpio) enemy.getValue();
-                scorpio.render(batch);
-            }
-            if(enemy.getKey().equals("Snake")) {
-                Snake snake = (Snake) enemy.getValue();
-                snake.render(batch);
-            }
-            if(enemy.getKey().equals("Vulture")) {
-                Vulture vulture = (Vulture) enemy.getValue();
-                vulture.render(batch);
-            }
-        }
-
+        for(Enemy enemy : enemies) {enemy.render(batch);}
         for(Box box : boxes) box.render(batch);
-        for(Coin coin : coins) coin.render(batch);
+        for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
+        for(KillBlock killBlock : killBlocks) killBlock.render(batch);
 
         batch.end();
+
+        screenViewport.apply();
+        stage.act();
+        stage.draw();
 
         if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
     }
@@ -139,6 +134,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void dispose() {
         super.dispose();
         batch.dispose();
+        //font.dispose();
         world.dispose();
         for(Box box : boxes) box.dispose();
         box2DDebugRenderer.dispose();
@@ -146,43 +142,62 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
+        extendViewport.update(width, height);
+        screenViewport.update(width, height);
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(this);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        stage.addAction(Actions.fadeIn(1f));
     }
 
     @Override
     public void hide() {
         Gdx.input.setInputProcessor(null);
+        stage.addAction(Actions.fadeOut(1f));
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A)
+        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             movementHandler.leftPressed();
-        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)
+            return true;
+        }
+        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             movementHandler.rightPressed();
-        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP)
+            return true;
+        }
+        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP) {
             movementHandler.spacePressed();
-        if(keycode == Input.Keys.SHIFT_LEFT)
+            return true;
+        }
+        if(keycode == Input.Keys.SHIFT_LEFT) {
             movementHandler.shiftPressed();
-        return true;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A)
+        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             movementHandler.leftReleased();
-        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)
+            return true;
+        }
+        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             movementHandler.rightReleased();
-        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP)
+            return true;
+        }
+        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP) {
             movementHandler.spaceReleased();
-        if(keycode == Input.Keys.SHIFT_LEFT)
+            return true;
+        }
+        if(keycode == Input.Keys.SHIFT_LEFT) {
             movementHandler.shiftReleased();
-        return true;
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -208,46 +223,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         player.update(delta);
         movementHandler.update(delta);
 
-
         // To be moved to map handler
-        for(Map.Entry<String,Enemy>  enemy : enemies.entrySet()) {
-            if(enemy.getKey().equals("Centipede")) {
-                Centipede centipede = (Centipede) enemy.getValue();
-                centipede.update(delta);
-            }
-            if(enemy.getKey().equals("Hyena")) {
-                Hyena hyena = (Hyena) enemy.getValue();
-                hyena.update(delta);
-            }
-            if(enemy.getKey().equals("BattleTurtle")) {
-                BattleTurtle battleTurtle = (BattleTurtle) enemy.getValue();
-                battleTurtle.update(delta);
-            }
-            if(enemy.getKey().equals("BigBloated")) {
-                BigBloated bigBloated = (BigBloated) enemy.getValue();
-                bigBloated.update(delta);
-            }
-            if(enemy.getKey().equals("Deceased")) {
-                Deceased deceased = (Deceased) enemy.getValue();
-                deceased.update(delta);
-            }
-            if(enemy.getKey().equals("Mummy")) {
-                Mummy mummy = (Mummy) enemy.getValue();
-                mummy.update(delta);
-            }
-            if(enemy.getKey().equals("Scorpio")) {
-                Scorpio scorpio = (Scorpio) enemy.getValue();
-                scorpio.update(delta);
-            }
-            if(enemy.getKey().equals("Snake")) {
-                Snake snake = (Snake) enemy.getValue();
-                snake.update(delta);
-            }
-            if(enemy.getKey().equals("Vulture")) {
-                Vulture vulture = (Vulture) enemy.getValue();
-                vulture.update(delta);
-            }
-        }
+        for(Enemy enemy : enemies) {enemy.update(delta);}
 
     }
 
@@ -257,6 +234,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         position.y = player.getBody().getPosition().y * PPM;
         camera.position.set(position);
         camera.update();
+    }
+
+    private void setupInterface() {
+
     }
 
     // Getters
@@ -272,16 +253,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return preferencesHandler;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
     }
 
-    public void addEnemy(String type, Enemy enemy) {
-        enemies.put(type, enemy);
+    public void setEndpoint(Endpoint endpoint) {this.endpoint = endpoint;}
+
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
     }
     public void addCheckpoint(Checkpoint checkpoint) {
         checkpoints.add(checkpoint);
@@ -289,8 +268,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void addBox(Box box) {boxes.add(box);}
     public void addLadder(Ladder ladder) { ladders.add(ladder);}
     public void addCoin(Coin coin) {coins.add(coin);}
+    public void addKillBlock(KillBlock killBlock) {killBlocks.add(killBlock);}
+    public Player getPlayer() {
+        return player;
+    }
     public ArrayList<Box> getBoxes(){return boxes;}
     public ArrayList<Ladder> getLadders(){return ladders;}
     public ArrayList<Coin> getCoins(){return coins;}
-
+    public ArrayList<Enemy> getEnemies() {return enemies;}
 }

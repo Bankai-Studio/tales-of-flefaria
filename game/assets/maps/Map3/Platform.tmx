@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="117">
- <tileset firstgid="1" source="spritesheet.tsx"/>
- <tileset firstgid="65" source="imaggini.tsx"/>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="245">
+ <tileset firstgid="1" source="imaggini.tsx"/>
+ <tileset firstgid="123" source="../Map4/Tileset.tsx"/>
  <layer id="2" name="Bekround" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt2LtOwzAUAFB/OAvvx1BmmCIWKkaQUOHrwKIVJrQhpnaTtOdIVaw0vrmSnRvHIQAAAAAAAAAAAAAAAAAAAAAAAAAAbPa4PF4m5y6S9jxpN2v6nyfts8/f6Zb5XK3Jp0+fl8z7vC6P89b5h8w47N710AnQ2yJ8j1czYB5TdVcp7nHBWDeFrvnLPjz3t//8byXnvdjlvlCcsXsOX/MmnTtPGf37jEnqPfP6fVOrXq3E8ZiFn+u9uP5Lx3cWfo9bUzetvZf7HJSOcSj1qoS3oROYkNL1quS6aopK1ImSSuXTN058F8U1mnqVb2xzp0vtXOM+2knlezBeJedXjLXtviybtb/5plTH6LYYOgGo6ND3q2AKjnZ8v/aeOUAJH+RBKA8=
+   eJzt2MlOwzAQAFB/GBe2shzKmVvEBcQRJFT4erAIIqRqwXTcLH1PqtwlmYw6E9d1SgAAAAAAAAAAAAAAAAAAAAAAAAAAm92340VArLOPx+mOMS7bsSSffM5z4XVe2vGh9/5dYRzKLHqvu99/03l+viXGVVg21LZK3/VqBsxjqm4rxT0OjHUddMxv5nDf3/zzsy8Rv9NZrb4am6f02Tfd3nksOP8vNel6Kzx+bmr3Va7HMv1c7+X1X7e+y7Ret6ZuWrNXeh9ExziU+SrC69AJTEh0X0Wuq6YoYp6IFJVPaRzzVbmx9c42+841r3Gi1v6MX2R/5Vi77suyWf8/35TmsSi5v06GTqKC1dAJQEWHvl8FU3C05+v198wBIrwD/zQWzA==
   </data>
  </layer>
+ <objectgroup id="4" name="TileObjects"/>
  <objectgroup id="3" name="Objects">
   <object id="1" x="0" y="1280">
    <polygon points="0,0 544,0 544,320 0,320 0,0"/>
@@ -101,9 +102,6 @@
   <object id="32" x="2048" y="1152">
    <polygon points="0,0 32,0 32,448 0,448"/>
   </object>
-  <object id="33" x="2080" y="1120">
-   <polygon points="0,0 800,0 800,480 0,480"/>
-  </object>
   <object id="34" x="1984" y="1056">
    <polygon points="0,0 0,32 -64,32 -64,0 -32,0"/>
   </object>
@@ -140,12 +138,6 @@
   <object id="46" x="3136" y="1376">
    <polygon points="0,0 32,0 32,224 0,224"/>
   </object>
-  <object id="47" x="3168" y="1408">
-   <polygon points="0,0 32,0 32,192 0,192"/>
-  </object>
-  <object id="48" x="3200" y="1376">
-   <polygon points="0,0 32,0 32,224 0,224"/>
-  </object>
   <object id="49" x="3232" y="1184">
    <polygon points="0,0 0,416 32,416 32,0 0,0"/>
   </object>
@@ -179,71 +171,11 @@
   <object id="60" x="3744" y="1376">
    <polygon points="0,0 32,0 32,224 0,224"/>
   </object>
-  <object id="61" x="3776" y="1408">
-   <polygon points="0,0 64,0 96,0 96,192 32,192 0,192"/>
-  </object>
-  <object id="62" x="3872" y="1376">
-   <polygon points="0,0 96,0 96,224 32,224 0,224"/>
-  </object>
-  <object id="63" x="3968" y="1344">
-   <polygon points="0,0 128,0 128,256 32,256 0,256 0,0"/>
-  </object>
-  <object id="64" x="3968" y="1312">
-   <polygon points="0,0 32,-32 32,-160 0,-192"/>
-  </object>
-  <object id="65" x="3840" y="1120">
-   <polygon points="0,0 0,192 128,192 128,0"/>
-  </object>
-  <object id="66" x="3680" y="1120">
-   <polygon points="0,0 0,64 32,64 32,0"/>
-  </object>
-  <object id="67" x="3712" y="1120">
-   <polygon points="0,0 0,96 32,96 32,0 0,0"/>
-  </object>
-  <object id="68" x="3744" y="1120">
-   <polygon points="0,0 0,128 64,128 64,32 64,0"/>
-  </object>
-  <object id="69" x="3808" y="1120">
-   <polygon points="0,0 32,0 32,160 0,160"/>
-  </object>
-  <object id="70" x="4128" y="1120">
-   <polygon points="0,0 0,480 -32,480 -32,32"/>
-  </object>
-  <object id="71" x="2592" y="1088">
-   <polygon points="0,0 0,32 32,32 32,0"/>
-  </object>
-  <object id="72" x="2688" y="1024">
-   <polygon points="0,0 32,0 32,32 0,32"/>
-  </object>
-  <object id="73" x="2784" y="992">
-   <polygon points="0,0 0,32 32,32 32,0 0,0"/>
-  </object>
-  <object id="74" x="2880" y="960">
-   <polygon points="0,0 0,32 32,32 32,0"/>
-  </object>
-  <object id="76" x="3040" y="1056">
-   <polygon points="0,0 0,32 32,32 32,0"/>
-  </object>
-  <object id="78" x="3232" y="992">
-   <polygon points="0,0 0,32 32,32 32,0"/>
-  </object>
   <object id="80" x="3424" y="992">
    <polygon points="0,0 0,32 32,32 32,0"/>
   </object>
   <object id="82" x="3616" y="1056">
    <polygon points="0,0 0,32 32,32 32,0"/>
-  </object>
-  <object id="84" x="3776" y="1056">
-   <polygon points="0,0 -32,0 -32,32 0,32 0,0"/>
-  </object>
-  <object id="85" x="3808" y="1024">
-   <polygon points="0,0 32,-32 64,-32 96,0"/>
-  </object>
-  <object id="86" x="3936" y="928">
-   <polygon points="0,0 0,32 32,32 32,0"/>
-  </object>
-  <object id="88" x="4064" y="1024">
-   <polygon points="0,0 0,32 32,32 32,0 0,0"/>
   </object>
   <object id="89" x="4128" y="1120">
    <polygon points="0,0 224,0 224,448 224,480 0,480"/>
@@ -287,7 +219,6 @@
   <object id="104" x="0" y="0">
    <polygon points="0,0 32,0 32,1280 0,1280"/>
   </object>
-  <object id="106" name="Player" x="194.667" y="1114.67" width="26" height="26"/>
   <object id="108" x="576" y="1216">
    <polygon points="0,0 96,0 96,32 0,32"/>
   </object>
@@ -300,25 +231,169 @@
   <object id="111" x="864" y="1216">
    <polygon points="0,0 0,32 64,32 64,0"/>
   </object>
-  <object id="112" x="2976" y="1024">
-   <polygon points="0,0 -32,32 32,32 32,0"/>
-  </object>
-  <object id="113" x="3168" y="1024">
-   <polygon points="0,0 -32,32 32,32 32,0"/>
-  </object>
   <object id="114" x="3328" y="960">
    <polygon points="0,0 -32,32 0,32 32,32 32,0"/>
   </object>
   <object id="115" x="3552" y="1024">
    <polygon points="0,0 -32,32 32,32 32,0"/>
   </object>
-  <object id="116" x="4032" y="960">
+  <object id="117" x="2880" y="1056">
+   <polygon points="0,0 0,32 32,32 32,0"/>
+  </object>
+  <object id="118" x="2976" y="1024">
+   <polygon points="0,0 32,0 32,32 0,32 0,0"/>
+  </object>
+  <object id="119" x="3168" y="1440">
+   <polygon points="0,0 64,0 64,160 0,160"/>
+  </object>
+  <object id="120" x="3776" y="1408">
+   <polygon points="0,0 64,0 64,192 0,192 0,0"/>
+  </object>
+  <object id="121" x="3840" y="1440">
+   <polygon points="0,0 128,0 128,160 0,160"/>
+  </object>
+  <object id="122" x="3968" y="1408">
+   <polygon points="0,0 32,0 32,192 0,192"/>
+  </object>
+  <object id="123" x="4000" y="1376">
+   <polygon points="0,0 64,0 64,224 0,224"/>
+  </object>
+  <object id="124" x="4064" y="1600">
+   <polygon points="0,0 32,0 32,-256 0,-256"/>
+  </object>
+  <object id="125" name="Spawnpoint" x="224" y="1120" width="32" height="32"/>
+  <object id="126" name="Checkpoint" x="1024" y="1184" width="32" height="64"/>
+  <object id="127" name="Checkpoint" x="2176" y="1056" width="32" height="64"/>
+  <object id="128" name="Checkpoint" x="3685" y="1060" width="32" height="64"/>
+  <object id="129" name="KillBlock" x="1794" y="1408" width="19.3333" height="30.6667"/>
+  <object id="130" name="KillBlock" x="1829" y="1472" width="19.3333" height="30.6667"/>
+  <object id="131" name="KillBlock" x="1895.33" y="1471.67" width="19.3333" height="30.6667"/>
+  <object id="132" name="KillBlock" x="1929.33" y="1407.67" width="19.3333" height="30.6667"/>
+  <object id="133" name="KillBlock" x="1959.33" y="1312.67" width="19.3333" height="30.6667"/>
+  <object id="134" name="KillBlock" x="1736.33" y="1343.67" width="19.3333" height="30.6667"/>
+  <object id="135" name="KillBlock" x="1856" y="1504" width="30.6666" height="30.6667"/>
+  <object id="136" name="KillBlock" x="3168" y="1408" width="30.6666" height="30.6667"/>
+  <object id="137" name="KillBlock" x="3141.33" y="1346.67" width="19.3333" height="30.6667"/>
+  <object id="138" name="KillBlock" x="3110.33" y="1312.67" width="19.3333" height="30.6667"/>
+  <object id="139" name="KillBlock" x="3076.83" y="1279.17" width="19.3333" height="30.6667"/>
+  <object id="140" name="KillBlock" x="3044.33" y="1252.67" width="19.3333" height="30.6667"/>
+  <object id="141" name="KillBlock" x="3205.33" y="1187.67" width="19.3333" height="30.6667"/>
+  <object id="142" name="KillBlock" x="3239.33" y="1152.67" width="19.3333" height="30.6667"/>
+  <object id="143" name="KillBlock" x="3367.83" y="1088.67" width="19.3333" height="30.6667"/>
+  <object id="144" name="KillBlock" x="3492.33" y="1186.67" width="19.3333" height="30.6667"/>
+  <object id="145" name="KillBlock" x="3543.33" y="1214.67" width="19.3333" height="30.6667"/>
+  <object id="146" name="KillBlock" x="3627.83" y="1280.17" width="19.3333" height="30.6667"/>
+  <object id="147" name="KillBlock" x="3699.33" y="1311.67" width="19.3333" height="30.6667"/>
+  <object id="148" name="KillBlock" x="3750.33" y="1343.17" width="19.3333" height="30.6667"/>
+  <object id="149" name="KillBlock" x="3798.33" y="1377.67" width="19.3333" height="30.6667"/>
+  <object id="150" name="KillBlock" x="3894.83" y="1409.17" width="19.3333" height="30.6667"/>
+  <object id="151" name="KillBlock" x="3975.83" y="1376.17" width="19.3333" height="30.6667"/>
+  <object id="152" name="Coin" x="72" y="1160" width="16" height="16"/>
+  <object id="153" name="Coin" x="330" y="1158" width="16" height="16"/>
+  <object id="154" name="Coin" x="589" y="1184" width="16" height="16"/>
+  <object id="155" name="Coin" x="639" y="1184" width="16" height="16"/>
+  <object id="156" name="Coin" x="745" y="1125" width="16" height="16"/>
+  <object id="157" name="Coin" x="815" y="1161" width="16" height="16"/>
+  <object id="158" name="Coin" x="887" y="1181" width="16" height="16"/>
+  <object id="159" name="Coin" x="1108" y="1184" width="16" height="16"/>
+  <object id="160" name="Coin" x="1199" y="1183" width="16" height="16"/>
+  <object id="161" name="Coin" x="1301" y="1178" width="16" height="16"/>
+  <object id="162" name="Coin" x="1373" y="1142" width="16" height="16"/>
+  <object id="163" name="Coin" x="1463" y="1133" width="16" height="16"/>
+  <object id="164" name="Coin" x="1572" y="1112" width="16" height="16"/>
+  <object id="165" name="Coin" x="1688" y="1083" width="16" height="16"/>
+  <object id="166" name="Coin" x="1764" y="1027" width="16" height="16"/>
+  <object id="167" name="Coin" x="1834" y="955" width="16" height="16"/>
+  <object id="168" name="Coin" x="1949" y="1019" width="16" height="16"/>
+  <object id="169" name="Coin" x="2108" y="1075" width="16" height="16"/>
+  <object id="170" name="Coin" x="2285.67" y="1083" width="16" height="16"/>
+  <object id="171" name="Coin" x="2365.67" y="1089" width="16" height="16"/>
+  <object id="172" name="Coin" x="2457.67" y="1089" width="16" height="16"/>
+  <object id="174" name="Coin" x="2562.67" y="1090" width="16" height="16"/>
+  <object id="175" name="Coin" x="2675.67" y="1081" width="16" height="16"/>
+  <object id="176" name="Coin" x="2759.67" y="1081" width="16" height="16"/>
+  <object id="177" name="Coin" x="2891" y="1026" width="16" height="16"/>
+  <object id="178" name="Coin" x="2986" y="1000" width="16" height="16"/>
+  <object id="179" name="Coin" x="3139" y="1020" width="16" height="16"/>
+  <object id="180" name="Coin" x="3210" y="1000" width="16" height="16"/>
+  <object id="181" name="Coin" x="3339" y="939" width="16" height="16"/>
+  <object id="182" name="Coin" x="3434" y="966" width="16" height="16"/>
+  <object id="183" name="Coin" x="3560" y="998" width="16" height="16"/>
+  <object id="184" name="Coin" x="3623" y="1029" width="16" height="16"/>
+  <object id="185" name="Coin" x="3766.33" y="1071" width="16" height="16"/>
+  <object id="186" name="Coin" x="3845.33" y="1069.67" width="16" height="16"/>
+  <object id="187" name="Coin" x="3931" y="1079" width="16" height="16"/>
+  <object id="188" name="Coin" x="4152" y="1082" width="16" height="16"/>
+  <object id="189" name="Coin" x="4221" y="1064" width="16" height="16"/>
+  <object id="190" name="Coin" x="4282" y="1077" width="16" height="16"/>
+  <object id="191" name="Coin" x="4414" y="1163" width="16" height="16"/>
+  <object id="192" name="Coin" x="4452" y="1192" width="16" height="16"/>
+  <object id="193" name="Coin" x="4497" y="1325" width="16" height="16"/>
+  <object id="194" name="Coin" x="4527" y="1397" width="16" height="16"/>
+  <object id="195" name="Coin" x="4552" y="1451" width="16" height="16"/>
+  <object id="196" name="Coin" x="4615" y="1467" width="16" height="16"/>
+  <object id="197" name="Coin" x="4639" y="1394" width="16" height="16"/>
+  <object id="198" name="Coin" x="4666" y="1350" width="16" height="16"/>
+  <object id="199" name="Coin" x="4706" y="1274" width="16" height="16"/>
+  <object id="201" name="Endpoint" x="4736" y="1184" width="32" height="64"/>
+  <object id="203" x="3136" y="1056">
    <polygon points="0,0 -32,32 32,32 32,0"/>
+  </object>
+  <object id="204" name="KillBlock" x="645.333" y="1471.67" width="19.3333" height="30.6667"/>
+  <object id="205" name="KillBlock" x="611.333" y="1440.17" width="19.3333" height="30.6667"/>
+  <object id="206" name="KillBlock" x="580.833" y="1409.17" width="19.3333" height="30.6667"/>
+  <object id="207" name="KillBlock" x="773.333" y="1471.67" width="19.3333" height="30.6667"/>
+  <object id="208" name="KillBlock" x="821.333" y="1439.67" width="19.3333" height="30.6667"/>
+  <object id="209" name="KillBlock" x="871.333" y="1407.67" width="19.3333" height="30.6667"/>
+  <object id="210" name="KillBlock" x="904.833" y="1343.67" width="19.3333" height="30.6667"/>
+  <object id="212" name="KillBlock" x="675.667" y="1535.67" width="30.6666" height="30.6667"/>
+  <object id="213" name="KillBlock" x="720.667" y="1535.67" width="30.6666" height="30.6667"/>
+  <object id="216" name="Player" x="192" y="1117" width="22" height="30"/>
+  <object id="219" name="Box" x="3805" y="1090.33" width="30" height="30"/>
+  <object id="222" name="Snake" x="191.5" y="1263.5" width="32" height="17"/>
+  <object id="224" name="Snake" x="3632.67" y="1290" width="32" height="17"/>
+  <object id="226" name="BigBloated" x="1248" y="1216" width="32" height="32"/>
+  <object id="228" name="BigBloated" x="2448.67" y="1118" width="32" height="32"/>
+  <object id="230" name="Box" x="1090" y="1215" width="30" height="30"/>
+  <object id="231" name="Box" x="432" y="1250" width="30" height="30"/>
+  <object id="232" x="3200" y="1024">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object id="234" x="2080" y="1120">
+   <polygon points="0,0 224,0 224,480 0,480"/>
+  </object>
+  <object id="235" x="2304" y="1152">
+   <polygon points="0,0 448,0 448,448 0,448"/>
+  </object>
+  <object id="236" x="2752" y="1120">
+   <polygon points="0,0 128,0 128,480 0,480"/>
+  </object>
+  <object id="237" name="Ladder" x="4064" y="1152" width="32" height="192"/>
+  <object id="238" x="3968" y="1120">
+   <polygon points="0,0 32,32 -288,32 -288,0"/>
+  </object>
+  <object id="239" x="3680" y="1152">
+   <polygon points="0,0 0,32 320,32 320,0"/>
+  </object>
+  <object id="240" x="3712" y="1184">
+   <polygon points="0,0 0,32 288,32 288,0"/>
+  </object>
+  <object id="241" x="3744" y="1216">
+   <polygon points="0,0 0,32 256,32 256,0"/>
+  </object>
+  <object id="242" x="3808" y="1248">
+   <polygon points="0,0 0,32 192,32 192,0"/>
+  </object>
+  <object id="243" x="4000" y="1280">
+   <polygon points="0,0 -32,32 -160,32 -160,0"/>
+  </object>
+  <object id="244" x="4128" y="1120">
+   <polygon points="0,0 -32,32 -32,480 0,480"/>
   </object>
  </objectgroup>
  <layer id="1" name="PlatformMap" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmE1OwzAQhUPZIEFh1wOUnx3LcB6OxlF6NFJRS8ayY3s8jofyfdJbIPBksF/fuJkmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOjFbnQDoI7kTOdFt9qNdKz73xj1OZU+N7Wutt58WfMh7APskDv7VFbUZohG5jAXZcT27WayMwO0zjWsg1+uA87x+pHk0XnN3tPuontPO0/7yzMOFZJQW+d+SvfsFN615un3/7UPfta8m70sel301ljnWaGX3oSe6qVafx3iNb7W1ixe+sz18RiseSjovYWcB1o80sNf4WdLemcq2Vdtf+WIeap0/eKtk7avajOr1Ys+JRnXemcOM9rXk7Dm1r7KeeNQkDkl3kr5S+KrWm9p+kqCm0Fnn7wnFPNQSq33KgveKvGVWy/JLqmvSr3l/73LAHeWdwnFssLS/KnJrJGeWvNWqa9y/nS47HJa7ukn//e155BDa29C/5fSa/6U3rVGzL8SX9T6ytWQfufU9JX23libP7ncspBVGW+J6+T8Fb63qH1GahbOHfalJrO2yok1r1vJqpi3pOed82lM0voxeuyJRV+tecuqrzTOPFVPs3bs3erWZ+gzYv6EfVmbgTEv9KipXdun976kciv1zmkLhXcti1n1F+Uyq2dW+bKYD64nC71ck6YNn9Xy3q2nRuUl0tNx+nm/ejTQCxqjb39AYhs=
+   eJztmMtqwzAQRf2p/Y+kFLJIWuiiXYRu+siuy2SV76tNLVAHWxo9LafnwBAIkj3SXN+R3XUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFCScx8fSycBs9xKbW5lHVAGlz602sHLlmNq3z/7OFXOY8ClgVSNoC+AdRLjR5s+DlZsx3hJyGMzzt/1cZ9wja0VvuvI8cP9v8fYjf9dxJyzNV6u/zAxPoWhNl9der9Ygz9LTc2FrNW1+1svO+TcY6fThczrTVzn0TPnVbGOJzFn7xnvu6cPnwZa6/+y3rGe4NvXnHFU5jmlqcPvfyfffJ+2QnU15BzqWZvA8S40Hpd6ZpYeneO5qqkrjbbmNBWqrYeZ+aG6itHWPmBsCUwPMv3lfYzr+Gt6TE4vkPd31XAJbT0r5g/a0nj0lHfF6CpEW/ae2mcHWVsT9jnCvl/KmbTP9S5nvUI8aylN+bSl0ZWtL613mbiIlhHi15r9zeX/LfWfkPNx7f6n1Zbm7C21Vet86at1zmc1tv+UrFfN9ZfYvxjNx+grdB9cvfAceK0cdZRryd3/QrXegle58k3JT9MbzXeuGB3M1brEnoboqlZNXdpqTVdyD1Pzc3lXqlcP1576tlrC/0O+y5T2Kl9eLfVAmat5L8qVn9GX+e6vfbf2hfSRks+pS1vGd2tqaok9+C9he1Ypr7Jjzh+W0NNUTq161RrDPK+1ntMW/cH0GDS13j21zwm5+jmxvvgBw+pm9g==
   </data>
  </layer>
 </map>

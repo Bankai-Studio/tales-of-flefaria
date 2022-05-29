@@ -31,6 +31,8 @@ public class Player extends GameEntity {
 
     // Variables
     private State state;
+
+    private int playerHealth;
     private int playerStamina;
     private Vector2 respawnPosition;
     private boolean canRespawn;
@@ -38,19 +40,20 @@ public class Player extends GameEntity {
     private final float FRAME_TIME = 1 / 7f;
     private String direction;
     private int characterSelection;
-    private final float chargedAttackMultiplier = 1.5f;
+    public final float heavyAttackMultiplier = 1.5f;
     private float playerSpeed;
-
+    private int collectedCoins;
     public Player(float width, float height, Body body) {
         super(width, height, body);
         minDamage = 34;
         maxDamage = 50;
-        health = 100;
+        playerHealth = 100;
         playerSpeed = 8f;
         playerStamina = maxPlayerStamina;
         canRespawn = true;
         playerAnimations = new AnimationHandler();
         characterSelection = 0;
+        collectedCoins = 0;
         direction = "RIGHT";
         loadPlayerSprites();
 
@@ -63,7 +66,6 @@ public class Player extends GameEntity {
 
     @Override
     public void update(float delta) {
-        checkPlayerDeath();
         respawnOnVoidPosition();
     }
 
@@ -79,15 +81,19 @@ public class Player extends GameEntity {
         batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
     }
 
-    private void checkPlayerDeath() {
+    public void checkPlayerDeath() {
         if(state.equals(State.DYING) && canRespawn) {
             body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
             state = State.IDLE;
+            playerAnimations.setCurrent("idle");
             canRespawn = false;
+            playerHealth = 100;
         }
-        else
+        else{
             canRespawn = true;
+        }
     }
+
 
     private void respawnOnVoidPosition() {
         if(body.getPosition().y < 0)
@@ -111,23 +117,17 @@ public class Player extends GameEntity {
         }
         TextureAtlas charset;
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/attack1.atlas"));
-        playerAnimations.add("attack1", new Animation<>(FRAME_TIME, charset.findRegions("attack1")));
+        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/lightAttack.atlas"));
+        playerAnimations.add("lightAttack", new Animation<>(1/8f, charset.findRegions("lightAttack")));
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/attack2.atlas"));
-        playerAnimations.add("attack2", new Animation<>(FRAME_TIME, charset.findRegions("attack2")));
-
-        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/attack3.atlas"));
-        playerAnimations.add("attack3", new Animation<>(FRAME_TIME, charset.findRegions("attack3")));
+        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/heavyAttack.atlas"));
+        playerAnimations.add("heavyAttack", new Animation<>(1/6f, charset.findRegions("heavyAttack")));
 
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/climb.atlas"));
         playerAnimations.add("climb", new Animation<>(FRAME_TIME, charset.findRegions("climb")));
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/craft.atlas"));
-        playerAnimations.add("craft", new Animation<>(FRAME_TIME, charset.findRegions("craft")));
-
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/death.atlas"));
-        playerAnimations.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
+        playerAnimations.add("death", new Animation<>(1/5f, charset.findRegions("death")));
 
         charset = new TextureAtlas(Gdx.files.internal("./characters/"+characterName+"/fall.atlas"));
         playerAnimations.add("fall", new Animation<>(FRAME_TIME, charset.findRegions("fall")));
@@ -165,13 +165,9 @@ public class Player extends GameEntity {
         direction = "RIGHT";
     }
 
-    public void setVelocityX(float velocityValue) {
-        velocityX = velocityValue;
-    }
+    public void setVelocityX(float velocityValue) {velocityX = velocityValue;}
 
-    public void setVelocityY(float velocityValue) {
-        velocityX = velocityValue;
-    }
+    public void setVelocityY(float velocityValue) {velocityY = velocityValue;}
 
     public void setX(float x) {
         this.x = x;
@@ -191,10 +187,13 @@ public class Player extends GameEntity {
 
     public void setRespawnPosition(Vector2 respawnPosition) {this.respawnPosition = respawnPosition;}
 
+    public void setCollectedCoins(int collectedCoins) {this.collectedCoins = collectedCoins;}
+    public void setPlayerHealth(int health){this.playerHealth = health;}
+
     // Getters
 
     public int getHealth(){
-        return health;
+        return playerHealth;
     }
     public float getVelocityX() {
         return velocityX;
@@ -231,4 +230,6 @@ public class Player extends GameEntity {
     public State getState(){
         return state;
     }
+
+    public int getCollectedCoins() {return collectedCoins;}
 }

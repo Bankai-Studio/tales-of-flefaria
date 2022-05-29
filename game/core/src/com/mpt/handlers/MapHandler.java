@@ -16,10 +16,12 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.mpt.modules.BodyModule;
+import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.KillBlock;
 import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
@@ -89,6 +91,20 @@ public class MapHandler {
                     );
                     gameScreen.addCheckpoint(new Checkpoint(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
+                if(rectangleName.equals("Endpoint")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            true,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    gameScreen.setEndpoint(new Endpoint(rectangle.getWidth(), rectangle.getHeight(), body));
+                }
                 if(rectangleName.equals("Box")) {
                     Body body = BodyModule.createBody(
                             rectangle.getX() + rectangle.getWidth() / 2,
@@ -131,41 +147,55 @@ public class MapHandler {
                     );
                     gameScreen.addCoin(new Coin(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
+                if(rectangleName.equals("KillBlock") || rectangleName.equals("KillBlockUp")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            true,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    gameScreen.addKillBlock(new KillBlock(rectangle.getWidth(), rectangle.getHeight(), body, rectangleName));
+                }
                 if(rectangleName.equals("Centipede")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("Centipede", new Centipede(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new Centipede(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Hyena")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("Hyena", new Hyena(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new Hyena(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("BattleTurtle")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("BattleTurtle", new BattleTurtle(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new BattleTurtle(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("BigBloated")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("BigBloated", new BigBloated(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new BigBloated(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Deceased")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("Deceased", new Deceased(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new Deceased(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Mummy")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("Mummy", new Mummy(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new Mummy(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Scorpio")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("Scorpio", new Scorpio(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new Scorpio(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Snake")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("Snake", new Snake(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new Snake(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Vulture")) {
                     Body body = createEnemyBody(rectangle);
-                    gameScreen.addEnemy("Vulture", new Vulture(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addEnemy(new Vulture(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
             }
         }

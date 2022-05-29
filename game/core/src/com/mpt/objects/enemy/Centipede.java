@@ -1,17 +1,7 @@
 package com.mpt.objects.enemy;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.mpt.handlers.AnimationHandler;
-import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
-
-import static com.mpt.constants.Constants.PPM;
 
 public class Centipede extends Enemy {
     public Centipede(float width, float height, Body body, GameScreen gameScreen) {

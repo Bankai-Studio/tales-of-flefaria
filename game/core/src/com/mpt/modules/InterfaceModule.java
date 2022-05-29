@@ -1,6 +1,8 @@
 package com.mpt.modules;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public abstract class InterfaceModule extends ScreenAdapter {
+public abstract class InterfaceModule extends ScreenAdapter implements InputProcessor {
     protected final Stage stage = new Stage(new FitViewport(1600, 900));
 
     protected final FreeTypeFontGenerator textFreeTypeFontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("menuAssets/fonts/Mephisto.ttf"));
@@ -21,6 +23,8 @@ public abstract class InterfaceModule extends ScreenAdapter {
     protected final Label.LabelStyle titleStyle, subTitleStyle, textStyle, smallTextStyle;
     protected final TextButton.TextButtonStyle textButtonStyle;
     protected final Texture menuBackground = new Texture("menuAssets/backgrounds/MenuBackground.png");
+
+    protected final InputMultiplexer inputMultiplexer;
 
     public InterfaceModule() {
         titleStyle = setupFont(72, Color.WHITE, titleFreeTypeFontGenerator);
@@ -31,6 +35,8 @@ public abstract class InterfaceModule extends ScreenAdapter {
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = subTitleStyle.font;
         textButtonStyle.fontColor = Color.WHITE;
+
+        inputMultiplexer = new InputMultiplexer(stage, this);
     }
 
     @Override
@@ -43,16 +49,25 @@ public abstract class InterfaceModule extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
+        super.resize(width, height);
         stage.getViewport().update(width, height, true);
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        super.show();
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     @Override
     public void hide() {
+        super.hide();
+        Gdx.input.setInputProcessor(null);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
         titleStyle.font.dispose();
         subTitleStyle.font.dispose();
         textStyle.font.dispose();
@@ -60,12 +75,6 @@ public abstract class InterfaceModule extends ScreenAdapter {
         menuBackground.dispose();
         titleFreeTypeFontGenerator.dispose();
         textFreeTypeFontGenerator.dispose();
-        Gdx.input.setInputProcessor(null);
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
     }
 
     protected abstract void setup();

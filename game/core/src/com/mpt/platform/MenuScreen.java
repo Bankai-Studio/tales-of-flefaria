@@ -2,6 +2,7 @@ package com.mpt.platform;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,13 +13,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mpt.modules.InterfaceModule;
+import com.mpt.modules.MusicModule;
 
 public class MenuScreen extends InterfaceModule {
 
     private GameScreen gameScreen;
     private CreditsScreen creditsScreen;
 
+    private boolean canQuit;
+
     public MenuScreen() {
+        canQuit = false;
         setBackground();
         setup();
     }
@@ -37,14 +42,13 @@ public class MenuScreen extends InterfaceModule {
         title.add(subtitleLabel).row();
         Cell titleCell = main.add(title);
         titleCell.row();
-        titleCell.padBottom(80);
+        titleCell.padBottom(80f);
 
         Label playButton = new Label("PLAY", subTitleStyle);
         playButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                playButton.addAction(Actions.fadeOut(1f));
                 stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
                     gameScreen = new GameScreen();
                     ((Game) Gdx.app.getApplicationListener()).setScreen(gameScreen);
@@ -55,12 +59,15 @@ public class MenuScreen extends InterfaceModule {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 playButton.setText("< PLAY >");
                 playButton.setColor(Color.WHITE);
+                MusicModule.getRolloverSound().play();
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                playButton.setText("PLAY");
-                playButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                if(pointer == -1) {
+                    playButton.setText("PLAY");
+                    playButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                }
             }
         });
 
@@ -69,20 +76,24 @@ public class MenuScreen extends InterfaceModule {
         settingsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                settingsButton.addAction(Actions.fadeOut(1f));
                 System.out.println("Clicked settings");
             }
 
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                settingsButton.setText("< SETTINGS >");
-                settingsButton.setColor(Color.WHITE);
+                if(pointer == -1) {
+                    settingsButton.setText("< NOT AVAILABLE >");
+                    settingsButton.setColor(Color.WHITE);
+                }
+                MusicModule.getRolloverSound().play();
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                settingsButton.setText("SETTINGS");
-                settingsButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                if(pointer == -1) {
+                    settingsButton.setText("SETTINGS");
+                    settingsButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                }
             }
         });
 
@@ -91,9 +102,8 @@ public class MenuScreen extends InterfaceModule {
         creditsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                creditsButton.addAction(Actions.fadeOut(1f));
                 stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> {
-                    creditsScreen = new CreditsScreen(getMenuScreen());
+                    creditsScreen = new CreditsScreen(MenuScreen.this);
                     ((Game) Gdx.app.getApplicationListener()).setScreen(creditsScreen);
                 })));
             }
@@ -102,18 +112,52 @@ public class MenuScreen extends InterfaceModule {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 creditsButton.setText("< CREDITS >");
                 creditsButton.setColor(Color.WHITE);
+                MusicModule.getRolloverSound().play();
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                creditsButton.setText("CREDITS");
-                creditsButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                if(pointer == -1) {
+                    creditsButton.setText("CREDITS");
+                    creditsButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                }
+            }
+        });
+
+        Label quitButton = new Label("QUIT", subTitleStyle);
+        quitButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+        quitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(!canQuit) {
+                    canQuit = true;
+                    quitButton.setText("< ARE YOU SURE >");
+                }
+                else
+                    Gdx.app.exit();
+            }
+
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                quitButton.setText("< QUIT >");
+                quitButton.setColor(Color.WHITE);
+                MusicModule.getRolloverSound().play();
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                if(pointer == -1) {
+                    quitButton.setText("QUIT");
+                    quitButton.setColor(new Color(80f/255f, 80f/255f, 80f/255f, 255f/255f));
+                    canQuit = false;
+                }
             }
         });
 
         options.add(playButton).row();
         options.add(settingsButton).row();
         options.add(creditsButton).row();
+        options.add(quitButton).row();
         main.add(options).row();
 
         stage.addActor(main);
@@ -122,12 +166,13 @@ public class MenuScreen extends InterfaceModule {
     @Override
     public void show() {
         super.show();
-        stage.addAction(Actions.sequence(Actions.fadeOut(0f), Actions.fadeIn(1f)));
+        stage.addAction(Actions.fadeIn(1f));
     }
 
     @Override
     public void hide() {
         super.hide();
+        stage.addAction(Actions.fadeOut(1f));
     }
 
     @Override
@@ -148,7 +193,43 @@ public class MenuScreen extends InterfaceModule {
             creditsScreen.resize(width, height);
     }
 
-    public MenuScreen getMenuScreen() {
-        return this;
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
+        return false;
     }
 }
