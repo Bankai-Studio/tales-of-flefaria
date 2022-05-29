@@ -54,6 +54,8 @@ public class Player extends GameEntity {
         playerAnimations = new AnimationHandler();
         characterSelection = 0;
         collectedCoins = 0;
+        adjustX = -15f;
+        adjustY = -17f;
         direction = "RIGHT";
         loadPlayerSprites();
 
@@ -76,7 +78,7 @@ public class Player extends GameEntity {
         if(direction.equals("LEFT") && !currentFrame.isFlipX()) currentFrame.flip(true,false);
         if(direction.equals("RIGHT") && currentFrame.isFlipX()) currentFrame.flip(true,false);
 
-        float tX = x-15f, tY = y-17f;
+        float tX = x+adjustX, tY = y+adjustY;
         if(direction.equals("LEFT")) tX -= 17f;
         batch.draw(currentFrame, tX, tY, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
     }
