@@ -1,10 +1,8 @@
 package com.mpt.platform;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -15,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
 import com.mpt.modules.MusicModule;
 import com.mpt.objects.endpoint.Endpoint;
@@ -23,12 +20,11 @@ import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.KillBlock;
 import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.mpt.constants.Constants.DEBUGGING;
 import static com.mpt.constants.Constants.PPM;
@@ -53,6 +49,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private ArrayList<Box> boxes;
     private ArrayList<Ladder> ladders;
     private ArrayList<Coin> coins;
+    private ArrayList<KillBlock> killBlocks;
     private InputMultiplexer inputMultiplexer;
 
     private int screenWidth, screenHeight;
@@ -65,6 +62,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         boxes = new ArrayList<>();
         ladders = new ArrayList<>();
         coins = new ArrayList<>();
+        killBlocks = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         preferencesHandler = new PreferencesHandler();
@@ -121,6 +119,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         for(Enemy enemy : enemies) {enemy.render(batch);}
         for(Box box : boxes) box.render(batch);
         for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
+        for(KillBlock killBlock : killBlocks) killBlock.render(batch);
+
         batch.end();
 
         screenViewport.apply();
@@ -268,6 +268,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void addBox(Box box) {boxes.add(box);}
     public void addLadder(Ladder ladder) { ladders.add(ladder);}
     public void addCoin(Coin coin) {coins.add(coin);}
+    public void addKillBlock(KillBlock killBlock) {killBlocks.add(killBlock);}
     public Player getPlayer() {
         return player;
     }

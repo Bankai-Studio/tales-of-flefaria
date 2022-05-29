@@ -5,16 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.handlers.AnimationHandler;
 import com.mpt.handlers.CombatHandler;
-import com.mpt.handlers.MapHandler;
 import com.mpt.objects.player.Player;
 import com.mpt.objects.GameEntity;
 import com.mpt.platform.GameScreen;
-
-import javax.swing.*;
 
 import static com.mpt.constants.Constants.PPM;
 
@@ -116,6 +112,7 @@ public abstract class Enemy extends GameEntity {
             animationHandler.setCurrent("attack", false);
         }
     }
+
 
     public void enemyMovements() {
         if (!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {

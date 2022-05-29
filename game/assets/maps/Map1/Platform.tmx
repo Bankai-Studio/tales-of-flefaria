@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="135">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="184">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="2" name="BackgroundAssets" width="150" height="50">
@@ -59,7 +59,7 @@
   <object id="39" x="1696" y="1184">
    <polygon points="0,0 0,32 96,32 128,32 128,0"/>
   </object>
-  <object id="54" name="Checkpoint" x="864" y="1152" width="32" height="64"/>
+  <object id="54" name="Checkpoint" x="830" y="1150.67" width="32" height="64"/>
   <object id="57" name="Checkpoint" x="2752" y="1056" width="32" height="64"/>
   <object id="45" name="Player" x="32" y="1280" width="22" height="30"/>
   <object id="60" x="736" y="1376">
@@ -180,7 +180,7 @@
   <object id="120" name="Coin" x="1754" y="1120" width="16" height="16"/>
   <object id="121" name="Coin" x="1228" y="1104" width="16" height="16"/>
   <object id="122" name="Coin" x="1487" y="1265" width="16" height="16"/>
-  <object id="123" name="Coin" x="813" y="1160" width="16" height="16"/>
+  <object id="123" name="Coin" x="802.333" y="1157.33" width="16" height="16"/>
   <object id="124" name="Coin" x="2213" y="1220" width="16" height="16"/>
   <object id="125" name="Coin" x="2470" y="1156" width="16" height="16"/>
   <object id="126" name="Coin" x="2697" y="1085" width="16" height="16"/>
@@ -191,6 +191,24 @@
   <object id="132" name="Coin" x="4585" y="1171" width="16" height="16"/>
   <object id="133" name="Coin" x="4512" y="917" width="16" height="16"/>
   <object id="134" name="Coin" x="4374" y="795" width="16" height="16"/>
+  <object id="160" name="KillBlock" x="3526.33" y="1249.33" width="19.3333" height="30.6667"/>
+  <object id="164" name="KillBlock" x="3584" y="1248" width="19.3333" height="30.6667"/>
+  <object id="165" name="KillBlock" x="3911.33" y="1376.67" width="19.3333" height="30.6667"/>
+  <object id="166" name="KillBlock" x="3973.33" y="1536" width="19.3333" height="30.6667"/>
+  <object id="167" name="KillBlock" x="4008.67" y="1440.67" width="19.3333" height="30.6667"/>
+  <object id="168" name="KillBlock" x="3941.33" y="1440" width="19.3333" height="30.6667"/>
+  <object id="169" name="KillBlock" x="4043.33" y="1376" width="19.3333" height="30.6667"/>
+  <object id="170" name="KillBlock" x="2530.67" y="1152" width="19.3333" height="30.6667"/>
+  <object id="172" name="KillBlock" x="1823.33" y="1282" width="19.3333" height="30.6667"/>
+  <object id="173" name="KillBlock" x="801" y="1504.67" width="30.6666" height="30.6667"/>
+  <object id="175" name="KillBlock" x="841.333" y="1440" width="19.3333" height="30.6667"/>
+  <object id="176" name="KillBlockUp" x="808" y="1246.67" width="16" height="29.3334"/>
+  <object id="178" name="KillBlock" x="544" y="1280" width="19.3333" height="30.6667"/>
+  <object id="179" name="KillBlock" x="774" y="1440" width="19.3333" height="30.6667"/>
+  <object id="180" name="KillBlockUp" x="1184.67" y="1214.67" width="15.3333" height="31.3333"/>
+  <object id="181" name="KillBlockUp" x="1253.33" y="1214" width="15.3333" height="30"/>
+  <object id="182" name="KillBlockUp" x="1497.33" y="1184" width="15.3333" height="30"/>
+  <object id="183" name="KillBlockUp" x="3967" y="1184" width="19.3333" height="30.6667"/>
  </objectgroup>
  <layer id="5" name="BackgroundNature" width="150" height="50">
   <data encoding="base64" compression="zlib">

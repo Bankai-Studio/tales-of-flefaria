@@ -21,6 +21,7 @@ import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.KillBlock;
 import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
@@ -145,6 +146,20 @@ public class MapHandler {
                             gameScreen.getWorld()
                     );
                     gameScreen.addCoin(new Coin(rectangle.getWidth(), rectangle.getHeight(), body));
+                }
+                if(rectangleName.equals("KillBlock") || rectangleName.equals("KillBlockUp")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            true,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    gameScreen.addKillBlock(new KillBlock(rectangle.getWidth(), rectangle.getHeight(), body,rectangleName));
                 }
                 if(rectangleName.equals("Centipede")) {
                     Body body = createEnemyBody(rectangle);

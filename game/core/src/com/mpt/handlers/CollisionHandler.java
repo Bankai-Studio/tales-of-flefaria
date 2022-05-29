@@ -5,10 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.MusicModule;
-import com.mpt.objects.GameObject;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.endpoint.Endpoint;
+import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.KillBlock;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 import com.mpt.platform.LoadingScreen;
@@ -49,6 +50,10 @@ public class CollisionHandler implements ContactListener {
             collectCoin(fixtureA, fixtureB);
         if(fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Coin)
             collectCoin(fixtureB, fixtureA);
+        if(fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof KillBlock)
+            collisionKillBlock(fixtureA);
+        if(fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof KillBlock)
+            collisionKillBlock(fixtureB);
         if(fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Endpoint)
             endLevel(fixtureA, fixtureB);
         if(fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Endpoint)
@@ -74,6 +79,12 @@ public class CollisionHandler implements ContactListener {
             MusicModule.getCollectCoinSound().play();
             player.setCollectedCoins(player.getCollectedCoins() + 1);
         }
+    }
+    private void collisionKillBlock(Fixture fixtureA){
+        Player player = (Player) fixtureA.getBody().getUserData();
+        player.setPlayerState(Player.State.DYING);
+        player.getPlayerAnimations().setCurrent("death");
+
     }
 
     private void endLevel(Fixture fixtureA, Fixture fixtureB) {

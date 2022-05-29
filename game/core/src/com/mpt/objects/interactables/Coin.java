@@ -1,7 +1,6 @@
 package com.mpt.objects.interactables;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,7 +12,7 @@ import com.mpt.objects.GameObject;
 import static com.mpt.constants.Constants.PPM;
 
 public class Coin extends GameObject {
-    private AnimationHandler animationHandler = new AnimationHandler();
+    private final AnimationHandler animationHandler = new AnimationHandler();
     private boolean isCollected;
     public Coin(float width, float height, Body body) {
         super(width, height, body);
