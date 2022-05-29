@@ -159,7 +159,7 @@ public class MapHandler {
                             0f,
                             gameScreen.getWorld()
                     );
-                    gameScreen.addKillBlock(new KillBlock(rectangle.getWidth(), rectangle.getHeight(), body,rectangleName));
+                    gameScreen.addKillBlock(new KillBlock(rectangle.getWidth(), rectangle.getHeight(), body, rectangleName));
                 }
                 if(rectangleName.equals("Centipede")) {
                     Body body = createEnemyBody(rectangle);
