@@ -106,6 +106,7 @@ public class MovementHandler {
 
         if (!player.getPlayerState().equals(State.DYING)) checkUserInput();
         else if (player.getPlayerAnimations().isFinished()) player.checkPlayerDeath();
+        else  player.getBody().setLinearVelocity(0, player.getBody().getLinearVelocity().y);
     }
 
     private void checkUserInput() {
@@ -117,6 +118,7 @@ public class MovementHandler {
             player.setPlayerState(State.CLIMBING);
             playerAnimations.setCurrent("climb");
             player.setPlayerSpeed(CLIMBING_SPEED);
+            jumpCounter = 0;
         }
 
         if (player.getState().equals(State.CLIMBING)) {
