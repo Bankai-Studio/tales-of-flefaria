@@ -11,12 +11,14 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mpt.handlers.*;
 import com.mpt.modules.MusicModule;
+import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.checkpoint.Checkpoint;
@@ -43,6 +45,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private Player player;
     private ArrayList<Enemy> enemies;
     private ArrayList<Checkpoint> checkpoints;
+    private Endpoint endpoint;
     private ExtendViewport extendViewport;
     private ScreenViewport screenViewport;
     private MovementHandler movementHandler;
@@ -50,7 +53,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private ArrayList<Box> boxes;
     private ArrayList<Ladder> ladders;
     private ArrayList<Coin> coins;
-    //private BitmapFont font;
+    private InputMultiplexer inputMultiplexer;
 
     private int screenWidth, screenHeight;
 
@@ -70,7 +73,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         screenHeight = Gdx.graphics.getHeight();
 
         mapHandler = new MapHandler(this);
-        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map3");
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map1");
 
         extendViewport = new ExtendViewport(30 * PPM, 20 * PPM);
         camera = (OrthographicCamera) extendViewport.getCamera();
@@ -80,9 +83,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         stage = new Stage(screenViewport, batch);
         setupInterface();
 
+        inputMultiplexer = new InputMultiplexer(this, stage);
+
         movementHandler = new MovementHandler(player, this);
 
-        world.setContactListener(new CollisionHandler(preferencesHandler));
+        world.setContactListener(new CollisionHandler(preferencesHandler, this));
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
@@ -143,38 +148,56 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(this);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        stage.addAction(Actions.fadeIn(1f));
     }
 
     @Override
     public void hide() {
         Gdx.input.setInputProcessor(null);
+        stage.addAction(Actions.fadeOut(1f));
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A)
+        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             movementHandler.leftPressed();
-        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)
+            return true;
+        }
+        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             movementHandler.rightPressed();
-        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP)
+            return true;
+        }
+        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP) {
             movementHandler.spacePressed();
-        if(keycode == Input.Keys.SHIFT_LEFT)
+            return true;
+        }
+        if(keycode == Input.Keys.SHIFT_LEFT) {
             movementHandler.shiftPressed();
-        return true;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A)
+        if(keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             movementHandler.leftReleased();
-        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)
+            return true;
+        }
+        if(keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             movementHandler.rightReleased();
-        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP)
+            return true;
+        }
+        if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP) {
             movementHandler.spaceReleased();
-        if(keycode == Input.Keys.SHIFT_LEFT)
+            return true;
+        }
+        if(keycode == Input.Keys.SHIFT_LEFT) {
             movementHandler.shiftReleased();
-        return true;
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -230,13 +253,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return preferencesHandler;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public void setEndpoint(Endpoint endpoint) {this.endpoint = endpoint;}
 
     public void addEnemy(Enemy enemy) {
         enemies.add(enemy);
@@ -247,6 +268,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void addBox(Box box) {boxes.add(box);}
     public void addLadder(Ladder ladder) { ladders.add(ladder);}
     public void addCoin(Coin coin) {coins.add(coin);}
+    public Player getPlayer() {
+        return player;
+    }
     public ArrayList<Box> getBoxes(){return boxes;}
     public ArrayList<Ladder> getLadders(){return ladders;}
     public ArrayList<Coin> getCoins(){return coins;}
