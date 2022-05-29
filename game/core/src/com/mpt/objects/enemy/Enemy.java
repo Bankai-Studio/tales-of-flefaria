@@ -140,7 +140,7 @@ public abstract class Enemy extends GameEntity{
     }
 
     public boolean playerSpotted(Player player) {
-        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f;
+        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 3f;
         return playerHasBeenSpotted;
     }
 
