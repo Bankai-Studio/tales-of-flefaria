@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="234">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="245">
  <tileset firstgid="1" source="imaggini.tsx"/>
  <tileset firstgid="123" source="../Map4/Tileset.tsx"/>
  <layer id="2" name="Bekround" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt2MlOwzAQANB8GBf25VDO3CIuVBxBQoWvh4giTGhLTMfZ+p4UxUriyUieuK6rCgAAAAAAAAAAAAAAAAAAAAAAAABgu4f1+TK5dpG0l0m73tD/PGmffRyne+ZztSGfLn2eM9/zsj4vW9fvM+PQv+uhE6CzVfU9XvWAeUzVXaG4x4GxboKe+cscvvvbf977kvO7uEupuhqbp+qzbtLaeczo32VMUm+Zz89N6bpqxmNR/VzvNeu/dHwX1e9xq8umNXu530F0jEOZryK8Dp3AhETXVeS6aooi5olIUfnkxjFf5Rtb7ezSd67NGidq7c/4RdZXE2vffVm2a//nm9I8FqWpr5OhkyhgNXQCUNCh71fBFBz1/L72njlAhHchUBbM
+   eJzt2MlOwzAQAFB/GBe2shzKmVvEBcQRJFT4erAIIqRqwXTcLH1PqtwlmYw6E9d1SgAAAAAAAAAAAAAAAAAAAAAAAAAAm92340VArLOPx+mOMS7bsSSffM5z4XVe2vGh9/5dYRzKLHqvu99/03l+viXGVVg21LZK3/VqBsxjqm4rxT0OjHUddMxv5nDf3/zzsy8Rv9NZrb4am6f02Tfd3nksOP8vNel6Kzx+bmr3Va7HMv1c7+X1X7e+y7Ret6ZuWrNXeh9ExziU+SrC69AJTEh0X0Wuq6YoYp6IFJVPaRzzVbmx9c42+841r3Gi1v6MX2R/5Vi77suyWf8/35TmsSi5v06GTqKC1dAJQEWHvl8FU3C05+v198wBIrwD/zQWzA==
   </data>
  </layer>
  <objectgroup id="4" name="TileObjects"/>
@@ -102,9 +102,6 @@
   <object id="32" x="2048" y="1152">
    <polygon points="0,0 32,0 32,448 0,448"/>
   </object>
-  <object id="33" x="2080" y="1120">
-   <polygon points="0,0 800,0 800,480 0,480"/>
-  </object>
   <object id="34" x="1984" y="1056">
    <polygon points="0,0 0,32 -64,32 -64,0 -32,0"/>
   </object>
@@ -173,27 +170,6 @@
   </object>
   <object id="60" x="3744" y="1376">
    <polygon points="0,0 32,0 32,224 0,224"/>
-  </object>
-  <object id="64" x="3968" y="1312">
-   <polygon points="0,0 32,-32 32,-160 0,-192"/>
-  </object>
-  <object id="65" x="3840" y="1120">
-   <polygon points="0,0 0,192 128,192 128,0"/>
-  </object>
-  <object id="66" x="3680" y="1120">
-   <polygon points="0,0 0,64 32,64 32,0"/>
-  </object>
-  <object id="67" x="3712" y="1120">
-   <polygon points="0,0 0,96 32,96 32,0 0,0"/>
-  </object>
-  <object id="68" x="3744" y="1120">
-   <polygon points="0,0 0,128 64,128 64,32 64,0"/>
-  </object>
-  <object id="69" x="3808" y="1120">
-   <polygon points="0,0 32,0 32,160 0,160"/>
-  </object>
-  <object id="70" x="4128" y="1120">
-   <polygon points="0,0 0,480 -32,480 -32,32"/>
   </object>
   <object id="80" x="3424" y="992">
    <polygon points="0,0 0,32 32,32 32,0"/>
@@ -330,12 +306,12 @@
   <object id="167" name="Coin" x="1834" y="955" width="16" height="16"/>
   <object id="168" name="Coin" x="1949" y="1019" width="16" height="16"/>
   <object id="169" name="Coin" x="2108" y="1075" width="16" height="16"/>
-  <object id="170" name="Coin" x="2269" y="1053" width="16" height="16"/>
-  <object id="171" name="Coin" x="2349" y="1059" width="16" height="16"/>
-  <object id="172" name="Coin" x="2441" y="1059" width="16" height="16"/>
-  <object id="174" name="Coin" x="2546" y="1060" width="16" height="16"/>
-  <object id="175" name="Coin" x="2659" y="1051" width="16" height="16"/>
-  <object id="176" name="Coin" x="2743" y="1051" width="16" height="16"/>
+  <object id="170" name="Coin" x="2285.67" y="1083" width="16" height="16"/>
+  <object id="171" name="Coin" x="2365.67" y="1089" width="16" height="16"/>
+  <object id="172" name="Coin" x="2457.67" y="1089" width="16" height="16"/>
+  <object id="174" name="Coin" x="2562.67" y="1090" width="16" height="16"/>
+  <object id="175" name="Coin" x="2675.67" y="1081" width="16" height="16"/>
+  <object id="176" name="Coin" x="2759.67" y="1081" width="16" height="16"/>
   <object id="177" name="Coin" x="2891" y="1026" width="16" height="16"/>
   <object id="178" name="Coin" x="2986" y="1000" width="16" height="16"/>
   <object id="179" name="Coin" x="3139" y="1020" width="16" height="16"/>
@@ -373,24 +349,51 @@
   <object id="212" name="KillBlock" x="675.667" y="1535.67" width="30.6666" height="30.6667"/>
   <object id="213" name="KillBlock" x="720.667" y="1535.67" width="30.6666" height="30.6667"/>
   <object id="216" name="Player" x="192" y="1117" width="22" height="30"/>
-  <object id="218" name="Box" x="2339" y="1090.5" width="30" height="30"/>
   <object id="219" name="Box" x="3805" y="1090.33" width="30" height="30"/>
   <object id="222" name="Snake" x="191.5" y="1263.5" width="32" height="17"/>
   <object id="224" name="Snake" x="3632.67" y="1290" width="32" height="17"/>
   <object id="226" name="BigBloated" x="1248" y="1216" width="32" height="32"/>
-  <object id="228" name="BigBloated" x="2432" y="1088" width="32" height="32"/>
+  <object id="228" name="BigBloated" x="2448.67" y="1118" width="32" height="32"/>
   <object id="230" name="Box" x="1090" y="1215" width="30" height="30"/>
   <object id="231" name="Box" x="432" y="1250" width="30" height="30"/>
   <object id="232" x="3200" y="1024">
    <polygon points="0,0 32,0 32,32 0,32"/>
   </object>
-  <object id="233" name="Ladder" x="4064" y="1152">
-   <polygon points="0,0 32,0 32,192 0,192"/>
+  <object id="234" x="2080" y="1120">
+   <polygon points="0,0 224,0 224,480 0,480"/>
+  </object>
+  <object id="235" x="2304" y="1152">
+   <polygon points="0,0 448,0 448,448 0,448"/>
+  </object>
+  <object id="236" x="2752" y="1120">
+   <polygon points="0,0 128,0 128,480 0,480"/>
+  </object>
+  <object id="237" name="Ladder" x="4064" y="1152" width="32" height="192"/>
+  <object id="238" x="3968" y="1120">
+   <polygon points="0,0 32,32 -288,32 -288,0"/>
+  </object>
+  <object id="239" x="3680" y="1152">
+   <polygon points="0,0 0,32 320,32 320,0"/>
+  </object>
+  <object id="240" x="3712" y="1184">
+   <polygon points="0,0 0,32 288,32 288,0"/>
+  </object>
+  <object id="241" x="3744" y="1216">
+   <polygon points="0,0 0,32 256,32 256,0"/>
+  </object>
+  <object id="242" x="3808" y="1248">
+   <polygon points="0,0 0,32 192,32 192,0"/>
+  </object>
+  <object id="243" x="4000" y="1280">
+   <polygon points="0,0 -32,32 -160,32 -160,0"/>
+  </object>
+  <object id="244" x="4128" y="1120">
+   <polygon points="0,0 -32,32 -32,480 0,480"/>
   </object>
  </objectgroup>
  <layer id="1" name="PlatformMap" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmMtOwzAQRfOp/EeLkFi0ILGABWLDozuWZdXvIxaxZI0S2+NXnHKONKoa2cnYvr7jZBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAm5zE+1k4CFrmWtbmWcUAdfPqI1Q5eth5z8/45xqlxHgafBnI1gr4AtkmKH+3GODqxn+J5jMsY9861vWizF+2/p7hMv6bvbeJYduL+ofvI9m4+dgw/os9ZjOso/sv2OZi1+Rry68UW/Flqqka8DnG6kHm9ifs8BPq8ROTyKPocAu1DzwwR0kBv9V/urVRPCM1raX3F5DmnqePftVOof0hbWl2ZnLWetVO29xHjcblnZunRJfZVS13FaGtJU1pt3S301+oqRVsHRdsa2BpkzwLvU1ymX3smKOkF8vm+NVxDW08R/Y22Yjx6zrtSdKXRljun7jlPrq0N9+zqPi/nTDrmelNyvTSetZamQtqK0ZWrr1jvsvEjSobGr2Pmt5T/91R/NOfj1vUvVlsxZ2+prVbny9Bal9yrqfWn5nq1HH+N+UvRfIq+tPPgq4Vn5b1KrKMcS+n6p9V6D17lyzcnv5jaaL9zpehgaa1rzKlGV63W1Ket3nQl5zA3P5935Xq1uffct9Ua/q/5LlPbq0J59VQDZa72vahUflZf5n1M824dCukjNfepT1vWd1tqao05+C/helYtr3JjyR/W0NNcTr161RbD7tdW+7RHf7A1Bk1td07dc0Kpek5sL34BqVdulA==
+   eJztmMtqwzAQRf2p/Y+kFLJIWuiiXYRu+siuy2SV76tNLVAHWxo9LafnwBAIkj3SXN+R3XUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFCScx8fSycBs9xKbW5lHVAGlz602sHLlmNq3z/7OFXOY8ClgVSNoC+AdRLjR5s+DlZsx3hJyGMzzt/1cZ9wja0VvuvI8cP9v8fYjf9dxJyzNV6u/zAxPoWhNl9der9Ygz9LTc2FrNW1+1svO+TcY6fThczrTVzn0TPnVbGOJzFn7xnvu6cPnwZa6/+y3rGe4NvXnHFU5jmlqcPvfyfffJ+2QnU15BzqWZvA8S40Hpd6ZpYeneO5qqkrjbbmNBWqrYeZ+aG6itHWPmBsCUwPMv3lfYzr+Gt6TE4vkPd31XAJbT0r5g/a0nj0lHfF6CpEW/ae2mcHWVsT9jnCvl/KmbTP9S5nvUI8aylN+bSl0ZWtL613mbiIlhHi15r9zeX/LfWfkPNx7f6n1Zbm7C21Vet86at1zmc1tv+UrFfN9ZfYvxjNx+grdB9cvfAceK0cdZRryd3/QrXegle58k3JT9MbzXeuGB3M1brEnoboqlZNXdpqTVdyD1Pzc3lXqlcP1576tlrC/0O+y5T2Kl9eLfVAmat5L8qVn9GX+e6vfbf2hfSRks+pS1vGd2tqaok9+C9he1Ypr7Jjzh+W0NNUTq161RrDPK+1ntMW/cH0GDS13j21zwm5+jmxvvgBw+pm9g==
   </data>
  </layer>
 </map>
