@@ -1,18 +1,26 @@
 package com.mpt.handlers;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.MusicModule;
+import com.mpt.objects.GameObject;
 import com.mpt.objects.checkpoint.Checkpoint;
+import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.interactables.Coin;
 import com.mpt.objects.player.Player;
+import com.mpt.platform.GameScreen;
+import com.mpt.platform.LoadingScreen;
 
 public class CollisionHandler implements ContactListener {
 
     PreferencesHandler preferencesHandler;
+    GameScreen gameScreen;
 
-    public CollisionHandler(PreferencesHandler preferencesHandler) {
+    public CollisionHandler(PreferencesHandler preferencesHandler, GameScreen gameScreen) {
         this.preferencesHandler = preferencesHandler;
+        this.gameScreen = gameScreen;
     }
 
     @Override
@@ -24,10 +32,7 @@ public class CollisionHandler implements ContactListener {
     }
 
     @Override
-    public void endContact(Contact contact) {
-        //Fixture fixtureA = contact.getFixtureA();
-        //Fixture fixtureB = contact.getFixtureB();
-    }
+    public void endContact(Contact contact) {}
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {}
@@ -44,6 +49,10 @@ public class CollisionHandler implements ContactListener {
             collectCoin(fixtureA, fixtureB);
         if(fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Coin)
             collectCoin(fixtureB, fixtureA);
+        if(fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Endpoint)
+            endLevel(fixtureA, fixtureB);
+        if(fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Endpoint)
+            endLevel(fixtureB, fixtureA);
     }
 
     private void setNewCheckpoint(Fixture fixtureA, Fixture fixtureB) {
@@ -66,4 +75,11 @@ public class CollisionHandler implements ContactListener {
             player.setCollectedCoins(player.getCollectedCoins() + 1);
         }
     }
+
+    private void endLevel(Fixture fixtureA, Fixture fixtureB) {
+        Player player = (Player) fixtureA.getBody().getUserData();
+        Endpoint endpoint = (Endpoint) fixtureB.getBody().getUserData();
+        ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen());
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.mpt.modules;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
@@ -23,6 +24,8 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
     protected final TextButton.TextButtonStyle textButtonStyle;
     protected final Texture menuBackground = new Texture("menuAssets/backgrounds/MenuBackground.png");
 
+    protected final InputMultiplexer inputMultiplexer;
+
     public InterfaceModule() {
         titleStyle = setupFont(72, Color.WHITE, titleFreeTypeFontGenerator);
         subTitleStyle = setupFont(36, Color.WHITE, textFreeTypeFontGenerator);
@@ -32,6 +35,8 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = subTitleStyle.font;
         textButtonStyle.fontColor = Color.WHITE;
+
+        inputMultiplexer = new InputMultiplexer(stage, this);
     }
 
     @Override
@@ -51,7 +56,7 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
     @Override
     public void show() {
         super.show();
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     @Override
