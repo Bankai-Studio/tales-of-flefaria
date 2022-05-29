@@ -10,6 +10,8 @@ public abstract class GameEntity {
     public int health, minDamage, maxDamage;
     protected float width, height;
     protected Body body;
+    protected float adjustX;
+    protected float adjustY;
 
     public GameEntity(float width, float height, Body body) {
         x = body.getPosition().x;

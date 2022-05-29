@@ -84,9 +84,10 @@ public abstract class Enemy extends GameEntity {
         if (direction.equals("RIGHT") && !currentFrame.isFlipX()) currentFrame.flip(true, false);
         if (direction.equals("LEFT") && currentFrame.isFlipX()) currentFrame.flip(true, false);
 
-        float tX = body.getPosition().x * PPM - 35f;
-        float tY = body.getPosition().y * PPM - 12f;
+        float tX = body.getPosition().x * PPM + adjustX;
+        float tY = body.getPosition().y * PPM + adjustY;
         if (enemyName.equals("Scorpio") && direction.equals("RIGHT")) tX += 25f;
+        if (enemyName.equals("Snake") && direction.equals("RIGHT")) tX += 25f;
         batch.draw(currentFrame, tX, tY);
     }
 

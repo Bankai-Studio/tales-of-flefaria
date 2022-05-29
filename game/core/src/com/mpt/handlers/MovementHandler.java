@@ -21,7 +21,7 @@ public class MovementHandler {
     // Constants
 
     private final float DEFAULT_SPEED = 8f;
-    private final float CLIMBING_SPEED = 4f;
+
     // Input Keys
     enum InputKeys {
         LEFT,
@@ -41,6 +41,7 @@ public class MovementHandler {
     private final float staminaRegenTime;
     private final GameScreen gameScreen;
     private boolean jumpedFromBox = false;
+    private float fallingStartingY;
     static Map<InputKeys, Boolean> inputKeys = new HashMap<>();
 
     static {
@@ -106,17 +107,17 @@ public class MovementHandler {
 
         if (!player.getPlayerState().equals(State.DYING)) checkUserInput();
         else if (player.getPlayerAnimations().isFinished()) player.checkPlayerDeath();
-        else  player.getBody().setLinearVelocity(0, player.getBody().getLinearVelocity().y);
+        else player.getBody().setLinearVelocity(0, player.getBody().getLinearVelocity().y);
     }
 
     private void checkUserInput() {
         AnimationHandler playerAnimations = player.getPlayerAnimations();
 
         if (playerAnimations.isFinished() && player.getState() == State.JUMPING && jumpedFromBox) jumpedFromBox = false;
-
         if (isPlayerNearALadder(player.getBody().getPosition()) && player.getState() != State.HURT && player.getState() != State.DYING && (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP))) {
             player.setPlayerState(State.CLIMBING);
             playerAnimations.setCurrent("climb");
+            float CLIMBING_SPEED = 4f;
             player.setPlayerSpeed(CLIMBING_SPEED);
             jumpCounter = 0;
         }
@@ -127,6 +128,7 @@ public class MovementHandler {
         }
 
         if (player.getBody().getLinearVelocity().y != 0 && !isPlayerNearABox(player.getBody().getPosition()) && player.getState() != State.JUMPING && player.getState() != State.FALLING && player.getState() != State.ATTACKING && player.getState() != State.DYING && player.getState() != State.HURT) {
+            fallingStartingY = player.getBody().getPosition().y;
             player.setPlayerState(State.FALLING);
             playerAnimations.setCurrent("fall", false);
         }
@@ -180,6 +182,7 @@ public class MovementHandler {
                     playerAnimations.setCurrent("jump", false);
                     player.setPlayerState(State.JUMPING);
 
+                    fallingStartingY = player.getBody().getPosition().y;
                     float force = player.getBody().getMass() * 9;
                     player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, 0);
                     player.getBody().applyLinearImpulse(new Vector2(0, force), player.getBody().getPosition(), true);
@@ -229,6 +232,7 @@ public class MovementHandler {
                     playerAnimations.setCurrent("idle");
                     player.setPlayerState(State.IDLE);
                 }
+                fallingDamage();
             } else wasLastFrameYVelocityZero = true;
         } else wasLastFrameYVelocityZero = false;
 
@@ -251,12 +255,12 @@ public class MovementHandler {
 
         if ((Gdx.input.isKeyPressed(Input.Keys.SPACE))) {
             player.setPlayerState(State.JUMPING);
-            player.getPlayerAnimations().setCurrent("jump",false);
+            player.getPlayerAnimations().setCurrent("jump", false);
             player.setPlayerSpeed(DEFAULT_SPEED);
         }
-        if(!isPlayerNearALadder(player.getBody().getPosition())){
+        if (!isPlayerNearALadder(player.getBody().getPosition())) {
             player.setPlayerState(State.FALLING);
-            player.getPlayerAnimations().setCurrent("fall",false);
+            player.getPlayerAnimations().setCurrent("fall", false);
             player.setPlayerSpeed(DEFAULT_SPEED);
         }
 
@@ -268,7 +272,7 @@ public class MovementHandler {
             player.setVelocityX(1);
             player.getPlayerAnimations().setStopped(false);
         }
-        if (inputKeys.get(InputKeys.LEFT) && inputKeys.get(InputKeys.RIGHT)){
+        if (inputKeys.get(InputKeys.LEFT) && inputKeys.get(InputKeys.RIGHT)) {
             player.setVelocityX(0);
             player.getPlayerAnimations().setStopped(true);
         }
@@ -277,9 +281,9 @@ public class MovementHandler {
             player.getPlayerAnimations().setStopped(false);
         }
         if ((Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN))) {
-            if(isTheLadderOver(player.getBody().getPosition())){
+            if (isTheLadderOver(player.getBody().getPosition())) {
                 player.setPlayerState(State.FALLING);
-                player.getPlayerAnimations().setCurrent("fall",false);
+                player.getPlayerAnimations().setCurrent("fall", false);
                 player.setPlayerSpeed(DEFAULT_SPEED);
             }
             player.setVelocityY(-1);
@@ -334,14 +338,32 @@ public class MovementHandler {
         return nearEnemies;
     }
 
-    private boolean isTheLadderOver(Vector2 playerPosition){
+    private boolean isTheLadderOver(Vector2 playerPosition) {
         ArrayList<Ladder> ladders = gameScreen.getLadders();
         for (Ladder ladder : ladders) {
             Vector2 ladderPosition = ladder.getBody().getPosition();
             if (Math.abs(playerPosition.x - ladderPosition.x) < ladder.getWidth() / 2 / PPM)
-                if((ladderPosition.y - ladder.getHeight() / 2 / PPM - 0.02f < playerPosition.y - player.getHeight() / 2 / PPM) && (ladderPosition.y - ladder.getHeight() / 2 / PPM + 0.02f > playerPosition.y - player.getHeight() / 2 / PPM))
-                return true;
+                if ((ladderPosition.y - ladder.getHeight() / 2 / PPM - 0.02f < playerPosition.y - player.getHeight() / 2 / PPM) && (ladderPosition.y - ladder.getHeight() / 2 / PPM + 0.02f > playerPosition.y - player.getHeight() / 2 / PPM))
+                    return true;
         }
         return false;
+    }
+
+    private void fallingDamage() {
+        float distance = player.getBody().getPosition().y - fallingStartingY;
+        if (distance < -5f) {
+            float damage = -distance + 5f + (float) Math.pow(1.15, -distance + 5f);
+            float health = player.getHealth() - damage;
+            player.setPlayerHealth((int) health);
+            System.out.println(player.getHealth());
+            if (health <= 0) {
+                player.setPlayerState(Player.State.DYING);
+                player.getPlayerAnimations().setCurrent("death", false);
+            } else {
+                player.setPlayerState(Player.State.HURT);
+                player.getPlayerAnimations().setCurrent("hurt", false);
+            }
+        }
+        fallingStartingY = 0;
     }
 }
