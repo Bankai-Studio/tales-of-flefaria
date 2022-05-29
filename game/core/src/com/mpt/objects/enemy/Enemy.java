@@ -18,7 +18,7 @@ import javax.swing.*;
 
 import static com.mpt.constants.Constants.PPM;
 
-public abstract class Enemy extends GameEntity{
+public abstract class Enemy extends GameEntity {
 
     private boolean distanceToAttackPlayer;
     private float initialPosX; //initial xPos of slime
@@ -35,6 +35,7 @@ public abstract class Enemy extends GameEntity{
     protected float walkSpeed;
     private float attackTimer = 0f;
     private final float ATTACK_DELAY = 1f;
+
     // Enemy States
     public enum EnemyState {
         IDLE,
@@ -43,10 +44,12 @@ public abstract class Enemy extends GameEntity{
         DYING,
         HURT
     }
+
     protected EnemyState enemyState;
     protected String direction;
     protected String enemyName;
     protected final AnimationHandler animationHandler;
+
     public Enemy(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
         initialPosX = body.getPosition().x; //initial position of enemy
@@ -59,40 +62,41 @@ public abstract class Enemy extends GameEntity{
         animationHandler = new AnimationHandler();
         enemyState = EnemyState.IDLE;
     }
+
     @Override
     public void update(float delta) {
         attackTimer += Gdx.graphics.getDeltaTime();
-        if(enemyState != EnemyState.DYING){
-            if(animationHandler.isFinished() && (enemyState.equals(EnemyState.HURT) || enemyState.equals(EnemyState.ATTACKING))) {
-                if(enemyState.equals(EnemyState.ATTACKING)){
+        if (enemyState != EnemyState.DYING) {
+            if (animationHandler.isFinished() && (enemyState.equals(EnemyState.HURT) || enemyState.equals(EnemyState.ATTACKING))) {
+                if (enemyState.equals(EnemyState.ATTACKING)) {
+                    if (enemyReadyToAttack(gameScreen.getPlayer())) CombatHandler.attack(this, gameScreen.getPlayer());
                     attackTimer = 0;
-                    CombatHandler.attack(this, gameScreen.getPlayer());
                 }
                 enemyState = EnemyState.IDLE;
                 animationHandler.setCurrent("idle");
             }
             if (!playerSpotted(gameScreen.getPlayer())) enemyMovements();
             else lurkTarget(gameScreen.getPlayer());
-        }
-        else body.setLinearVelocity(0, body.getLinearVelocity().y);
+        } else body.setLinearVelocity(0, body.getLinearVelocity().y);
 
     }
+
     @Override
     public void render(SpriteBatch batch) {
         TextureRegion currentFrame = animationHandler.getFrame();
 
-        if(direction.equals("RIGHT") && !currentFrame.isFlipX()) currentFrame.flip(true,false);
-        if(direction.equals("LEFT") && currentFrame.isFlipX()) currentFrame.flip(true,false);
+        if (direction.equals("RIGHT") && !currentFrame.isFlipX()) currentFrame.flip(true, false);
+        if (direction.equals("LEFT") && currentFrame.isFlipX()) currentFrame.flip(true, false);
 
-        float tX=body.getPosition().x * PPM - 35f;
-        float tY=body.getPosition().y * PPM - 12f;
-        if(enemyName.equals("Scorpio") && direction.equals("RIGHT")) tX+=25f;
+        float tX = body.getPosition().x * PPM - 35f;
+        float tY = body.getPosition().y * PPM - 12f;
+        if (enemyName.equals("Scorpio") && direction.equals("RIGHT")) tX += 25f;
         batch.draw(currentFrame, tX, tY);
     }
 
 
     private void checkPlayerDeath() {
-        if(enemyState.equals(EnemyState.DYING)) {
+        if (enemyState.equals(EnemyState.DYING)) {
             //body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
             enemyState = EnemyState.IDLE;
             //animationHandler.setCurrent("idle");
@@ -100,20 +104,21 @@ public abstract class Enemy extends GameEntity{
     }
 
     private void respawnOnVoidPosition() {
-        if(body.getPosition().y < 0){
-            enemyState= EnemyState.DYING;
+        if (body.getPosition().y < 0) {
+            enemyState = EnemyState.DYING;
             //animationHandler.setCurrent("death", false);
         }
     }
 
     public void enemyAttackPlayer(Player player) {
-        if (enemyReadyToAttack(player) && !enemyState.equals(EnemyState.HURT)  && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING)) {
+        if (enemyReadyToAttack(player) && !enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING)) {
             enemyState = EnemyState.ATTACKING;
             animationHandler.setCurrent("attack", false);
         }
     }
-    public void enemyMovements(){
-        if(!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
+
+    public void enemyMovements() {
+        if (!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
             enemyState = EnemyState.WALKING;
             animationHandler.setCurrent("walk");
         }
@@ -121,19 +126,17 @@ public abstract class Enemy extends GameEntity{
         xMaxLimitDX = initialPosX + 2.4f;
         xMaxLimitSX = initialPosX - 5f;
         switchDirectionToRight = true;
-        if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight){
+        if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight) {
             body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
             setFacingRight();
-        }
-        else {
+        } else {
             switchDirectionToRight = false;
             switchDirectionToLeft = true;
         }
-        if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX){
+        if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX) {
             body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
             setFacingLeft();
-        }
-        else {
+        } else {
             switchDirectionToLeft = false;
             switchDirectionToRight = true;
         }
@@ -144,11 +147,12 @@ public abstract class Enemy extends GameEntity{
         return playerHasBeenSpotted;
     }
 
-    public boolean enemyReadyToAttack(Player player){
-        return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1f  && attackTimer >= ATTACK_DELAY && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 1f);
+    public boolean enemyReadyToAttack(Player player) {
+        return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < (width / 2 / PPM + player.getWidth() / PPM) && attackTimer >= ATTACK_DELAY && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < (height / 2 / PPM + player.getHeight() / PPM));
     }
-    public void lurkTarget(Player player){
-        if(!enemyReadyToAttack(player)) {
+
+    public void lurkTarget(Player player) {
+        if (!enemyReadyToAttack(player)) {
             if (playerSpotted(player) && Math.abs((int) player.getBody().getPosition().x - (int) body.getPosition().x) != 0) {
                 if (player.getBody().getPosition().x < this.getBody().getPosition().x) {
                     body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
@@ -157,48 +161,68 @@ public abstract class Enemy extends GameEntity{
                     body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
                     setFacingRight();
                 }
-                if(!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
+                if (!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
                     enemyState = EnemyState.WALKING;
                     animationHandler.setCurrent("walk");
                 }
             } else if (Math.abs((int) player.getBody().getPosition().x - (int) body.getPosition().x) == 0) {
                 this.getBody().setLinearVelocity(0, this.getBody().getLinearVelocity().y);
-                if(!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
+                if (!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
                     enemyState = EnemyState.IDLE;
                     animationHandler.setCurrent("idle");
                 }
             }
         }
-       enemyAttackPlayer(player);
+        enemyAttackPlayer(player);
     }
 
     protected void loadSprites() {
         TextureAtlas charset;
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/attack.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack.atlas"));
         float FRAME_TIME = 1 / 6f;
         this.animationHandler.add("attack", new Animation<>(FRAME_TIME, charset.findRegions("attack")));
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/death.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/death.atlas"));
         this.animationHandler.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/hurt.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/hurt.atlas"));
         this.animationHandler.add("hurt", new Animation<>(FRAME_TIME, charset.findRegions("hurt")));
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/idle.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/idle.atlas"));
         this.animationHandler.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/"+enemyName+"/walk.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/walk.atlas"));
         this.animationHandler.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
 
         this.animationHandler.setCurrent("walk");
     }
 
-    public void setEnemyState(EnemyState enemyState){this.enemyState=enemyState;}
-    public void setFacingLeft() {direction = "LEFT";}
-    public void setFacingRight() {direction = "RIGHT";}
-    public void setHealth(int health){this.health=health;}
-    public int getHealth(){return health;}
-    public AnimationHandler getAnimationHandler() {return animationHandler;}
-    public EnemyState getEnemyState() {return enemyState;}
+    public void setEnemyState(EnemyState enemyState) {
+        this.enemyState = enemyState;
+    }
+
+    public void setFacingLeft() {
+        direction = "LEFT";
+    }
+
+    public void setFacingRight() {
+        direction = "RIGHT";
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public AnimationHandler getAnimationHandler() {
+        return animationHandler;
+    }
+
+    public EnemyState getEnemyState() {
+        return enemyState;
+    }
 }
