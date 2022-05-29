@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="833">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="848">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="3" name="Beckground" width="160" height="60">
@@ -913,14 +913,9 @@
   <object id="682" name="Coin" x="2080" y="992" width="16" height="16"/>
   <object id="690" name="KillBlock" x="2112" y="1824" width="32" height="32"/>
   <object id="691" name="KillBlock" x="2080" y="1792" width="32" height="32"/>
-  <object id="692" name="Coin" x="1732.67" y="1343.33" width="16" height="16"/>
-  <object id="693" name="Coin" x="1760" y="1376" width="16" height="16"/>
-  <object id="695" name="Coin" x="2048" y="1696" width="16" height="16"/>
-  <object id="696" name="Coin" x="1952" y="1632" width="16" height="16"/>
-  <object id="697" name="Coin" x="1888" y="1568" width="16" height="16"/>
   <object id="700" name="Scorpio" x="512" y="1408" width="40" height="20"/>
   <object id="701" name="Scorpio" x="1312" y="1312" width="40" height="20"/>
-  <object id="702" name="Scorpio" x="2880" y="1376" width="40" height="20"/>
+  <object id="702" name="Scorpio" x="2830" y="1375" width="40" height="20"/>
   <object id="703" name="Coin" x="2400" y="1152" width="16" height="16"/>
   <object id="704" name="Coin" x="2592" y="1216" width="16" height="16"/>
   <object id="705" name="Coin" x="2720" y="1312" width="16" height="16"/>
@@ -1015,13 +1010,27 @@
   <object id="823" name="Coin" x="4640" y="1504" width="16" height="16"/>
   <object id="824" name="Coin" x="4544" y="1568" width="16" height="16"/>
   <object id="825" name="Endpoint" x="4320" y="1536" width="32" height="64"/>
-  <object id="826" name="KillBlock" x="2150.33" y="1631.33" width="19.3333" height="30.6667"/>
-  <object id="827" name="KillBlock" x="2182.33" y="1567.33" width="19.3333" height="30.6667"/>
-  <object id="828" name="KillBlock" x="2214.33" y="1536.67" width="19.3333" height="30.6667"/>
-  <object id="829" name="KillBlock" x="2247.67" y="1470" width="19.3333" height="30.6667"/>
+  <object id="826" name="KillBlock" x="2150.83" y="1632.33" width="19.3333" height="30.6667"/>
+  <object id="827" name="KillBlock" x="2183.33" y="1569.83" width="19.3333" height="30.6667"/>
+  <object id="828" name="KillBlock" x="2217.83" y="1537.17" width="19.3333" height="30.6667"/>
+  <object id="829" name="KillBlock" x="2249.67" y="1473" width="19.3333" height="30.6667"/>
   <object id="830" name="KillBlock" x="4999.67" y="1087.33" width="19.3333" height="30.6667"/>
-  <object id="831" name="KillBlock" x="1031.67" y="1630" width="19.3333" height="30.6667"/>
-  <object id="832" name="KillBlock" x="1062.33" y="1594" width="19.3333" height="30.6667"/>
+  <object id="831" name="KillBlock" x="1030.67" y="1634" width="19.3333" height="30.6667"/>
+  <object id="832" name="KillBlock" x="1063.83" y="1601.5" width="19.3333" height="30.6667"/>
+  <object id="833" name="KillBlock" x="2031.83" y="1728.67" width="19.3333" height="30.6667"/>
+  <object id="834" name="KillBlock" x="1989.83" y="1697.17" width="19.3333" height="30.6667"/>
+  <object id="835" name="KillBlock" x="1956.83" y="1664.17" width="19.3333" height="30.6667"/>
+  <object id="836" name="KillBlock" x="1925.83" y="1632.67" width="19.3333" height="30.6667"/>
+  <object id="837" name="KillBlock" x="1894.33" y="1600.67" width="19.3333" height="30.6667"/>
+  <object id="838" name="KillBlock" x="1861.83" y="1567.67" width="19.3333" height="30.6667"/>
+  <object id="839" name="KillBlock" x="1828.83" y="1505.17" width="19.3333" height="30.6667"/>
+  <object id="840" name="KillBlock" x="1797.33" y="1473.67" width="19.3333" height="30.6667"/>
+  <object id="841" name="KillBlock" x="1761.33" y="1437.67" width="19.3333" height="30.6667"/>
+  <object id="843" name="KillBlock" x="3175.67" y="1696.67" width="19.3333" height="30.6667"/>
+  <object id="844" name="KillBlock" x="3241.33" y="1731.67" width="19.3333" height="30.6667"/>
+  <object id="845" name="Box" x="1188" y="1312" width="30" height="30"/>
+  <object id="846" name="Box" x="2912" y="1376" width="30" height="30"/>
+  <object id="847" name="Box" x="3360" y="1376" width="30" height="30"/>
  </objectgroup>
  <layer id="1" name="Livello tile 1" width="160" height="60">
   <data encoding="base64" compression="zlib">
