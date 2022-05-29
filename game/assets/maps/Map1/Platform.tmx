@@ -176,7 +176,6 @@
   <object id="103" name="Box" x="992" y="1248" width="30" height="30"/>
   <object id="115" name="Scorpio" x="4672" y="1280" width="40" height="20"/>
   <object id="116" name="Coin" x="1493" y="1056" width="16" height="16"/>
-  <object id="117" name="Ladder" x="4320.09" y="959.875" width="23" height="320.125"/>
   <object id="119" name="Endpoint" x="4288" y="768" width="32" height="64"/>
   <object id="120" name="Coin" x="1754" y="1120" width="16" height="16"/>
   <object id="121" name="Coin" x="1228" y="1104" width="16" height="16"/>
@@ -213,7 +212,7 @@
  </layer>
  <layer id="6" name="PlatformAssets" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt10EKgzAQBVAP1l6g2B6z5yzuilDIoHYmyXsbN4Kf+DMkywIAAAAAAAAAAAAAAAAAAAAwn0d2AICgZ3YAunbPDsCQbg3vOHMR1dIriGrtlZl1ve1M+8oOcZIZ59VI/+9fomsW7VX1e+IZnbmqc0ez9bQfqs+rbS3X7BCE/epVT3ujiuw1y/7+t+rzij7pFcAx+3tn9XsoMLd3dgCGtO6eAJWZVQBU9QFlGwxQ
+   eJzt17sNgDAMBUDWYCUEjMmciDZdfrKBuyZlXhw5ipcFAAAAAAAAAAAAAAAAAACgzRodAKDDFh0AoNIRHQCggT8X8CberPmeP+0ZHYJm7q/e7JplnxNHnH9W/Xqz6Ydxnlru0SEYRm/Ui65Z9P4AQG7l3Jl9DgX+7YoOwCftxQqQmbcKgKxuhTIKEA==
   </data>
  </layer>
  <layer id="1" name="PlarformLvl1" width="150" height="50">
