@@ -112,14 +112,20 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         extendViewport.apply();
         batch.begin();
+
+        for(KillBlock killBlock : killBlocks) killBlock.render(batch);
+
         mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
         orthogonalTiledMapRenderer.render(); // Renders the map
-        player.render(batch);
 
         for(Enemy enemy : enemies) {enemy.render(batch);}
         for(Box box : boxes) box.render(batch);
         for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
-        for(KillBlock killBlock : killBlocks) killBlock.render(batch);
+        for(Checkpoint checkpoint : checkpoints) checkpoint.render(batch);
+        endpoint.render(batch);
+
+        player.render(batch);
+
 
         batch.end();
 
