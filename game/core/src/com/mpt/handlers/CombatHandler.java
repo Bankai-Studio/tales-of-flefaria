@@ -3,6 +3,7 @@ package com.mpt.handlers;
 import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.player.Player;
+import com.mpt.platform.GameScreen;
 
 public class CombatHandler {
     public static void attack(GameEntity attacker, GameEntity victim) {

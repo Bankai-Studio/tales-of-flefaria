@@ -241,6 +241,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         player.update(delta);
         movementHandler.update(delta);
+        updateHealth(player.getHealth());
 
         // To be moved to map handler
         for(Enemy enemy : enemies) {enemy.update(delta);}
@@ -284,6 +285,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private void loadAssets() {
         assetManager.load("coin/coins.png", Texture.class);
         assetManager.finishLoading();
+    }
+
+    public void updateHealth(int currentPlayerHealth) {
+            playerHealthLabel.setText(currentPlayerHealth);
     }
 
     // Getters
