@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="351">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="357">
  <tileset firstgid="1" source="imaggini.tsx"/>
  <tileset firstgid="123" source="../Map4/Tileset.tsx"/>
  <objectgroup id="4" name="TileObjects">
@@ -70,7 +70,6 @@
   <object id="338" gid="60" x="4576" y="1536" width="34" height="28"/>
   <object id="339" gid="65" x="4704" y="1312" width="27" height="26"/>
   <object id="340" gid="65" x="4768" y="1184" width="27" height="26"/>
-  <object id="341" gid="119" x="4736" y="1248" width="47" height="57"/>
   <object id="342" gid="96" x="1600" y="1184" width="13" height="21"/>
   <object id="343" gid="79" x="1952" y="1344" width="17" height="16"/>
   <object id="344" gid="79" x="640" y="1504" width="17" height="16"/>
@@ -211,15 +210,6 @@
   <object id="46" x="3136" y="1376">
    <polygon points="0,0 32,0 32,224 0,224"/>
   </object>
-  <object id="49" x="3232" y="1184">
-   <polygon points="0,0 0,416 32,416 32,0 0,0"/>
-  </object>
-  <object id="50" x="3232" y="1216">
-   <polygon points="0,0 -32,0 -32,128 0,128 0,0"/>
-  </object>
-  <object id="51" x="3264" y="1152">
-   <polygon points="0,0 32,0 32,448 0,448"/>
-  </object>
   <object id="52" x="3296" y="1120">
    <polygon points="0,0 160,0 160,480 0,480 0,0"/>
   </object>
@@ -249,12 +239,6 @@
   </object>
   <object id="82" x="3616" y="1056">
    <polygon points="0,0 0,32 32,32 32,0"/>
-  </object>
-  <object id="89" x="4128" y="1120">
-   <polygon points="0,0 224,0 224,448 224,480 0,480"/>
-  </object>
-  <object id="90" x="4352" y="1120">
-   <polygon points="0,0 32,32 32,480 0,480"/>
   </object>
   <object id="92" x="4480" y="1344">
    <polygon points="0,0 32,32 32,256 0,256 0,0"/>
@@ -297,9 +281,6 @@
   </object>
   <object id="118" x="2976" y="1024">
    <polygon points="0,0 32,0 32,32 0,32 0,0"/>
-  </object>
-  <object id="119" x="3168" y="1440">
-   <polygon points="0,0 64,0 64,160 0,160"/>
   </object>
   <object id="120" x="3776" y="1408">
    <polygon points="0,0 64,0 64,192 0,192 0,0"/>
@@ -389,7 +370,7 @@
   <object id="197" name="Coin" x="4639" y="1394" width="16" height="16"/>
   <object id="198" name="Coin" x="4666" y="1350" width="16" height="16"/>
   <object id="199" name="Coin" x="4706" y="1274" width="16" height="16"/>
-  <object id="201" name="Endpoint" x="4736" y="1184" width="32" height="64"/>
+  <object id="201" name="EndpointLeft" x="4736" y="1184" width="32" height="64"/>
   <object id="203" x="3136" y="1056">
    <polygon points="0,0 -32,32 32,32 32,0"/>
   </object>
@@ -438,18 +419,6 @@
   <object id="243" x="4000" y="1280">
    <polygon points="0,0 -32,32 -160,32 -160,0"/>
   </object>
-  <object id="244" x="4128" y="1120">
-   <polygon points="0,0 -32,32 -32,480 0,480"/>
-  </object>
-  <object id="245" x="4384" y="1184">
-   <polygon points="0,0 32,32 32,416 0,416"/>
-  </object>
-  <object id="246" x="4416" y="1216">
-   <polygon points="0,0 32,32 32,384 0,384"/>
-  </object>
-  <object id="247" x="4448" y="1248">
-   <polygon points="0,0 32,32 32,320 32,352 0,352"/>
-  </object>
   <object id="248" x="4608" y="1600">
    <polygon points="0,0 32,0 32,-96 0,-96"/>
   </object>
@@ -478,10 +447,28 @@
   <object id="266" name="KillBlockUp" x="2990.33" y="1052.33" width="15.3333" height="30"/>
   <object id="267" name="KillBlockUp" x="3431.67" y="1027.67" width="15.3333" height="30"/>
   <object id="268" name="KillBlockUp" x="3626.33" y="1087.67" width="15.3333" height="30"/>
+  <object id="351" x="4096" y="1152">
+   <polygon points="0,0 32,-32 256,-32 288,0 288,448 0,448"/>
+  </object>
+  <object id="352" x="4384" y="1184">
+   <polygon points="0,0 96,96 96,416 0,416"/>
+  </object>
+  <object id="353" x="3168" y="1440">
+   <polygon points="0,0 32,0 32,160 0,160"/>
+  </object>
+  <object id="354" x="3200" y="1312">
+   <polygon points="0,0 32,0 32,288 0,288"/>
+  </object>
+  <object id="355" x="3232" y="1216">
+   <polygon points="0,0 32,0 32,384 0,384"/>
+  </object>
+  <object id="356" x="3264" y="1184">
+   <polygon points="0,0 32,0 32,416 0,416 0,0"/>
+  </object>
  </objectgroup>
  <layer id="1" name="PlatformMap" width="150" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmMtOwzAQRfOp/EdBSF00ILGARcWGR3cs21W/j1jEkhkl9jh+xKnOkUZIlZ1MZm7umHQdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACU5DzE59pJwCy30ptbeQ4og08fWu3gZesxVfevIU6V8zD4NJCqEfQFsE2W+NFuiN6J+zEeEvIw13wdYp9wnZ2TiyYfud7c/2eM/fjbRew5O+vl8/cT61Mwvfnu0ufFFvxZamouZK+u3f9+uSH3Hrt4nZq83sV1ngJ73hTP8Sz2HALrQ/cMEdJAa/M/l7eE6pozjso8pzTV//12Cu0PaStWVybnWM/aRa73ofG41DOz9Ogc71VNXWm0NaepWG09zuyP1dUSbR0i1pbAziA7Xz7GuI5/7YzJ6QXy/r4erqGtF8V+oy2NR0951xJdxWjLral7dpC9teGeI9z7pZxJh1zvcvYrxrPW0lRIWxpdufrSepeNixgZMX6tqW8u/29p/sScj2vPP622NGdvqa1a58tQr3O+q0vnT8l+1Xz+EvVbovkl+oqtQ2gW5n5XY+dP7vkXq/UWvMqXb0p+mtlov3Mtebfmel3iXY3RVa2e+rTVmq5kDVPz83lXav/Ntac8q9S5RvtdprRXhfJqaQbKXO3/Rbnys/qy3/1zXVv6SMma+rRlfbempuZq0KJXbS2kZ5Wu6Zw/rKGnqZxa9aothn1fa9W0RX+wMwZNbbem7jlB+62cuL34Bdq6ZMI=
+   eJztmMtOwzAQRf2p/EeLkFi0ILGARcWGR3cs21W/j1iKJdfEscevOOUcaYSKXHsyc3PHqlIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFCT0xCfSycBXm6lN7fyHFCHOX3EagcvW46pun8NcWych2ZOA7kaQV8A6yTFjzZD7K3YjnGfkYfe83WIx4x9NlYuMfm46/X5P2M8jv87O985Wevd599PrM9B9+Zb5c+LNfiz7sW7utaViYP6W2vTq4u67pcde2fPg0rT6c7J5ymw/s3zHHY8B85wI3RmiJAGepv/pbwlVNeScRDkOaX34fMx9P2QtqS60jlLPWsjXD9HjMfl3pldjy7xXrXUVay25jw0VlsPnu9LdZWirZ1gbQ3MvcbMl48xLuNfM2NKe4F9vq9/S2or1GutrRiPnvKuFF1JtGXX1L47uL01Yd8j7PNy7qRDrncl+yXxrKU0FaOt2F5LvMvE2RkZEr+OqW8p/+9p/kjux63nX6y2pHqP9a4SdQj1uuS7mjp/avar5fOXrt9L4j4p+pLWITQLS7+r0vlTev5Jtd6DV/nyTdWVra/Y37lS3i1fr2u8qxJdteppiftLyzA1zNWV0ZbPu3L7r/ee8qxa95oY/23hVaG8epqBbq6pHhLSl/ndv9T+ro/UrOmctozvttSUrwY9etXawvWs2jX1+cMSeprKqVevWmOY97VVTXv0hxoz5r9H65qa87aNzyX6il91d2P4
   </data>
  </layer>
 </map>
