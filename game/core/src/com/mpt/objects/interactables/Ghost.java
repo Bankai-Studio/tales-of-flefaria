@@ -11,16 +11,19 @@ import com.mpt.objects.GameObject;
 
 import static com.mpt.constants.Constants.PPM;
 
-public class Coin extends GameObject {
+public class Ghost extends GameObject {
     private final AnimationHandler animationHandler = new AnimationHandler();
-    private boolean isCollected;
+    private boolean touched;
+    private boolean isFlipped;
 
-    public Coin(float width, float height, Body body) {
+    public Ghost(float width, float height, Body body, boolean isFlipped) {
         super(width, height, body);
         body.setUserData(this);
-        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("./coin/coin.atlas"));
-        animationHandler.add("coin", new Animation<>(1 / 16f, charset.findRegions("coin")));
-        animationHandler.setCurrent("coin");
+        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("./ghost/ghost.atlas"));
+        animationHandler.add("ghost", new Animation<>(1 / 12f, charset.findRegions("ghost")));
+        animationHandler.setCurrent("ghost");
+        this.isFlipped = isFlipped;
+        touched = false;
     }
 
     @Override
@@ -30,14 +33,11 @@ public class Coin extends GameObject {
     @Override
     public void render(SpriteBatch batch) {
         TextureRegion currentFrame = animationHandler.getFrame();
-        if(!isCollected) batch.draw(currentFrame, x * PPM - width / 2, y * PPM - height / 2, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
+        if(isFlipped && !currentFrame.isFlipX()) currentFrame.flip(true, false);
+        if(!touched) batch.draw(currentFrame, x * PPM - width*(3f/2f), y * PPM - height, currentFrame.getRegionWidth()/5, currentFrame.getRegionHeight()/5);
     }
 
-    public void setIsCollected(boolean isCollected) {
-        this.isCollected = isCollected;
-    }
-
-    public boolean isCollected() {
-        return isCollected;
+    public void setTouched(boolean touched) {
+        this.touched = touched;
     }
 }

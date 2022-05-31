@@ -27,11 +27,8 @@ import com.mpt.modules.InterfaceModule;
 import com.mpt.modules.MusicModule;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
-import com.mpt.objects.interactables.Box;
+import com.mpt.objects.interactables.*;
 import com.mpt.objects.checkpoint.Checkpoint;
-import com.mpt.objects.interactables.Coin;
-import com.mpt.objects.interactables.KillBlock;
-import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
@@ -61,13 +58,13 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private ArrayList<Coin> coins;
     private ArrayList<KillBlock> killBlocks;
     private Array<Body> bodies;
+    private ArrayList<Ghost> ghosts;
     private InputMultiplexer inputMultiplexer;
     private Label coinValueLabel;
     private Label playerHealthLabel;
     private AssetManager assetManager;
     private String currentMap;
     private int curretCharacter;
-
     private int screenWidth, screenHeight;
 
     public GameScreen() {
@@ -81,6 +78,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         ladders = new ArrayList<>();
         coins = new ArrayList<>();
         killBlocks = new ArrayList<>();
+        ghosts = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         preferencesHandler = new PreferencesHandler();
@@ -138,8 +136,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         for(KillBlock killBlock : killBlocks) killBlock.render(batch);
         for(Checkpoint checkpoint : checkpoints) checkpoint.render(batch);
-        for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
+        for(Coin coin : coins) coin.render(batch);
         for(Enemy enemy : enemies) {enemy.render(batch);}
+        for(Ghost ghost : ghosts) {ghost.render(batch);}
         endpoint.render(batch);
 
         player.render(batch);
@@ -370,6 +369,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         coins.add(coin);
     }
     public void addKillBlock(KillBlock killBlock) {killBlocks.add(killBlock);}
+    public void addGhost(Ghost ghost) {
+        ghosts.add(ghost);
+    }
     public Player getPlayer() {
         return player;
     }
@@ -378,4 +380,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public ArrayList<Coin> getCoins(){return coins;}
     public ArrayList<Enemy> getEnemies() {return enemies;}
     public ArrayList<Checkpoint> getCheckpoints() {return checkpoints;}
+    public ArrayList<Ghost> getGhosts(){return ghosts;}
+
 }

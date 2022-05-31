@@ -8,6 +8,7 @@ import com.mpt.modules.MusicModule;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.Ghost;
 import com.mpt.objects.interactables.KillBlock;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
@@ -60,6 +61,10 @@ public class CollisionHandler implements ContactListener {
             endLevel(fixtureA, fixtureB);
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Endpoint)
             endLevel(fixtureB, fixtureA);
+        if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Ghost)
+            hideGhost(fixtureB);
+        if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Ghost)
+            hideGhost(fixtureA);
     }
 
     private void setNewCheckpoint(Fixture fixtureA, Fixture fixtureB) {
@@ -79,7 +84,7 @@ public class CollisionHandler implements ContactListener {
     private void collectCoin(Fixture fixtureA, Fixture fixtureB) {
         Player player = (Player) fixtureA.getBody().getUserData();
         Coin coin = (Coin) fixtureB.getBody().getUserData();
-        if (!coin.getIsCollected()) {
+        if (!coin.isCollected()) {
             coin.setIsCollected(true);
             MusicModule.getCollectCoinSound().play(0.3f);
             player.setCollectedCoins(player.getCollectedCoins() + 1);
@@ -87,8 +92,8 @@ public class CollisionHandler implements ContactListener {
         }
     }
 
-    private void collisionKillBlock(Fixture fixtureA) {
-        Player player = (Player) fixtureA.getBody().getUserData();
+    private void collisionKillBlock(Fixture fixture) {
+        Player player = (Player) fixture.getBody().getUserData();
         player.setPlayerState(Player.State.DYING);
         player.setPlayerHealth(0);
         MusicModule.getPlayerDeathSound().play(0.1f);
@@ -102,4 +107,8 @@ public class CollisionHandler implements ContactListener {
         ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen(gameScreen));
     }
 
+    private void hideGhost(Fixture fixture){
+        Ghost ghost = (Ghost) fixture.getBody().getUserData();
+        ghost.setTouched(true);
+    }
 }

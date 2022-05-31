@@ -18,11 +18,8 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.mpt.modules.BodyModule;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
-import com.mpt.objects.interactables.Box;
+import com.mpt.objects.interactables.*;
 import com.mpt.objects.checkpoint.Checkpoint;
-import com.mpt.objects.interactables.Coin;
-import com.mpt.objects.interactables.KillBlock;
-import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
@@ -161,6 +158,21 @@ public class MapHandler {
                             gameScreen.getWorld()
                     );
                     gameScreen.addKillBlock(new KillBlock(rectangle.getWidth(), rectangle.getHeight(), body, rectangleName));
+                }
+                if(rectangleName.equals("GhostLeft") || rectangleName.equals("GhostRight")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            true,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    if(rectangleName.equals("GhostLeft")) gameScreen.addGhost(new Ghost(rectangle.getWidth(), rectangle.getHeight(), body, true));
+                    if(rectangleName.equals("GhostRight")) gameScreen.addGhost(new Ghost(rectangle.getWidth(), rectangle.getHeight(), body, false));
                 }
                 if(rectangleName.equals("TestingDummy")) {
                     Body body = createEnemyBody(rectangle);
