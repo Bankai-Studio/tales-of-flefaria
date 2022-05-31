@@ -78,7 +78,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         screenHeight = Gdx.graphics.getHeight();
 
         mapHandler = new MapHandler(this);
-        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map1");
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "MapTutorial");
 
         extendViewport = new ExtendViewport(30 * PPM, 20 * PPM);
         camera = (OrthographicCamera) extendViewport.getCamera();

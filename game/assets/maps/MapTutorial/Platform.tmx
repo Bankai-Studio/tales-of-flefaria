@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="210">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="211">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
+ <tileset firstgid="179" source="../Map1/ObjectsTileset.tsx"/>
  <layer id="4" name="Beckground" width="150" height="50">
   <data encoding="base64" compression="zlib">
    eJzt1QkKwjAQAMB8wbN+SBGP/39Hgi1I0XoEm6aZgVCoNOyu2U0IAAAAAAAAAAAAAAAAAAAAAAAAQKl2uQNItA3l5wBj2LSrNP2YS+v35ZN35tZ44vlZ//BdE6bzH8UztEjc49g+m3ZtE/erRYkz85nlw5qrQ0i/5/bh3h/9mRH7b861eyfWZaq90M34qcb3izivuzMX8+rP6ynm2t0xXby5Y7z8Yc84Y1bhdW6PNcidP9875w4gk1rzJp2zA/NzGvhNz8Owa+4AKqXu8Lmhex4om/4GanMDxBoIzg==
   </data>
  </layer>
  <objectgroup id="5" name="TileObjects">
-  <object id="138" gid="20" x="96" y="1248" width="22" height="10"/>
-  <object id="139" gid="21" x="64" y="1248" width="50" height="25"/>
-  <object id="140" gid="21" x="128" y="1248" width="50" height="25"/>
   <object id="145" gid="70" x="224" y="1280" width="124" height="129"/>
   <object id="146" gid="19" x="256" y="1280" width="38" height="13"/>
   <object id="147" gid="21" x="288" y="1280" width="50" height="25"/>
@@ -60,6 +58,7 @@
   <object id="206" gid="23" x="4576" y="1152" width="43" height="22"/>
   <object id="207" gid="23" x="4608" y="1152" width="43" height="22"/>
   <object id="208" gid="22" x="4640" y="1152" width="41" height="24"/>
+  <object id="210" gid="257" x="41.8182" y="1248.82" width="108" height="53"/>
  </objectgroup>
  <objectgroup id="3" name="Objects">
   <object id="1" name="Player" x="96" y="1184" width="30" height="30"/>
