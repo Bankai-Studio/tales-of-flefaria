@@ -7,7 +7,7 @@ public class TestingDummy extends Enemy {
     public TestingDummy(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body, gameScreen);
         adjustX = -35f;
-        adjustY = -20f;
+        adjustY = -18f;
         walkSpeed = 1f;
         minDamage = 0;
         maxDamage = 0;
