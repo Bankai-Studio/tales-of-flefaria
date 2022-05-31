@@ -3,7 +3,6 @@
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <tileset firstgid="179" source="../Map1/ObjectsTileset.tsx"/>
- <tileset firstgid="258" source="Tutorial.tsx"/>
  <layer id="4" name="Beckground" width="150" height="50">
   <data encoding="base64" compression="zlib">
    eJzt1YEKgjAQAND9QlbaDxVB/f/31JGCiBG0cs3egyEMHLfb7pYSAAAAAAAAAAAAAAAAAAAAAAAAUKtD6QAytan+PcAS9v2ozTTm2uq9mZnTt5YT92f3xn9d+p0ziju0yVzj3H+7frSZ6/2LGnvmnGY01uqU8t+5Y3rUx7RnRP2tOXevRF7WUgs1iH493LnI+7Rf/+JZDG/MEG/pGK9fWDN6zDY939s4B6X3DwDwSZfSAQAAAADc3QC/zQY3
