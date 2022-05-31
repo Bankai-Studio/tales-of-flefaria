@@ -64,7 +64,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private Label playerHealthLabel;
     private AssetManager assetManager;
     private String currentMap;
-    private int curretCharacter;
+    private int currentCharacter;
     private int screenWidth, screenHeight;
 
     public GameScreen() {
@@ -98,8 +98,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         mapHandler = new MapHandler(this);
         currentMap = "MapTutorial";
-        curretCharacter = 0;
-        loadMap(currentMap, curretCharacter);
+        currentCharacter = 0;
+        loadMap(currentMap, currentCharacter);
 
         Timer.schedule(new Timer.Task() {
             @Override
@@ -319,8 +319,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public void loadMap(String mapName, int character) {
         currentMap = mapName;
-        curretCharacter = character;
-        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, currentMap, curretCharacter);
+        currentCharacter = character;
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, currentMap, currentCharacter);
         movementHandler = new MovementHandler(player, this);
         world.setContactListener(new CollisionHandler(preferencesHandler, this));
     }
@@ -332,7 +332,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         killBlocks.clear();
         enemies.clear();
         checkpoints.clear();
-        //ghosts.clear();
+        ghosts.clear();
 
         bodies = new Array<Body>(world.getBodyCount());
         world.getBodies(bodies);
@@ -350,18 +350,22 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
                 return "Map3";
             case "Map3":
                 return "Map4";
+            case "Map4":
+                return "Map5";
         }
         return "MapTutorial";
     }
 
     public int selectNexCharacter() {
-        switch (curretCharacter) {
+        switch (currentCharacter) {
             case 0:
                 return 1;
             case 1:
                 return 2;
             case 2:
-                return 0;
+                return 3;
+            case 3:
+                return 4;
         }
         return 0;
     }

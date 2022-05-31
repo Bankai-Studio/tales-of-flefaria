@@ -104,13 +104,15 @@ public class Player extends GameEntity {
         String characterName;
         switch (characterSelection) {
             case 0:
-                characterName = "Woodcutter";
-                break;
             case 1:
-                characterName = "GraveRobber";
+                characterName = "Woodcutter";
                 break;
             case 2:
                 characterName = "SteamMan";
+                break;
+            case 3:
+            case 4:
+                characterName = "GraveRobber";
                 break;
             default:
                 throw new java.lang.Error("Player.java: characterSelection has ambiguous value");
