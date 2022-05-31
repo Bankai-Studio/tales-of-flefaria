@@ -1,6 +1,7 @@
 package com.mpt.platform;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -58,11 +59,15 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private ArrayList<KillBlock> killBlocks;
     private InputMultiplexer inputMultiplexer;
     private Label coinValueLabel;
+    private Label playerHealthLabel;
+    private AssetManager assetManager;
 
     private int screenWidth, screenHeight;
 
     public GameScreen() {
         batch = new SpriteBatch();
+        assetManager = new AssetManager();
+        loadAssets();
         world = new World(new Vector2(0, -25f), false);
         enemies = new ArrayList<>();
         checkpoints = new ArrayList<>();
@@ -150,6 +155,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         //font.dispose();
         world.dispose();
         for(Box box : boxes) box.dispose();
+        assetManager.dispose();
         box2DDebugRenderer.dispose();
     }
 
@@ -253,20 +259,31 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         Table root = new Table();
         root.setFillParent(true);
 
-        Table main = new Table();
-        Image image = new Image(new Texture(Gdx.files.internal("coin/coins.png")));
+        Table coins = new Table();
+        Image image = new Image(assetManager.get("coin/coins.png", Texture.class));
         image.setScale(2.5f);
         coinValueLabel = new Label("0", InterfaceModule.setupFont(30, Color.WHITE));
+        coins.add(image);
+        coins.add(coinValueLabel).padLeft(25f).padBottom(30f);
 
-        main.add(image);
-        main.add(coinValueLabel).padLeft(25f).padBottom(30f);
-        root.add(main).padLeft(10f).padBottom(15f).expand().bottom().left();
+        Table health = new Table();
+        playerHealthLabel = new Label("100", InterfaceModule.setupFont(30, Color.WHITE));
+        health.add(playerHealthLabel);
+
+
+        root.add(coins).padLeft(10f).padBottom(15f).expand().bottom().left();
+        root.add(health).padBottom(100f).expand().bottom().left();
 
         stage.addActor(root);
     }
 
     public void updateCoins(int currentCollectedCoins) {
         coinValueLabel.setText(currentCollectedCoins);
+    }
+
+    private void loadAssets() {
+        assetManager.load("coin/coins.png", Texture.class);
+        assetManager.finishLoading();
     }
 
     // Getters
