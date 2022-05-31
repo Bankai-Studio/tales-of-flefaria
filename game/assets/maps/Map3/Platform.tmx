@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="357">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="358">
  <tileset firstgid="1" source="imaggini.tsx"/>
  <tileset firstgid="123" source="../Map4/Tileset.tsx"/>
  <objectgroup id="4" name="TileObjects">
@@ -29,7 +29,6 @@
   <object id="295" gid="122" x="1792" y="1440" width="31" height="31"/>
   <object id="296" gid="122" x="1888" y="1504" width="31" height="31"/>
   <object id="297" gid="79" x="1920" y="1440" width="17" height="16"/>
-  <object id="298" gid="79" x="1728" y="1376" width="17" height="16"/>
   <object id="299" gid="79" x="1632" y="1248" width="17" height="16"/>
   <object id="300" gid="122" x="2016" y="1248" width="31" height="31"/>
   <object id="301" gid="103" x="2144" y="1120" width="40" height="28"/>
@@ -71,14 +70,14 @@
   <object id="339" gid="65" x="4704" y="1312" width="27" height="26"/>
   <object id="340" gid="65" x="4768" y="1184" width="27" height="26"/>
   <object id="342" gid="96" x="1600" y="1184" width="13" height="21"/>
-  <object id="343" gid="79" x="1952" y="1344" width="17" height="16"/>
-  <object id="344" gid="79" x="640" y="1504" width="17" height="16"/>
-  <object id="345" gid="79" x="608" y="1472" width="17" height="16"/>
+  <object id="343" gid="79" x="1993" y="1281" width="17" height="23"/>
+  <object id="344" gid="79" x="551" y="1342" width="17" height="22"/>
+  <object id="345" gid="79" x="608" y="1472" width="17" height="24"/>
   <object id="346" gid="79" x="848" y="1476" width="17" height="16"/>
   <object id="347" gid="79" x="896" y="1376" width="17" height="16"/>
-  <object id="348" gid="79" x="928" y="1344" width="17" height="16"/>
+  <object id="348" gid="79" x="970" y="1279" width="17" height="26"/>
   <object id="349" name="Checkpoint" x="3744" y="1056" width="32" height="64"/>
-  <object id="350" gid="119" x="3744" y="1120" width="47" height="57"/>
+  <object id="357" gid="79" x="1765.5" y="1405" width="17" height="16"/>
  </objectgroup>
  <objectgroup id="3" name="Objects">
   <object id="1" x="0" y="1280">
@@ -300,10 +299,8 @@
   <object id="125" name="Spawnpoint" x="224" y="1120" width="32" height="32"/>
   <object id="126" name="Checkpoint" x="1056" y="1184" width="32" height="64"/>
   <object id="127" name="Checkpoint" x="2176" y="1056" width="32" height="64"/>
-  <object id="129" name="KillBlock" x="1794" y="1408" width="19.3333" height="30.6667"/>
   <object id="130" name="KillBlock" x="1829" y="1472" width="19.3333" height="30.6667"/>
   <object id="131" name="KillBlock" x="1895.33" y="1471.67" width="19.3333" height="30.6667"/>
-  <object id="132" name="KillBlock" x="1929.33" y="1407.67" width="19.3333" height="30.6667"/>
   <object id="133" name="KillBlock" x="1959.33" y="1312.67" width="19.3333" height="30.6667"/>
   <object id="134" name="KillBlock" x="1736.33" y="1343.67" width="19.3333" height="30.6667"/>
   <object id="135" name="KillBlock" x="1856" y="1504" width="30.6666" height="30.6667"/>
@@ -374,15 +371,12 @@
   <object id="203" x="3136" y="1056">
    <polygon points="0,0 -32,32 32,32 32,0"/>
   </object>
-  <object id="204" name="KillBlock" x="645.333" y="1472.34" width="19.3333" height="30.6667"/>
-  <object id="205" name="KillBlock" x="612.666" y="1442.17" width="19.3333" height="30.6667"/>
+  <object id="204" name="KillBlock" x="644.333" y="1473.34" width="19.3333" height="30.6667"/>
   <object id="206" name="KillBlock" x="580.833" y="1409.17" width="19.3333" height="30.6667"/>
   <object id="207" name="KillBlock" x="773.333" y="1473" width="19.3333" height="30.6667"/>
-  <object id="208" name="KillBlock" x="821.333" y="1439.67" width="19.3333" height="30.6667"/>
   <object id="209" name="KillBlock" x="871.333" y="1407.67" width="19.3333" height="30.6667"/>
-  <object id="210" name="KillBlock" x="904.833" y="1343.67" width="19.3333" height="30.6667"/>
-  <object id="212" name="KillBlock" x="675.667" y="1535.67" width="30.6666" height="30.6667"/>
-  <object id="213" name="KillBlock" x="720.667" y="1535.67" width="30.6666" height="30.6667"/>
+  <object id="210" name="KillBlock" x="937.833" y="1312.67" width="19.3333" height="30.6667"/>
+  <object id="212" name="KillBlock" x="704" y="1536" width="30.6666" height="30.6667"/>
   <object id="216" name="Player" x="192" y="1117" width="22" height="30"/>
   <object id="222" name="Snake" x="191.5" y="1263.5" width="32" height="17"/>
   <object id="226" name="BigBloated" x="1536" y="1152" width="32" height="32"/>
@@ -434,15 +428,11 @@
   <object id="252" x="4736" y="1600">
    <polygon points="0,0 32,0 32,-352 0,-352"/>
   </object>
-  <object id="253" name="KillBlockUp" x="616.333" y="1247" width="15.3333" height="30"/>
   <object id="254" name="KillBlockUp" x="746.333" y="1183.67" width="15.3333" height="30"/>
-  <object id="255" name="KillBlockUp" x="809.667" y="1216.33" width="15.3333" height="30"/>
   <object id="256" name="KillBlockUp" x="888.333" y="1247" width="15.3333" height="30"/>
   <object id="257" name="KillBlockUp" x="201.667" y="1182.33" width="15.3333" height="30"/>
   <object id="258" name="KillBlockUp" x="1689" y="1151.67" width="15.3333" height="30"/>
-  <object id="259" name="KillBlockUp" x="1769" y="1086.33" width="15.3333" height="30"/>
-  <object id="260" name="KillBlockUp" x="1833.67" y="1021.67" width="15.3333" height="30"/>
-  <object id="261" name="KillBlockUp" x="1943" y="1087.67" width="15.3333" height="30"/>
+  <object id="261" name="KillBlockUp" x="1833" y="1020.67" width="15.3333" height="30"/>
   <object id="265" name="KillBlockUp" x="3211" y="1052.33" width="15.3333" height="30"/>
   <object id="266" name="KillBlockUp" x="2990.33" y="1052.33" width="15.3333" height="30"/>
   <object id="267" name="KillBlockUp" x="3431.67" y="1027.67" width="15.3333" height="30"/>
