@@ -70,6 +70,9 @@ public class CollisionHandler implements ContactListener {
             MusicModule.getCheckPointMusic().play(0.1f);
             player.setRespawnPosition(checkpointPosition);
             checkpoint.setCheckpointClaimed();
+            for(Checkpoint checkpointChecked : gameScreen.getCheckpoints())
+                if (checkpointChecked.isCheckpointCurrent()) checkpointChecked.setCheckpointCurrent(false);
+            checkpoint.setCheckpointCurrent(true);
         }
     }
 
@@ -87,6 +90,7 @@ public class CollisionHandler implements ContactListener {
     private void collisionKillBlock(Fixture fixtureA) {
         Player player = (Player) fixtureA.getBody().getUserData();
         player.setPlayerState(Player.State.DYING);
+        player.setPlayerHealth(0);
         MusicModule.getPlayerDeathSound().play(0.1f);
         player.getPlayerAnimations().setCurrent("death");
     }

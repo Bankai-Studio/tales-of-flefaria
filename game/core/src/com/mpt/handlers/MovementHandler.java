@@ -353,14 +353,15 @@ public class MovementHandler {
 
     private void fallingDamage() {
         float distance = player.getBody().getPosition().y - fallingStartingY;
-        if (distance < -5f) {
-            float damage = -distance + 5f + (float) Math.pow(1.15, -distance + 5f);
+        if (distance < -4f) {
+            float damage = -distance + 4f + (float) Math.pow(1.2, -distance + 5f);
             float health = player.getHealth() - damage;
             player.setPlayerHealth((int) health);
             System.out.println(player.getHealth());
             if (health <= 0) {
                 player.setPlayerState(Player.State.DYING);
                 player.getPlayerAnimations().setCurrent("death", false);
+                player.setPlayerHealth(0);
             } else {
                 player.setPlayerState(Player.State.HURT);
                 player.getPlayerAnimations().setCurrent("hurt", false);

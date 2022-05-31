@@ -33,6 +33,7 @@ public class CombatHandler {
             if (health <= 0) {
                 player.setPlayerState(Player.State.DYING);
                 player.getPlayerAnimations().setCurrent("death", false);
+                player.setPlayerHealth(0);
             } else {
                 player.setPlayerState(Player.State.HURT);
                 player.getPlayerAnimations().setCurrent("hurt", false);

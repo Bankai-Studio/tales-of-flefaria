@@ -329,4 +329,5 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public ArrayList<Ladder> getLadders(){return ladders;}
     public ArrayList<Coin> getCoins(){return coins;}
     public ArrayList<Enemy> getEnemies() {return enemies;}
+    public ArrayList<Checkpoint> getCheckpoints() {return checkpoints;}
 }
