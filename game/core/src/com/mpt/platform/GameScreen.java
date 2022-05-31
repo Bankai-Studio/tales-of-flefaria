@@ -132,19 +132,20 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         extendViewport.apply();
         batch.begin();
 
-
-        orthogonalTiledMapRenderer.render(); // Renders the map
-        mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
+        if(orthogonalTiledMapRenderer != null)
+            orthogonalTiledMapRenderer.render(); // Renders the map
+        if(mapHandler != null)
+            mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
 
         for(KillBlock killBlock : killBlocks) killBlock.render(batch);
         for(Checkpoint checkpoint : checkpoints) checkpoint.render(batch);
         for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
         for(Enemy enemy : enemies) {enemy.render(batch);}
-        endpoint.render(batch);
-
-        player.render(batch);
+        if(endpoint != null)
+            endpoint.render(batch);
+        if(player != null)
+            player.render(batch);
         for(Box box : boxes) box.render(batch);
-
 
         batch.end();
 
@@ -152,7 +153,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         stage.act();
         stage.draw();
 
-        if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+        if(box2DDebugRenderer != null)
+            if(DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
     }
 
     @Override
