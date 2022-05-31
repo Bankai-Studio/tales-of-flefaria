@@ -21,10 +21,9 @@ public class LoadingScreen extends InterfaceModule {
         Table main = new Table();
         main.setFillParent(true);
 
-        Label label = new Label("loading", textStyle);
-        label.addAction(Actions.fadeOut(0f));
-        main.add(label);
-        label.addAction(Actions.sequence(Actions.fadeIn(3f), Actions.fadeOut(3f), Actions.run(() ->  {
+        main.add(new Label("< LOADING >", textStyle));
+        main.addAction(Actions.fadeOut(0f));
+        main.addAction(Actions.sequence(Actions.fadeIn(3f), Actions.fadeOut(3f), Actions.run(() ->  {
             gameScreen.clearBodies();
             gameScreen.loadMap(gameScreen.selectNextMap(), gameScreen.selectNexCharacter());
             ((Game) Gdx.app.getApplicationListener()).setScreen(gameScreen);
