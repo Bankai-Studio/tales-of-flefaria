@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="263">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="264">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <tileset firstgid="179" source="../Map1/ObjectsTileset.tsx"/>
@@ -93,7 +93,8 @@
   <object id="259" gid="259" x="2916.33" y="1059.67" width="32" height="32"/>
   <object id="260" gid="273" x="369.333" y="1258.17" width="64" height="64"/>
   <object id="261" gid="275" x="3374.33" y="1174.33" width="64" height="64"/>
-  <object id="262" gid="274" x="3389.67" y="1113" width="32" height="32"/>
+  <object id="262" gid="274" x="3421.67" y="1114" width="32" height="32"/>
+  <object id="263" gid="276" x="3434.5" y="1174.5" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="3" name="Objects">
   <object id="1" name="Player" x="78" y="1180" width="30" height="30"/>
@@ -304,7 +305,7 @@
   <object id="107" name="Coin" x="3046.67" y="1158.67" width="16" height="16"/>
   <object id="114" name="Coin" x="3173.67" y="1163.67" width="16" height="16"/>
   <object id="115" name="Coin" x="3304" y="1188" width="16" height="16"/>
-  <object id="116" name="Coin" x="3460" y="1173.33" width="16" height="16"/>
+  <object id="116" name="Coin" x="3529.5" y="1181.33" width="16" height="16"/>
   <object id="117" name="Coin" x="3610.67" y="1158.67" width="16" height="16"/>
   <object id="118" name="Coin" x="3809.33" y="1128" width="16" height="16"/>
   <object id="119" name="Coin" x="4114.67" y="1085.33" width="16" height="16"/>
