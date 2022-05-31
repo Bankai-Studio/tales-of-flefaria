@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.mpt.handlers.AnimationHandler;
 import com.mpt.handlers.CombatHandler;
 import com.mpt.objects.player.Player;
@@ -94,16 +95,13 @@ public abstract class Enemy extends GameEntity {
 
     private void checkPlayerDeath() {
         if (enemyState.equals(EnemyState.DYING)) {
-            //body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
             enemyState = EnemyState.IDLE;
-            //animationHandler.setCurrent("idle");
         }
     }
 
     private void respawnOnVoidPosition() {
         if (body.getPosition().y < 0) {
             enemyState = EnemyState.DYING;
-            //animationHandler.setCurrent("death", false);
         }
     }
 
@@ -141,7 +139,7 @@ public abstract class Enemy extends GameEntity {
     }
 
     public boolean playerSpotted(Player player) {
-        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 3f;
+        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 2f;
         return playerHasBeenSpotted;
     }
 

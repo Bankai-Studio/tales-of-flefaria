@@ -67,6 +67,7 @@ public class CollisionHandler implements ContactListener {
         Checkpoint checkpoint = (Checkpoint) fixtureB.getBody().getUserData();
         Vector2 checkpointPosition = new Vector2(checkpoint.getBody().getPosition().x - 2f, checkpoint.getBody().getPosition().y);
         if (!player.getRespawnPosition().equals(checkpointPosition) && !checkpoint.isCheckpointClaimed()) {
+            MusicModule.getCheckPointMusic().play(0.1f);
             player.setRespawnPosition(checkpointPosition);
             checkpoint.setCheckpointClaimed();
         }
@@ -93,6 +94,7 @@ public class CollisionHandler implements ContactListener {
     private void endLevel(Fixture fixtureA, Fixture fixtureB) {
         Player player = (Player) fixtureA.getBody().getUserData();
         Endpoint endpoint = (Endpoint) fixtureB.getBody().getUserData();
+        MusicModule.getPortalSound().play(0.1f);
         ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen());
     }
 

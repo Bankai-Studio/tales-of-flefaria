@@ -11,7 +11,6 @@ public abstract class GameEntity {
     protected Body body;
     protected float adjustX;
     protected float adjustY;
-
     public GameEntity(float width, float height, Body body) {
         x = body.getPosition().x;
         y = body.getPosition().y;

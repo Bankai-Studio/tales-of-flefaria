@@ -3,6 +3,7 @@ package com.mpt.handlers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.mpt.modules.MusicModule;
 import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.interactables.Box;
 import com.mpt.objects.interactables.Ladder;
@@ -144,6 +145,7 @@ public class MovementHandler {
         }
 
         if (inputKeys.get(InputKeys.LEFT) && !player.getPlayerState().equals(State.DYING)) {
+            //MusicModule.getFootStepsMusic().play();
             player.setFacingLeft();
             if (player.getVelocityY() == 0f && (!player.getState().equals(State.RUNNING) || !inputKeys.get(InputKeys.SHIFT)) && !player.getState().equals(State.JUMPING) && !player.getState().equals(State.ATTACKING) && !inputKeys.get(InputKeys.RIGHT) && !player.getState().equals(State.PUSHING) && !player.getState().equals(State.FALLING) && !player.getState().equals(State.CLIMBING) && !player.getState().equals(State.HURT)) {
                 playerAnimations.setCurrent("walk");
@@ -152,6 +154,7 @@ public class MovementHandler {
             player.setVelocityX(-1);
         }
         if (inputKeys.get(InputKeys.RIGHT) && !player.getPlayerState().equals(State.DYING)) {
+            //MusicModule.getFootStepsMusic().play();
             player.setFacingRight();
             if (player.getVelocityY() == 0 && (!player.getState().equals(State.RUNNING) || !inputKeys.get(InputKeys.SHIFT)) && !player.getState().equals(State.JUMPING) && !player.getState().equals(State.ATTACKING) && !inputKeys.get(InputKeys.LEFT) && !player.getState().equals(State.PUSHING) && !player.getState().equals(State.FALLING) && !player.getState().equals(State.CLIMBING) && !player.getState().equals(State.HURT)) {
                 playerAnimations.setCurrent("walk");
@@ -172,6 +175,7 @@ public class MovementHandler {
                 player.setPlayerState(State.JUMPING);
                 if (jumpCounter == 0 || (jumpCounter == 1 && isDoubleJumpReady)) {
                     if (jumpCounter == 1) {
+                        MusicModule.getJumpSound().play(0.1f);
                         isDoubleJumpReady = false;
                         jumpedFromBox = false;
                         doubleJumpTimer = 0f;
@@ -179,7 +183,7 @@ public class MovementHandler {
                     }
                     playerAnimations.setCurrent("jump", false);
                     player.setPlayerState(State.JUMPING);
-
+                    MusicModule.getJumpSound().play(0.1f);
                     fallingStartingY = player.getBody().getPosition().y;
                     float force = player.getBody().getMass() * 9;
                     player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, 0);

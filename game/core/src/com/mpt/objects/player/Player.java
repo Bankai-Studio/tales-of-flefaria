@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.handlers.AnimationHandler;
+import com.mpt.modules.MusicModule;
 import com.mpt.objects.GameEntity;
 
 public class Player extends GameEntity {
@@ -94,12 +95,11 @@ public class Player extends GameEntity {
         }
     }
 
-
     private void respawnOnVoidPosition() {
-        if (body.getPosition().y < 0)
+        if (body.getPosition().y < 0) {
             state = State.DYING;
+        }
     }
-
     private void loadPlayerSprites() {
         String characterName;
         switch (characterSelection) {
