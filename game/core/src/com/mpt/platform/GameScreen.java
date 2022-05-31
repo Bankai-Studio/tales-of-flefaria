@@ -66,6 +66,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private String currentMap;
     private int currentCharacter;
     private int screenWidth, screenHeight;
+    private GameOver gameOver;
 
     public GameScreen() {
         batch = new SpriteBatch();
@@ -144,6 +145,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             endpoint.render(batch);
         if (player != null)
             player.render(batch);
+        if (gameOver != null)
+            gameOver.render(batch);
         for (Box box : boxes) box.render(batch);
 
         batch.end();
@@ -385,6 +388,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setGameOver(GameOver gameOver) {
+        this.gameOver = gameOver;
     }
 
     public void setEndpoint(Endpoint endpoint) {

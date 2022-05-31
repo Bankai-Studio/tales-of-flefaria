@@ -174,6 +174,20 @@ public class MapHandler {
                     if(rectangleName.equals("GhostLeft")) gameScreen.addGhost(new Ghost(rectangle.getWidth(), rectangle.getHeight(), body, true));
                     if(rectangleName.equals("GhostRight")) gameScreen.addGhost(new Ghost(rectangle.getWidth(), rectangle.getHeight(), body, false));
                 }
+                if(rectangleName.equals("GameOver")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            true,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    gameScreen.setGameOver(new GameOver(rectangle.getWidth(), rectangle.getHeight(), body));
+                }
                 if(rectangleName.equals("TestingDummy")) {
                     Body body = createEnemyBody(rectangle);
                     gameScreen.addEnemy(new TestingDummy(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
