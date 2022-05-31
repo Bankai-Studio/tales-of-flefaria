@@ -91,7 +91,7 @@ public class MapHandler {
                     );
                     gameScreen.addCheckpoint(new Checkpoint(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
-                if(rectangleName.equals("Endpoint")) {
+                if(rectangleName.equals("EndpointLeft") || rectangleName.equals("EndpointRight")) {
                     Body body = BodyModule.createBody(
                             rectangle.getX() + rectangle.getWidth() / 2,
                             rectangle.getY() + rectangle.getHeight() / 2,
@@ -103,7 +103,8 @@ public class MapHandler {
                             0f,
                             gameScreen.getWorld()
                     );
-                    gameScreen.setEndpoint(new Endpoint(rectangle.getWidth(), rectangle.getHeight(), body));
+                    if(rectangleName.equals("EndpointLeft")) gameScreen.setEndpoint(new Endpoint(rectangle.getWidth(), rectangle.getHeight(), body, false));
+                    if(rectangleName.equals("EndpointRight")) gameScreen.setEndpoint(new Endpoint(rectangle.getWidth(), rectangle.getHeight(), body, true));
                 }
                 if(rectangleName.equals("Box")) {
                     Body body = BodyModule.createBody(
