@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.4" name="Tutorial" tilewidth="1640" tileheight="664" tilecount="15" columns="0">
+<tileset version="1.8" tiledversion="1.8.4" name="Tutorial" tilewidth="1640" tileheight="664" tilecount="16" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="128" height="128" source="Images/Tutorial/A.png"/>
@@ -45,5 +45,8 @@
  </tile>
  <tile id="14">
   <image width="554" height="554" source="Images/Tutorial/Void.png"/>
+ </tile>
+ <tile id="15">
+  <image width="554" height="554" source="Images/Tutorial/Box.png"/>
  </tile>
 </tileset>
