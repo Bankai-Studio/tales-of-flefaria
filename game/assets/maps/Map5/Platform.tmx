@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="13">
+ <tileset firstgid="1" source="ObjectsTileset.tsx"/>
+ <objectgroup id="3" name="TileObjects"/>
+ <objectgroup id="2" name="Objects">
+  <object id="1" x="0" y="992">
+   <polygon points="0,0 3200,0 3200,32 0,32"/>
+  </object>
+  <object id="2" x="0" y="0">
+   <polygon points="0,0 32,0 32,992 0,992"/>
+  </object>
+  <object id="3" x="3200" y="992">
+   <polygon points="0,0 -32,0 -32,-992 0,-992"/>
+  </object>
+  <object id="4" name="Player" x="62.6667" y="894.667" width="32" height="32"/>
+  <object id="7" name="Spawnpoint" x="96" y="960" width="32" height="32"/>
+  <object id="12" name="EndpointLeft" x="128" y="0" width="32" height="64"/>
+ </objectgroup>
+</map>
