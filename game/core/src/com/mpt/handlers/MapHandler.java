@@ -162,6 +162,10 @@ public class MapHandler {
                     );
                     gameScreen.addKillBlock(new KillBlock(rectangle.getWidth(), rectangle.getHeight(), body, rectangleName));
                 }
+                if(rectangleName.equals("TestingDummy")) {
+                    Body body = createEnemyBody(rectangle);
+                    gameScreen.addEnemy(new TestingDummy(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                }
                 if(rectangleName.equals("Centipede")) {
                     Body body = createEnemyBody(rectangle);
                     gameScreen.addEnemy(new Centipede(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
