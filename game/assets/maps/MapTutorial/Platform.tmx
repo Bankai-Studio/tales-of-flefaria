@@ -91,9 +91,9 @@
   <object id="254" gid="268" x="4210" y="1219" width="32" height="32"/>
   <object id="255" gid="265" x="4210" y="1343" width="32" height="32"/>
   <object id="256" gid="267" x="4150" y="1283" width="150" height="32"/>
-  <object id="257" gid="266" x="3100.5" y="1120.5" width="40" height="32"/>
-  <object id="258" gid="264" x="3139" y="1120" width="32" height="32"/>
-  <object id="259" gid="259" x="3168" y="1120" width="32" height="32"/>
+  <object id="257" gid="266" x="3034" y="1121" width="40" height="32"/>
+  <object id="258" gid="264" x="3070.5" y="1121.5" width="32" height="32"/>
+  <object id="259" gid="259" x="3101" y="1121" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="3" name="Objects">
   <object id="1" name="Player" x="78" y="1180" width="30" height="30"/>
