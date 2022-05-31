@@ -69,7 +69,6 @@ public class CollisionHandler implements ContactListener {
         if (!player.getRespawnPosition().equals(checkpointPosition) && !checkpoint.isCheckpointClaimed()) {
             player.setRespawnPosition(checkpointPosition);
             checkpoint.setCheckpointClaimed();
-            preferencesHandler.setRespawnPosition(checkpointPosition);
         }
     }
 
