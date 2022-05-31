@@ -78,7 +78,7 @@ public class CollisionHandler implements ContactListener {
         Coin coin = (Coin) fixtureB.getBody().getUserData();
         if (!coin.getIsCollected()) {
             coin.setIsCollected(true);
-            MusicModule.getCollectCoinSound().play();
+            MusicModule.getCollectCoinSound().play(0.8f);
             player.setCollectedCoins(player.getCollectedCoins() + 1);
             gameScreen.updateCoins(player.getCollectedCoins());
         }
