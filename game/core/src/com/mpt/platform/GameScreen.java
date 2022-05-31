@@ -256,7 +256,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         Table main = new Table();
         Image image = new Image(new Texture(Gdx.files.internal("coin/coins.png")));
         image.setScale(2f);
-        coinValueLabel = new Label("0", InterfaceModule.setupFont(36, Color.WHITE));
+        coinValueLabel = new Label("0", InterfaceModule.setupFont(30, Color.WHITE));
 
         main.add(image);
         main.add(coinValueLabel).padLeft(25f).padBottom(30f);

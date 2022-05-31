@@ -117,7 +117,7 @@
   <object id="39" x="1696" y="1184">
    <polygon points="0,0 0,32 96,32 128,32 128,0"/>
   </object>
-  <object id="54" name="Checkpoint" x="830" y="1150.67" width="32" height="64"/>
+  <object id="54" name="Checkpoint" x="827" y="1150.67" width="32" height="64"/>
   <object id="57" name="Checkpoint" x="2752" y="1056" width="32" height="64"/>
   <object id="45" name="Player" x="32" y="1280" width="22" height="30"/>
   <object id="60" x="736" y="1376">
