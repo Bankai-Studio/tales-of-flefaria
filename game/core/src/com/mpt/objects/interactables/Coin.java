@@ -14,6 +14,7 @@ import static com.mpt.constants.Constants.PPM;
 public class Coin extends GameObject {
     private final AnimationHandler animationHandler = new AnimationHandler();
     private boolean isCollected;
+
     public Coin(float width, float height, Body body) {
         super(width, height, body);
         body.setUserData(this);
@@ -23,15 +24,20 @@ public class Coin extends GameObject {
     }
 
     @Override
-    public void update(float delta) {}
+    public void update(float delta) {
+    }
 
     @Override
     public void render(SpriteBatch batch) {
         TextureRegion currentFrame = animationHandler.getFrame();
-        batch.draw(currentFrame, x * PPM  - width/2, y * PPM  - height/2, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
+        batch.draw(currentFrame, x * PPM - width / 2, y * PPM - height / 2, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
     }
 
-    public void setIsCollected(boolean isCollected){this.isCollected=isCollected;}
+    public void setIsCollected(boolean isCollected) {
+        this.isCollected = isCollected;
+    }
 
-    public boolean getIsCollected(){return isCollected;}
+    public boolean getIsCollected() {
+        return isCollected;
+    }
 }
