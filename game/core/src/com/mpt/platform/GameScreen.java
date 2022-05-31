@@ -98,7 +98,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         inputMultiplexer = new InputMultiplexer(this, stage);
 
         mapHandler = new MapHandler(this);
-        currentMap = "Map5";
+        currentMap = "MapTutorial";
         currentCharacter = 0;
         loadMap(currentMap, currentCharacter);
 
