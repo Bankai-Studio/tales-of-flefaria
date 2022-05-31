@@ -123,7 +123,7 @@ public class MovementHandler {
         if (player.getState().equals(State.CLIMBING)) {
             ladderMovement();
             return;
-        }
+        } else if (player.getVelocityY() != 0f)  player.setVelocityY(0f);
 
         if (player.getBody().getLinearVelocity().y != 0 && !isPlayerNearABox(player.getBody().getPosition()) && !player.getState().equals(State.JUMPING) && !player.getState().equals(State.FALLING) && !player.getState().equals(State.ATTACKING) && !player.getState().equals(State.DYING) && !player.getState().equals(State.HURT)) {
             fallingStartingY = player.getBody().getPosition().y;
@@ -246,7 +246,7 @@ public class MovementHandler {
     }
 
     private void ladderMovement() {
-        player.setVelocityX(0);
+        player.setVelocityX(0f);
         player.setVelocityY(0.104f);
         player.getPlayerAnimations().setStopped(true);
 
@@ -262,11 +262,11 @@ public class MovementHandler {
         }
 
         if (inputKeys.get(InputKeys.LEFT)) {
-            player.setVelocityX(-1);
+            player.setVelocityX(-1f);
             player.getPlayerAnimations().setStopped(false);
         }
         if (inputKeys.get(InputKeys.RIGHT)) {
-            player.setVelocityX(1);
+            player.setVelocityX(1f);
             player.getPlayerAnimations().setStopped(false);
         }
         if (inputKeys.get(InputKeys.LEFT) && inputKeys.get(InputKeys.RIGHT)) {
@@ -274,7 +274,7 @@ public class MovementHandler {
             player.getPlayerAnimations().setStopped(true);
         }
         if ((Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP))) {
-            player.setVelocityY(1);
+            player.setVelocityY(1f);
             player.getPlayerAnimations().setStopped(false);
         }
         if ((Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN))) {
@@ -282,8 +282,9 @@ public class MovementHandler {
                 player.setPlayerState(State.FALLING);
                 player.getPlayerAnimations().setCurrent("fall", false);
                 player.setPlayerSpeed(DEFAULT_SPEED);
+                player.setVelocityY(0f);
             }
-            player.setVelocityY(-1);
+            player.setVelocityY(-1f);
             player.getPlayerAnimations().setStopped(false);
         }
 
