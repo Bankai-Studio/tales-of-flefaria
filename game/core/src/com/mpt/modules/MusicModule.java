@@ -18,6 +18,7 @@ public class MusicModule {
     private static Sound portalSound;
 
     private static Sound playerDeathSound;
+    private static Music enemyAttackSound;
 
     public static void setup() {
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/Poseidon's Realm.wav"));
@@ -30,6 +31,7 @@ public class MusicModule {
         doubleJumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/doubleJumpSound.mp3"));
         portalSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/portalSound.mp3"));
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/humanDeath.mp3"));
+        enemyAttackSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/enemyAttack.mp3"));
     }
 
     public static Music getGameOverSound() {return gameOverSound;}
@@ -63,7 +65,9 @@ public class MusicModule {
     public static Sound getPlayerDeathSound() {
         return playerDeathSound;
     }
+    public static Music getEnemyAttackSound(){return enemyAttackSound;}
     public static void dispose(){
+        enemyAttackSound.dispose();
         playerDeathSound.dispose();
         portalSound.dispose();
         jumpSound.dispose();
