@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="239">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="260">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <tileset firstgid="179" source="../Map1/ObjectsTileset.tsx"/>
+ <tileset firstgid="258" source="Tutorial.tsx"/>
  <layer id="4" name="Beckground" width="150" height="50">
   <data encoding="base64" compression="zlib">
    eJzt1YEKgjAQAND9QlbaDxVB/f/31JGCiBG0cs3egyEMHLfb7pYSAAAAAAAAAAAAAAAAAAAAAAAAUKtD6QAytan+PcAS9v2ozTTm2uq9mZnTt5YT92f3xn9d+p0ziju0yVzj3H+7frSZ6/2LGnvmnGY01uqU8t+5Y3rUx7RnRP2tOXevRF7WUgs1iH493LnI+7Rf/+JZDG/MEG/pGK9fWDN6zDY939s4B6X3DwDwSZfSAQAAAADc3QC/zQY3
@@ -75,6 +76,24 @@
   <object id="227" gid="238" x="4297.25" y="1440.06" width="23" height="32"/>
   <object id="229" gid="239" x="4297.25" y="1408.09" width="23" height="32"/>
   <object id="233" gid="199" x="128" y="1248" width="50" height="25"/>
+  <object id="239" gid="271" x="365.667" y="1260.08" width="64" height="64"/>
+  <object id="240" gid="258" x="312" y="1068" width="32" height="32"/>
+  <object id="241" gid="259" x="518.5" y="1069" width="32" height="32"/>
+  <object id="242" gid="267" x="356.667" y="1056" width="150" height="32"/>
+  <object id="243" gid="267" x="992" y="1056" width="150" height="32"/>
+  <object id="244" gid="267" x="1184" y="1056" width="150" height="32"/>
+  <object id="245" gid="264" x="1148.67" y="1056.67" width="32" height="32"/>
+  <object id="246" gid="271" x="1109.83" y="1368" width="64" height="64"/>
+  <object id="247" gid="269" x="1491.95" y="1150.59" width="128" height="50"/>
+  <object id="248" gid="270" x="4644.33" y="1091.33" width="128" height="50"/>
+  <object id="249" gid="267" x="1961.33" y="1127.33" width="150" height="32"/>
+  <object id="252" gid="272" x="1951" y="1315" width="64" height="64"/>
+  <object id="254" gid="268" x="4210" y="1219" width="32" height="32"/>
+  <object id="255" gid="265" x="4210" y="1343" width="32" height="32"/>
+  <object id="256" gid="267" x="4150" y="1283" width="150" height="32"/>
+  <object id="257" gid="266" x="3100.5" y="1120.5" width="40" height="32"/>
+  <object id="258" gid="264" x="3139" y="1120" width="32" height="32"/>
+  <object id="259" gid="259" x="3168" y="1120" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="3" name="Objects">
   <object id="1" name="Player" x="78" y="1180" width="30" height="30"/>
