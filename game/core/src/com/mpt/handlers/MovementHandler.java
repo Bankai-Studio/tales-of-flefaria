@@ -41,14 +41,7 @@ public class MovementHandler {
     private float staminaTimer;
     private boolean jumpedFromBox = false;
     private float fallingStartingY;
-    static Map<InputKeys, Boolean> inputKeys = new HashMap<>();
-
-    static {
-        inputKeys.put(InputKeys.LEFT, false);
-        inputKeys.put(InputKeys.RIGHT, false);
-        inputKeys.put(InputKeys.SPACE, false);
-        inputKeys.put(InputKeys.SHIFT, false);
-    }
+    private Map<InputKeys, Boolean> inputKeys = new HashMap<>();
 
     Player player;
     GameScreen gameScreen;
@@ -56,6 +49,7 @@ public class MovementHandler {
 
     public MovementHandler(Player player, GameScreen gameScreen) {
         this.player = player;
+        this.gameScreen = gameScreen;
         jumpCounter = 0;
         isDoubleJumpReady = true;
         wasLastFrameYVelocityZero = false;
@@ -63,7 +57,12 @@ public class MovementHandler {
         doubleJumpTimer = 0f;
         staminaTimer = 0f;
         playerAnimations = player.getPlayerAnimations();
-        this.gameScreen = gameScreen;
+
+        inputKeys.put(InputKeys.LEFT, false);
+        inputKeys.put(InputKeys.RIGHT, false);
+        inputKeys.put(InputKeys.SPACE, false);
+        inputKeys.put(InputKeys.SHIFT, false);
+
     }
 
     public void leftPressed() {
@@ -99,6 +98,7 @@ public class MovementHandler {
     }
 
     public void update(float delta) {
+
         player.setX(player.getBody().getPosition().x * PPM);
         player.setY(player.getBody().getPosition().y * PPM);
 

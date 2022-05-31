@@ -37,14 +37,14 @@ public class MapHandler {
         this.gameScreen = gameScreen;
     }
 
-    public OrthogonalBleedingHandler setup(float unitScale, SpriteBatch batch, String mapName) {
+    public OrthogonalBleedingHandler setup(float unitScale, SpriteBatch batch, String mapName, int character) {
         this.spriteBatch = batch;
         tiledMap = new TmxMapLoader().load("maps/" + mapName + "/Platform.tmx");
-        parseMapObjects(tiledMap.getLayers().get("Objects").getObjects());
+        parseMapObjects(tiledMap.getLayers().get("Objects").getObjects(), character);
         return new OrthogonalBleedingHandler(tiledMap, unitScale, batch);
     }
 
-    private void parseMapObjects(MapObjects mapObjects) {
+    private void parseMapObjects(MapObjects mapObjects, int character) {
         
         if(mapObjects.get("Spawnpoint") != null && mapObjects.get("Spawnpoint") instanceof RectangleMapObject) {
             Rectangle rectangle = (((RectangleMapObject) mapObjects.get("Spawnpoint")).getRectangle());
@@ -74,7 +74,7 @@ public class MapHandler {
                             0f,
                             gameScreen.getWorld()
                     );
-                    gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body));
+                    gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body, character));
                     body.setTransform(gameScreen.getPreferencesHandler().getRespawnPosition(), body.getAngle());
                 }
                 if(rectangleName.equals("Checkpoint")) {

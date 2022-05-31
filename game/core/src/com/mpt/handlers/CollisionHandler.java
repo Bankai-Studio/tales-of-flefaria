@@ -99,7 +99,7 @@ public class CollisionHandler implements ContactListener {
         Player player = (Player) fixtureA.getBody().getUserData();
         Endpoint endpoint = (Endpoint) fixtureB.getBody().getUserData();
         MusicModule.getPortalSound().play(0.1f);
-        ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen());
+        ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen(gameScreen));
     }
 
 }

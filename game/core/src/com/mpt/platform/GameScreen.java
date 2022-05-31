@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.attributes.PointLightsAttribute;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -38,12 +41,12 @@ import static com.mpt.constants.Constants.PPM;
 
 public class GameScreen extends ScreenAdapter implements InputProcessor {
 
-    private final OrthographicCamera camera;
+    private OrthographicCamera camera;
     private SpriteBatch batch;
     private Stage stage;
     private final World world;
     private final Box2DDebugRenderer box2DDebugRenderer;
-    private final OrthogonalBleedingHandler orthogonalTiledMapRenderer;
+    private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private final MapHandler mapHandler;
     private Player player;
     private ArrayList<Enemy> enemies;
@@ -57,10 +60,13 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private ArrayList<Ladder> ladders;
     private ArrayList<Coin> coins;
     private ArrayList<KillBlock> killBlocks;
+    private Array<Body> bodies;
     private InputMultiplexer inputMultiplexer;
     private Label coinValueLabel;
     private Label playerHealthLabel;
     private AssetManager assetManager;
+    private String currentMap;
+    private int curretCharacter;
 
     private int screenWidth, screenHeight;
 
@@ -82,9 +88,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
 
-        mapHandler = new MapHandler(this);
-        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "MapTutorial");
-
         extendViewport = new ExtendViewport(30 * PPM, 20 * PPM);
         camera = (OrthographicCamera) extendViewport.getCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
@@ -95,9 +98,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         inputMultiplexer = new InputMultiplexer(this, stage);
 
-        movementHandler = new MovementHandler(player, this);
+        mapHandler = new MapHandler(this);
+        currentMap = "MapTutorial";
+        curretCharacter = 0;
+        loadMap(currentMap, curretCharacter);
 
-        world.setContactListener(new CollisionHandler(preferencesHandler, this));
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
@@ -116,6 +121,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void render(float delta) {
+        world.step(1/60f, 6, 2);
+
         this.update(delta);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -233,7 +240,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public boolean scrolled(float amountX, float amountY) {return false;}
 
     private void update(float delta) {
-        world.step(1/60f, 6, 2);
         this.cameraUpdate();
 
         batch.setProjectionMatrix(camera.combined);
@@ -289,6 +295,48 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public void updateHealth(int currentPlayerHealth) {
             playerHealthLabel.setText(currentPlayerHealth);
+    }
+
+    public void loadMap(String mapName, int character) {
+        currentMap = mapName;
+        curretCharacter = character;
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, currentMap, curretCharacter);
+        movementHandler = new MovementHandler(player, this);
+        world.setContactListener(new CollisionHandler(preferencesHandler, this));
+    }
+
+    public void clearBodies() {
+        boxes.clear();
+        coins.clear();
+        ladders.clear();
+        killBlocks.clear();
+        enemies.clear();
+        checkpoints.clear();
+        //ghosts.clear();
+
+        bodies = new Array<Body>(world.getBodyCount());
+        world.getBodies(bodies);
+        for(Body body : bodies)
+            world.destroyBody(body);
+    }
+
+    public String selectNextMap() {
+        switch(currentMap) {
+            case "MapTutorial": return "Map1";
+            case "Map1": return "Map2";
+            case "Map2": return "Map3";
+            case "Map3": return "Map4";
+        }
+        return "MapTutorial";
+    }
+
+    public int selectNexCharacter() {
+        switch(curretCharacter) {
+            case 0: return 1;
+            case 1: return 2;
+            case 2: return 0;
+        }
+        return 0;
     }
 
     // Getters

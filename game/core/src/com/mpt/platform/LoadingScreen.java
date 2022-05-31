@@ -1,5 +1,7 @@
 package com.mpt.platform;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -7,7 +9,10 @@ import com.mpt.modules.InterfaceModule;
 
 public class LoadingScreen extends InterfaceModule {
 
-    public LoadingScreen() {
+    GameScreen gameScreen;
+
+    public LoadingScreen(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
         setup();
     }
 
@@ -16,7 +21,14 @@ public class LoadingScreen extends InterfaceModule {
         Table main = new Table();
         main.setFillParent(true);
 
-        main.add(new Label("loading", textStyle));
+        Label label = new Label("loading", textStyle);
+        label.addAction(Actions.fadeOut(0f));
+        main.add(label);
+        label.addAction(Actions.sequence(Actions.fadeIn(3f), Actions.fadeOut(3f), Actions.run(() ->  {
+            gameScreen.clearBodies();
+            gameScreen.loadMap(gameScreen.selectNextMap(), gameScreen.selectNexCharacter());
+            ((Game) Gdx.app.getApplicationListener()).setScreen(gameScreen);
+        })));
 
         stage.addActor(main);
     }
@@ -29,13 +41,13 @@ public class LoadingScreen extends InterfaceModule {
     @Override
     public void show() {
         super.show();
-        stage.addAction(Actions.fadeIn(3f));
+        stage.addAction(Actions.fadeIn(1f));
     }
 
     @Override
     public void hide() {
         super.hide();
-        stage.addAction(Actions.fadeOut(3f));
+        stage.addAction(Actions.fadeOut(1f));
         dispose();
     }
 

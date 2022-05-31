@@ -16,7 +16,7 @@ public class Player extends GameEntity {
     private final int MAX_PLAYER_STAMINA = 100;
     private final float FRAME_TIME = 1 / 7f;
     public final float HEAVY_ATTACK_MULTIPLIER = 1.5f;
-    private final int characterSelection;
+    private int characterSelection;
     private final AnimationHandler playerAnimations;
 
     // Player States
@@ -43,7 +43,7 @@ public class Player extends GameEntity {
     private float playerSpeed;
     private int collectedCoins;
 
-    public Player(float width, float height, Body body) {
+    public Player(float width, float height, Body body, int character) {
         super(width, height, body);
         minDamage = 34;
         maxDamage = 50;
@@ -51,8 +51,8 @@ public class Player extends GameEntity {
         playerSpeed = 8f;
         playerStamina = MAX_PLAYER_STAMINA;
         canRespawn = true;
+        characterSelection = character;
         playerAnimations = new AnimationHandler();
-        characterSelection = 0;
         collectedCoins = 0;
         adjustX = -15f;
         adjustY = -17f;
@@ -199,6 +199,10 @@ public class Player extends GameEntity {
 
     public void setPlayerHealth(int health) {
         this.playerHealth = health;
+    }
+
+    public void setCharacterSelection(int characterSelection) {
+        this.characterSelection = characterSelection;
     }
 
     // Getters
