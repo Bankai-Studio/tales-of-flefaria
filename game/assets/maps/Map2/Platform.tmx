@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="1082">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="1088">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="3" name="Beckground" width="160" height="60">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="8" name="TileObjects">
@@ -20,8 +20,8 @@
   <object id="889" gid="76" x="768" y="1344" width="39" height="17"/>
   <object id="890" gid="76" x="864" y="1472" width="39" height="17"/>
   <object id="891" gid="76" x="1088" y="1472" width="39" height="17"/>
-  <object id="892" gid="76" x="1024" y="1664" width="39" height="17"/>
-  <object id="893" gid="76" x="960" y="1824" width="39" height="17"/>
+  <object id="892" gid="76" x="928" y="1634" width="39" height="17"/>
+  <object id="893" gid="76" x="992" y="1792" width="39" height="17"/>
   <object id="894" gid="77" x="928" y="1280" width="46" height="22"/>
   <object id="895" gid="78" x="960" y="1280" width="70" height="44"/>
   <object id="896" gid="78" x="1312" y="1344" width="70" height="44"/>
@@ -32,12 +32,12 @@
   <object id="901" gid="74" x="1664" y="1312" width="22" height="14"/>
   <object id="902" gid="74" x="1728" y="1408" width="22" height="14"/>
   <object id="903" gid="74" x="1792" y="1504" width="22" height="14"/>
-  <object id="904" gid="74" x="1856" y="1600" width="22" height="14"/>
-  <object id="905" gid="75" x="1920" y="1664" width="27" height="16"/>
+  <object id="904" gid="74" x="1824" y="1536" width="22" height="14"/>
+  <object id="905" gid="75" x="1888" y="1632" width="27" height="16"/>
   <object id="906" gid="75" x="2144" y="1664" width="27" height="16"/>
   <object id="907" gid="76" x="2112" y="1856" width="39" height="17"/>
-  <object id="908" gid="75" x="2240" y="1504" width="27" height="16"/>
-  <object id="909" gid="75" x="2304" y="1344" width="27" height="16"/>
+  <object id="908" gid="75" x="2272" y="1440" width="27" height="16"/>
+  <object id="909" gid="75" x="1952" y="1696" width="27" height="16"/>
   <object id="910" gid="75" x="2368" y="1216" width="27" height="16"/>
   <object id="911" gid="76" x="2336" y="1216" width="39" height="17"/>
   <object id="912" gid="76" x="2496" y="1248" width="39" height="17"/>
@@ -200,7 +200,6 @@
   <object id="1071" gid="76" x="4928" y="704" width="39" height="17"/>
   <object id="1072" gid="77" x="4960" y="704" width="46" height="22"/>
   <object id="1073" gid="74" x="4992" y="1120" width="22" height="14"/>
-  <object id="1074" gid="25" x="4320" y="1600" width="35" height="64"/>
   <object id="1075" gid="78" x="1920" y="1120" width="70" height="44"/>
   <object id="1076" gid="76" x="1984" y="1120" width="39" height="17"/>
   <object id="1077" gid="76" x="1760" y="1184" width="39" height="17"/>
@@ -208,6 +207,7 @@
   <object id="1079" gid="77" x="2048" y="1056" width="46" height="22"/>
   <object id="1080" gid="78" x="2080" y="1056" width="70" height="44"/>
   <object id="1081" gid="77" x="2176" y="1120" width="46" height="22"/>
+  <object id="1085" gid="76" x="1056" y="1632" width="39" height="17"/>
  </objectgroup>
  <objectgroup id="2" name="Objects">
   <object id="5" name="Player" x="64" y="1280" width="30" height="30"/>
@@ -1025,7 +1025,7 @@
   <object id="618" name="Checkpoint" x="1792" y="1120" width="32" height="64"/>
   <object id="620" name="Checkpoint" x="4032" y="1440" width="32" height="64"/>
   <object id="621" name="Checkpoint" x="3200" y="384" width="32" height="64"/>
-  <object id="622" name="Checkpoint" x="2752" y="96" width="32" height="64"/>
+  <object id="622" name="Checkpoint" x="3264" y="128" width="32" height="64"/>
   <object id="623" x="4992" y="1120">
    <polygon points="0,0 32,0 32,128 0,128"/>
   </object>
@@ -1075,19 +1075,12 @@
   <object id="658" name="Coin" x="608" y="1344" width="16" height="16"/>
   <object id="659" name="Coin" x="736" y="1280" width="16" height="16"/>
   <object id="660" name="Coin" x="960" y="1216" width="16" height="16"/>
-  <object id="662" name="KillBlock" x="864" y="1440" width="32" height="32"/>
-  <object id="663" name="KillBlock" x="896" y="1504" width="32" height="32"/>
-  <object id="664" name="KillBlock" x="928" y="1600" width="32" height="32"/>
-  <object id="665" name="KillBlock" x="960" y="1792" width="32" height="32"/>
-  <object id="666" name="KillBlock" x="992" y="1760" width="32" height="32"/>
   <object id="671" name="Coin" x="1216" y="1280" width="16" height="16"/>
   <object id="672" name="Coin" x="1504" y="1248" width="16" height="16"/>
   <object id="673" name="Coin" x="1568" y="1184" width="16" height="16"/>
   <object id="679" name="Coin" x="1920" y="1056" width="16" height="16"/>
   <object id="680" name="Coin" x="1760" y="1120" width="16" height="16"/>
   <object id="682" name="Coin" x="2080" y="992" width="16" height="16"/>
-  <object id="690" name="KillBlock" x="2112" y="1824" width="32" height="32"/>
-  <object id="691" name="KillBlock" x="2080" y="1792" width="32" height="32"/>
   <object id="700" name="Scorpio" x="512" y="1408" width="40" height="20"/>
   <object id="701" name="Scorpio" x="1312" y="1312" width="40" height="20"/>
   <object id="702" name="Scorpio" x="2830" y="1375" width="40" height="20"/>
@@ -1144,14 +1137,14 @@
   <object id="780" name="Coin" x="1792" y="160" width="16" height="16"/>
   <object id="781" name="Scorpio" x="2048" y="160" width="40" height="20"/>
   <object id="782" name="Coin" x="2176" y="128" width="16" height="16"/>
-  <object id="783" name="Checkpoint" x="1280" y="544" width="32" height="64"/>
+  <object id="783" name="Checkpoint" x="1344" y="544" width="32" height="64"/>
   <object id="785" name="Scorpio" x="2402.67" y="136" width="40" height="20"/>
   <object id="786" name="Coin" x="3136" y="1280" width="16" height="16"/>
   <object id="787" name="Coin" x="2944" y="96" width="16" height="16"/>
   <object id="788" name="Coin" x="3040" y="96" width="16" height="16"/>
   <object id="789" name="Coin" x="3168" y="128" width="16" height="16"/>
   <object id="790" name="Coin" x="3167.33" y="89.3333" width="16" height="16"/>
-  <object id="791" name="Coin" x="3296" y="128" width="16" height="16"/>
+  <object id="791" name="Coin" x="3314" y="138" width="16" height="16"/>
   <object id="792" name="Coin" x="3424" y="160" width="16" height="16"/>
   <object id="794" name="Scorpio" x="3616" y="224" width="40" height="20"/>
   <object id="796" name="Coin" x="3776" y="192" width="16" height="16"/>
@@ -1177,29 +1170,25 @@
   <object id="816" name="Coin" x="5056" y="1152" width="16" height="16"/>
   <object id="817" name="Coin" x="5056" y="1216" width="16" height="16"/>
   <object id="818" name="Coin" x="5056" y="1280" width="16" height="16"/>
-  <object id="819" name="Coin" x="5024" y="1344" width="16" height="16"/>
-  <object id="820" name="Coin" x="4992" y="1408" width="16" height="16"/>
-  <object id="821" name="Coin" x="4960" y="1472" width="16" height="16"/>
+  <object id="819" name="Coin" x="5035" y="1345" width="16" height="16"/>
+  <object id="820" name="Coin" x="5023" y="1417" width="16" height="16"/>
+  <object id="821" name="Coin" x="4868" y="1451" width="16" height="16"/>
   <object id="822" name="Coin" x="4736" y="1472" width="16" height="16"/>
   <object id="823" name="Coin" x="4640" y="1504" width="16" height="16"/>
   <object id="824" name="Coin" x="4544" y="1568" width="16" height="16"/>
-  <object id="825" name="Endpoint" x="4320" y="1536" width="32" height="64"/>
+  <object id="825" name="EndpointRight" x="4320" y="1536" width="32" height="64"/>
   <object id="826" name="KillBlock" x="2150.83" y="1632.33" width="19.3333" height="30.6667"/>
   <object id="827" name="KillBlock" x="2183.33" y="1569.83" width="19.3333" height="30.6667"/>
   <object id="828" name="KillBlock" x="2217.83" y="1537.17" width="19.3333" height="30.6667"/>
   <object id="829" name="KillBlock" x="2249.67" y="1473" width="19.3333" height="30.6667"/>
   <object id="830" name="KillBlock" x="4999.67" y="1087.33" width="19.3333" height="30.6667"/>
   <object id="831" name="KillBlock" x="1030.67" y="1634" width="19.3333" height="30.6667"/>
-  <object id="832" name="KillBlock" x="1063.83" y="1601.5" width="19.3333" height="30.6667"/>
-  <object id="833" name="KillBlock" x="2031.83" y="1728.67" width="19.3333" height="30.6667"/>
+  <object id="832" name="KillBlock" x="966.83" y="1793.5" width="19.3333" height="30.6667"/>
   <object id="834" name="KillBlock" x="1989.83" y="1697.17" width="19.3333" height="30.6667"/>
-  <object id="835" name="KillBlock" x="1956.83" y="1664.17" width="19.3333" height="30.6667"/>
   <object id="836" name="KillBlock" x="1925.83" y="1632.67" width="19.3333" height="30.6667"/>
-  <object id="837" name="KillBlock" x="1894.33" y="1600.67" width="19.3333" height="30.6667"/>
   <object id="838" name="KillBlock" x="1861.83" y="1567.67" width="19.3333" height="30.6667"/>
-  <object id="839" name="KillBlock" x="1828.83" y="1505.17" width="19.3333" height="30.6667"/>
   <object id="840" name="KillBlock" x="1797.33" y="1473.67" width="19.3333" height="30.6667"/>
-  <object id="841" name="KillBlock" x="1761.33" y="1437.67" width="19.3333" height="30.6667"/>
+  <object id="841" name="KillBlock" x="2304" y="1312" width="19.3333" height="30.6667"/>
   <object id="843" name="KillBlock" x="3175.67" y="1696.67" width="19.3333" height="30.6667"/>
   <object id="844" name="KillBlock" x="3241.33" y="1731.67" width="19.3333" height="30.6667"/>
   <object id="848" x="1152" y="1344">
@@ -1257,19 +1246,20 @@
   </object>
   <object id="867" name="KillBlockUp" x="3136" y="1376" width="15.3333" height="30"/>
   <object id="868" name="KillBlockUp" x="1760" y="1216" width="15.3333" height="30"/>
-  <object id="869" name="KillBlockUp" x="1952" y="1152" width="15.3333" height="30"/>
   <object id="870" name="KillBlockUp" x="2080" y="1088" width="15.3333" height="30"/>
-  <object id="871" name="KillBlockUp" x="2208" y="1152" width="15.3333" height="30"/>
   <object id="872" name="KillBlockUp" x="960" y="1312" width="15.3333" height="30"/>
   <object id="873" name="KillBlockUp" x="2176" y="480" width="15.3333" height="30"/>
   <object id="874" x="2016" y="480">
    <polygon points="0,0 32,0 32,96 0,96"/>
   </object>
-  <object id="875" name="KillBlockUp" x="2311.67" y="480.333" width="15.3333" height="30"/>
   <object id="876" name="KillBlockUp" x="2954.33" y="160.333" width="15.3333" height="30"/>
   <object id="877" name="KillBlockUp" x="3049" y="159.667" width="15.3333" height="30"/>
   <object id="878" name="KillBlockUp" x="5000.33" y="1023.67" width="15.3333" height="30"/>
-  <object id="879" name="KillBlockUp" x="4795.67" y="1380.33" width="15.3333" height="30"/>
+  <object id="1082" name="KillBlock" x="2085.33" y="1794.67" width="19.3333" height="30.6667"/>
+  <object id="1083" name="KillBlock" x="1702.33" y="1348.67" width="19.3333" height="30.6667"/>
+  <object id="1084" name="KillBlock" x="902.333" y="1508.67" width="19.3333" height="30.6667"/>
+  <object id="1086" name="KillBlock" x="1126.33" y="1379.67" width="19.3333" height="30.6667"/>
+  <object id="1087" name="KillBlockUp" x="3755.33" y="606" width="15.3333" height="30"/>
  </objectgroup>
  <layer id="1" name="Livello tile 1" width="160" height="60">
   <data encoding="base64" compression="zlib">

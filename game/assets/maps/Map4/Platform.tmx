@@ -71,7 +71,6 @@
   <object id="386" gid="271" x="2880" y="1120" width="8" height="14"/>
   <object id="387" gid="265" x="2240" y="1568" width="17" height="16"/>
   <object id="388" gid="259" x="2272" y="1568" width="63" height="27"/>
-  <object id="389" gid="305" x="2144" y="1568" width="47" height="57"/>
  </objectgroup>
  <objectgroup id="2" name="Objects">
   <object id="7" x="0" y="1280">
@@ -503,7 +502,7 @@
   <object id="258" name="Coin" x="2455" y="1434" width="16" height="16"/>
   <object id="259" name="Coin" x="2362" y="1496" width="16" height="16"/>
   <object id="260" name="Coin" x="2256" y="1525" width="16" height="16"/>
-  <object id="261" name="Endpoint" x="2144" y="1504" width="32" height="64"/>
+  <object id="261" name="EndpointRight" x="2144" y="1504" width="32" height="64"/>
   <object id="262" name="KillBlock" x="105.333" y="1506.67" width="19.3333" height="30.6667"/>
   <object id="263" name="KillBlock" x="136.333" y="1442.67" width="19.3333" height="30.6667"/>
   <object id="264" name="KillBlock" x="168.333" y="1411.67" width="19.3333" height="30.6667"/>
