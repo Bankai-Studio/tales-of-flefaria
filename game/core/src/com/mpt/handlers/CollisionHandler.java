@@ -8,9 +8,11 @@ import com.mpt.modules.MusicModule;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.interactables.Coin;
+import com.mpt.objects.interactables.GameOver;
 import com.mpt.objects.interactables.Ghost;
 import com.mpt.objects.interactables.KillBlock;
 import com.mpt.objects.player.Player;
+import com.mpt.platform.GameOverScreen;
 import com.mpt.platform.GameScreen;
 import com.mpt.platform.LoadingScreen;
 
@@ -65,6 +67,10 @@ public class CollisionHandler implements ContactListener {
             hideGhost(fixtureB);
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Ghost)
             hideGhost(fixtureA);
+        if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof GameOver)
+            gameOver();
+        if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof GameOver)
+            gameOver();
     }
 
     private void setNewCheckpoint(Fixture fixtureA, Fixture fixtureB) {
@@ -110,5 +116,9 @@ public class CollisionHandler implements ContactListener {
     private void hideGhost(Fixture fixture){
         Ghost ghost = (Ghost) fixture.getBody().getUserData();
         ghost.setTouched(true);
+    }
+
+    private void gameOver(){
+        ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(gameScreen));
     }
 }
