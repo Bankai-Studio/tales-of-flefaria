@@ -80,6 +80,7 @@ public class CollisionHandler implements ContactListener {
             coin.setIsCollected(true);
             MusicModule.getCollectCoinSound().play();
             player.setCollectedCoins(player.getCollectedCoins() + 1);
+            gameScreen.updateCoins(player.getCollectedCoins());
         }
     }
 

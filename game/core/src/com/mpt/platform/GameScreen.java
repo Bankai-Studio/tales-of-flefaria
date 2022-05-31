@@ -1,8 +1,10 @@
 package com.mpt.platform;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -10,10 +12,14 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mpt.handlers.*;
+import com.mpt.modules.InterfaceModule;
 import com.mpt.modules.MusicModule;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
@@ -51,6 +57,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private ArrayList<Coin> coins;
     private ArrayList<KillBlock> killBlocks;
     private InputMultiplexer inputMultiplexer;
+    private Label coinValueLabel;
 
     private int screenWidth, screenHeight;
 
@@ -243,7 +250,23 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     private void setupInterface() {
+        Table root = new Table();
+        root.setFillParent(true);
 
+        Table main = new Table();
+        Image image = new Image(new Texture(Gdx.files.internal("coin/coins.png")));
+        image.setScale(2f);
+        coinValueLabel = new Label("0", InterfaceModule.setupFont(36, Color.WHITE));
+
+        main.add(image);
+        main.add(coinValueLabel).padLeft(25f).padBottom(30f);
+        root.add(main).padLeft(10f).padBottom(15f).expand().bottom().left();
+
+        stage.addActor(root);
+    }
+
+    public void updateCoins(int currentCollectedCoins) {
+        coinValueLabel.setText(currentCollectedCoins);
     }
 
     // Getters
@@ -273,7 +296,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
     public void addBox(Box box) {boxes.add(box);}
     public void addLadder(Ladder ladder) { ladders.add(ladder);}
-    public void addCoin(Coin coin) {coins.add(coin);}
+    public void addCoin(Coin coin) {
+        coins.add(coin);
+    }
     public void addKillBlock(KillBlock killBlock) {killBlocks.add(killBlock);}
     public Player getPlayer() {
         return player;
