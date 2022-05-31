@@ -71,7 +71,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         screenHeight = Gdx.graphics.getHeight();
 
         mapHandler = new MapHandler(this);
-        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map4");
+        orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, "Map1");
 
         extendViewport = new ExtendViewport(30 * PPM, 20 * PPM);
         camera = (OrthographicCamera) extendViewport.getCamera();
@@ -115,16 +115,16 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         for(KillBlock killBlock : killBlocks) killBlock.render(batch);
 
-        mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
         orthogonalTiledMapRenderer.render(); // Renders the map
+        mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
 
-        for(Enemy enemy : enemies) {enemy.render(batch);}
-        for(Box box : boxes) box.render(batch);
-        for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
         for(Checkpoint checkpoint : checkpoints) checkpoint.render(batch);
+        for(Coin coin : coins) if(!coin.getIsCollected()) coin.render(batch);
+        for(Enemy enemy : enemies) {enemy.render(batch);}
         endpoint.render(batch);
 
         player.render(batch);
+        for(Box box : boxes) box.render(batch);
 
 
         batch.end();
