@@ -234,7 +234,7 @@
    <polygon points="0,0 256,0 256,256 0,256"/>
   </object>
   <object id="103" name="Box" x="993.333" y="1248" width="30" height="30"/>
-  <object id="115" name="Scorpio" x="4672" y="1280" width="40" height="20"/>
+  <object id="115" name="Scorpio" x="4590.67" y="1281.33" width="40" height="20"/>
   <object id="116" name="Coin" x="1493" y="1056" width="16" height="16"/>
   <object id="119" name="EndpointRight" x="4288" y="768" width="32" height="64"/>
   <object id="120" name="Coin" x="1754" y="1120" width="16" height="16"/>
