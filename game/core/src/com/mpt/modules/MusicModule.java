@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
+import java.util.HashMap;
+
 public class MusicModule {
     //Musics
     private static Music mainMenuMusic;
@@ -19,8 +21,8 @@ public class MusicModule {
     private static Sound portalSound;
     private static Sound playerDeathSound;
     private static Music enemyAttackSound;
-    private static Music welcomeToFlefaria;
-    private static Music theForest;
+
+    private static HashMap<String, Music> worldMusics;
 
     public static void setup() {
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/Poseidon's Realm.wav"));
@@ -35,8 +37,13 @@ public class MusicModule {
         portalSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/portalSound.mp3"));
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/humanDeath.mp3"));
         enemyAttackSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/enemyAttack.mp3"));
-        welcomeToFlefaria = Gdx.audio.newMusic(Gdx.files.internal("audio/Welcome to Flefaria.wav"));
-        theForest = Gdx.audio.newMusic(Gdx.files.internal("audio/The Forest.mp3"));
+        worldMusics = new HashMap<>();
+        worldMusics.put("MapTutorial", Gdx.audio.newMusic(Gdx.files.internal("audio/Welcome to Flefaria.wav")));
+        worldMusics.put("Map1", Gdx.audio.newMusic(Gdx.files.internal("audio/The Forest.mp3")));
+        worldMusics.put("Map2", Gdx.audio.newMusic(Gdx.files.internal("audio/The Underground.mp3")));
+        worldMusics.put("Map3", Gdx.audio.newMusic(Gdx.files.internal("audio/The Ancient Valley.mp3")));
+        worldMusics.put("Map4", Gdx.audio.newMusic(Gdx.files.internal("audio/Flying Islands.mp3")));
+        worldMusics.put("Map5", Gdx.audio.newMusic(Gdx.files.internal("audio/Flying Islands.mp3")));
     }
 
     public static Music getGameOverSound() {return gameOverSound;}
@@ -82,11 +89,7 @@ public class MusicModule {
     public static Music getEnemyAttackSound(){return enemyAttackSound;}
 
     public static Music getWorldMusic(String worldName) {
-        switch(worldName) {
-            case "MapTutorial": return welcomeToFlefaria;
-            case "Map1": return theForest;
-            default: return null;
-        }
+        return worldMusics.get(worldName);
     }
 
     public static void dispose(){

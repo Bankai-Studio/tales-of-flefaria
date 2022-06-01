@@ -322,24 +322,29 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     public void loadMap(String mapName, int character) {
+        if(currentMap != mapName && MusicModule.getWorldMusic(currentMap).isPlaying())
+            MusicModule.getWorldMusic(currentMap).stop();
         currentMap = mapName;
         currentCharacter = character;
-        Music worldMusic = MusicModule.getWorldMusic(mapName);
-        worldMusic.play();
-        worldMusic.setVolume(0f);
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                if (!MusicModule.getMainMenuMusic().isPlaying() && worldMusic.isPlaying()) {
-                    if (worldMusic.getVolume() < 0.2f) {
-                        worldMusic.setVolume(Math.min(0.1f, MusicModule.getMainMenuMusic().getVolume() + 0.01f));
-                    }
-                    else {
-                        this.cancel();
+        Music worldMusic = MusicModule.getWorldMusic(currentMap);
+        if(worldMusic != null) {
+            worldMusic.play();
+            worldMusic.setLooping(true);
+            worldMusic.setVolume(0f);
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    if (!MusicModule.getMainMenuMusic().isPlaying() && worldMusic.isPlaying()) {
+                        if (worldMusic.getVolume() < 0.3f) {
+                            worldMusic.setVolume(Math.min(0.1f, worldMusic.getVolume() + 0.01f));
+                        }
+                        else {
+                            this.cancel();
+                        }
                     }
                 }
-            }
-        }, 0f, 0.1f);
+            }, 0f, 0.1f);
+        }
         orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, currentMap, currentCharacter);
         movementHandler = new MovementHandler(player, this);
         world.setContactListener(new CollisionHandler(preferencesHandler, this));
