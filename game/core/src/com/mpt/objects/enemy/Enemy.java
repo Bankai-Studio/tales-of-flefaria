@@ -57,6 +57,7 @@ public abstract class Enemy extends GameEntity {
                 enemyState = EnemyState.IDLE;
                 animationHandler.setCurrent("idle");
             }
+            if(body.getLinearVelocity().x == 0 && !playerSpotted(gameScreen.getPlayer())) enemyMovementsCollision();
             if (!playerSpotted(gameScreen.getPlayer())) enemyMovements();
             else lurkTarget(gameScreen.getPlayer());
         } else body.setLinearVelocity(0, body.getLinearVelocity().y);
@@ -91,21 +92,40 @@ public abstract class Enemy extends GameEntity {
             enemyState = EnemyState.WALKING;
             animationHandler.setCurrent("walk");
         }
+        if (this.getBody().getLinearVelocity().x > 0) {
+            xMaxLimitDX = initialPosX + 2.4f;
+            xMaxLimitSX = initialPosX - 5f;
+            switchDirectionToRight = true;
+            if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight) {
+                body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
+                setFacingRight();
+            } else {
+                switchDirectionToRight = false;
+                switchDirectionToLeft = true;
+            }
+            if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX) {
+                body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
+                setFacingLeft();
+            } else {
+                switchDirectionToLeft = false;
+                switchDirectionToRight = true;
+            }
+        }
+    }
 
-        xMaxLimitDX = initialPosX + 2.4f;
-        xMaxLimitSX = initialPosX - 5f;
+    public void enemyMovementsCollision() {
         switchDirectionToRight = true;
-        if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight) {
+        if (body.getPosition().x < initialPosX + 0.1f && switchDirectionToRight) {
             body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
             setFacingRight();
         } else {
-            switchDirectionToRight = false;
             switchDirectionToLeft = true;
+            switchDirectionToRight = false;
         }
-        if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX) {
+        if (body.getPosition().x > initialPosX - 0.1f && switchDirectionToLeft) {
             body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
             setFacingLeft();
-        } else {
+        } else{
             switchDirectionToLeft = false;
             switchDirectionToRight = true;
         }
@@ -142,8 +162,7 @@ public abstract class Enemy extends GameEntity {
                     animationHandler.setCurrent("idle");
                 }
             }
-        }
-        else if(enemyReadyToAttack(player)){
+        } else if (enemyReadyToAttack(player)) {
             MusicModule.getEnemyAttackSound().setVolume(0.1f);
             MusicModule.getEnemyAttackSound().play();
             enemyAttackPlayer(player);

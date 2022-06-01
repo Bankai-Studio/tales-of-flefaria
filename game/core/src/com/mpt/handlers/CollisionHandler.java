@@ -2,11 +2,13 @@ package com.mpt.handlers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.MusicModule;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.endpoint.Endpoint;
+import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.interactables.Coin;
 import com.mpt.objects.interactables.GameOver;
 import com.mpt.objects.interactables.Ghost;
@@ -20,6 +22,8 @@ public class CollisionHandler implements ContactListener {
 
     PreferencesHandler preferencesHandler;
     GameScreen gameScreen;
+
+    private float walkSpeed = 1f;
 
     public CollisionHandler(PreferencesHandler preferencesHandler, GameScreen gameScreen) {
         this.preferencesHandler = preferencesHandler;
@@ -71,6 +75,12 @@ public class CollisionHandler implements ContactListener {
             gameOver();
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof GameOver)
             gameOver();
+        if (fixtureA.getBody().getUserData() instanceof Enemy)
+            collisionWithBlock(fixtureA);
+        if (fixtureB.getBody().getUserData() instanceof Enemy)
+            collisionWithBlock(fixtureB);
+
+
     }
 
     private void setNewCheckpoint(Fixture fixtureA, Fixture fixtureB) {
@@ -97,7 +107,6 @@ public class CollisionHandler implements ContactListener {
             gameScreen.updateCoins(player.getCollectedCoins());
         }
     }
-
     private void collisionKillBlock(Fixture fixture) {
         Player player = (Player) fixture.getBody().getUserData();
         player.setPlayerState(Player.State.DYING);
@@ -105,6 +114,8 @@ public class CollisionHandler implements ContactListener {
         MusicModule.getPlayerDeathSound().play(0.1f);
         player.getPlayerAnimations().setCurrent("death");
     }
+
+
 
     private void endLevel(Fixture fixtureA, Fixture fixtureB) {
         MusicModule.getPortalSound().play(0.1f);
@@ -118,5 +129,10 @@ public class CollisionHandler implements ContactListener {
 
     private void gameOver(){
         ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(gameScreen));
+    }
+    private void collisionWithBlock(Fixture fixtureA) {
+        Enemy enemy = (Enemy) fixtureA.getBody().getUserData();
+        enemy.getBody().setLinearVelocity(0f,enemy.getBody().getLinearVelocity().y);
+
     }
 }
