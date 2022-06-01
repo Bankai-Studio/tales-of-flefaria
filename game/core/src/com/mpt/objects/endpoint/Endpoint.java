@@ -14,13 +14,18 @@ import static com.mpt.constants.Constants.PPM;
 public class Endpoint extends GameObject {
     private final AnimationHandler animationHandler = new AnimationHandler();
     private final boolean isFlipped;
+    private final TextureAtlas charset;
     public Endpoint(float width, float height, Body body, boolean isFlipped) {
         super(width, height, body);
         body.setUserData(this);
-        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("./portal/portal.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("./portal/portal.atlas"));
         animationHandler.add("portal", new Animation<>(1 / 16f, charset.findRegions("portal")));
         animationHandler.setCurrent("portal");
         this.isFlipped = isFlipped;
+    }
+
+    public void dispose(){
+        charset.dispose();
     }
 
     @Override

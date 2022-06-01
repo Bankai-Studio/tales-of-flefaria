@@ -156,18 +156,23 @@ public abstract class Enemy extends GameEntity {
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack.atlas"));
         float FRAME_TIME = 1 / 6f;
         this.animationHandler.add("attack", new Animation<>(FRAME_TIME, charset.findRegions("attack")));
+        textureAtlases.add(charset);
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/death.atlas"));
         this.animationHandler.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
+        textureAtlases.add(charset);
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/hurt.atlas"));
         this.animationHandler.add("hurt", new Animation<>(FRAME_TIME, charset.findRegions("hurt")));
+        textureAtlases.add(charset);
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/idle.atlas"));
         this.animationHandler.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
+        textureAtlases.add(charset);
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/walk.atlas"));
         this.animationHandler.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
+        textureAtlases.add(charset);
 
         this.animationHandler.setCurrent("walk");
     }

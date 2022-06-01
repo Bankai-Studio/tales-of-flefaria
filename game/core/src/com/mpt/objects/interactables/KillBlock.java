@@ -17,6 +17,10 @@ public class KillBlock extends GameObject {
         texture = new Texture(Gdx.files.internal("./killBlock/"+name+".png"));
     }
 
+    public void dispose(){
+        texture.dispose();
+    }
+
     @Override
     public void update(float delta) {}
 

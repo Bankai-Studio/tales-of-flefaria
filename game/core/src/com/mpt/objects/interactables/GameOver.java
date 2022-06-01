@@ -1,7 +1,6 @@
 package com.mpt.objects.interactables;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -14,14 +13,19 @@ import static com.mpt.constants.Constants.PPM;
 
 public class GameOver extends GameObject {
     private final AnimationHandler animationHandler;
+    private final TextureAtlas charset;
 
     public GameOver(float width, float height, Body body) {
         super(width, height, body);
         body.setUserData(this);
         animationHandler = new AnimationHandler();
-        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("./NPCs/Old_man/idle.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("./NPCs/Old_man/idle.atlas"));
         animationHandler.add("idle", new Animation<>(1 / 4f, charset.findRegions("idle")));
         animationHandler.setCurrent("idle");
+    }
+
+    public void dispose(){
+        charset.dispose();
     }
 
     @Override

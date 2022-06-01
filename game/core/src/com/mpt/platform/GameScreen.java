@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.attributes.PointLightsAttribute;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -166,9 +165,16 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         batch.dispose();
         //font.dispose();
         world.dispose();
-        for (Box box : boxes) box.dispose();
         assetManager.dispose();
         box2DDebugRenderer.dispose();
+        player.dispose();
+        for (Box box : boxes) box.dispose();
+        for(Enemy enemy : enemies) enemy.dispose();
+        for(Ghost ghost : ghosts) ghost.dispose();
+        for(Checkpoint checkpoint : checkpoints) checkpoint.dispose();
+        for(KillBlock killBlock : killBlocks) killBlock.dispose();
+        gameOver.dispose();
+        endpoint.dispose();
     }
 
     @Override

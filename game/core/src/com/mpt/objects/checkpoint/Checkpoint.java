@@ -38,6 +38,12 @@ public class Checkpoint extends GameObject {
         else batch.draw(textureDead, body.getPosition().x * PPM - width / 2, body.getPosition().y * PPM - height / 2);
     }
 
+    public void dispose(){
+        textureUnclaimed.dispose();
+        textureClaimed.dispose();
+        textureDead.dispose();
+    }
+
     public boolean isCheckpointClaimed() {
         return isCheckpointClaimed;
     }
