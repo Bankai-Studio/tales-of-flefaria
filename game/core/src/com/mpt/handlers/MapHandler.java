@@ -11,10 +11,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.BodyModule;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
@@ -23,7 +20,7 @@ import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
-import static com.mpt.constants.Constants.PPM;
+import static com.mpt.constants.Constants.*;
 
 public class MapHandler {
     private TiledMap tiledMap;
@@ -69,6 +66,8 @@ public class MapHandler {
                             false,
                             0f,
                             0f,
+                            BIT_PLAYER,
+                            (short) (BIT_MAP | BIT_BOX | BIT_SENSOR),
                             gameScreen.getWorld()
                     );
                     gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body, character));
@@ -84,6 +83,8 @@ public class MapHandler {
                             true,
                             0f,
                             0f,
+                            BIT_SENSOR,
+                            BIT_PLAYER,
                             gameScreen.getWorld()
                     );
                     gameScreen.addCheckpoint(new Checkpoint(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -98,6 +99,8 @@ public class MapHandler {
                             true,
                             0f,
                             0f,
+                            BIT_SENSOR,
+                            BIT_PLAYER,
                             gameScreen.getWorld()
                     );
                     if(rectangleName.equals("EndpointLeft")) gameScreen.setEndpoint(new Endpoint(rectangle.getWidth(), rectangle.getHeight(), body, false));
@@ -113,6 +116,8 @@ public class MapHandler {
                             false,
                             1000f,
                             0f,
+                            BIT_BOX,
+                            (short) (BIT_MAP | BIT_ENEMY | BIT_PLAYER),
                             gameScreen.getWorld()
                     );
                     gameScreen.addBox(new Box(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -127,6 +132,8 @@ public class MapHandler {
                             true,
                             0f,
                             0f,
+                            BIT_SENSOR,
+                            BIT_PLAYER,
                             gameScreen.getWorld()
                     );
                     gameScreen.addLadder(new Ladder(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -141,6 +148,8 @@ public class MapHandler {
                             true,
                             0f,
                             0f,
+                            BIT_SENSOR,
+                            BIT_PLAYER,
                             gameScreen.getWorld()
                     );
                     gameScreen.addCoin(new Coin(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -155,6 +164,8 @@ public class MapHandler {
                             true,
                             0f,
                             0f,
+                            BIT_SENSOR,
+                            BIT_PLAYER,
                             gameScreen.getWorld()
                     );
                     gameScreen.addKillBlock(new KillBlock(rectangle.getWidth(), rectangle.getHeight(), body, rectangleName));
@@ -169,6 +180,8 @@ public class MapHandler {
                             true,
                             0f,
                             0f,
+                            BIT_SENSOR,
+                            BIT_PLAYER,
                             gameScreen.getWorld()
                     );
                     if(rectangleName.equals("GhostLeft")) gameScreen.addGhost(new Ghost(rectangle.getWidth(), rectangle.getHeight(), body, true));
@@ -184,6 +197,8 @@ public class MapHandler {
                             true,
                             0f,
                             0f,
+                            BIT_SENSOR,
+                            BIT_PLAYER,
                             gameScreen.getWorld()
                     );
                     gameScreen.setGameOver(new GameOver(rectangle.getWidth(), rectangle.getHeight(), body));
@@ -242,6 +257,8 @@ public class MapHandler {
                 false,
                 0f,
                 0f,
+                BIT_ENEMY,
+                BIT_MAP,
                 gameScreen.getWorld()
         );
     }
@@ -251,7 +268,15 @@ public class MapHandler {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         Body body = gameScreen.getWorld().createBody(bodyDef);
         Shape shape = createPolygonShape(polygonMapObject);
-        body.createFixture(shape, 1000);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 1000;
+        fixtureDef.shape = shape;
+        fixtureDef.filter.categoryBits = BIT_MAP;
+        fixtureDef.filter.maskBits = (BIT_PLAYER | BIT_BOX | BIT_ENEMY);
+
+        body.createFixture(fixtureDef);
+
         shape.dispose();
     }
 
