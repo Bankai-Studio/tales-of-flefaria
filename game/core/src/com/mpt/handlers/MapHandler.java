@@ -70,7 +70,15 @@ public class MapHandler {
                             (short) (BIT_MAP | BIT_BOX | BIT_SENSOR),
                             gameScreen.getWorld()
                     );
-                    gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body, character));
+
+                    int tempCoins;
+                    if(gameScreen.getPlayer() != null)
+                        tempCoins = gameScreen.getPlayer().getCollectedCoins();
+                    else
+                        tempCoins = 0;
+                    Player player = new Player(rectangle.getWidth(), rectangle.getHeight(), body, character);
+                    player.setCollectedCoins(tempCoins);
+                    gameScreen.setPlayer(player);
                     body.setTransform(gameScreen.getPreferencesHandler().getRespawnPosition(), body.getAngle());
                 }
                 if(rectangleName.equals("Checkpoint")) {
