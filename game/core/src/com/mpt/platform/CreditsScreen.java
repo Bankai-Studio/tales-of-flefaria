@@ -77,7 +77,8 @@ public class CreditsScreen extends InterfaceModule {
         uiDesigners.add(createCreditLine("Interface Design", "Zaiden")).row();
 
         Table gameSfx = new Table();
-        gameSfx.add(createCreditLine("Game SFX", "Zaiden")).row();
+        gameSfx.add(createCreditLine("Interface SFX", "Zaiden")).row();
+        gameSfx.add(createCreditLine("Game SFX", "Niz")).row();
 
         Table animators = new Table();
         animators.add(createCreditLine("Animations and Assets", "MasterK")).row();
