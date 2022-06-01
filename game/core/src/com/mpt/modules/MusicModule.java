@@ -13,7 +13,8 @@ public class MusicModule {
     private static Sound rolloverSound;
     private static Sound collectCoinSound;
     private static Sound checkPointSound;
-    private static Sound jumpSound;
+    private static Sound jumpSound1;
+    private static Sound jumpSound2;
     private static Sound doubleJumpSound;
     private static Sound portalSound;
 
@@ -27,7 +28,8 @@ public class MusicModule {
         footStepsSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/FootstepSound.ogg"));
         checkPointSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Checkpoint.ogg"));
         gameOverSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/GameoverSound.wav"));
-        jumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/jumpSound.mp3"));
+        jumpSound1 = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Jump1.mp3"));
+        jumpSound2 = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Jump2.mp3"));
         doubleJumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/doubleJumpSound.mp3"));
         portalSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/portalSound.mp3"));
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/humanDeath.mp3"));
@@ -46,8 +48,11 @@ public class MusicModule {
         return rolloverSound;
     }
 
-    public static Sound getJumpSound() {
-        return jumpSound;
+    public static Sound getJumpSound1() {
+        return jumpSound1;
+    }
+    public static Sound getJumpSound2() {
+        return jumpSound2;
     }
     public static Sound getDoubleJumpSound() {
         return doubleJumpSound;
@@ -70,7 +75,8 @@ public class MusicModule {
         enemyAttackSound.dispose();
         playerDeathSound.dispose();
         portalSound.dispose();
-        jumpSound.dispose();
+        jumpSound1.dispose();
+        jumpSound2.dispose();
         doubleJumpSound.dispose();
         gameOverSound.dispose();
         mainMenuMusic.dispose();

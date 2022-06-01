@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.mpt.modules.InterfaceModule;
+import com.mpt.modules.MusicModule;
 
 public class LoadingScreen extends InterfaceModule {
 
@@ -20,7 +21,6 @@ public class LoadingScreen extends InterfaceModule {
     protected void setup() {
         Table main = new Table();
         main.setFillParent(true);
-
         main.add(new Label("< LOADING >", textStyle));
         main.addAction(Actions.fadeOut(0f));
         main.addAction(Actions.sequence(Actions.fadeIn(3f), Actions.fadeOut(3f), Actions.run(() ->  {

@@ -175,7 +175,7 @@ public class MovementHandler {
                 player.setPlayerState(State.JUMPING);
                 if (jumpCounter == 0 || (jumpCounter == 1 && isDoubleJumpReady)) {
                     if (jumpCounter == 1) {
-                        MusicModule.getJumpSound().play(0.1f);
+                        MusicModule.getJumpSound1().play(0.3f);
                         isDoubleJumpReady = false;
                         jumpedFromBox = false;
                         doubleJumpTimer = 0f;
@@ -183,7 +183,7 @@ public class MovementHandler {
                     }
                     playerAnimations.setCurrent("jump", false);
                     player.setPlayerState(State.JUMPING);
-                    MusicModule.getJumpSound().play(0.1f);
+                    MusicModule.getJumpSound2().play(0.3f);
                     fallingStartingY = player.getBody().getPosition().y;
                     float force = player.getBody().getMass() * 9;
                     player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, 0);

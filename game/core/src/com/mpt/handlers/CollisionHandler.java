@@ -92,7 +92,7 @@ public class CollisionHandler implements ContactListener {
         Coin coin = (Coin) fixtureB.getBody().getUserData();
         if (!coin.isCollected()) {
             coin.setIsCollected(true);
-            MusicModule.getCollectCoinSound().play(0.3f);
+            MusicModule.getCollectCoinSound().play(0.1f);
             player.setCollectedCoins(player.getCollectedCoins() + 1);
             gameScreen.updateCoins(player.getCollectedCoins());
         }
@@ -107,8 +107,6 @@ public class CollisionHandler implements ContactListener {
     }
 
     private void endLevel(Fixture fixtureA, Fixture fixtureB) {
-        Player player = (Player) fixtureA.getBody().getUserData();
-        Endpoint endpoint = (Endpoint) fixtureB.getBody().getUserData();
         MusicModule.getPortalSound().play(0.1f);
         ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen(gameScreen));
     }
