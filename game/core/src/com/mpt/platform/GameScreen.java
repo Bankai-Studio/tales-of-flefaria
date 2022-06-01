@@ -2,6 +2,7 @@ package com.mpt.platform;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -323,6 +324,22 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void loadMap(String mapName, int character) {
         currentMap = mapName;
         currentCharacter = character;
+        Music worldMusic = MusicModule.getWorldMusic(mapName);
+        worldMusic.play();
+        worldMusic.setVolume(0f);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                if (!MusicModule.getMainMenuMusic().isPlaying() && worldMusic.isPlaying()) {
+                    if (worldMusic.getVolume() < 0.5f) {
+                        worldMusic.setVolume(Math.min(0.1f, MusicModule.getMainMenuMusic().getVolume() + 0.1f));
+                    }
+                    else {
+                        this.cancel();
+                    }
+                }
+            }
+        }, 0f, 0.1f);
         orthogonalTiledMapRenderer = mapHandler.setup(1f, batch, currentMap, currentCharacter);
         movementHandler = new MovementHandler(player, this);
         world.setContactListener(new CollisionHandler(preferencesHandler, this));

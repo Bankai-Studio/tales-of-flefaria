@@ -17,9 +17,10 @@ public class MusicModule {
     private static Sound jumpSound2;
     private static Sound doubleJumpSound;
     private static Sound portalSound;
-
     private static Sound playerDeathSound;
     private static Music enemyAttackSound;
+    private static Music welcomeToFlefaria;
+    private static Music theForest;
 
     public static void setup() {
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/Poseidon's Realm.wav"));
@@ -34,9 +35,12 @@ public class MusicModule {
         portalSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/portalSound.mp3"));
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/humanDeath.mp3"));
         enemyAttackSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/enemyAttack.mp3"));
+        welcomeToFlefaria = Gdx.audio.newMusic(Gdx.files.internal("audio/Welcome to Flefaria.wav"));
+        theForest = Gdx.audio.newMusic(Gdx.files.internal("audio/The Forest.mp3"));
     }
 
     public static Music getGameOverSound() {return gameOverSound;}
+
     public static Music getMainMenuMusic() {
         return mainMenuMusic;
     }
@@ -44,22 +48,25 @@ public class MusicModule {
     public static Sound getFootStepsMusic() {
         return footStepsSound;
     }
-    public static Sound getRolloverSound() {
-        return rolloverSound;
-    }
+
+    public static Sound getRolloverSound() {return rolloverSound;}
 
     public static Sound getJumpSound1() {
         return jumpSound1;
     }
+
     public static Sound getJumpSound2() {
         return jumpSound2;
     }
+
     public static Sound getDoubleJumpSound() {
         return doubleJumpSound;
     }
+
     public static Sound getCollectCoinSound() {
         return collectCoinSound;
     }
+
     public static Sound getCheckPointMusic() {
         return checkPointSound;
     }
@@ -67,10 +74,21 @@ public class MusicModule {
     public static Sound getPortalSound() {
         return portalSound;
     }
+
     public static Sound getPlayerDeathSound() {
         return playerDeathSound;
     }
+
     public static Music getEnemyAttackSound(){return enemyAttackSound;}
+
+    public static Music getWorldMusic(String worldName) {
+        switch(worldName) {
+            case "MapTutorial": return welcomeToFlefaria;
+            case "Map1": return theForest;
+            default: return null;
+        }
+    }
+
     public static void dispose(){
         enemyAttackSound.dispose();
         playerDeathSound.dispose();
