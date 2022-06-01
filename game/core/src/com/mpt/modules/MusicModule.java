@@ -43,18 +43,14 @@ public class MusicModule {
         worldMusics.put("Map2", Gdx.audio.newMusic(Gdx.files.internal("audio/The Underground.mp3")));
         worldMusics.put("Map3", Gdx.audio.newMusic(Gdx.files.internal("audio/The Ancient Valley.mp3")));
         worldMusics.put("Map4", Gdx.audio.newMusic(Gdx.files.internal("audio/Flying Islands.mp3")));
-        worldMusics.put("Map5", Gdx.audio.newMusic(Gdx.files.internal("audio/Flying Islands.mp3")));
+        worldMusics.put("Map5", Gdx.audio.newMusic(Gdx.files.internal("audio/The Depths.wav")));
     }
 
-    public static Music getGameOverSound() {return gameOverSound;}
 
     public static Music getMainMenuMusic() {
         return mainMenuMusic;
     }
 
-    public static Sound getFootStepsMusic() {
-        return footStepsSound;
-    }
 
     public static Sound getRolloverSound() {return rolloverSound;}
 
@@ -64,10 +60,6 @@ public class MusicModule {
 
     public static Sound getJumpSound2() {
         return jumpSound2;
-    }
-
-    public static Sound getDoubleJumpSound() {
-        return doubleJumpSound;
     }
 
     public static Sound getCollectCoinSound() {
