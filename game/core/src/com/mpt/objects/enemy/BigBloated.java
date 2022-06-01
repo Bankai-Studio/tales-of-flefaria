@@ -6,6 +6,8 @@ import com.mpt.platform.GameScreen;
 public class BigBloated extends Enemy {
     public BigBloated(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body, gameScreen);
+        adjustX = -35f;
+        adjustY = -18f;
         walkSpeed = 1f;
         minDamage = 34;
         maxDamage = 50;

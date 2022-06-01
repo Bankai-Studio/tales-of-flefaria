@@ -18,11 +18,8 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.mpt.modules.BodyModule;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
-import com.mpt.objects.interactables.Box;
+import com.mpt.objects.interactables.*;
 import com.mpt.objects.checkpoint.Checkpoint;
-import com.mpt.objects.interactables.Coin;
-import com.mpt.objects.interactables.KillBlock;
-import com.mpt.objects.interactables.Ladder;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
@@ -37,14 +34,14 @@ public class MapHandler {
         this.gameScreen = gameScreen;
     }
 
-    public OrthogonalBleedingHandler setup(float unitScale, SpriteBatch batch, String mapName) {
+    public OrthogonalBleedingHandler setup(float unitScale, SpriteBatch batch, String mapName, int character) {
         this.spriteBatch = batch;
         tiledMap = new TmxMapLoader().load("maps/" + mapName + "/Platform.tmx");
-        parseMapObjects(tiledMap.getLayers().get("Objects").getObjects());
+        parseMapObjects(tiledMap.getLayers().get("Objects").getObjects(), character);
         return new OrthogonalBleedingHandler(tiledMap, unitScale, batch);
     }
 
-    private void parseMapObjects(MapObjects mapObjects) {
+    private void parseMapObjects(MapObjects mapObjects, int character) {
         
         if(mapObjects.get("Spawnpoint") != null && mapObjects.get("Spawnpoint") instanceof RectangleMapObject) {
             Rectangle rectangle = (((RectangleMapObject) mapObjects.get("Spawnpoint")).getRectangle());
@@ -74,7 +71,7 @@ public class MapHandler {
                             0f,
                             gameScreen.getWorld()
                     );
-                    gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body));
+                    gameScreen.setPlayer(new Player(rectangle.getWidth(), rectangle.getHeight(), body, character));
                     body.setTransform(gameScreen.getPreferencesHandler().getRespawnPosition(), body.getAngle());
                 }
                 if(rectangleName.equals("Checkpoint")) {
@@ -91,7 +88,7 @@ public class MapHandler {
                     );
                     gameScreen.addCheckpoint(new Checkpoint(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
-                if(rectangleName.equals("Endpoint")) {
+                if(rectangleName.equals("EndpointLeft") || rectangleName.equals("EndpointRight")) {
                     Body body = BodyModule.createBody(
                             rectangle.getX() + rectangle.getWidth() / 2,
                             rectangle.getY() + rectangle.getHeight() / 2,
@@ -103,7 +100,8 @@ public class MapHandler {
                             0f,
                             gameScreen.getWorld()
                     );
-                    gameScreen.setEndpoint(new Endpoint(rectangle.getWidth(), rectangle.getHeight(), body));
+                    if(rectangleName.equals("EndpointLeft")) gameScreen.setEndpoint(new Endpoint(rectangle.getWidth(), rectangle.getHeight(), body, false));
+                    if(rectangleName.equals("EndpointRight")) gameScreen.setEndpoint(new Endpoint(rectangle.getWidth(), rectangle.getHeight(), body, true));
                 }
                 if(rectangleName.equals("Box")) {
                     Body body = BodyModule.createBody(
@@ -160,6 +158,39 @@ public class MapHandler {
                             gameScreen.getWorld()
                     );
                     gameScreen.addKillBlock(new KillBlock(rectangle.getWidth(), rectangle.getHeight(), body, rectangleName));
+                }
+                if(rectangleName.equals("GhostLeft") || rectangleName.equals("GhostRight")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            true,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    if(rectangleName.equals("GhostLeft")) gameScreen.addGhost(new Ghost(rectangle.getWidth(), rectangle.getHeight(), body, true));
+                    if(rectangleName.equals("GhostRight")) gameScreen.addGhost(new Ghost(rectangle.getWidth(), rectangle.getHeight(), body, false));
+                }
+                if(rectangleName.equals("GameOver")) {
+                    Body body = BodyModule.createBody(
+                            rectangle.getX() + rectangle.getWidth() / 2,
+                            rectangle.getY() + rectangle.getHeight() / 2,
+                            rectangle.getWidth(),
+                            rectangle.getHeight(),
+                            true,
+                            true,
+                            0f,
+                            0f,
+                            gameScreen.getWorld()
+                    );
+                    gameScreen.setGameOver(new GameOver(rectangle.getWidth(), rectangle.getHeight(), body));
+                }
+                if(rectangleName.equals("TestingDummy")) {
+                    Body body = createEnemyBody(rectangle);
+                    gameScreen.addEnemy(new TestingDummy(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("Centipede")) {
                     Body body = createEnemyBody(rectangle);

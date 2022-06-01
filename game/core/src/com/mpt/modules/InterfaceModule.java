@@ -99,4 +99,18 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
         return fontStyle;
     }
 
+    public static Label.LabelStyle setupFont(int fontSize, Color fontColor) {
+        FreeTypeFontGenerator freeTypeFontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("menuAssets/fonts/Mephisto.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontParameter.size = fontSize;
+        fontParameter.incremental = true;
+
+        Label.LabelStyle fontStyle = new Label.LabelStyle();
+        fontStyle.font = freeTypeFontGenerator.generateFont(fontParameter);
+        fontStyle.font.setUseIntegerPositions(true);
+        fontStyle.fontColor = fontColor;
+
+        return fontStyle;
+    }
+
 }

@@ -12,6 +12,7 @@ public class PlatformGame extends Game {
 		MusicModule.setup();
 		menuScreen = new MenuScreen();
 		MusicModule.getMainMenuMusic().play();
+		MusicModule.getMainMenuMusic().setVolume(0.5f);
 		MusicModule.getMainMenuMusic().setLooping(true);
 		setScreen(menuScreen);
 	}

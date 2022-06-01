@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="18">
+ <tileset firstgid="1" source="ObjectsTileset.tsx"/>
+ <objectgroup id="3" name="TileObjects"/>
+ <objectgroup id="2" name="Objects">
+  <object id="1" x="0" y="992">
+   <polygon points="0,0 3200,0 3200,32 0,32"/>
+  </object>
+  <object id="2" x="0" y="0">
+   <polygon points="0,0 32,0 32,992 0,992"/>
+  </object>
+  <object id="3" x="3200" y="992">
+   <polygon points="0,0 -32,0 -32,-992 0,-992"/>
+  </object>
+  <object id="4" name="Player" x="63.3031" y="960.031" width="32" height="32"/>
+  <object id="7" name="Spawnpoint" x="96" y="960" width="32" height="32"/>
+  <object id="13" name="GameOver" x="3098.16" y="962.182" width="30" height="30"/>
+  <object id="14" name="GhostLeft" x="520.894" y="946.439" width="25" height="43"/>
+  <object id="15" name="GhostLeft" x="1556.35" y="949.5" width="25" height="43"/>
+  <object id="16" name="GhostLeft" x="2423.53" y="948.955" width="25" height="43"/>
+  <object id="17" name="EndpointLeft" x="40" y="6.66667" width="32" height="64"/>
+ </objectgroup>
+</map>

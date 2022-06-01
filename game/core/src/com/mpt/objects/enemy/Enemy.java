@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.handlers.AnimationHandler;
 import com.mpt.handlers.CombatHandler;
+import com.mpt.modules.MusicModule;
 import com.mpt.objects.player.Player;
 import com.mpt.objects.GameEntity;
 import com.mpt.platform.GameScreen;
@@ -15,30 +16,17 @@ import com.mpt.platform.GameScreen;
 import static com.mpt.constants.Constants.PPM;
 
 public abstract class Enemy extends GameEntity {
-
-    private boolean distanceToAttackPlayer;
-    private float initialPosX; //initial xPos of slime
-    private float initialPosY; //initial yPos of slime
-    private int killCounter; //player's frags
-    private int damageToPlayer;
-    private GameScreen gameScreen;
+    private final float initialPosX;
+    private final GameScreen gameScreen;
     private boolean playerHasBeenSpotted;
-    private boolean playerHasBeenDefeat;
-    private float xMaxLimitDX; //limit position on right side
-    private float xMaxLimitSX; //limit position on left side
-    private boolean switchDirectionToRight = false; //flag that says if enemy switched direction
-    private boolean switchDirectionToLeft = false;
+    public boolean switchDirectionToRight;
+    public boolean switchDirectionToLeft;
     protected float walkSpeed;
     private float attackTimer = 0f;
-    private final float ATTACK_DELAY = 1f;
 
     // Enemy States
     public enum EnemyState {
-        IDLE,
-        WALKING,
-        ATTACKING,
-        DYING,
-        HURT
+        IDLE, WALKING, ATTACKING, DYING, HURT
     }
 
     protected EnemyState enemyState;
@@ -49,10 +37,7 @@ public abstract class Enemy extends GameEntity {
     public Enemy(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
         initialPosX = body.getPosition().x; //initial position of enemy
-        initialPosY = body.getPosition().y; //initial position of enemy
         playerHasBeenSpotted = false;
-        playerHasBeenDefeat = false;
-        distanceToAttackPlayer = false;
         this.gameScreen = gameScreen;
         direction = "RIGHT";
         animationHandler = new AnimationHandler();
@@ -84,26 +69,11 @@ public abstract class Enemy extends GameEntity {
         if (direction.equals("RIGHT") && !currentFrame.isFlipX()) currentFrame.flip(true, false);
         if (direction.equals("LEFT") && currentFrame.isFlipX()) currentFrame.flip(true, false);
 
-        float tX = body.getPosition().x * PPM - 35f;
-        float tY = body.getPosition().y * PPM - 12f;
+        float tX = body.getPosition().x * PPM + adjustX;
+        float tY = body.getPosition().y * PPM + adjustY;
         if (enemyName.equals("Scorpio") && direction.equals("RIGHT")) tX += 25f;
+        if (enemyName.equals("Snake") && direction.equals("RIGHT")) tX += 25f;
         batch.draw(currentFrame, tX, tY);
-    }
-
-
-    private void checkPlayerDeath() {
-        if (enemyState.equals(EnemyState.DYING)) {
-            //body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
-            enemyState = EnemyState.IDLE;
-            //animationHandler.setCurrent("idle");
-        }
-    }
-
-    private void respawnOnVoidPosition() {
-        if (body.getPosition().y < 0) {
-            enemyState = EnemyState.DYING;
-            //animationHandler.setCurrent("death", false);
-        }
     }
 
     public void enemyAttackPlayer(Player player) {
@@ -113,8 +83,9 @@ public abstract class Enemy extends GameEntity {
         }
     }
 
-
     public void enemyMovements() {
+        float xMaxLimitDX; //limit position on right side
+        float xMaxLimitSX; //limit position on left side
         if (!enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.ATTACKING)) {
             enemyState = EnemyState.WALKING;
             animationHandler.setCurrent("walk");
@@ -140,11 +111,12 @@ public abstract class Enemy extends GameEntity {
     }
 
     public boolean playerSpotted(Player player) {
-        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 3f;
+        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 2f;
         return playerHasBeenSpotted;
     }
 
     public boolean enemyReadyToAttack(Player player) {
+        final float ATTACK_DELAY = 1f;
         return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < (width / 2 / PPM + player.getWidth() / PPM) && attackTimer >= ATTACK_DELAY && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < (height / 2 / PPM + player.getHeight() / PPM));
     }
 
@@ -170,7 +142,11 @@ public abstract class Enemy extends GameEntity {
                 }
             }
         }
-        enemyAttackPlayer(player);
+        else if(enemyReadyToAttack(player)){
+            MusicModule.getEnemyAttackSound().setVolume(0.1f);
+            MusicModule.getEnemyAttackSound().play();
+            enemyAttackPlayer(player);
+        }
     }
 
     protected void loadSprites() {

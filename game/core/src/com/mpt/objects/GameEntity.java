@@ -2,7 +2,6 @@ package com.mpt.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.mpt.handlers.CombatHandler;
 
 public abstract class GameEntity {
 
@@ -10,7 +9,8 @@ public abstract class GameEntity {
     public int health, minDamage, maxDamage;
     protected float width, height;
     protected Body body;
-
+    protected float adjustX;
+    protected float adjustY;
     public GameEntity(float width, float height, Body body) {
         x = body.getPosition().x;
         y = body.getPosition().y;
@@ -22,10 +22,18 @@ public abstract class GameEntity {
     }
 
     public abstract void update(float delta);
+
     public abstract void render(SpriteBatch batch);
+
     public Body getBody() {
         return body;
     }
-    public float getWidth() { return width; }
-    public float getHeight() { return height; }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
 }

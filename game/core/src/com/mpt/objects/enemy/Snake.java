@@ -6,6 +6,8 @@ import com.mpt.platform.GameScreen;
 public class Snake extends Enemy {
     public Snake(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body, gameScreen);
+        adjustX = -35f;
+        adjustY = -10f;
         walkSpeed = 1f;
         minDamage = 34;
         maxDamage = 50;
