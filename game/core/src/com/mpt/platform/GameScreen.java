@@ -65,6 +65,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private Label playerHealthLabel;
     private Image healthImage;
     private Image healthBar;
+    private Image staminaImage;
+    private Image staminaBar;
     private AssetManager assetManager;
     private String currentMap;
     private GameOver gameOver;
@@ -319,13 +321,21 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         healthImage.setScaleX(500f);
         healthImage.setScaleY(0.7f);
         playerHealthLabel = new Label("100", InterfaceModule.setupFont(30, Color.WHITE));
+        staminaBar = new Image(assetManager.get("interfaceAssets/staminaBar.png", Texture.class));
+        staminaBar.setScaleY(0.7f);
+        staminaBar.setScaleX(300f);
+        staminaImage = new Image(assetManager.get("interfaceAssets/stamina.png", Texture.class));
+        staminaImage.setScaleY(0.7f);
+        staminaImage.setScaleX(300f);
+
         health.add(healthBar).padBottom(-10f);
         health.add(healthImage).padLeft(-1002f).padBottom(-7f);
         health.add(playerHealthLabel).padLeft(-517f);
+        health.add(staminaBar).padLeft(-800f).padBottom(-100f);
+        health.add(staminaImage).padLeft(-800f).padBottom(-100f);
 
-
-        root.add(coins).padLeft(10f).padBottom(15f).expand().bottom().left();
-        root.add(health).padBottom(100f).expand().bottom().left();
+        root.add(coins).padLeft(15f).padTop(10f).expand().top().left();
+        root.add(health).padBottom(100f).expand().bottom().left().row();
 
         stage.addActor(root);
     }
@@ -338,6 +348,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         assetManager.load("interfaceAssets/coins.png", Texture.class);
         assetManager.load("interfaceAssets/health.png", Texture.class);
         assetManager.load("interfaceAssets/healthBar.png", Texture.class);
+        assetManager.load("interfaceAssets/stamina.png", Texture.class);
+        assetManager.load("interfaceAssets/staminaBar.png", Texture.class);
         assetManager.finishLoading();
     }
 
@@ -364,6 +376,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             }
         }, 0f, 0.1f);
         */
+    }
+
+    public void updateStamina(int stamina) {
+        staminaImage.setScaleX(stamina * 3f);
     }
 
     public void resetHealthLabel() {

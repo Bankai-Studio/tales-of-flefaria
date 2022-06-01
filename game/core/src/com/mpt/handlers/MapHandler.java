@@ -71,13 +71,19 @@ public class MapHandler {
                             gameScreen.getWorld()
                     );
 
-                    int tempCoins;
-                    if(gameScreen.getPlayer() != null)
+                    int tempCoins, tempHealth;
+                    if(gameScreen.getPlayer() != null) {
                         tempCoins = gameScreen.getPlayer().getCollectedCoins();
-                    else
+                        tempHealth = gameScreen.getPlayer().getHealth();
+                    }
+                    else {
                         tempCoins = 0;
+                        tempHealth = 100;
+                    }
                     Player player = new Player(rectangle.getWidth(), rectangle.getHeight(), body, character, gameScreen);
                     player.setCollectedCoins(tempCoins);
+                    player.setPlayerHealth(tempHealth);
+
                     gameScreen.setPlayer(player);
                     body.setTransform(gameScreen.getPreferencesHandler().getRespawnPosition(), body.getAngle());
                 }

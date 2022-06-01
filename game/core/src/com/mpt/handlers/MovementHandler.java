@@ -190,6 +190,7 @@ public class MovementHandler {
                     player.getBody().applyLinearImpulse(new Vector2(0, force), player.getBody().getPosition(), true);
                     jumpCounter++;
                     player.setPlayerStamina(player.getPlayerStamina() - 10);
+                    gameScreen.updateStamina(player.getPlayerStamina());
                 }
             }
         }
@@ -202,8 +203,10 @@ public class MovementHandler {
             }
             if (player.getBody().getLinearVelocity().y == 0 && player.getPlayerSpeed() <= 14f && player.getPlayerStamina() > 0 && !isSprintReloading && !player.getState().equals(State.PUSHING))
                 player.setPlayerSpeed(player.getPlayerSpeed() + 0.4f);
-            if (player.getBody().getLinearVelocity().x != 0 && player.getBody().getLinearVelocity().y == 0 && player.getPlayerStamina() > 0 && !isSprintReloading)
+            if (player.getBody().getLinearVelocity().x != 0 && player.getBody().getLinearVelocity().y == 0 && player.getPlayerStamina() > 0 && !isSprintReloading) {
                 player.setPlayerStamina(player.getPlayerStamina() - 1);
+                gameScreen.updateStamina(player.getPlayerStamina());
+            }
             if (!player.getState().equals(State.RUNNING) && !player.getState().equals(State.JUMPING) && player.getVelocityX() != 0 && !isSprintReloading && !player.getState().equals(State.ATTACKING) && !player.getState().equals(State.PUSHING) && !player.getState().equals(State.CLIMBING)) {
                 player.setPlayerState(State.RUNNING);
                 playerAnimations.setCurrent("run");
@@ -299,6 +302,7 @@ public class MovementHandler {
         staminaTimer += delta;
         if ((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().x == 0 || isSprintReloading) && player.getPlayerStamina() < player.getPlayerMaxStamina() && staminaTimer > STAMINA_REGEN_TIME) {
             player.setPlayerStamina(player.getPlayerStamina() + 1);
+            gameScreen.updateStamina(player.getPlayerStamina());
             staminaTimer = 0f;
         }
     }
