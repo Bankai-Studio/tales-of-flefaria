@@ -178,7 +178,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         for(Ghost ghost : ghosts) ghost.dispose();
         for(Checkpoint checkpoint : checkpoints) checkpoint.dispose();
         for(KillBlock killBlock : killBlocks) killBlock.dispose();
-        gameOver.dispose();
+        if(gameOver != null)
+            gameOver.dispose();
         endpoint.dispose();
     }
 
@@ -342,7 +343,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             playerHealthLabel.setText(currentPlayerHealth);
         else
             playerHealthLabel.setText(0);
-        healthImage.setScaleX(healthImage.getScaleX() - damageProvided * 5f);
+        float scaleToBeRemoved = healthImage.getScaleX() - (damageProvided * 5f);
+        if((damageProvided * 5f) > healthImage.getScaleX())
+            scaleToBeRemoved = 0;
+        healthImage.setScaleX(scaleToBeRemoved);
         /*
         Timer.schedule(new Timer.Task() {
             @Override
