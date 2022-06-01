@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="120" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="418">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="120" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="421">
  <tileset firstgid="1" source="imaggini.tsx"/>
  <tileset firstgid="123" source="Tileset.tsx"/>
  <tileset firstgid="187" source="../Map3/imaggini.tsx"/>
@@ -77,9 +77,6 @@
   <object id="7" x="0" y="1280">
    <polygon points="0,0 64,0 64,320 0,320"/>
   </object>
-  <object id="8" x="64" y="1376">
-   <polygon points="0,0 32,0 32,128 0,128"/>
-  </object>
   <object id="9" x="64" y="1568">
    <polygon points="0,0 32,0 32,32 0,32 0,0"/>
   </object>
@@ -113,7 +110,7 @@
   <object id="24" x="640" y="1152">
    <polygon points="0,0 0,32 32,32 32,0"/>
   </object>
-  <object id="26" name="Checkpoint" x="1504" y="1088" width="32" height="64"/>
+  <object id="26" name="Checkpoint" x="1472" y="1088" width="32" height="64"/>
   <object id="28" name="Checkpoint" x="2464" y="96" width="32" height="64"/>
   <object id="29" name="Checkpoint" x="3104" y="992" width="32" height="64"/>
   <object id="31" x="1056" y="1024">
@@ -205,9 +202,6 @@
   </object>
   <object id="69" x="2272" y="992">
    <polygon points="0,0 -32,0 -32,-64 0,-64"/>
-  </object>
-  <object id="70" x="2240" y="960">
-   <polygon points="0,0 -32,0 0,-32"/>
   </object>
   <object id="74" x="2304" y="1088">
    <polygon points="0,0 0,32 -96,32 -96,0"/>
@@ -388,7 +382,6 @@
   <object id="195" name="Coin" x="1326" y="961" width="16" height="16"/>
   <object id="196" name="Coin" x="1385" y="984" width="16" height="16"/>
   <object id="197" name="Coin" x="1423" y="1058" width="16" height="16"/>
-  <object id="198" name="Coin" x="1478" y="1122" width="16" height="16"/>
   <object id="199" name="Coin" x="1580" y="1063" width="16" height="16"/>
   <object id="200" name="Coin" x="1666" y="989" width="16" height="16"/>
   <object id="201" name="Coin" x="1768" y="1061" width="16" height="16"/>
@@ -453,11 +446,9 @@
   <object id="262" name="KillBlock" x="105.333" y="1506.67" width="19.3333" height="30.6667"/>
   <object id="264" name="KillBlock" x="168.333" y="1411.67" width="19.3333" height="30.6667"/>
   <object id="266" name="KillBlock" x="72.3333" y="1346.67" width="19.3333" height="30.6667"/>
-  <object id="267" name="KillBlock" x="64" y="1536" width="30.6666" height="30.6667"/>
   <object id="269" name="KillBlock" x="1737.33" y="1311.67" width="19.3333" height="30.6667"/>
   <object id="271" name="KillBlock" x="1800.5" y="1217.84" width="19.3333" height="30.6667"/>
   <object id="273" name="KillBlock" x="1638.33" y="1345.67" width="19.3333" height="30.6667"/>
-  <object id="275" name="KillBlock" x="1664" y="1376" width="30.6666" height="30.6667"/>
   <object id="276" name="KillBlockUp" x="1030" y="1055.33" width="16" height="29.3334"/>
   <object id="277" name="KillBlockUp" x="648" y="1181.33" width="16" height="29.3334"/>
   <object id="278" name="KillBlockUp" x="134" y="1243.33" width="16" height="29.3334"/>
@@ -564,6 +555,13 @@
    <polygon points="0,0 32,0 32,160 0,160 0,0"/>
   </object>
   <object id="414" name="KillBlock" x="1575.33" y="1217.17" width="19.3333" height="30.6667"/>
+  <object id="418" x="2240" y="928">
+   <polygon points="0,0 -32,0 -32,32 0,32"/>
+  </object>
+  <object id="419" name="KillBlock" x="1670.33" y="1380.67" width="19.3333" height="30.6667"/>
+  <object id="420" x="64" y="1376">
+   <polygon points="0,0 32,0 32,192 0,192 0,0"/>
+  </object>
  </objectgroup>
  <layer id="1" name="Platform" width="120" height="50">
   <data encoding="base64" compression="zlib">
