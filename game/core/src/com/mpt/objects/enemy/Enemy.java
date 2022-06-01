@@ -38,6 +38,7 @@ public abstract class Enemy extends GameEntity {
         super(width, height, body);
         initialPosX = body.getPosition().x; //initial position of enemy
         playerHasBeenSpotted = false;
+        body.setUserData(this);
         this.gameScreen = gameScreen;
         direction = "RIGHT";
         animationHandler = new AnimationHandler();
