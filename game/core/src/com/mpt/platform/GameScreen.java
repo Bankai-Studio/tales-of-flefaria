@@ -331,8 +331,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             @Override
             public void run() {
                 if (!MusicModule.getMainMenuMusic().isPlaying() && worldMusic.isPlaying()) {
-                    if (worldMusic.getVolume() < 0.5f) {
-                        worldMusic.setVolume(Math.min(0.1f, MusicModule.getMainMenuMusic().getVolume() + 0.1f));
+                    if (worldMusic.getVolume() < 0.2f) {
+                        worldMusic.setVolume(Math.min(0.1f, MusicModule.getMainMenuMusic().getVolume() + 0.01f));
                     }
                     else {
                         this.cancel();
