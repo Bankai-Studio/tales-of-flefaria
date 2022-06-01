@@ -129,8 +129,8 @@ public class CollisionHandler implements ContactListener {
         GameOver gameOver = (GameOver) fixture.getBody().getUserData();
         if(gameOver.isVisible()) ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(gameScreen));
     }
-    private void collisionWithBlock(Fixture fixtureA) {
-        Enemy enemy = (Enemy) fixtureA.getBody().getUserData();
+    private void collisionWithBlock(Fixture fixture) {
+        Enemy enemy = (Enemy) fixture.getBody().getUserData();
         enemy.getBody().setLinearVelocity(0f,enemy.getBody().getLinearVelocity().y);
     }
 }
