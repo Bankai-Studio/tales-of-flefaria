@@ -258,7 +258,7 @@ public class MapHandler {
                 0f,
                 0f,
                 BIT_ENEMY,
-                BIT_MAP,
+                (short) (BIT_MAP | BIT_BOX),
                 gameScreen.getWorld()
         );
     }
