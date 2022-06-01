@@ -103,7 +103,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
 
         mapHandler = new MapHandler(this);
-        currentMap = "Map1";
+        currentMap = "MapTutorial";
         currentCharacter = 0;
         loadMap(currentMap, currentCharacter);
 
@@ -174,7 +174,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         box2DDebugRenderer.dispose();
         player.dispose();
         for (Box box : boxes) box.dispose();
-        for(Enemy enemy : enemies) enemy.dispose();
+        for(Enemy enemy : enemies) {
+            enemy.dispose();
+            if(enemy instanceof FinalBoss) ((FinalBoss) enemy).disposeBullets();
+        }
         for(Ghost ghost : ghosts) ghost.dispose();
         for(Checkpoint checkpoint : checkpoints) checkpoint.dispose();
         for(KillBlock killBlock : killBlocks) killBlock.dispose();
@@ -282,9 +285,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         movementHandler.update(delta);
 
         // To be moved to map handler
-        for (Enemy enemy : enemies) {
-            enemy.update(delta);
-        }
+        for (Enemy enemy : enemies) enemy.update(delta);
+        if (gameOver != null)
+            gameOver.update(delta);
 
     }
 

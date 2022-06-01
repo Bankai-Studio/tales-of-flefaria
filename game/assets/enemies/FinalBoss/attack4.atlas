@@ -1,0 +1,34 @@
+
+attack4.png
+size: 298, 76
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+attack4
+  rotate: false
+  xy: 150, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+attack4
+  rotate: false
+  xy: 2, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+attack4
+  rotate: false
+  xy: 224, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+attack4
+  rotate: false
+  xy: 76, 2
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1

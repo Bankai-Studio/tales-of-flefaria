@@ -80,7 +80,8 @@ public abstract class Enemy extends GameEntity {
         float tY = body.getPosition().y * PPM + adjustY;
         if (enemyName.equals("Scorpio") && direction.equals("RIGHT")) tX += 25f;
         if (enemyName.equals("Snake") && direction.equals("RIGHT")) tX += 25f;
-        batch.draw(currentFrame, tX, tY);
+        if(enemyName.equals("FinalBoss")) batch.draw(currentFrame, tX - width/2, tY - height/2, width*1.8f, height*1.8f);
+        else batch.draw(currentFrame, tX, tY);
     }
 
     public void enemyAttackPlayer(Player player) {
@@ -176,10 +177,54 @@ public abstract class Enemy extends GameEntity {
 
     protected void loadSprites() {
         TextureAtlas charset;
+        float FRAME_TIME = 1 / 6f;
+
+        if(enemyName.equals("FinalBoss")){
+            loadBossSprites();
+            return;
+        }
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack.atlas"));
-        float FRAME_TIME = 1 / 6f;
         this.animationHandler.add("attack", new Animation<>(FRAME_TIME, charset.findRegions("attack")));
+        textureAtlases.add(charset);
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/death.atlas"));
+        this.animationHandler.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
+        textureAtlases.add(charset);
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/hurt.atlas"));
+        this.animationHandler.add("hurt", new Animation<>(FRAME_TIME, charset.findRegions("hurt")));
+        textureAtlases.add(charset);
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/idle.atlas"));
+        this.animationHandler.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
+        textureAtlases.add(charset);
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/walk.atlas"));
+        this.animationHandler.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
+        textureAtlases.add(charset);
+
+        this.animationHandler.setCurrent("walk");
+    }
+
+    protected void loadBossSprites() {
+        TextureAtlas charset;
+        float FRAME_TIME = 1 / 6f;
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack1.atlas"));
+        this.animationHandler.add("attack1", new Animation<>(FRAME_TIME, charset.findRegions("attack1")));
+        textureAtlases.add(charset);
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack2.atlas"));
+        this.animationHandler.add("attack", new Animation<>(FRAME_TIME, charset.findRegions("attack2")));
+        textureAtlases.add(charset);
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack3.atlas"));
+        this.animationHandler.add("attack3", new Animation<>(FRAME_TIME, charset.findRegions("attack3")));
+        textureAtlases.add(charset);
+
+        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack4.atlas"));
+        this.animationHandler.add("attack4", new Animation<>(FRAME_TIME, charset.findRegions("attack4")));
         textureAtlases.add(charset);
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/death.atlas"));
