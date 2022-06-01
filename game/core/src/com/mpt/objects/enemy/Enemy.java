@@ -51,7 +51,12 @@ public abstract class Enemy extends GameEntity {
         if (enemyState != EnemyState.DYING) {
             if (animationHandler.isFinished() && (enemyState.equals(EnemyState.HURT) || enemyState.equals(EnemyState.ATTACKING))) {
                 if (enemyState.equals(EnemyState.ATTACKING)) {
-                    if (enemyReadyToAttack(gameScreen.getPlayer())) CombatHandler.attack(this, gameScreen.getPlayer());
+                    if (enemyReadyToAttack(gameScreen.getPlayer())) {
+                        int damageProvided = gameScreen.getPlayer().getHealth();
+                        CombatHandler.attack(this, gameScreen.getPlayer());
+                        damageProvided -= gameScreen.getPlayer().getHealth();
+                        gameScreen.updateHealthLabel(gameScreen.getPlayer().getHealth(), damageProvided);
+                    }
                     attackTimer = 0;
                 }
                 enemyState = EnemyState.IDLE;

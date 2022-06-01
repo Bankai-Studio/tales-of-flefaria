@@ -357,7 +357,7 @@ public class MovementHandler {
             float damage = -distance + 4f + (float) Math.pow(1.2, -distance + 5f);
             float health = player.getHealth() - damage;
             player.setPlayerHealth((int) health);
-            System.out.println(player.getHealth());
+            gameScreen.updateHealthLabel(player.getHealth(), (int) damage);
             if (health <= 0) {
                 player.setPlayerState(Player.State.DYING);
                 player.getPlayerAnimations().setCurrent("death", false);

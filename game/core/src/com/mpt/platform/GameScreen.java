@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -62,11 +63,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private InputMultiplexer inputMultiplexer;
     private Label coinValueLabel;
     private Label playerHealthLabel;
+    private Image healthImage;
+    private Image healthBar;
     private AssetManager assetManager;
     private String currentMap;
+    private GameOver gameOver;
+
     private int currentCharacter;
     private int screenWidth, screenHeight;
-    private GameOver gameOver;
 
     public GameScreen() {
         batch = new SpriteBatch();
@@ -97,8 +101,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         inputMultiplexer = new InputMultiplexer(this, stage);
 
+
         mapHandler = new MapHandler(this);
-        currentMap = "MapTutorial";
+        currentMap = "Map1";
         currentCharacter = 0;
         loadMap(currentMap, currentCharacter);
 
@@ -275,7 +280,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         player.update(delta);
         movementHandler.update(delta);
-        updateHealth(player.getHealth());
 
         // To be moved to map handler
         for (Enemy enemy : enemies) {
@@ -297,15 +301,23 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         root.setFillParent(true);
 
         Table coins = new Table();
-        Image image = new Image(assetManager.get("coin/coins.png", Texture.class));
+        Image image = new Image(assetManager.get("interfaceAssets/coins.png", Texture.class));
         image.setScale(2.5f);
         coinValueLabel = new Label("0", InterfaceModule.setupFont(30, Color.WHITE));
         coins.add(image);
         coins.add(coinValueLabel).padLeft(25f).padBottom(30f);
 
         Table health = new Table();
+        healthBar = new Image(assetManager.get("interfaceAssets/healthBar.png", Texture.class));
+        healthBar.setScaleY(0.8f);
+        healthBar.setScaleX(1.010f);
+        healthImage = new Image(assetManager.get("interfaceAssets/health.png", Texture.class));
+        healthImage.setScaleX(500f);
+        healthImage.setScaleY(0.7f);
         playerHealthLabel = new Label("100", InterfaceModule.setupFont(30, Color.WHITE));
-        health.add(playerHealthLabel);
+        health.add(healthBar).padBottom(-10f);
+        health.add(healthImage).padLeft(-1002f).padBottom(-7f);
+        health.add(playerHealthLabel).padLeft(-517f);
 
 
         root.add(coins).padLeft(10f).padBottom(15f).expand().bottom().left();
@@ -319,12 +331,37 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     private void loadAssets() {
-        assetManager.load("coin/coins.png", Texture.class);
+        assetManager.load("interfaceAssets/coins.png", Texture.class);
+        assetManager.load("interfaceAssets/health.png", Texture.class);
+        assetManager.load("interfaceAssets/healthBar.png", Texture.class);
         assetManager.finishLoading();
     }
 
-    public void updateHealth(int currentPlayerHealth) {
-        playerHealthLabel.setText(currentPlayerHealth);
+    public void updateHealthLabel(int currentPlayerHealth, int damageProvided) {
+        if(currentPlayerHealth >= 0)
+            playerHealthLabel.setText(currentPlayerHealth);
+        else
+            playerHealthLabel.setText(0);
+        healthImage.setScaleX(healthImage.getScaleX() - damageProvided * 5f);
+        /*
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                if (healthImage.getScaleX() > healthImage.getScaleX() - damageProvided * 5f && !player.hasRespawned()) {
+                    healthImage.setScaleX(Math.max(healthImage.getScaleX() - damageProvided * 5f, healthImage.getScaleX() - 5f));
+                    System.out.println(player.hasRespawned());
+                }
+                else {
+                    this.cancel();
+                }
+            }
+        }, 0f, 0.1f);
+        */
+    }
+
+    public void resetHealthLabel() {
+        playerHealthLabel.setText(player.getHealth());
+        healthImage.setScaleX(player.getHealth() * 5f);
     }
 
     public void loadMap(String mapName, int character) {

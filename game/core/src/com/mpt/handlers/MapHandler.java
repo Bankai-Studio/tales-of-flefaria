@@ -76,7 +76,7 @@ public class MapHandler {
                         tempCoins = gameScreen.getPlayer().getCollectedCoins();
                     else
                         tempCoins = 0;
-                    Player player = new Player(rectangle.getWidth(), rectangle.getHeight(), body, character);
+                    Player player = new Player(rectangle.getWidth(), rectangle.getHeight(), body, character, gameScreen);
                     player.setCollectedCoins(tempCoins);
                     gameScreen.setPlayer(player);
                     body.setTransform(gameScreen.getPreferencesHandler().getRespawnPosition(), body.getAngle());

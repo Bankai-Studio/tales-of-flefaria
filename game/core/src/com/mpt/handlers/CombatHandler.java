@@ -6,6 +6,7 @@ import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
 public class CombatHandler {
+
     public static void attack(GameEntity attacker, GameEntity victim) {
         Player player;
         Enemy enemy;
@@ -38,7 +39,6 @@ public class CombatHandler {
                 player.setPlayerState(Player.State.HURT);
                 player.getPlayerAnimations().setCurrent("hurt", false);
             }
-
         }
     }
 

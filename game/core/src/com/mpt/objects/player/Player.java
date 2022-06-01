@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.handlers.AnimationHandler;
 import com.mpt.objects.GameEntity;
+import com.mpt.platform.GameScreen;
 
 public class Player extends GameEntity {
     // Constants
@@ -34,22 +35,21 @@ public class Player extends GameEntity {
 
     // Variables
     private State state;
-    private int playerHealth;
     private int playerStamina;
     private Vector2 respawnPosition;
-    private boolean canRespawn;
     private String direction;
     private float playerSpeed;
     private int collectedCoins;
+    GameScreen gameScreen;
 
-    public Player(float width, float height, Body body, int character) {
+    public Player(float width, float height, Body body, int character, GameScreen gameScreen) {
         super(width, height, body);
+        this.gameScreen = gameScreen;
         minDamage = 34;
         maxDamage = 50;
-        playerHealth = 100;
+        health = 100;
         playerSpeed = 8f;
         playerStamina = MAX_PLAYER_STAMINA;
-        canRespawn = true;
         characterSelection = character;
         playerAnimations = new AnimationHandler();
         collectedCoins = 0;
@@ -83,14 +83,12 @@ public class Player extends GameEntity {
     }
 
     public void checkPlayerDeath() {
-        if (state.equals(State.DYING) && canRespawn) {
+        if (state.equals(State.DYING)) {
             body.setTransform(respawnPosition.x, respawnPosition.y, body.getAngle());
             state = State.IDLE;
             playerAnimations.setCurrent("idle");
-            canRespawn = false;
-            playerHealth = 100;
-        } else {
-            canRespawn = true;
+            health = 100;
+            gameScreen.resetHealthLabel();
         }
     }
 
@@ -210,7 +208,7 @@ public class Player extends GameEntity {
     }
 
     public void setPlayerHealth(int health) {
-        this.playerHealth = health;
+        this.health = health;
     }
 
     public void setCharacterSelection(int characterSelection) {
@@ -220,7 +218,7 @@ public class Player extends GameEntity {
     // Getters
 
     public int getHealth() {
-        return playerHealth;
+        return health;
     }
 
     public float getVelocityX() {
@@ -262,4 +260,5 @@ public class Player extends GameEntity {
     public int getCollectedCoins() {
         return collectedCoins;
     }
+
 }
