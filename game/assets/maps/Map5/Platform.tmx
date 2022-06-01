@@ -16,7 +16,7 @@
   <object id="7" name="Spawnpoint" x="96" y="960" width="32" height="32"/>
   <object id="13" name="GameOver" x="3098.16" y="962.182" width="30" height="30"/>
   <object id="14" name="GhostLeft" x="520.894" y="946.439" width="25" height="43"/>
-  <object id="15" name="GhostLeft" x="1556.35" y="949.5" width="25" height="43"/>
+  <object id="15" name="FinalBoss" x="1446.35" y="876.5" width="155" height="116"/>
   <object id="16" name="GhostLeft" x="2423.53" y="948.955" width="25" height="43"/>
   <object id="17" name="EndpointLeft" x="40" y="6.66667" width="32" height="64"/>
  </objectgroup>

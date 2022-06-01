@@ -209,7 +209,7 @@ public class MapHandler {
                             BIT_PLAYER,
                             gameScreen.getWorld()
                     );
-                    gameScreen.setGameOver(new GameOver(rectangle.getWidth(), rectangle.getHeight(), body));
+                    gameScreen.setGameOver(new GameOver(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
                 if(rectangleName.equals("TestingDummy")) {
                     Body body = createEnemyBody(rectangle);
@@ -250,6 +250,10 @@ public class MapHandler {
                 if(rectangleName.equals("Vulture")) {
                     Body body = createEnemyBody(rectangle);
                     gameScreen.addEnemy(new Vulture(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                }
+                if(rectangleName.equals("FinalBoss")) {
+                    Body body = createEnemyBody(rectangle);
+                    gameScreen.addEnemy(new FinalBoss(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                 }
             }
         }

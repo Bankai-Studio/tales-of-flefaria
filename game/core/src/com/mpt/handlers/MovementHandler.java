@@ -334,7 +334,7 @@ public class MovementHandler {
         ArrayList<Enemy> enemies = gameScreen.getEnemies();
         for (Enemy enemy : enemies) {
             Vector2 enemyPosition = enemy.getBody().getPosition();
-            if (Math.abs(playerPosition.x - enemyPosition.x) < (enemy.getWidth() / PPM + player.getWidth() / PPM) && Math.abs(playerPosition.y - enemyPosition.y) < (enemy.getHeight() / 2 / PPM + player.getHeight() / PPM))
+            if (Math.abs(playerPosition.x - enemyPosition.x) < (enemy.getWidth()/2 / PPM + player.getWidth() / PPM) && Math.abs(playerPosition.y - enemyPosition.y) < (enemy.getHeight() / 2 / PPM + player.getHeight() / PPM))
                 nearEnemies.add(enemy);
         }
         return nearEnemies;
