@@ -36,41 +36,35 @@ import static com.mpt.constants.Constants.PPM;
 
 public class GameScreen extends ScreenAdapter implements InputProcessor {
 
-    private OrthographicCamera camera;
-    private SpriteBatch batch;
-    private Stage stage;
+    private final OrthographicCamera camera;
+    private final SpriteBatch batch;
+    private final Stage stage;
     private final World world;
     private final Box2DDebugRenderer box2DDebugRenderer;
     private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private final MapHandler mapHandler;
     private Player player;
-    private ArrayList<Enemy> enemies;
-    private ArrayList<Checkpoint> checkpoints;
+    private final ArrayList<Enemy> enemies;
+    private final ArrayList<Checkpoint> checkpoints;
     private Endpoint endpoint;
-    private ExtendViewport extendViewport;
-    private ScreenViewport screenViewport;
+    private final ExtendViewport extendViewport;
+    private final ScreenViewport screenViewport;
     private MovementHandler movementHandler;
-    private PreferencesHandler preferencesHandler;
-    private ArrayList<Box> boxes;
-    private ArrayList<Ladder> ladders;
-    private ArrayList<Coin> coins;
-    private ArrayList<KillBlock> killBlocks;
-    private Array<Body> bodies;
-    private ArrayList<Ghost> ghosts;
-    private InputMultiplexer inputMultiplexer;
+    private final PreferencesHandler preferencesHandler;
+    private final ArrayList<Box> boxes;
+    private final ArrayList<Ladder> ladders;
+    private final ArrayList<Coin> coins;
+    private final ArrayList<KillBlock> killBlocks;
+    private final ArrayList<Ghost> ghosts;
+    private final InputMultiplexer inputMultiplexer;
     private Label coinValueLabel;
-    private Label playerHealthLabel;
     private Image healthImage;
-    private Image healthBarBackground;
-    private Image healthBarOvertop;
-    private Image staminaBackground;
     private Image staminaBar;
-    private AssetManager assetManager;
+    private final AssetManager assetManager;
     private String currentMap;
     private GameOver gameOver;
 
     private int currentCharacter;
-    private int screenWidth, screenHeight;
 
     public GameScreen() {
         batch = new SpriteBatch();
@@ -88,8 +82,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         preferencesHandler = new PreferencesHandler();
 
-        screenWidth = Gdx.graphics.getWidth();
-        screenHeight = Gdx.graphics.getHeight();
+        int screenWidth = Gdx.graphics.getWidth();
+        int screenHeight = Gdx.graphics.getHeight();
 
         extendViewport = new ExtendViewport(30 * PPM, 20 * PPM);
         camera = (OrthographicCamera) extendViewport.getCamera();
@@ -136,8 +130,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         extendViewport.apply();
         batch.begin();
 
-        if (orthogonalTiledMapRenderer != null)
-            orthogonalTiledMapRenderer.render(); // Renders the map
+        if (orthogonalTiledMapRenderer != null) {
+            orthogonalTiledMapRenderer.render();
+        }
         if (mapHandler != null)
             mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
 
@@ -320,9 +315,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         Stack health = new Stack();
 
-        healthBarBackground = new Image(assetManager.get("interfaceAssets/healthBarBackground.png", Texture.class));
+        Image healthBarBackground = new Image(assetManager.get("interfaceAssets/healthBarBackground.png", Texture.class));
         healthImage = new Image(assetManager.get("interfaceAssets/health.png", Texture.class));
-        healthBarOvertop = new Image(assetManager.get("interfaceAssets/healthBarOvertop.png", Texture.class));
+        Image healthBarOvertop = new Image(assetManager.get("interfaceAssets/healthBarOvertop.png", Texture.class));
 
         healthBarBackground.setScale(1f);
         healthBarBackground.setOrigin(0, healthBarBackground.getHeight() / 2);
@@ -343,7 +338,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         Stack staminaStack = new Stack();
         staminaStack.setOrigin(staminaStack.getWidth() / 2, staminaStack.getHeight() / 2);
 
-        staminaBackground = new Image(assetManager.get("interfaceAssets/staminaBar.png", Texture.class));
+        Image staminaBackground = new Image(assetManager.get("interfaceAssets/staminaBar.png", Texture.class));
         staminaBar = new Image(assetManager.get("interfaceAssets/stamina.png", Texture.class));
 
         staminaBackground.setScaleY(1f);
@@ -383,20 +378,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public void updateHealthBar() {
         healthImage.setScaleX(Math.max((float) player.getHealth() * 10f, 0f));
-        /*
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                if (healthImage.getScaleX() > healthImage.getScaleX() - damageProvided * 5f && !player.hasRespawned()) {
-                    healthImage.setScaleX(Math.max(healthImage.getScaleX() - damageProvided * 5f, healthImage.getScaleX() - 5f));
-                    System.out.println(player.hasRespawned());
-                }
-                else {
-                    this.cancel();
-                }
-            }
-        }, 0f, 0.1f);
-        */
     }
 
     public void updateStamina(int stamina) {
@@ -404,7 +385,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     public void loadMap(String mapName, int character) {
-        if (currentMap != mapName && MusicModule.getWorldMusic(currentMap).isPlaying())
+        if (!currentMap.equals(mapName) && MusicModule.getWorldMusic(currentMap).isPlaying())
             MusicModule.getWorldMusic(currentMap).stop();
         currentMap = mapName;
         currentCharacter = character;
@@ -440,7 +421,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         checkpoints.clear();
         ghosts.clear();
 
-        bodies = new Array<>(world.getBodyCount());
+        Array<Body> bodies = new Array<>(world.getBodyCount());
         world.getBodies(bodies);
         for (Body body : bodies)
             world.destroyBody(body);

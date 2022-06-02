@@ -6,13 +6,7 @@
  <tileset firstgid="258" source="Tutorial.tsx"/>
  <tileset firstgid="277" name="images" tilewidth="1920" tileheight="1080" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
-  <tile id="0">
-   <image width="1920" height="1080" source="Images/snow.png"/>
-  </tile>
  </tileset>
- <objectgroup id="9" name="Background">
-  <object id="289" gid="277" x="0" y="1605.64" width="2840.26" height="1597.64"/>
- </objectgroup>
  <layer id="4" name="Beckground" width="150" height="50" visible="0">
   <data encoding="base64" compression="zlib">
    eJzt1YEKwiAQAFB/oVFbP1QE9f/fU9KEIYsga871HshAmJynd4YAAAAAAAAAAAAAAAAAAAAAAAAAtOpYO4BCfWh/D7CEwzhak8fcWr13M3P61nLi/dl/8N8Q1nNG8Q7tCte4jN9hHH3hev+ixZ45p5uMrTqH8nfuFJ71kfeMWH9bzt07MS9bqYUWxH6d7lzMe96v13gW6Y1J8daO8fbDtV/tbZqD2vsHAPima+0AAAAAAB7u0sYF3g==
