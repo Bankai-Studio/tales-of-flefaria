@@ -146,7 +146,6 @@ public abstract class Enemy extends GameEntity {
     public void enemyMovementsCollision() {
         switchDirectionToRight = true;
         if (body.getPosition().x < initialPosX + 0.1f && switchDirectionToRight) {
-            System.out.println((int) initialPosY + " " + (int) body.getPosition().y);
             body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
             setFacingRight();
         } else {
