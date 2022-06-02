@@ -360,31 +360,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         staminaStack.add(staminaBackground);
         staminaStack.add(staminaBarTbl);
-
-        //health.setDebug(true, true);
-
-        /*
-        staminaBar = new Image(assetManager.get("interfaceAssets/staminaBar.png", Texture.class));
-        staminaBar.setScaleY(0.7f);
-        staminaBar.setScaleX(300f);
-        staminaImage = new Image(assetManager.get("interfaceAssets/stamina.png", Texture.class));
-        staminaImage.setScaleY(0.7f);
-        staminaImage.setScaleX(300f);
-
-        //health.add(healthBarBackground);
-        health.add(healthImage).padLeft(-900f).padBottom(-7f);
-        //health.add(healthBarOvertop);
-        health.add(playerHealthLabel).padLeft(-417f);
-        health.add(staminaBar).padLeft(-700f).padBottom(-100f);
-        health.add(staminaImage).padLeft(-700f).padBottom(-100f);
-
-        root.add(coins).padLeft(15f).padTop(10f).expand().top().left();
-        root.add(health).padBottom(100f).expand().bottom().left().row();
-        */
+        
         root.add(coins).pad(30f).expand().top().left().row();
         root.add(health).pad(20f).expand().bottom().row();
         root.add(staminaStack).pad(20f).bottom();
-        root.setDebug(true, true);
+        if(DEBUGGING)
+            root.setDebug(true, true);
         stage.addActor(root);
     }
 
