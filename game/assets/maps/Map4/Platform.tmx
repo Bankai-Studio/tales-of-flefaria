@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="120" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="422">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="120" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="423">
  <tileset firstgid="1" source="imaggini.tsx"/>
  <tileset firstgid="123" source="Tileset.tsx"/>
  <tileset firstgid="187" source="../Map3/imaggini.tsx"/>
@@ -30,7 +30,6 @@
   <object id="345" gid="268" x="1771.67" y="1312.34" width="11" height="13"/>
   <object id="348" gid="258" x="2240" y="1280" width="61" height="24"/>
   <object id="349" gid="259" x="2208" y="1056" width="63" height="27"/>
-  <object id="350" gid="260" x="2208" y="928" width="61" height="25"/>
   <object id="351" gid="264" x="2336" y="864" width="17" height="18"/>
   <object id="352" gid="260" x="2368" y="864" width="61" height="25"/>
   <object id="353" gid="264" x="2304" y="704" width="17" height="18"/>
@@ -554,18 +553,18 @@
    <polygon points="0,0 32,0 32,160 0,160 0,0"/>
   </object>
   <object id="414" name="KillBlock" x="1575.33" y="1217.17" width="19.3333" height="30.6667"/>
-  <object id="418" x="2240" y="928">
-   <polygon points="0,0 -32,0 -32,32 0,32"/>
-  </object>
   <object id="419" name="KillBlock" x="1670.33" y="1380.67" width="19.3333" height="30.6667"/>
   <object id="420" x="64" y="1376">
    <polygon points="0,0 32,0 32,192 0,192 0,0"/>
   </object>
-  <object id="421" name="BigBloated" x="2328" y="1517" width="32" height="32"/>
+  <object id="421" name="BigBloated" x="2305.33" y="1535.67" width="32" height="32"/>
+  <object id="422" x="2208" y="960">
+   <polygon points="0,0 32,0 32,32 0,32 0,0"/>
+  </object>
  </objectgroup>
  <layer id="1" name="Platform" width="120" height="50">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
 </map>
