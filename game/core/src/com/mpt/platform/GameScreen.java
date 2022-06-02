@@ -97,7 +97,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
 
         mapHandler = new MapHandler(this);
-        currentMap = "MapTutorial";
+        currentMap = "Map3";
         currentCharacter = 0;
         loadMap(currentMap, currentCharacter);
 
@@ -129,10 +129,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         extendViewport.apply();
         batch.begin();
-
-        if(mapHandler != null) {
-            mapHandler.renderTiledMapTileBackgrounds();
-        }
 
         if (orthogonalTiledMapRenderer != null) {
             orthogonalTiledMapRenderer.render();
