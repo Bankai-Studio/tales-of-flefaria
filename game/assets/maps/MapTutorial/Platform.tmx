@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="273">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="290">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <tileset firstgid="179" source="../Map1/ObjectsTileset.tsx"/>
  <tileset firstgid="258" source="Tutorial.tsx"/>
- <layer id="4" name="Beckground" width="150" height="50">
+ <tileset firstgid="277" name="images" tilewidth="1920" tileheight="1080" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="1920" height="1080" source="Images/snow.png"/>
+  </tile>
+ </tileset>
+ <objectgroup id="9" name="Background">
+  <object id="289" gid="277" x="0" y="1605.64" width="2840.26" height="1597.64"/>
+ </objectgroup>
+ <layer id="4" name="Beckground" width="150" height="50" visible="0">
   <data encoding="base64" compression="zlib">
    eJzt1YEKwiAQAFB/oVFbP1QE9f/fU9KEIYsga871HshAmJynd4YAAAAAAAAAAAAAAAAAAAAAAAAAtOpYO4BCfWh/D7CEwzhak8fcWr13M3P61nLi/dl/8N8Q1nNG8Q7tCte4jN9hHH3hev+ixZ45p5uMrTqH8nfuFJ71kfeMWH9bzt07MS9bqYUWxH6d7lzMe96v13gW6Y1J8daO8fbDtV/tbZqD2vsHAPima+0AAAAAAB7u0sYF3g==
   </data>
@@ -324,7 +333,7 @@
    <polygon points="0,0 0,32 96,32 96,0"/>
   </object>
   <object id="219" name="KillBlock" x="2533.33" y="1219.67" width="19.3333" height="30.6667"/>
-  <object id="236" name="TestingDummy" x="3296" y="1216" width="32" height="32"/>
+  <object id="236" name="TestingDummy" x="3424" y="1216" width="32" height="32"/>
   <object id="237" name="Box" x="384" y="1248" width="32" height="32"/>
   <object id="264" name="Coin" x="422" y="1115" width="16" height="16"/>
   <object id="267" name="GhostLeft" x="737.833" y="1201.74" width="25" height="43"/>
