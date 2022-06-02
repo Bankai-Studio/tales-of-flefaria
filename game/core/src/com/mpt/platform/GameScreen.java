@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -176,14 +175,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         box2DDebugRenderer.dispose();
         player.dispose();
         for (Box box : boxes) box.dispose();
-        for(Enemy enemy : enemies) {
+        for (Enemy enemy : enemies) {
             enemy.dispose();
-            if(enemy instanceof FinalBoss) ((FinalBoss) enemy).disposeBullets();
+            if (enemy instanceof FinalBoss) ((FinalBoss) enemy).disposeBullets();
         }
-        for(Ghost ghost : ghosts) ghost.dispose();
-        for(Checkpoint checkpoint : checkpoints) checkpoint.dispose();
-        for(KillBlock killBlock : killBlocks) killBlock.dispose();
-        if(gameOver != null)
+        for (Ghost ghost : ghosts) ghost.dispose();
+        for (Checkpoint checkpoint : checkpoints) checkpoint.dispose();
+        for (KillBlock killBlock : killBlocks) killBlock.dispose();
+        if (gameOver != null)
             gameOver.dispose();
         endpoint.dispose();
     }
@@ -354,12 +353,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     public void updateHealthLabel(int currentPlayerHealth, int damageProvided) {
-        if(currentPlayerHealth >= 0)
-            playerHealthLabel.setText(currentPlayerHealth);
-        else
-            playerHealthLabel.setText(0);
+        playerHealthLabel.setText(Math.max(currentPlayerHealth, 0));
         float scaleToBeRemoved = healthImage.getScaleX() - (damageProvided * 5f);
-        if((damageProvided * 5f) > healthImage.getScaleX())
+        if ((damageProvided * 5f) > healthImage.getScaleX())
             scaleToBeRemoved = 0;
         healthImage.setScaleX(scaleToBeRemoved);
         /*
@@ -388,12 +384,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     public void loadMap(String mapName, int character) {
-        if(currentMap != mapName && MusicModule.getWorldMusic(currentMap).isPlaying())
+        if (currentMap != mapName && MusicModule.getWorldMusic(currentMap).isPlaying())
             MusicModule.getWorldMusic(currentMap).stop();
         currentMap = mapName;
         currentCharacter = character;
         Music worldMusic = MusicModule.getWorldMusic(currentMap);
-        if(worldMusic != null) {
+        if (worldMusic != null) {
             worldMusic.play();
             worldMusic.setLooping(true);
             worldMusic.setVolume(0f);
@@ -403,8 +399,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
                     if (!MusicModule.getMainMenuMusic().isPlaying() && worldMusic.isPlaying()) {
                         if (worldMusic.getVolume() < 0.3f) {
                             worldMusic.setVolume(Math.min(0.1f, worldMusic.getVolume() + 0.01f));
-                        }
-                        else {
+                        } else {
                             this.cancel();
                         }
                     }
@@ -425,7 +420,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         checkpoints.clear();
         ghosts.clear();
 
-        bodies = new Array<Body>(world.getBodyCount());
+        bodies = new Array<>(world.getBodyCount());
         world.getBodies(bodies);
         for (Body body : bodies)
             world.destroyBody(body);
@@ -472,6 +467,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public PreferencesHandler getPreferencesHandler() {
         return preferencesHandler;
+    }
+
+    public MovementHandler getMovementHandler() {
+        return movementHandler;
     }
 
     public void setPlayer(Player player) {
@@ -526,20 +525,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return ladders;
     }
 
-    public ArrayList<Coin> getCoins() {
-        return coins;
-    }
-
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
 
     public ArrayList<Checkpoint> getCheckpoints() {
         return checkpoints;
-    }
-
-    public ArrayList<Ghost> getGhosts() {
-        return ghosts;
     }
 
 }

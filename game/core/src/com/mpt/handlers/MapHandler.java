@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.BodyModule;
+import com.mpt.objects.block.Block;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.*;
@@ -294,6 +295,7 @@ public class MapHandler {
         fixtureDef.filter.maskBits = (BIT_PLAYER | BIT_BOX | BIT_ENEMY);
 
         body.createFixture(fixtureDef);
+        body.setUserData(new Block());
 
         shape.dispose();
     }
