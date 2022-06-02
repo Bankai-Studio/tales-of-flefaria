@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="1100">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="1105">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="3" name="Beckground" width="160" height="60">
@@ -1116,7 +1116,6 @@
   <object id="780" name="Coin" x="1792" y="160" width="16" height="16"/>
   <object id="781" name="Scorpio" x="2172" y="161.333" width="40" height="20"/>
   <object id="782" name="Coin" x="2176" y="128" width="16" height="16"/>
-  <object id="783" name="Checkpoint" x="1344" y="544" width="32" height="64"/>
   <object id="785" name="Scorpio" x="2524" y="128" width="40" height="20"/>
   <object id="786" name="Coin" x="3136" y="1280" width="16" height="16"/>
   <object id="787" name="Coin" x="2944" y="96" width="16" height="16"/>
@@ -1246,6 +1245,11 @@
   <object id="1099" x="4640" y="1120">
    <polygon points="0,0 192,0 192,32 0,32"/>
   </object>
+  <object id="1100" name="GhostLeft" x="784.833" y="1293.17" width="25" height="43"/>
+  <object id="1101" name="GhostLeft" x="2204.83" y="1073.17" width="25" height="43"/>
+  <object id="1102" name="GhostLeft" x="4928.83" y="1137.17" width="25" height="43"/>
+  <object id="1103" name="GhostRight" x="3770.17" y="529.167" width="25" height="43"/>
+  <object id="1104" name="GhostLeft" x="1627.5" y="181.167" width="25" height="43"/>
  </objectgroup>
  <layer id="1" name="Livello tile 1" width="160" height="60">
   <data encoding="base64" compression="zlib">

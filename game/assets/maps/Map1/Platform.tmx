@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="284">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="288">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="80" source="NormalTerrain.tsx"/>
  <layer id="2" name="BackgroundAssets" width="150" height="50">
@@ -280,6 +280,9 @@
    <polygon points="0,0 32,0 32,1312 0,1312"/>
   </object>
   <object id="281" name="KillBlock" x="3456" y="1248" width="19.3333" height="30.6667"/>
+  <object id="285" name="GhostLeft" x="650.5" y="1233.5" width="25" height="43"/>
+  <object id="286" name="GhostLeft" x="2781.5" y="1073.5" width="25" height="43"/>
+  <object id="287" name="GhostRight" x="4451.5" y="851.5" width="25" height="43"/>
  </objectgroup>
  <layer id="1" name="PlarformLvl1" width="150" height="50">
   <data encoding="base64" compression="zlib">
