@@ -39,7 +39,6 @@ public class MusicModule {
         portalSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/portalSound.mp3"));
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/humanDeath.mp3"));
         enemyAttackSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/enemyAttack.mp3"));
-        snakeMovementSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/snakeMovementSound.mp3"));
         snakeAttackSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/snakeAttackSound.mp3"));
         stepSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/stepSound.mp3"));
         worldMusics = new HashMap<>();
@@ -90,9 +89,6 @@ public class MusicModule {
 
     public static Music getWorldMusic(String worldName) {
         return worldMusics.get(worldName);
-    }
-    public static Music getSnakeMovementSound() {
-        return snakeMovementSound;
     }
     public static Music getSnakeAttackSound() {
         return snakeAttackSound;

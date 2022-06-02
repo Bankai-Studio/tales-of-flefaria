@@ -21,9 +21,6 @@ public class MovementHandler {
 
     // Constants
     private final float DEFAULT_SPEED = 8f;
-    private final float DOUBLE_JUMP_REGEN_TIME = 0f;
-    private final float STAMINA_REGEN_TIME = 0.03f;
-    private final float CLIMBING_SPEED = 4f;
     private final Map<InputKeys, Boolean> inputKeys = new HashMap<>();
     private final Player player;
     private final GameScreen gameScreen;
@@ -116,6 +113,7 @@ public class MovementHandler {
         changeState(State.IDLE);
 
         if (isPlayerNearALadder(player.getBody().getPosition()) && (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) && changeState(State.CLIMBING)) {
+            float CLIMBING_SPEED = 4f;
             player.setPlayerSpeed(CLIMBING_SPEED);
             jumpCounter = 0;
         }
@@ -325,6 +323,7 @@ public class MovementHandler {
 
     private void regenStamina(float delta) {
         staminaTimer += delta;
+        float STAMINA_REGEN_TIME = 0.03f;
         if ((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().x == 0 || isSprintReloading) && player.getPlayerStamina() < player.getPlayerMaxStamina() && staminaTimer > STAMINA_REGEN_TIME) {
             player.setPlayerStamina(player.getPlayerStamina() + 1);
             gameScreen.updateStamina(player.getPlayerStamina());
@@ -334,6 +333,7 @@ public class MovementHandler {
 
     private void reloadDoubleJump(float delta) {
         doubleJumpTimer += delta;
+        float DOUBLE_JUMP_REGEN_TIME = 0f;
         if (!isDoubleJumpReady && doubleJumpTimer > DOUBLE_JUMP_REGEN_TIME) isDoubleJumpReady = true;
     }
 
