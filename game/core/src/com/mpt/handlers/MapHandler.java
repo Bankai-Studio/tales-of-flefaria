@@ -343,4 +343,34 @@ public class MapHandler {
             }
         }
     }
+
+    public void renderTiledMapTileBackgrounds() {
+        MapObjects mapObjects = tiledMap.getLayers().get("BackgroundObjects").getObjects();
+        for(MapObject mapObject : mapObjects) {
+            if(mapObject instanceof TiledMapTileMapObject) {
+                TiledMapTileMapObject tiledMapTileMapObject = (TiledMapTileMapObject) mapObject;
+                TextureRegion textureRegion = tiledMapTileMapObject.getTile().getTextureRegion();
+
+                float rotation = -tiledMapTileMapObject.getRotation();
+                float scaleX = tiledMapTileMapObject.getScaleX();
+                float scaleY = tiledMapTileMapObject.getScaleY();
+                float xPos = tiledMapTileMapObject.getX();
+                float yPos = tiledMapTileMapObject.getY();
+
+                textureRegion.flip(tiledMapTileMapObject.isFlipHorizontally(), tiledMapTileMapObject.isFlipVertically());
+                spriteBatch.draw(
+                        textureRegion,
+                        xPos,
+                        yPos,
+                        tiledMapTileMapObject.getOriginX() * scaleX,
+                        tiledMapTileMapObject.getOriginY() * scaleY,
+                        textureRegion.getRegionWidth() * scaleX,
+                        textureRegion.getRegionHeight() * scaleY,
+                        1f,
+                        1f,
+                        rotation);
+                textureRegion.flip(tiledMapTileMapObject.isFlipHorizontally(), tiledMapTileMapObject.isFlipVertically());
+            }
+        }
+    }
 }
