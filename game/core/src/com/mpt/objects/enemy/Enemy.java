@@ -31,6 +31,8 @@ public abstract class Enemy extends GameEntity {
     protected String enemyName;
     private boolean playerHasBeenSpotted;
     private float attackTimer = 0f;
+    private final float ATTACK_DELAY = 1f;
+    private final float BOSS_ATTACK_DELAY = 3f;
 
     public Enemy(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
@@ -52,11 +54,20 @@ public abstract class Enemy extends GameEntity {
         if (enemyState != EnemyState.DYING) {
             if (animationHandler.isFinished() && (enemyState.equals(EnemyState.HURT) || enemyState.equals(EnemyState.ATTACKING))) {
                 if (enemyState.equals(EnemyState.ATTACKING)) {
-                    if (enemyReadyToAttack(gameScreen.getPlayer())) {
+                    if (bossSpottedEnemy) {
+                        if (Math.abs(gameScreen.getPlayer().getBody().getPosition().x - body.getPosition().x) < (width / 2 / PPM + gameScreen.getPlayer().getWidth() / PPM))
+                            CombatHandler.attack(this, gameScreen.getPlayer());
+                        else {
+                            if (animationHandler.isCurrent("shoot"))
+                                shootPlayer(gameScreen.getPlayer());
+                        }
+                        gameScreen.updateHealthBar();
+                        attackTimer = 0;
+                    } else if (enemyReadyToAttack(gameScreen.getPlayer())) {
                         CombatHandler.attack(this, gameScreen.getPlayer());
                         gameScreen.updateHealthBar();
+                        attackTimer = 0;
                     }
-                    attackTimer = 0;
                 }
                 enemyState = EnemyState.IDLE;
                 animationHandler.setCurrent("idle");
@@ -93,6 +104,15 @@ public abstract class Enemy extends GameEntity {
             this.getBody().setLinearVelocity(0, this.getBody().getLinearVelocity().y);
             enemyState = EnemyState.ATTACKING;
             animationHandler.setCurrent("attack", false);
+        }
+        if (bossSpottedEnemy && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING)) {
+            this.getBody().setLinearVelocity(0, this.getBody().getLinearVelocity().y);
+            enemyState = EnemyState.ATTACKING;
+            if (enemyReadyToAttack(player))
+                animationHandler.setCurrent("attack", false);
+            else if (attackTimer >= BOSS_ATTACK_DELAY)
+                animationHandler.setCurrent("shoot", false);
+
         }
     }
 
@@ -152,9 +172,17 @@ public abstract class Enemy extends GameEntity {
     }
 
     public boolean enemyReadyToAttack(Player player) {
-        final float ATTACK_DELAY = 1f;
-        return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < (width / 2 / PPM + player.getWidth() / PPM) && attackTimer >= ATTACK_DELAY && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < (height / 2 / PPM + player.getHeight() / PPM));
+        if (bossSpottedEnemy)
+            return attackTimer >= BOSS_ATTACK_DELAY;
+        if (playerHasBeenSpotted)
+            return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < (width / 2 / PPM + player.getWidth() / PPM) && attackTimer >= ATTACK_DELAY && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < (height / 2 / PPM + player.getHeight() / PPM));
+        return false;
     }
+
+    public void shootPlayer(Player player) {
+
+    }
+
 
     public void lurkTarget(Player player) {
         if (!enemyReadyToAttack(player)) {
@@ -225,20 +253,16 @@ public abstract class Enemy extends GameEntity {
         TextureAtlas charset;
         float FRAME_TIME = 1 / 6f;
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack1.atlas"));
-        this.animationHandler.add("attack1", new Animation<>(FRAME_TIME, charset.findRegions("attack1")));
-        textureAtlases.add(charset);
-
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack2.atlas"));
         this.animationHandler.add("attack", new Animation<>(FRAME_TIME, charset.findRegions("attack2")));
         textureAtlases.add(charset);
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack3.atlas"));
-        this.animationHandler.add("attack3", new Animation<>(FRAME_TIME, charset.findRegions("attack3")));
+        this.animationHandler.add("mortalStrike", new Animation<>(FRAME_TIME, charset.findRegions("attack3")));
         textureAtlases.add(charset);
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack4.atlas"));
-        this.animationHandler.add("attack4", new Animation<>(FRAME_TIME, charset.findRegions("attack4")));
+        this.animationHandler.add("shoot", new Animation<>(FRAME_TIME, charset.findRegions("attack4")));
         textureAtlases.add(charset);
 
         charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/death.atlas"));
