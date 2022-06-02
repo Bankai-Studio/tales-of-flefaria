@@ -30,7 +30,7 @@ public abstract class Enemy extends GameEntity {
     protected EnemyState enemyState;
     protected String direction;
     protected String enemyName;
-    private boolean bossSpottedEnemy;
+    private boolean bossSpottedPlayer;
     private boolean playerHasBeenSpotted;
     private float attackTimer = 0f;
 
@@ -39,7 +39,7 @@ public abstract class Enemy extends GameEntity {
         initialPosX = body.getPosition().x; //initial position of enemy
         initialPosY = body.getPosition().y; //initial y position
         playerHasBeenSpotted = false;
-        bossSpottedEnemy = false;
+        bossSpottedPlayer = false;
         body.setUserData(this);
         this.gameScreen = gameScreen;
         direction = "RIGHT";
@@ -54,7 +54,7 @@ public abstract class Enemy extends GameEntity {
         if (enemyState != EnemyState.DYING) {
             if (animationHandler.isFinished() && (enemyState.equals(EnemyState.HURT) || enemyState.equals(EnemyState.ATTACKING))) {
                 if (enemyState.equals(EnemyState.ATTACKING)) {
-                    if (bossSpottedEnemy) {
+                    if (bossSpottedPlayer) {
                         if (animationHandler.isCurrent("attack") && Math.abs(gameScreen.getPlayer().getBody().getPosition().x - body.getPosition().x) < (width / 2 / PPM + gameScreen.getPlayer().getWidth() / PPM))
                             CombatHandler.attack(this, gameScreen.getPlayer());
                         if (animationHandler.isCurrent("shoot"))
@@ -95,17 +95,17 @@ public abstract class Enemy extends GameEntity {
         if (enemyName.equals("FinalBoss"))
             batch.draw(currentFrame, tX - width / 2, tY - height / 2, width * 1.8f, height * 1.8f);
         else batch.draw(currentFrame, tX, tY);
-        if (playerSpotted(gameScreen.getPlayer()) && !enemyState.equals(EnemyState.DYING) && !bossSpottedEnemy)
+        if (playerSpotted(gameScreen.getPlayer()) && !enemyState.equals(EnemyState.DYING) && !bossSpottedPlayer)
             batch.draw(attackTexture, body.getPosition().x * PPM, body.getPosition().y * PPM + height, (float) attackTexture.getWidth() / 40, (float) attackTexture.getHeight() / 40);
     }
 
     public void enemyAttackPlayer(Player player) {
-        if (!bossSpottedEnemy && enemyReadyToAttack(player) && !enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING)) {
+        if (!bossSpottedPlayer && enemyReadyToAttack(player) && !enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING)) {
             this.getBody().setLinearVelocity(0, this.getBody().getLinearVelocity().y);
             enemyState = EnemyState.ATTACKING;
             animationHandler.setCurrent("attack", false);
         }
-        if (bossSpottedEnemy && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING) && enemyReadyToAttack(gameScreen.getPlayer()) && !enemyState.equals(EnemyState.ATTACKING)) {
+        if (bossSpottedPlayer && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING) && enemyReadyToAttack(gameScreen.getPlayer()) && !enemyState.equals(EnemyState.ATTACKING)) {
             this.getBody().setLinearVelocity(0, this.getBody().getLinearVelocity().y);
             enemyState = EnemyState.ATTACKING;
             if (Math.abs(gameScreen.getPlayer().getBody().getPosition().x - body.getPosition().x) < (width / 2 / PPM + gameScreen.getPlayer().getWidth() / PPM))
@@ -163,8 +163,8 @@ public abstract class Enemy extends GameEntity {
 
     public boolean playerSpotted(Player player) {
         if (this instanceof FinalBoss) {
-            bossSpottedEnemy = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1000 + width / 2 / PPM;
-            return bossSpottedEnemy;
+            bossSpottedPlayer = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1000 + width / 2 / PPM;
+            return bossSpottedPlayer;
         } else {
             playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 6f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 2f && player.getBody().getPosition().y >= this.getBody().getPosition().y - 0.4f;
             return playerHasBeenSpotted;
@@ -172,7 +172,7 @@ public abstract class Enemy extends GameEntity {
     }
 
     public boolean enemyReadyToAttack(Player player) {
-        if (bossSpottedEnemy)
+        if (bossSpottedPlayer)
             return attackTimer >= BOSS_ATTACK_DELAY;
         if (playerHasBeenSpotted)
             return Math.abs(player.getBody().getPosition().x - body.getPosition().x) < (width / 2 / PPM + player.getWidth() / PPM) && attackTimer >= ATTACK_DELAY && (Math.abs(player.getBody().getPosition().y - body.getPosition().y) < (height / 2 / PPM + player.getHeight() / PPM));
