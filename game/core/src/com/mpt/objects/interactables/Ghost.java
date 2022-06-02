@@ -45,4 +45,10 @@ public class Ghost extends GameObject {
     public void setTouched(boolean touched) {
         this.touched = touched;
     }
+
+    public boolean isTouched(){
+        if(touched)
+            return true;
+        return false;
+    }
 }

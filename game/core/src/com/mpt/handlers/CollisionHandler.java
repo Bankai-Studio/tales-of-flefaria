@@ -20,6 +20,7 @@ public class CollisionHandler implements ContactListener {
 
     PreferencesHandler preferencesHandler;
     GameScreen gameScreen;
+    private boolean isTouched = false;
 
     public CollisionHandler(PreferencesHandler preferencesHandler, GameScreen gameScreen) {
         this.preferencesHandler = preferencesHandler;
@@ -122,10 +123,11 @@ public class CollisionHandler implements ContactListener {
 
     private void hideGhost(Fixture fixture) {
         Ghost ghost = (Ghost) fixture.getBody().getUserData();
-        ghost.setTouched(true);
-        MusicModule.getGhostSound().setVolume(0.4f);
-        MusicModule.getGhostSound().play();
-
+        if(!ghost.isTouched()) {
+            ghost.setTouched(true);
+            MusicModule.getGhostSound().setVolume(0.4f);
+            MusicModule.getGhostSound().play();
+        }
     }
 
     private void gameOver(Fixture fixture) {

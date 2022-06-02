@@ -94,8 +94,12 @@ public class MovementHandler {
         reloadDoubleJump(delta);
 
         if(player.getPlayerState().equals(State.WALKING)) {
-            MusicModule.getStepSound().setVolume(0.4f);
+            MusicModule.getStepSound().setVolume(5f);
             MusicModule.getStepSound().play();
+        }
+        if(player.getPlayerState().equals(State.RUNNING)){
+            MusicModule.getRunSound().setVolume(5f);
+            MusicModule.getRunSound().play();
         }
 
         if (!player.getPlayerState().equals(State.DYING)) checkUserInput();
