@@ -43,7 +43,7 @@
   <object id="310" gid="79" x="2976" y="1216" width="17" height="16"/>
   <object id="311" gid="79" x="3040" y="1280" width="17" height="16"/>
   <object id="312" gid="79" x="3104" y="1344" width="17" height="16"/>
-  <object id="313" gid="79" x="3200" y="1216" width="17" height="16"/>
+  <object id="313" gid="79" x="3248" y="1214" width="17" height="16"/>
   <object id="314" gid="72" x="3296" y="1120" width="61" height="24"/>
   <object id="315" gid="71" x="3360" y="1120" width="31" height="26"/>
   <object id="316" gid="71" x="3520" y="1248" width="31" height="26"/>
@@ -307,10 +307,10 @@
   <object id="133" name="KillBlock" x="1959.33" y="1312.67" width="19.3333" height="30.6667"/>
   <object id="134" name="KillBlock" x="1736.33" y="1343.67" width="19.3333" height="30.6667"/>
   <object id="137" name="KillBlock" x="3141.33" y="1346.67" width="19.3333" height="30.6667"/>
-  <object id="139" name="KillBlock" x="3076.83" y="1279.17" width="19.3333" height="30.6667"/>
+  <object id="139" name="KillBlock" x="3076.83" y="1283.17" width="19.3333" height="30.6667"/>
   <object id="140" name="KillBlock" x="3013.66" y="1224.67" width="19.3333" height="30.6667"/>
-  <object id="141" name="KillBlock" x="3205.33" y="1187.67" width="19.3333" height="30.6667"/>
-  <object id="142" name="KillBlock" x="3239.33" y="1152.67" width="19.3333" height="30.6667"/>
+  <object id="141" name="KillBlock" x="3208.83" y="1285.17" width="19.3333" height="30.6667"/>
+  <object id="142" name="KillBlock" x="3273.83" y="1155.67" width="19.3333" height="30.6667"/>
   <object id="143" name="KillBlock" x="3367.83" y="1088.67" width="19.3333" height="30.6667"/>
   <object id="144" name="KillBlock" x="3492.33" y="1186.67" width="19.3333" height="30.6667"/>
   <object id="146" name="KillBlock" x="3627.83" y="1280.17" width="19.3333" height="30.6667"/>
@@ -432,7 +432,7 @@
   <object id="261" name="KillBlockUp" x="1833" y="1020.67" width="15.3333" height="30"/>
   <object id="265" name="KillBlockUp" x="3211" y="1052.33" width="15.3333" height="30"/>
   <object id="266" name="KillBlockUp" x="2990.33" y="1052.33" width="15.3333" height="30"/>
-  <object id="267" name="KillBlockUp" x="3431.67" y="1027.67" width="15.3333" height="30"/>
+  <object id="267" name="KillBlockUp" x="3433.67" y="1020.67" width="15.3333" height="30"/>
   <object id="268" name="KillBlockUp" x="3626.33" y="1087.67" width="15.3333" height="30"/>
   <object id="351" x="4096" y="1152">
    <polygon points="0,0 32,-32 256,-32 288,0 288,448 0,448"/>
