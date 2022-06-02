@@ -324,7 +324,7 @@
    <polygon points="0,0 0,32 96,32 96,0"/>
   </object>
   <object id="219" name="KillBlock" x="2533.33" y="1219.67" width="19.3333" height="30.6667"/>
-  <object id="236" name="TestingDummy" x="3424" y="1216" width="32" height="32"/>
+  <object id="236" name="TestingDummy" x="3296" y="1216" width="32" height="32"/>
   <object id="237" name="Box" x="384" y="1248" width="32" height="32"/>
   <object id="264" name="Coin" x="422" y="1115" width="16" height="16"/>
   <object id="267" name="GhostLeft" x="737.833" y="1201.74" width="25" height="43"/>

@@ -1,6 +1,7 @@
 package com.mpt.objects.enemy;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,12 +18,16 @@ import static com.mpt.constants.Constants.PPM;
 
 public abstract class Enemy extends GameEntity {
     private final float initialPosX;
+    private final float initialPosY;
     private final GameScreen gameScreen;
     private boolean playerHasBeenSpotted;
     public boolean switchDirectionToRight;
     public boolean switchDirectionToLeft;
     protected float walkSpeed;
     private float attackTimer = 0f;
+
+    private final Texture attackTexture;
+
 
     // Enemy States
     public enum EnemyState {
@@ -37,12 +42,15 @@ public abstract class Enemy extends GameEntity {
     public Enemy(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
         initialPosX = body.getPosition().x; //initial position of enemy
+        initialPosY = body.getPosition().y; //initial y position
         playerHasBeenSpotted = false;
         body.setUserData(this);
         this.gameScreen = gameScreen;
         direction = "RIGHT";
         animationHandler = new AnimationHandler();
         enemyState = EnemyState.IDLE;
+        //spottedTexture = new Texture(Gdx.files.internal("./enemies/questionMark.png"));
+        attackTexture = new Texture(Gdx.files.internal("./enemies/exclamationPoint.png"));
     }
 
     @Override
@@ -62,7 +70,9 @@ public abstract class Enemy extends GameEntity {
                 enemyState = EnemyState.IDLE;
                 animationHandler.setCurrent("idle");
             }
-            if(body.getLinearVelocity().x == 0 && !playerSpotted(gameScreen.getPlayer())) enemyMovementsCollision();
+            if (body.getLinearVelocity().x == 0 && !playerSpotted(gameScreen.getPlayer())) {
+                enemyMovementsCollision();
+            }
             if (!playerSpotted(gameScreen.getPlayer())) enemyMovements();
             else lurkTarget(gameScreen.getPlayer());
         } else body.setLinearVelocity(0, body.getLinearVelocity().y);
@@ -80,8 +90,11 @@ public abstract class Enemy extends GameEntity {
         float tY = body.getPosition().y * PPM + adjustY;
         if (enemyName.equals("Scorpio") && direction.equals("RIGHT")) tX += 25f;
         if (enemyName.equals("Snake") && direction.equals("RIGHT")) tX += 25f;
-        if(enemyName.equals("FinalBoss")) batch.draw(currentFrame, tX - width/2, tY - height/2, width*1.8f, height*1.8f);
+        if (enemyName.equals("FinalBoss"))
+            batch.draw(currentFrame, tX - width / 2, tY - height / 2, width * 1.8f, height * 1.8f);
         else batch.draw(currentFrame, tX, tY);
+        if (playerSpotted(gameScreen.getPlayer()) && !enemyState.equals(EnemyState.DYING))
+            batch.draw(attackTexture, body.getPosition().x * PPM, body.getPosition().y * PPM + height ,(float)attackTexture.getWidth()/40,(float)attackTexture.getHeight()/40);
     }
 
     public void enemyAttackPlayer(Player player) {
@@ -98,47 +111,46 @@ public abstract class Enemy extends GameEntity {
             enemyState = EnemyState.WALKING;
             animationHandler.setCurrent("walk");
         }
-        if (this.getBody().getLinearVelocity().x > 0) {
-            xMaxLimitDX = initialPosX + 2.4f;
-            xMaxLimitSX = initialPosX - 5f;
+        xMaxLimitDX = initialPosX + 3f;
+        xMaxLimitSX = initialPosX - 3f;
+        switchDirectionToRight = true;
+        if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight) {
+            body.setLinearVelocity(walkSpeed * (2f), body.getLinearVelocity().y);
+            setFacingRight();
+        } else {
+            switchDirectionToRight = false;
+            switchDirectionToLeft = true;
+        }
+        if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX) {
+            body.setLinearVelocity(walkSpeed * (-2f), body.getLinearVelocity().y);
+            setFacingLeft();
+        } else {
+            switchDirectionToLeft = false;
             switchDirectionToRight = true;
-            if (body.getPosition().x < xMaxLimitDX && switchDirectionToRight) {
-                body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
-                setFacingRight();
-            } else {
-                switchDirectionToRight = false;
-                switchDirectionToLeft = true;
-            }
-            if (switchDirectionToLeft && body.getPosition().x > xMaxLimitSX) {
-                body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
-                setFacingLeft();
-            } else {
-                switchDirectionToLeft = false;
-                switchDirectionToRight = true;
-            }
         }
     }
 
     public void enemyMovementsCollision() {
         switchDirectionToRight = true;
         if (body.getPosition().x < initialPosX + 0.1f && switchDirectionToRight) {
+            System.out.println((int) initialPosY + " " + (int) body.getPosition().y);
             body.setLinearVelocity(walkSpeed * (3f), body.getLinearVelocity().y);
             setFacingRight();
         } else {
             switchDirectionToLeft = true;
             switchDirectionToRight = false;
         }
-        if (body.getPosition().x > initialPosX - 0.1f && switchDirectionToLeft) {
+        if (body.getPosition().x > initialPosX - 0.1f && switchDirectionToLeft && body.getPosition().y != initialPosY) {
             body.setLinearVelocity(walkSpeed * (-3f), body.getLinearVelocity().y);
             setFacingLeft();
-        } else{
+        } else {
             switchDirectionToLeft = false;
             switchDirectionToRight = true;
         }
     }
 
     public boolean playerSpotted(Player player) {
-        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 8f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 2f;
+        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 6f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 2f && player.getBody().getPosition().y >= this.getBody().getPosition().y - 0.4f;
         return playerHasBeenSpotted;
     }
 
@@ -179,7 +191,7 @@ public abstract class Enemy extends GameEntity {
         TextureAtlas charset;
         float FRAME_TIME = 1 / 6f;
 
-        if(enemyName.equals("FinalBoss")){
+        if (enemyName.equals("FinalBoss")) {
             loadBossSprites();
             return;
         }

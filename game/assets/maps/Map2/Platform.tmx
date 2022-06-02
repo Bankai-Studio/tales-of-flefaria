@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="1091">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="1094">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="79" source="NormalTerrain.tsx"/>
  <layer id="3" name="Beckground" width="160" height="60">
@@ -1090,7 +1090,6 @@
   <object id="723" name="Scorpio" x="3456" y="1376" width="40" height="20"/>
   <object id="724" name="Coin" x="3552" y="1344" width="16" height="16"/>
   <object id="725" name="Coin" x="3808" y="1312" width="16" height="16"/>
-  <object id="726" name="Scorpio" x="3712" y="1344" width="40" height="20"/>
   <object id="728" name="Coin" x="3904" y="1376" width="16" height="16"/>
   <object id="729" name="Coin" x="3968" y="1440" width="16" height="16"/>
   <object id="730" name="Scorpio" x="4192" y="1472" width="40" height="20"/>
@@ -1118,7 +1117,6 @@
   <object id="762" name="Coin" x="2432" y="416" width="16" height="16"/>
   <object id="763" name="Coin" x="2176" y="416" width="16" height="16"/>
   <object id="764" name="Coin" x="2176" y="384" width="16" height="16"/>
-  <object id="765" name="Scorpio" x="1888" y="448" width="40" height="20"/>
   <object id="767" name="Coin" x="1760" y="448" width="16" height="16"/>
   <object id="768" name="Coin" x="1696" y="480" width="16" height="16"/>
   <object id="769" name="Coin" x="1632" y="512" width="16" height="16"/>
@@ -1128,14 +1126,13 @@
   <object id="773" name="Coin" x="1152" y="448" width="16" height="16"/>
   <object id="774" name="Coin" x="1280" y="384" width="16" height="16"/>
   <object id="776" name="Coin" x="1408" y="256" width="16" height="16"/>
-  <object id="777" name="Scorpio" x="1632" y="192" width="40" height="20"/>
-  <object id="778" name="Scorpio" x="1856" y="192" width="40" height="20"/>
+  <object id="777" name="Scorpio" x="1884" y="192" width="40" height="20"/>
   <object id="779" name="Coin" x="1728" y="160" width="16" height="16"/>
   <object id="780" name="Coin" x="1792" y="160" width="16" height="16"/>
-  <object id="781" name="Scorpio" x="2048" y="160" width="40" height="20"/>
+  <object id="781" name="Scorpio" x="2172" y="161.333" width="40" height="20"/>
   <object id="782" name="Coin" x="2176" y="128" width="16" height="16"/>
   <object id="783" name="Checkpoint" x="1344" y="544" width="32" height="64"/>
-  <object id="785" name="Scorpio" x="2402.67" y="136" width="40" height="20"/>
+  <object id="785" name="Scorpio" x="2524" y="128" width="40" height="20"/>
   <object id="786" name="Coin" x="3136" y="1280" width="16" height="16"/>
   <object id="787" name="Coin" x="2944" y="96" width="16" height="16"/>
   <object id="788" name="Coin" x="3040" y="96" width="16" height="16"/>
@@ -1254,6 +1251,7 @@
   <object id="1084" name="KillBlock" x="902.333" y="1508.67" width="19.3333" height="30.6667"/>
   <object id="1086" name="KillBlock" x="1126.33" y="1379.67" width="19.3333" height="30.6667"/>
   <object id="1087" name="KillBlockUp" x="3755.33" y="606" width="15.3333" height="30"/>
+  <object id="1093" name="Scorpio" x="5024" y="1536" width="40" height="20"/>
  </objectgroup>
  <layer id="1" name="Livello tile 1" width="160" height="60">
   <data encoding="base64" compression="zlib">

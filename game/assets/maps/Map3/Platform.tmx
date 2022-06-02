@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="363">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="366">
  <tileset firstgid="1" source="imaggini.tsx"/>
  <tileset firstgid="123" source="../Map4/Tileset.tsx"/>
  <objectgroup id="4" name="TileObjects">
@@ -376,7 +376,7 @@
   <object id="210" name="KillBlock" x="937.833" y="1312.67" width="19.3333" height="30.6667"/>
   <object id="216" name="Player" x="192" y="1117" width="22" height="30"/>
   <object id="222" name="Snake" x="191.5" y="1263.5" width="32" height="17"/>
-  <object id="226" name="BigBloated" x="1536" y="1152" width="32" height="32"/>
+  <object id="226" name="BigBloated" x="1338" y="1214.67" width="32" height="32"/>
   <object id="228" name="BigBloated" x="2496" y="1120" width="32" height="32"/>
   <object id="231" name="Box" x="412.667" y="1248" width="30" height="30"/>
   <object id="232" x="3200" y="1024">
@@ -454,6 +454,7 @@
   </object>
   <object id="361" name="KillBlock" x="3174.33" y="1414" width="19.3333" height="30.6667"/>
   <object id="362" name="KillBlock" x="704" y="1536" width="19.3333" height="30.6667"/>
+  <object id="364" name="Snake" x="4256" y="1088" width="32" height="17"/>
  </objectgroup>
  <layer id="1" name="PlatformMap" width="150" height="50">
   <data encoding="base64" compression="zlib">
