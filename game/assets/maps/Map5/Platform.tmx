@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="19">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="20">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <objectgroup id="3" name="TileObjects"/>
  <objectgroup id="2" name="Objects">
@@ -22,6 +22,7 @@
   <object id="18" x="32" y="0">
    <polygon points="0,0 0,32 3136,32 3136,0"/>
   </object>
+  <object id="19" name="Checkpoint" x="95.9091" y="927.636" width="32" height="64"/>
  </objectgroup>
  <layer id="4" name="Platform" width="100" height="40">
   <data encoding="base64" compression="zlib">
