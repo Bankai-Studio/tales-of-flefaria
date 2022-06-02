@@ -20,7 +20,10 @@ public class MusicModule {
     private static Sound doubleJumpSound;
     private static Sound portalSound;
     private static Sound playerDeathSound;
+    private static Music snakeMovementSound;
+    private static Music snakeAttackSound;
     private static Music enemyAttackSound;
+
 
     private static HashMap<String, Music> worldMusics;
 
@@ -30,13 +33,15 @@ public class MusicModule {
         collectCoinSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/CollectCoin.mp3"));
         footStepsSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/FootstepSound.ogg"));
         checkPointSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Checkpoint.ogg"));
-        gameOverSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/GameoverSound.wav"));
+        gameOverSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/GameOverSound.wav"));
         jumpSound1 = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Jump1.mp3"));
         jumpSound2 = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Jump2.mp3"));
         doubleJumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/doubleJumpSound.mp3"));
         portalSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/portalSound.mp3"));
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/humanDeath.mp3"));
         enemyAttackSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/enemyAttack.mp3"));
+        snakeMovementSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/snakeMovementSound.mp3"));
+        snakeAttackSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/snakeAttackSound.mp3"));
         worldMusics = new HashMap<>();
         worldMusics.put("MapTutorial", Gdx.audio.newMusic(Gdx.files.internal("audio/Welcome to Flefaria.wav")));
         worldMusics.put("Map1", Gdx.audio.newMusic(Gdx.files.internal("audio/The Forest.mp3")));
@@ -83,8 +88,16 @@ public class MusicModule {
     public static Music getWorldMusic(String worldName) {
         return worldMusics.get(worldName);
     }
+    public static Music getSnakeMovementSound() {
+        return snakeMovementSound;
+    }
+    public static Music getSnakeAttackSound() {
+        return snakeAttackSound;
+    }
 
     public static void dispose(){
+        snakeAttackSound.dispose();
+        snakeMovementSound.dispose();
         enemyAttackSound.dispose();
         playerDeathSound.dispose();
         portalSound.dispose();

@@ -19,6 +19,7 @@ import static com.mpt.constants.Constants.PPM;
 public abstract class Enemy extends GameEntity {
     protected final AnimationHandler animationHandler;
     private final float initialPosX;
+    private boolean bossSpottedEnemy;
     private final float initialPosY;
     private final GameScreen gameScreen;
     private final Texture attackTexture;
@@ -36,12 +37,12 @@ public abstract class Enemy extends GameEntity {
         initialPosX = body.getPosition().x; //initial position of enemy
         initialPosY = body.getPosition().y; //initial y position
         playerHasBeenSpotted = false;
+        bossSpottedEnemy = false;
         body.setUserData(this);
         this.gameScreen = gameScreen;
         direction = "RIGHT";
         animationHandler = new AnimationHandler();
         enemyState = EnemyState.IDLE;
-        //spottedTexture = new Texture(Gdx.files.internal("./enemies/questionMark.png"));
         attackTexture = new Texture(Gdx.files.internal("./enemies/exclamationPoint.png"));
     }
 
@@ -85,12 +86,13 @@ public abstract class Enemy extends GameEntity {
         if (enemyName.equals("FinalBoss"))
             batch.draw(currentFrame, tX - width / 2, tY - height / 2, width * 1.8f, height * 1.8f);
         else batch.draw(currentFrame, tX, tY);
-        if (playerSpotted(gameScreen.getPlayer()) && !enemyState.equals(EnemyState.DYING))
+        if (playerSpotted(gameScreen.getPlayer()) && !enemyState.equals(EnemyState.DYING) && !bossSpottedEnemy)
             batch.draw(attackTexture, body.getPosition().x * PPM, body.getPosition().y * PPM + height, (float) attackTexture.getWidth() / 40, (float) attackTexture.getHeight() / 40);
     }
 
     public void enemyAttackPlayer(Player player) {
         if (enemyReadyToAttack(player) && !enemyState.equals(EnemyState.HURT) && !enemyState.equals(EnemyState.DYING) && !player.getPlayerState().equals(Player.State.DYING)) {
+            this.getBody().setLinearVelocity(0, this.getBody().getLinearVelocity().y);
             enemyState = EnemyState.ATTACKING;
             animationHandler.setCurrent("attack", false);
         }
@@ -142,11 +144,13 @@ public abstract class Enemy extends GameEntity {
     }
 
     public boolean playerSpotted(Player player) {
-        if (this instanceof FinalBoss)
-            playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 6f + width / 2 / PPM;
-        else
+        if (this instanceof FinalBoss) {
+            bossSpottedEnemy = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 1000 + width / 2 / PPM;
+            return bossSpottedEnemy;
+        } else {
             playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 6f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 2f && player.getBody().getPosition().y >= this.getBody().getPosition().y - 0.4f;
-        return playerHasBeenSpotted;
+            return playerHasBeenSpotted;
+        }
     }
 
     public boolean enemyReadyToAttack(Player player) {
@@ -175,9 +179,14 @@ public abstract class Enemy extends GameEntity {
                     animationHandler.setCurrent("idle");
                 }
             }
-        } else if (enemyReadyToAttack(player)) {
-            MusicModule.getEnemyAttackSound().setVolume(0.1f);
-            MusicModule.getEnemyAttackSound().play();
+        } else if (enemyReadyToAttack(player) && !player.getPlayerState().equals(Player.State.DYING)) {
+            if (enemyName.equals("Snake")) {
+                MusicModule.getSnakeAttackSound().setVolume(0.1f);
+                MusicModule.getSnakeAttackSound().play();
+            } else if (enemyName.equals("Centipede") || enemyName.equals("BigBloated") || enemyName.equals("FinalBoss")) {
+                MusicModule.getEnemyAttackSound().setVolume(0.1f);
+                MusicModule.getEnemyAttackSound().play();
+            }
             enemyAttackPlayer(player);
         }
     }
