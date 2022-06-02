@@ -150,7 +150,7 @@ public class MovementHandler {
 
         if (inputKeys.get(InputKeys.SPACE)) {
             inputKeys.put(InputKeys.SPACE, false);
-            if (player.getPlayerStamina() >= 10 && changeState(State.JUMPING)) {
+            if (player.getPlayerStamina() >= 15 && changeState(State.JUMPING)) {
                 if (jumpCounter == 0 || (jumpCounter == 1 && isDoubleJumpReady)) {
                     if (jumpCounter == 1) {
                         MusicModule.getJumpSound1().play(0.4f);
@@ -164,7 +164,7 @@ public class MovementHandler {
                     player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, 0);
                     player.getBody().applyLinearImpulse(new Vector2(0, force), player.getBody().getPosition(), true);
                     jumpCounter++;
-                    player.setPlayerStamina(player.getPlayerStamina() - 10);
+                    player.setPlayerStamina(player.getPlayerStamina() - 15);
                     gameScreen.updateStamina(player.getPlayerStamina());
                 }
             }
@@ -207,9 +207,8 @@ public class MovementHandler {
             } else wasLastFrameYVelocityZero = true;
         } else wasLastFrameYVelocityZero = false;
 
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
-            changeState(State.ATTACKING);
-
+        if ((Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) && player.getPlayerStamina() >= 60 && changeState(State.ATTACKING))
+            player.setPlayerStamina(player.getPlayerStamina() - 60);
 
         player.getBody().setLinearVelocity(player.getVelocityX() * player.getPlayerSpeed(), player.getBody().getLinearVelocity().y < 25 ? player.getBody().getLinearVelocity().y : 25);
     }
@@ -287,7 +286,7 @@ public class MovementHandler {
         }
         if (newState.equals(State.JUMPING)) {
             if (!currentState.equals(State.HURT)) {
-                if (currentState.equals(State.JUMPING)) playerAnimations.setCurrent("idle", false);
+                if (currentState.equals(State.JUMPING) && jumpCounter==1) playerAnimations.setCurrent("idle", false);
                 playerAnimations.setCurrent("jump", false);
                 changed = true;
             }
