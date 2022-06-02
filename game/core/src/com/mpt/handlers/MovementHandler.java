@@ -96,6 +96,11 @@ public class MovementHandler {
         regenStamina(delta);
         reloadDoubleJump(delta);
 
+        if(player.getPlayerState().equals(State.WALKING)) {
+            MusicModule.getStepSound().setVolume(0.4f);
+            MusicModule.getStepSound().play();
+        }
+
         if (!player.getPlayerState().equals(State.DYING)) checkUserInput();
         else if (player.getPlayerAnimations().isFinished()) player.checkPlayerDeath();
         else player.getBody().setLinearVelocity(0, player.getBody().getLinearVelocity().y);
@@ -128,13 +133,11 @@ public class MovementHandler {
             changeState(State.PUSHING);
 
         if (inputKeys.get(InputKeys.LEFT) && !inputKeys.get(InputKeys.RIGHT)) {
-            //MusicModule.getFootStepsMusic().play();
             changeState(State.WALKING);
             player.setFacingLeft();
             player.setVelocityX(-1);
         }
         if (inputKeys.get(InputKeys.RIGHT) && !inputKeys.get(InputKeys.LEFT)) {
-            //MusicModule.getFootStepsMusic().play();
             changeState(State.WALKING);
             player.setFacingRight();
             player.setVelocityX(1);
@@ -397,6 +400,8 @@ public class MovementHandler {
 
     public void calculateFallingDamage() {
         fallingDamage();
+        MusicModule.getStepSound().setVolume(0.4f);
+        MusicModule.getStepSound().play();
     }
 
     // Input Keys

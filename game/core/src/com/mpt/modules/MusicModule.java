@@ -11,7 +11,6 @@ public class MusicModule {
     private static Music mainMenuMusic;
     private static Music gameOverSound;
     //Sounds
-    private static Sound footStepsSound;
     private static Sound rolloverSound;
     private static Sound collectCoinSound;
     private static Sound checkPointSound;
@@ -19,6 +18,7 @@ public class MusicModule {
     private static Sound jumpSound2;
     private static Sound doubleJumpSound;
     private static Sound portalSound;
+    private static Music stepSound;
     private static Sound playerDeathSound;
     private static Music snakeMovementSound;
     private static Music snakeAttackSound;
@@ -31,7 +31,6 @@ public class MusicModule {
         mainMenuMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/Poseidon's Realm.wav"));
         rolloverSound = Gdx.audio.newSound(Gdx.files.internal("audio/ui_sfx/OptionRollover.wav"));
         collectCoinSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/CollectCoin.mp3"));
-        footStepsSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/FootstepSound.ogg"));
         checkPointSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Checkpoint.ogg"));
         gameOverSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/GameOverSound.wav"));
         jumpSound1 = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Jump1.mp3"));
@@ -42,6 +41,7 @@ public class MusicModule {
         enemyAttackSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/enemyAttack.mp3"));
         snakeMovementSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/snakeMovementSound.mp3"));
         snakeAttackSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/snakeAttackSound.mp3"));
+        stepSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/stepSound.mp3"));
         worldMusics = new HashMap<>();
         worldMusics.put("MapTutorial", Gdx.audio.newMusic(Gdx.files.internal("audio/Welcome to Flefaria.wav")));
         worldMusics.put("Map1", Gdx.audio.newMusic(Gdx.files.internal("audio/The Forest.mp3")));
@@ -82,6 +82,9 @@ public class MusicModule {
     public static Sound getPlayerDeathSound() {
         return playerDeathSound;
     }
+    public static Music getStepSound() {
+        return stepSound;
+    }
 
     public static Music getEnemyAttackSound(){return enemyAttackSound;}
 
@@ -96,6 +99,7 @@ public class MusicModule {
     }
 
     public static void dispose(){
+        stepSound.dispose();
         snakeAttackSound.dispose();
         snakeMovementSound.dispose();
         enemyAttackSound.dispose();
@@ -108,7 +112,6 @@ public class MusicModule {
         mainMenuMusic.dispose();
         rolloverSound.dispose();
         collectCoinSound.dispose();
-        footStepsSound.dispose();
     }
 
 }
