@@ -16,7 +16,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -29,7 +28,6 @@ import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.*;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.player.Player;
-import sun.tools.jconsole.Tab;
 
 import java.util.ArrayList;
 
@@ -360,7 +358,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         staminaStack.add(staminaBackground);
         staminaStack.add(staminaBarTbl);
-        
+
         root.add(coins).pad(30f).expand().top().left().row();
         root.add(health).pad(20f).expand().bottom().row();
         root.add(staminaStack).pad(20f).bottom();
