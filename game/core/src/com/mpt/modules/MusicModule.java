@@ -19,7 +19,7 @@ public class MusicModule {
     private static Sound doubleJumpSound;
     private static Sound portalSound;
     private static Music stepSound;
-    private static Sound playerDeathSound;
+    private static Music playerDeathSound;
     private static Music snakeAttackSound;
     private static Music ghostSound;
     private static Music runSound;
@@ -38,7 +38,7 @@ public class MusicModule {
         jumpSound2 = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Jump2.mp3"));
         doubleJumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/doubleJumpSound.mp3"));
         portalSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/portalSound.mp3"));
-        playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/humanDeath.mp3"));
+        playerDeathSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/humanDeath2.mp3"));
         enemyAttackSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/enemyAttack.mp3"));
         snakeAttackSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/snakeAttackSound.mp3"));
         ghostSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/ghostSound.mp3"));
@@ -81,7 +81,7 @@ public class MusicModule {
         return portalSound;
     }
 
-    public static Sound getPlayerDeathSound() {
+    public static Music getPlayerDeathSound() {
         return playerDeathSound;
     }
     public static Music getStepSound() {

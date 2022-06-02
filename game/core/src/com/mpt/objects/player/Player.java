@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.handlers.AnimationHandler;
+import com.mpt.modules.MusicModule;
 import com.mpt.objects.GameEntity;
 import com.mpt.platform.GameScreen;
 
@@ -67,6 +68,12 @@ public class Player extends GameEntity {
 
     @Override
     public void update(float delta) {
+        if(this.getPlayerState().equals(State.DYING)){
+            MusicModule.getPlayerDeathSound().pause();
+            MusicModule.getPlayerDeathSound().setVolume(0.4f);
+            MusicModule.getPlayerDeathSound().play();
+
+        }
         respawnOnVoidPosition();
     }
 

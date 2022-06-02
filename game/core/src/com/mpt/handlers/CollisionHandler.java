@@ -116,7 +116,6 @@ public class CollisionHandler implements ContactListener {
         Player player = (Player) fixture.getBody().getUserData();
         player.setPlayerState(Player.State.DYING);
         player.setPlayerHealth(0);
-        MusicModule.getPlayerDeathSound().play(0.1f);
         player.getPlayerAnimations().setCurrent("death");
         gameScreen.updateHealthBar();
     }
