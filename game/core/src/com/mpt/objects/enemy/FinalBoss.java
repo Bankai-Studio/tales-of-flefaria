@@ -13,7 +13,7 @@ public class FinalBoss extends Enemy {
     public FinalBoss(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body, gameScreen);
         adjustX = -35f;
-        adjustY = -2f;
+        adjustY = -1f;
         walkSpeed = 1f;
         minDamage = 34;
         maxDamage = 50;
