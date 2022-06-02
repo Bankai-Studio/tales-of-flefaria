@@ -2,6 +2,7 @@ package com.mpt.handlers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.MusicModule;
@@ -122,6 +123,9 @@ public class CollisionHandler implements ContactListener {
     private void hideGhost(Fixture fixture) {
         Ghost ghost = (Ghost) fixture.getBody().getUserData();
         ghost.setTouched(true);
+        MusicModule.getGhostSound().setVolume(0.4f);
+        MusicModule.getGhostSound().play();
+
     }
 
     private void gameOver(Fixture fixture) {

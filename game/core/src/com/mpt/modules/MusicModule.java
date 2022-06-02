@@ -22,6 +22,7 @@ public class MusicModule {
     private static Sound playerDeathSound;
     private static Music snakeMovementSound;
     private static Music snakeAttackSound;
+    private static Music ghostSound;
     private static Music enemyAttackSound;
 
 
@@ -40,6 +41,7 @@ public class MusicModule {
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/humanDeath.mp3"));
         enemyAttackSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/enemyAttack.mp3"));
         snakeAttackSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/snakeAttackSound.mp3"));
+        ghostSound =  Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/ghostSound.mp3"));
         stepSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/stepSound.mp3"));
         worldMusics = new HashMap<>();
         worldMusics.put("MapTutorial", Gdx.audio.newMusic(Gdx.files.internal("audio/Welcome to Flefaria.wav")));
@@ -93,8 +95,12 @@ public class MusicModule {
     public static Music getSnakeAttackSound() {
         return snakeAttackSound;
     }
+    public static Music getGhostSound() {
+        return ghostSound;
+    }
 
     public static void dispose(){
+        ghostSound.dispose();
         stepSound.dispose();
         snakeAttackSound.dispose();
         enemyAttackSound.dispose();
