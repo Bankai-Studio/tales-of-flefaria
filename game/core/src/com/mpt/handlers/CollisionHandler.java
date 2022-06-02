@@ -2,17 +2,14 @@ package com.mpt.handlers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.MusicModule;
+import com.mpt.objects.block.Block;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.Enemy;
-import com.mpt.objects.interactables.Coin;
-import com.mpt.objects.interactables.GameOver;
-import com.mpt.objects.interactables.Ghost;
-import com.mpt.objects.interactables.KillBlock;
+import com.mpt.objects.interactables.*;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameOverScreen;
 import com.mpt.platform.GameScreen;
@@ -22,8 +19,6 @@ public class CollisionHandler implements ContactListener {
 
     PreferencesHandler preferencesHandler;
     GameScreen gameScreen;
-
-    private float walkSpeed = 1f;
 
     public CollisionHandler(PreferencesHandler preferencesHandler, GameScreen gameScreen) {
         this.preferencesHandler = preferencesHandler;
@@ -64,9 +59,9 @@ public class CollisionHandler implements ContactListener {
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof KillBlock)
             collisionKillBlock(fixtureB);
         if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Endpoint)
-            endLevel(fixtureA, fixtureB);
+            endLevel();
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Endpoint)
-            endLevel(fixtureB, fixtureA);
+            endLevel();
         if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Ghost)
             hideGhost(fixtureB);
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Ghost)
@@ -75,10 +70,14 @@ public class CollisionHandler implements ContactListener {
             gameOver(fixtureB);
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof GameOver)
             gameOver(fixtureA);
-        if (fixtureA.getBody().getUserData() instanceof Enemy)
+        if (fixtureA.getBody().getUserData() instanceof Enemy && (fixtureB.getBody().getUserData() instanceof Block || fixtureB.getBody().getUserData() instanceof Box))
             collisionWithBlock(fixtureA);
-        if (fixtureB.getBody().getUserData() instanceof Enemy)
+        if (fixtureB.getBody().getUserData() instanceof Enemy && (fixtureA.getBody().getUserData() instanceof Block || fixtureA.getBody().getUserData() instanceof Box))
             collisionWithBlock(fixtureB);
+        if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Block)
+            gameScreen.getMovementHandler().calculateFallingDamage();
+        if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Block)
+            gameScreen.getMovementHandler().calculateFallingDamage();
     }
 
     private void setNewCheckpoint(Fixture fixtureA, Fixture fixtureB) {
@@ -89,7 +88,7 @@ public class CollisionHandler implements ContactListener {
             MusicModule.getCheckPointMusic().play(0.1f);
             player.setRespawnPosition(checkpointPosition);
             checkpoint.setCheckpointClaimed();
-            for(Checkpoint checkpointChecked : gameScreen.getCheckpoints())
+            for (Checkpoint checkpointChecked : gameScreen.getCheckpoints())
                 if (checkpointChecked.isCheckpointCurrent()) checkpointChecked.setCheckpointCurrent(false);
             checkpoint.setCheckpointCurrent(true);
         }
@@ -105,6 +104,7 @@ public class CollisionHandler implements ContactListener {
             gameScreen.updateCoins(player.getCollectedCoins());
         }
     }
+
     private void collisionKillBlock(Fixture fixture) {
         Player player = (Player) fixture.getBody().getUserData();
         int damage = player.getHealth();
@@ -115,22 +115,23 @@ public class CollisionHandler implements ContactListener {
         gameScreen.updateHealthLabel(player.getHealth(), damage);
     }
 
-    private void endLevel(Fixture fixtureA, Fixture fixtureB) {
+    private void endLevel() {
         MusicModule.getPortalSound().play(0.1f);
         ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen(gameScreen));
     }
 
-    private void hideGhost(Fixture fixture){
+    private void hideGhost(Fixture fixture) {
         Ghost ghost = (Ghost) fixture.getBody().getUserData();
         ghost.setTouched(true);
     }
 
-    private void gameOver(Fixture fixture){
+    private void gameOver(Fixture fixture) {
         GameOver gameOver = (GameOver) fixture.getBody().getUserData();
-        if(gameOver.isVisible()) ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(gameScreen));
+        if (gameOver.isVisible()) ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(gameScreen));
     }
-    private void collisionWithBlock(Fixture fixtureA) {
-        Enemy enemy = (Enemy) fixtureA.getBody().getUserData();
-        enemy.getBody().setLinearVelocity(0f,enemy.getBody().getLinearVelocity().y);
+
+    private void collisionWithBlock(Fixture fixture) {
+        Enemy enemy = (Enemy) fixture.getBody().getUserData();
+        enemy.getBody().setLinearVelocity(0f, enemy.getBody().getLinearVelocity().y);
     }
 }

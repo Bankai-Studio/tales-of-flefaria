@@ -3,7 +3,6 @@ package com.mpt.handlers;
 import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
 import com.mpt.objects.player.Player;
-import com.mpt.platform.GameScreen;
 
 public class CombatHandler {
 
@@ -17,7 +16,7 @@ public class CombatHandler {
             float damage = (float) (Math.random() * (player.maxDamage - player.minDamage + 1) + player.minDamage);
             if (player.getPlayerAnimations().isCurrent("heavyAttack")) damage *= player.HEAVY_ATTACK_MULTIPLIER;
             int health = enemy.getHealth() - (int) damage;
-            enemy.setHealth(health);
+            enemy.setHealth(Math.max(health, 0));
             if (health <= 0) {
                 enemy.setEnemyState(Enemy.EnemyState.DYING);
                 enemy.getAnimationHandler().setCurrent("death", false);
@@ -30,11 +29,10 @@ public class CombatHandler {
             player = (Player) victim;
             int damage = (int) (Math.random() * (enemy.maxDamage - enemy.minDamage + 1) + enemy.minDamage);
             int health = player.getHealth() - damage;
-            player.setPlayerHealth(health);
+            player.setPlayerHealth(Math.max(health, 0));
             if (health <= 0) {
                 player.setPlayerState(Player.State.DYING);
                 player.getPlayerAnimations().setCurrent("death", false);
-                player.setPlayerHealth(0);
             } else {
                 player.setPlayerState(Player.State.HURT);
                 player.getPlayerAnimations().setCurrent("hurt", false);

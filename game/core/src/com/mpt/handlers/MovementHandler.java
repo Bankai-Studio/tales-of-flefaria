@@ -26,10 +26,7 @@ public class MovementHandler {
 
     // Input Keys
     enum InputKeys {
-        LEFT,
-        RIGHT,
-        SPACE,
-        SHIFT
+        LEFT, RIGHT, SPACE, SHIFT
     }
 
     // Variables
@@ -41,7 +38,7 @@ public class MovementHandler {
     private float staminaTimer;
     private boolean jumpedFromBox = false;
     private float fallingStartingY;
-    private Map<InputKeys, Boolean> inputKeys = new HashMap<>();
+    private final Map<InputKeys, Boolean> inputKeys = new HashMap<>();
 
     Player player;
     GameScreen gameScreen;
@@ -124,7 +121,7 @@ public class MovementHandler {
         if (player.getState().equals(State.CLIMBING)) {
             ladderMovement();
             return;
-        } else if (player.getVelocityY() != 0f)  player.setVelocityY(0f);
+        } else if (player.getVelocityY() != 0f) player.setVelocityY(0f);
 
         if (player.getBody().getLinearVelocity().y != 0 && !isPlayerNearABox(player.getBody().getPosition()) && !player.getState().equals(State.JUMPING) && !player.getState().equals(State.FALLING) && !player.getState().equals(State.ATTACKING) && !player.getState().equals(State.DYING) && !player.getState().equals(State.HURT)) {
             fallingStartingY = player.getBody().getPosition().y;
@@ -190,6 +187,7 @@ public class MovementHandler {
                     player.getBody().applyLinearImpulse(new Vector2(0, force), player.getBody().getPosition(), true);
                     jumpCounter++;
                     player.setPlayerStamina(player.getPlayerStamina() - 10);
+                    gameScreen.updateStamina(player.getPlayerStamina());
                 }
             }
         }
@@ -202,8 +200,10 @@ public class MovementHandler {
             }
             if (player.getBody().getLinearVelocity().y == 0 && player.getPlayerSpeed() <= 14f && player.getPlayerStamina() > 0 && !isSprintReloading && !player.getState().equals(State.PUSHING))
                 player.setPlayerSpeed(player.getPlayerSpeed() + 0.4f);
-            if (player.getBody().getLinearVelocity().x != 0 && player.getBody().getLinearVelocity().y == 0 && player.getPlayerStamina() > 0 && !isSprintReloading)
+            if (player.getBody().getLinearVelocity().x != 0 && player.getBody().getLinearVelocity().y == 0 && player.getPlayerStamina() > 0 && !isSprintReloading) {
                 player.setPlayerStamina(player.getPlayerStamina() - 1);
+                gameScreen.updateStamina(player.getPlayerStamina());
+            }
             if (!player.getState().equals(State.RUNNING) && !player.getState().equals(State.JUMPING) && player.getVelocityX() != 0 && !isSprintReloading && !player.getState().equals(State.ATTACKING) && !player.getState().equals(State.PUSHING) && !player.getState().equals(State.CLIMBING)) {
                 player.setPlayerState(State.RUNNING);
                 playerAnimations.setCurrent("run");
@@ -212,8 +212,7 @@ public class MovementHandler {
 
         if (player.getPlayerState().equals(State.DYING)) player.setVelocityX(0);
 
-        if (isSprintReloading && player.getPlayerStamina() == player.getPlayerMaxStamina())
-            isSprintReloading = false;
+        if (isSprintReloading && player.getPlayerStamina() == player.getPlayerMaxStamina()) isSprintReloading = false;
 
         if ((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().y != 0 || isSprintReloading) && player.getPlayerSpeed() > DEFAULT_SPEED)
             player.setPlayerSpeed(player.getPlayerSpeed() - 0.2f);
@@ -233,7 +232,6 @@ public class MovementHandler {
                     playerAnimations.setCurrent("idle");
                     player.setPlayerState(State.IDLE);
                 }
-                fallingDamage();
             } else wasLastFrameYVelocityZero = true;
         } else wasLastFrameYVelocityZero = false;
 
@@ -299,14 +297,14 @@ public class MovementHandler {
         staminaTimer += delta;
         if ((!player.getPlayerState().equals(State.RUNNING) || player.getBody().getLinearVelocity().x == 0 || isSprintReloading) && player.getPlayerStamina() < player.getPlayerMaxStamina() && staminaTimer > STAMINA_REGEN_TIME) {
             player.setPlayerStamina(player.getPlayerStamina() + 1);
+            gameScreen.updateStamina(player.getPlayerStamina());
             staminaTimer = 0f;
         }
     }
 
     private void reloadDoubleJump(float delta) {
         doubleJumpTimer += delta;
-        if (!isDoubleJumpReady && doubleJumpTimer > DOUBLE_JUMP_REGEN_TIME)
-            isDoubleJumpReady = true;
+        if (!isDoubleJumpReady && doubleJumpTimer > DOUBLE_JUMP_REGEN_TIME) isDoubleJumpReady = true;
     }
 
     private boolean isPlayerNearABox(Vector2 playerPosition) {
@@ -334,7 +332,7 @@ public class MovementHandler {
         ArrayList<Enemy> enemies = gameScreen.getEnemies();
         for (Enemy enemy : enemies) {
             Vector2 enemyPosition = enemy.getBody().getPosition();
-            if (Math.abs(playerPosition.x - enemyPosition.x) < (enemy.getWidth()/2 / PPM + player.getWidth() / PPM) && Math.abs(playerPosition.y - enemyPosition.y) < (enemy.getHeight() / 2 / PPM + player.getHeight() / PPM))
+            if (Math.abs(playerPosition.x - enemyPosition.x) < (enemy.getWidth() / 2 / PPM + player.getWidth() / PPM) && Math.abs(playerPosition.y - enemyPosition.y) < (enemy.getHeight() / 2 / PPM + player.getHeight() / PPM))
                 nearEnemies.add(enemy);
         }
         return nearEnemies;
@@ -368,5 +366,9 @@ public class MovementHandler {
             }
         }
         fallingStartingY = 0;
+    }
+
+    public void calculateFallingDamage() {
+        fallingDamage();
     }
 }

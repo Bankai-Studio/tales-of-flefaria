@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.BodyModule;
+import com.mpt.objects.block.Block;
 import com.mpt.objects.endpoint.Endpoint;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.*;
@@ -71,13 +72,19 @@ public class MapHandler {
                             gameScreen.getWorld()
                     );
 
-                    int tempCoins;
-                    if(gameScreen.getPlayer() != null)
+                    int tempCoins, tempHealth;
+                    if(gameScreen.getPlayer() != null) {
                         tempCoins = gameScreen.getPlayer().getCollectedCoins();
-                    else
+                        tempHealth = gameScreen.getPlayer().getHealth();
+                    }
+                    else {
                         tempCoins = 0;
+                        tempHealth = 100;
+                    }
                     Player player = new Player(rectangle.getWidth(), rectangle.getHeight(), body, character, gameScreen);
                     player.setCollectedCoins(tempCoins);
+                    player.setPlayerHealth(tempHealth);
+
                     gameScreen.setPlayer(player);
                     body.setTransform(gameScreen.getPreferencesHandler().getRespawnPosition(), body.getAngle());
                 }
@@ -288,6 +295,7 @@ public class MapHandler {
         fixtureDef.filter.maskBits = (BIT_PLAYER | BIT_BOX | BIT_ENEMY);
 
         body.createFixture(fixtureDef);
+        body.setUserData(new Block());
 
         shape.dispose();
     }
