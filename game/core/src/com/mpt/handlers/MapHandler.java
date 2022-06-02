@@ -14,10 +14,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.BodyModule;
 import com.mpt.objects.block.Block;
-import com.mpt.objects.endpoint.Endpoint;
+import com.mpt.objects.interactables.Endpoint;
 import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.*;
-import com.mpt.objects.checkpoint.Checkpoint;
+import com.mpt.objects.interactables.Checkpoint;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
@@ -68,7 +68,7 @@ public class MapHandler {
                             0f,
                             0f,
                             BIT_PLAYER,
-                            (short) (BIT_MAP | BIT_BOX | BIT_SENSOR),
+                            (short) (BIT_MAP | BIT_BOX | BIT_SENSOR | BIT_BULLET),
                             gameScreen.getWorld()
                     );
 
@@ -292,7 +292,7 @@ public class MapHandler {
         fixtureDef.density = 1000;
         fixtureDef.shape = shape;
         fixtureDef.filter.categoryBits = BIT_MAP;
-        fixtureDef.filter.maskBits = (BIT_PLAYER | BIT_BOX | BIT_ENEMY);
+        fixtureDef.filter.maskBits = (BIT_PLAYER | BIT_BOX | BIT_ENEMY | BIT_BULLET);
 
         body.createFixture(fixtureDef);
         body.setUserData(new Block());

@@ -15,7 +15,10 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -23,10 +26,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mpt.handlers.*;
 import com.mpt.modules.InterfaceModule;
 import com.mpt.modules.MusicModule;
-import com.mpt.objects.endpoint.Endpoint;
-import com.mpt.objects.enemy.*;
+import com.mpt.objects.bullets.Bullet;
+import com.mpt.objects.enemy.Enemy;
+import com.mpt.objects.enemy.FinalBoss;
 import com.mpt.objects.interactables.*;
-import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.player.Player;
 
 import java.util.ArrayList;
@@ -41,29 +44,29 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private final Stage stage;
     private final World world;
     private final Box2DDebugRenderer box2DDebugRenderer;
-    private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
     private final MapHandler mapHandler;
-    private Player player;
     private final ArrayList<Enemy> enemies;
     private final ArrayList<Checkpoint> checkpoints;
-    private Endpoint endpoint;
     private final ExtendViewport extendViewport;
     private final ScreenViewport screenViewport;
-    private MovementHandler movementHandler;
     private final PreferencesHandler preferencesHandler;
     private final ArrayList<Box> boxes;
     private final ArrayList<Ladder> ladders;
     private final ArrayList<Coin> coins;
     private final ArrayList<KillBlock> killBlocks;
     private final ArrayList<Ghost> ghosts;
+    private final ArrayList<Bullet> bullets;
     private final InputMultiplexer inputMultiplexer;
+    private final AssetManager assetManager;
+    private OrthogonalBleedingHandler orthogonalTiledMapRenderer;
+    private Player player;
+    private Endpoint endpoint;
+    private MovementHandler movementHandler;
     private Label coinValueLabel;
     private Image healthImage;
     private Image staminaBar;
-    private final AssetManager assetManager;
     private String currentMap;
     private GameOver gameOver;
-
     private int currentCharacter;
 
     public GameScreen() {
@@ -78,6 +81,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         coins = new ArrayList<>();
         killBlocks = new ArrayList<>();
         ghosts = new ArrayList<>();
+        bullets = new ArrayList<>();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         preferencesHandler = new PreferencesHandler();
@@ -130,28 +134,33 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         extendViewport.apply();
         batch.begin();
 
-        if(mapHandler != null) {
+        if (mapHandler != null) {
             mapHandler.renderTiledMapTileBackgrounds();
         }
 
         if (orthogonalTiledMapRenderer != null) {
             orthogonalTiledMapRenderer.render();
         }
-        if (mapHandler != null)
-            mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
+        if (mapHandler != null) mapHandler.renderTiledMapTileMapObject(); // Renders background objects first
 
         for (KillBlock killBlock : killBlocks) killBlock.render(batch);
         for (Checkpoint checkpoint : checkpoints) checkpoint.render(batch);
         for (Coin coin : coins) coin.render(batch);
         for (Enemy enemy : enemies) enemy.render(batch);
         for (Ghost ghost : ghosts) ghost.render(batch);
-        if (endpoint != null)
-            endpoint.render(batch);
-        if (player != null)
-            player.render(batch);
-        if (gameOver != null)
-            gameOver.render(batch);
+        if (endpoint != null) endpoint.render(batch);
+        if (player != null) player.render(batch);
+        if (gameOver != null) gameOver.render(batch);
         for (Box box : boxes) box.render(batch);
+
+        ArrayList<Bullet> bulletsToRemove = new ArrayList<>();
+        for (Bullet bullet : bullets)
+            if (bullet.remove) bulletsToRemove.add(bullet);
+            else bullet.render(batch);
+        bullets.removeAll(bulletsToRemove);
+        for (Bullet bullet : bulletsToRemove)
+            world.destroyBody(bullet.getBody());
+
 
         batch.end();
 
@@ -159,8 +168,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         stage.act();
         stage.draw();
 
-        if (box2DDebugRenderer != null)
-            if (DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+        if (box2DDebugRenderer != null) if (DEBUGGING) box2DDebugRenderer.render(world, camera.combined.scl(PPM));
     }
 
     @Override
@@ -180,8 +188,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         for (Ghost ghost : ghosts) ghost.dispose();
         for (Checkpoint checkpoint : checkpoints) checkpoint.dispose();
         for (KillBlock killBlock : killBlocks) killBlock.dispose();
-        if (gameOver != null)
-            gameOver.dispose();
+        if (gameOver != null) gameOver.dispose();
         endpoint.dispose();
     }
 
@@ -286,8 +293,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         // To be moved to map handler
         for (Enemy enemy : enemies) enemy.update(delta);
-        if (gameOver != null)
-            gameOver.update(delta);
+        if (gameOver != null) gameOver.update(delta);
 
     }
 
@@ -361,8 +367,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         root.add(coins).pad(30f).expand().top().left().row();
         root.add(health).pad(20f).expand().bottom().row();
         root.add(staminaStack).pad(20f).bottom();
-        if(DEBUGGING)
-            root.setDebug(true, true);
+        if (DEBUGGING) root.setDebug(true, true);
         stage.addActor(root);
     }
 
@@ -478,10 +483,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return movementHandler;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public void setGameOver(GameOver gameOver) {
         this.gameOver = gameOver;
     }
@@ -510,6 +511,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         coins.add(coin);
     }
 
+    public void addBullet(Bullet bullet) {
+        bullets.add(bullet);
+    }
+
     public void addKillBlock(KillBlock killBlock) {
         killBlocks.add(killBlock);
     }
@@ -520,6 +525,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public ArrayList<Box> getBoxes() {
@@ -538,4 +547,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return checkpoints;
     }
 
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
 }

@@ -10,6 +10,7 @@ public class FinalBoss extends Enemy {
     private final Texture straightBulletBright;
     private final Texture mortarStrikeDark;
     private final Texture mortarStrikeBright;
+
     public FinalBoss(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body, gameScreen);
         adjustX = -35f;
@@ -17,7 +18,7 @@ public class FinalBoss extends Enemy {
         walkSpeed = 1f;
         minDamage = 34;
         maxDamage = 50;
-        health = 1000;
+        health = 500;
         enemyName = "FinalBoss";
         loadSprites();
         straightBulletDark = new Texture(Gdx.files.internal("./enemies/FinalBoss/Bullet1.png"));
@@ -26,10 +27,26 @@ public class FinalBoss extends Enemy {
         mortarStrikeBright = new Texture(Gdx.files.internal("./enemies/FinalBoss/Bullet4.png"));
     }
 
-    public void disposeBullets(){
+    public void disposeBullets() {
         straightBulletDark.dispose();
         straightBulletBright.dispose();
         mortarStrikeDark.dispose();
         mortarStrikeBright.dispose();
+    }
+
+    public Texture getStraightBulletDark() {
+        return straightBulletDark;
+    }
+
+    public Texture getStraightBulletBright() {
+        return straightBulletBright;
+    }
+
+    public Texture getMortarStrikeDark() {
+        return mortarStrikeDark;
+    }
+
+    public Texture getMortarStrikeBright() {
+        return mortarStrikeBright;
     }
 }

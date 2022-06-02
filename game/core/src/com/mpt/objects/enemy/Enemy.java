@@ -11,6 +11,7 @@ import com.mpt.handlers.AnimationHandler;
 import com.mpt.handlers.CombatHandler;
 import com.mpt.modules.MusicModule;
 import com.mpt.objects.GameEntity;
+import com.mpt.objects.bullets.Bullet;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
@@ -180,11 +181,17 @@ public abstract class Enemy extends GameEntity {
     }
 
     public void shootPlayer(Player player) {
+        FinalBoss finalBoss = (FinalBoss) this;
+        float angle = (float) Math.toDegrees(Math.atan2(player.getBody().getPosition().x - finalBoss.getBody().getPosition().x, player.getBody().getPosition().y - finalBoss.getBody().getPosition().y));
+        Bullet bullet1 = new Bullet(Bullet.createBody(finalBoss.getBody().getPosition().x + 2f, finalBoss.getBody().getPosition().y + 1f, gameScreen.getWorld()), finalBoss.getStraightBulletBright(), gameScreen, angle);
+        Bullet bullet2 = new Bullet(Bullet.createBody(finalBoss.getBody().getPosition().x, finalBoss.getBody().getPosition().y + 1f, gameScreen.getWorld()), finalBoss.getStraightBulletDark(), gameScreen, angle);
+        gameScreen.addBullet(bullet1);
+        gameScreen.addBullet(bullet2);
     }
 
     public void strikePlayer(Player player) {
-    }
 
+    }
 
     public void lurkTarget(Player player) {
         if (!enemyReadyToAttack(player)) {

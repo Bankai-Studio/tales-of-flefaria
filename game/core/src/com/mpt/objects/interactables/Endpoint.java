@@ -1,4 +1,4 @@
-package com.mpt.objects.endpoint;
+package com.mpt.objects.interactables;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
