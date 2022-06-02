@@ -133,11 +133,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         extendViewport.apply();
         batch.begin();
-
-        if (mapHandler != null) {
-            mapHandler.renderTiledMapTileBackgrounds();
-        }
-
+        
         if (orthogonalTiledMapRenderer != null) {
             orthogonalTiledMapRenderer.render();
         }
