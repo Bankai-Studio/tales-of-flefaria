@@ -97,7 +97,6 @@ public class MusicModule {
     public static void dispose(){
         stepSound.dispose();
         snakeAttackSound.dispose();
-        snakeMovementSound.dispose();
         enemyAttackSound.dispose();
         playerDeathSound.dispose();
         portalSound.dispose();

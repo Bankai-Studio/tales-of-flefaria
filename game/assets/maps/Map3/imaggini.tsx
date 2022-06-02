@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.4" name="imaggini" tilewidth="576" tileheight="324" tilecount="57" columns="0">
+<tileset version="1.8" tiledversion="1.8.4" name="imaggini" tilewidth="199" tileheight="183" tilecount="56" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="59">
   <image width="34" height="28" source="Images/Boxes/1.png"/>
@@ -168,8 +168,5 @@
  </tile>
  <tile id="121">
   <image width="31" height="31" source="Images/Stones/5.png"/>
- </tile>
- <tile id="122">
-  <image width="576" height="324" source="../Map4/Images/Background.png"/>
  </tile>
 </tileset>

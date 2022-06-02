@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="120" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="431">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="120" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="440">
  <tileset firstgid="1" source="imaggini.tsx"/>
  <tileset firstgid="123" source="Tileset.tsx"/>
  <tileset firstgid="187" source="../Map3/imaggini.tsx"/>
- <objectgroup id="5" name="BackgroundObjects"/>
+ <tileset firstgid="310" source="Backgrounds.tsx"/>
+ <objectgroup id="5" name="BackgroundObjects">
+  <object id="431" gid="310" x="-804.634" y="1904.68" width="5410.77" height="2629.58"/>
+ </objectgroup>
  <objectgroup id="3" name="TileObjects">
   <object id="318" gid="266" x="0" y="1280" width="14" height="16"/>
   <object id="319" gid="267" x="32" y="1280" width="12" height="12"/>
