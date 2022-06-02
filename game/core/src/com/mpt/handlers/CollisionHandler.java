@@ -8,6 +8,7 @@ import com.mpt.modules.MusicModule;
 import com.mpt.objects.block.Block;
 import com.mpt.objects.bullets.Bullet;
 import com.mpt.objects.enemy.Enemy;
+import com.mpt.objects.enemy.FinalBoss;
 import com.mpt.objects.interactables.*;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameOverScreen;
@@ -85,6 +86,10 @@ public class CollisionHandler implements ContactListener {
             destroyBullet((Bullet) fixtureA.getBody().getUserData());
         if (fixtureB.getBody().getUserData() instanceof Bullet && fixtureA.getBody().getUserData() instanceof Block)
             destroyBullet((Bullet) fixtureB.getBody().getUserData());
+        if (fixtureA.getBody().getUserData() instanceof Enemy && fixtureB.getBody().getUserData() instanceof Bullet)
+            hitEnemy(fixtureA, fixtureB);
+        if (fixtureB.getBody().getUserData() instanceof Enemy && fixtureA.getBody().getUserData() instanceof Bullet)
+            hitEnemy(fixtureB, fixtureA);
     }
 
     private void setNewCheckpoint(Fixture fixtureA, Fixture fixtureB) {
@@ -147,7 +152,14 @@ public class CollisionHandler implements ContactListener {
     private void hitPlayer(Fixture fixtureA, Fixture fixtureB) {
         Player player = (Player) fixtureA.getBody().getUserData();
         Bullet bullet = (Bullet) fixtureB.getBody().getUserData();
+        if(player.getPlayerAnimations().isCurrent("heavyAttack") && player.getPlayerAnimations().isAnimationOverHalf()){
+            bullet.setHitByPlayer(true);
+            bullet.changeDirection();
+            player.setPlayerStamina(0);
+            return;
+        }
         player.setPlayerHealth(Math.max(player.getHealth() - bullet.DAMAGE, 0));
+        gameScreen.updateHealthBar();
         if (player.getHealth() <= 0) {
             player.setPlayerState(Player.State.DYING);
             player.getPlayerAnimations().setCurrent("death", false);
@@ -160,5 +172,21 @@ public class CollisionHandler implements ContactListener {
 
     private void destroyBullet(Bullet bullet) {
         bullet.setRemove(true);
+    }
+
+    private void hitEnemy(Fixture fixtureA, Fixture fixtureB) {
+        Enemy enemy = (Enemy) fixtureA.getBody().getUserData();
+        Bullet bullet = (Bullet) fixtureB.getBody().getUserData();
+        if(bullet.isHitByPlayer()){
+            enemy.setHealth(Math.max(enemy.getHealth() - Bullet.DAMAGE, 0));
+            if (enemy.getHealth() <= 0) {
+                enemy.setEnemyState(Enemy.EnemyState.DYING);
+                enemy.getAnimationHandler().setCurrent("death", false);
+            } else {
+                enemy.setEnemyState(Enemy.EnemyState.HURT);
+                enemy.getAnimationHandler().setCurrent("hurt", false);
+            }
+            destroyBullet(bullet);
+        }
     }
 }

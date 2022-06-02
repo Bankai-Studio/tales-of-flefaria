@@ -18,7 +18,7 @@ public class FinalBoss extends Enemy {
         walkSpeed = 1f;
         minDamage = 34;
         maxDamage = 50;
-        health = 500;
+        health = 1000;
         enemyName = "FinalBoss";
         loadSprites();
         straightBulletDark = new Texture(Gdx.files.internal("./enemies/FinalBoss/Bullet1.png"));

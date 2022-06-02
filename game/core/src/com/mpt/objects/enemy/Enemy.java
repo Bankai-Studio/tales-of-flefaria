@@ -182,9 +182,9 @@ public abstract class Enemy extends GameEntity {
 
     public void shootPlayer(Player player) {
         FinalBoss finalBoss = (FinalBoss) this;
-        float angle = (float) Math.toDegrees(Math.atan2(player.getBody().getPosition().x - finalBoss.getBody().getPosition().x, player.getBody().getPosition().y - finalBoss.getBody().getPosition().y));
-        Bullet bullet1 = new Bullet(Bullet.createBody(finalBoss.getBody().getPosition().x + 2f, finalBoss.getBody().getPosition().y + 1f, gameScreen.getWorld()), finalBoss.getStraightBulletBright(), gameScreen, angle);
-        Bullet bullet2 = new Bullet(Bullet.createBody(finalBoss.getBody().getPosition().x, finalBoss.getBody().getPosition().y + 1f, gameScreen.getWorld()), finalBoss.getStraightBulletDark(), gameScreen, angle);
+        float direction = 1 * ((player.getBody().getPosition().x - finalBoss.getBody().getPosition().x) / Math.abs(player.getBody().getPosition().x - finalBoss.getBody().getPosition().x));
+        Bullet bullet1 = new Bullet(Bullet.createBody(finalBoss.getBody().getPosition().x + 1f, player.getBody().getPosition().y + player.getHeight() / 2 / PPM, gameScreen.getWorld()), finalBoss.getStraightBulletBright(), direction);
+        Bullet bullet2 = new Bullet(Bullet.createBody(finalBoss.getBody().getPosition().x, player.getBody().getPosition().y + player.getHeight() / 2 / PPM, gameScreen.getWorld()), finalBoss.getStraightBulletDark(), direction);
         gameScreen.addBullet(bullet1);
         gameScreen.addBullet(bullet2);
     }

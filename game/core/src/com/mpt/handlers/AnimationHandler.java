@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class AnimationHandler {
+    private final HashMap<String, Animation<TextureRegion>> animations = new HashMap<>();
     private float timer = 0;
     private boolean looping = true;
     private boolean stopped = false;
     private String current;
-    private final HashMap<String, Animation<TextureRegion>> animations = new HashMap<>();
 
     public void add(String name, Animation<TextureRegion> animation) {
         animations.put(name, animation);
@@ -38,6 +38,10 @@ public class AnimationHandler {
 
     public boolean isFinished() {
         return animations.get(current).isAnimationFinished(timer);
+    }
+
+    public boolean isAnimationOverHalf() {
+        return timer >= animations.get(current).getAnimationDuration() / 2;
     }
 
     public void setStopped(boolean stopped) {

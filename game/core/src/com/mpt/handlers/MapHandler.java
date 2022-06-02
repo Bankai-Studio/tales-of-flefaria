@@ -277,7 +277,7 @@ public class MapHandler {
                 0f,
                 0f,
                 BIT_ENEMY,
-                (short) (BIT_MAP | BIT_BOX),
+                (short) (BIT_MAP | BIT_BOX | BIT_BULLET),
                 gameScreen.getWorld()
         );
     }
