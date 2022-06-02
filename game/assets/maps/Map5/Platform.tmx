@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="20">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
- <objectgroup id="5" name="BackgroundObjects"/>
  <objectgroup id="3" name="TileObjects"/>
  <objectgroup id="2" name="Objects">
   <object id="1" x="0" y="992">

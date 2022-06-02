@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.4" name="ObjectsTileset" tilewidth="1024" tileheight="575" tilecount="81" columns="0">
+<tileset version="1.8" tiledversion="1.8.4" name="ObjectsTileset" tilewidth="144" tileheight="72" tilecount="64" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="45" height="22" source="Images/Benches/1.png"/>
@@ -192,56 +192,5 @@
  </tile>
  <tile id="63">
   <image width="144" height="39" source="Images/Other/Rapm3.png"/>
- </tile>
- <tile id="64">
-  <image width="26" height="7" source="Images/Other/Skateboard1.png"/>
- </tile>
- <tile id="65">
-  <image width="11" height="20" source="Images/Other/Skateboard2.png"/>
- </tile>
- <tile id="66">
-  <image width="10" height="20" source="Images/Other/Skateboard3.png"/>
- </tile>
- <tile id="67">
-  <image width="12" height="20" source="Images/Other/Skateboard4.png"/>
- </tile>
- <tile id="68">
-  <image width="62" height="103" source="Images/Other/Tree1.png"/>
- </tile>
- <tile id="69">
-  <image width="124" height="129" source="Images/Other/Tree2.png"/>
- </tile>
- <tile id="70">
-  <image width="175" height="190" source="Images/Other/Tree3.png"/>
- </tile>
- <tile id="71">
-  <image width="175" height="190" source="Images/Other/Tree4.png"/>
- </tile>
- <tile id="72">
-  <image width="10" height="7" source="Images/Stones/1.png"/>
- </tile>
- <tile id="73">
-  <image width="22" height="14" source="Images/Stones/2.png"/>
- </tile>
- <tile id="74">
-  <image width="27" height="16" source="Images/Stones/3.png"/>
- </tile>
- <tile id="75">
-  <image width="39" height="17" source="Images/Stones/4.png"/>
- </tile>
- <tile id="76">
-  <image width="46" height="22" source="Images/Stones/5.png"/>
- </tile>
- <tile id="77">
-  <image width="70" height="44" source="Images/Stones/6.png"/>
- </tile>
- <tile id="78">
-  <image width="1024" height="575" source="Images/Background.jpg"/>
- </tile>
- <tile id="79">
-  <image width="363" height="23" source="Images/BackgroundTerrain.png"/>
- </tile>
- <tile id="80">
-  <image width="554" height="13" source="Images/BackgroundSky.png"/>
  </tile>
 </tileset>

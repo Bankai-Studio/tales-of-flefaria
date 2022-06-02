@@ -3,9 +3,6 @@
  <tileset firstgid="1" source="imaggini.tsx"/>
  <tileset firstgid="123" source="../Map4/Tileset.tsx"/>
  <tileset firstgid="187" source="../Map5/ObjectsTileset.tsx"/>
- <objectgroup id="5" name="BackgroundObjects">
-  <object id="371" gid="268" x="-628" y="2246" width="6248" height="2864"/>
- </objectgroup>
  <objectgroup id="4" name="TileObjects">
   <object id="271" gid="72" x="192" y="1280" width="61" height="24"/>
   <object id="272" gid="73" x="224" y="1280" width="63" height="27"/>

@@ -2,36 +2,6 @@
 <map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="160" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="1134">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="81" source="NormalTerrain.tsx"/>
- <objectgroup id="9" name="BackgroundObjects">
-  <object id="1106" gid="79" x="0" y="1440" width="1000" height="500"/>
-  <object id="1107" gid="79" x="992" y="1681.33" width="1000" height="741.333"/>
-  <object id="1108" gid="79" x="1984" y="1688" width="1000" height="748"/>
-  <object id="1109" gid="79" x="2976" y="1440" width="1000" height="500"/>
-  <object id="1110" gid="79" x="3968" y="1566" width="1000" height="562"/>
-  <object id="1111" gid="79" x="4960" y="1564" width="1000" height="560"/>
-  <object id="1112" gid="80" x="1258" y="940" width="794" height="157.5"/>
-  <object id="1113" gid="79" x="1088" y="608" width="1000" height="500"/>
-  <object id="1114" gid="79" x="2080" y="576" width="1000" height="500"/>
-  <object id="1115" gid="79" x="3072" y="576" width="470" height="500"/>
-  <object id="1116" gid="79" x="4032" y="1024" width="1000" height="500"/>
-  <object id="1117" gid="79" x="3527" y="773" width="543" height="500"/>
-  <object id="1118" gid="80" x="3522.67" y="268.333" width="630" height="102"/>
-  <object id="1119" gid="80" x="4167.33" y="314.333" width="160" height="22"/>
-  <object id="1120" gid="80" x="4586.67" y="509" width="160" height="26"/>
-  <object id="1121" gid="80" x="4347.33" y="408.333" width="160" height="22"/>
-  <object id="1122" gid="80" x="5046.5" y="995.5" width="38" height="223"/>
-  <object id="1123" gid="80" x="4337.33" y="1603" width="160" height="38"/>
-  <object id="1124" gid="80" x="2959" y="1897" width="558" height="379"/>
-  <object id="1125" gid="80" x="2032" y="965" width="378" height="378"/>
-  <object id="1126" gid="80" x="1578" y="124" width="703" height="68"/>
-  <object id="1127" gid="80" x="909.333" y="1523" width="89.3333" height="75.3333"/>
-  <object id="1128" gid="80" x="932" y="1707" width="160" height="34"/>
-  <object id="1129" gid="80" x="5116" y="1007" width="842.667" height="1007.33"/>
-  <object id="1130" gid="80" x="5118.67" y="1919" width="842.667" height="355.333"/>
-  <object id="1131" gid="80" x="-1198" y="1919" width="1198" height="1922"/>
-  <object id="1132" gid="80" x="-1198" y="2511" width="7160" height="594"/>
-  <object id="1133" gid="80" x="-1198" y="-3" width="7153.45" height="510"/>
- </objectgroup>
  <layer id="3" name="Beckground" width="160" height="60">
   <data encoding="base64" compression="zlib">
    eJztnUtuGzEMhnVOr7LI2rfp3oGTNl0kvYKP1hHiQQSFpCiJEjkyCXxA0XrGMucXReoxfQkhvDiO4ziH5ZkB917vgu2SvJdjk3Pg2Sl861BCFyO0Bd3TNWyTqCWu9lL7Y6DtzrHZtPcUMnvdeEP4nXxuu/ai3X4pqNh4NdC+lck1Vvr8prtbZGYbJfLRFnJduhblfGmdXV+l3OAU5mgRwzW5Fq35aLSTgfY73xwp5vXoLjXteBjxmKjDlj/eMKjrKN1x6yHIPB7qMDvuRX1x8jRIh9vfXfLPpppjfDepxZXqdOcnkO52/UCaiDrM+0dtDY4BadHSPKWPy33kuvlMnjMWsyAdztBErZZ3bcye43F+UjN+c5/zrsFXw78LyyE8j+xHaw43pWdsHQ0nfx35/SuOzXt/1/atdaB1SMi2/vOk3dajkdeXaZ6W5mWP7NtW/eUxy/NFGKq27K05V6E0l1jKW9MxJp0Ddz3q8M9AG2rBNFjSHjSHmZpUfrNijijJCv0dW2spXedrMbrk4492ezRI9QpZunfcEfX7Jfe1dpu0odYEH7V/DvT1BfKxRF8/35n1W6RzLEqDHgtloPJv7+vjYuGK9Qh37S2tb2fVf0fHY+EX0nVqSX/RLO1D0YSqkx9Bh6lx50g5MdHnH/iU9s6uqMOStegjzz84ftX2AwS1L2Nk7VPy14cB30hRik/RpNaNjjT3QO3NOE/aO43t4Zb21RX58wzSvaJcw9bQuGtrGnvic79iewS4551maTDVYuo3SoPa9W+o/DwnBubWWzdA39l7z1q/1+gN88FnZ5t7/GblDAvmv5o9xZxzY7lJa5DjT4n9CxJnOjX3a/fuTarpp6Uakxo/W/RRo0GJPETifNFM3UWL2msd47jXtdy/d9xtOR8pEfsgTXB1aK1u6NUdda54xT2RPWdy/xI+rL0XNK5xNag9h0ydYeHoruZcMYZkzq9dP3B4R3wrnZdw52da71+bz7XoC7Ndd7064LwfFpq3sqCz1lwQ8/uIWMTRoGQt1hPLuCbRT2vbZOEdNBLvwOjN+VpqyJIGJfU3yiTG2RbdQda7llaazxyh0ecvH96w3zR6XYbS4Ii4W2ul2qHmeY7SXW5HWdOldFfKY2ZokJMDtsRdynK9jfzdNbqD+kHJeucRJMZ1rA+WtDdDd1IabAH6zRJ6k4p5nH5Qs87e0zeknwGlvdm6S6HeYzXqO2fG+fy5pobpraTnEfNZUBvjeXiJ55BrT1NvENjai/Z8oBaceMp9R2Zg3Bd7P8Pb/e+ltMe9RuO9urNjoGVqa1Dova37v+1GXY/1/1x/v+5o+2cUrkEdoPh3vr9LNmSfnalBS3HwCHMLFuHGUmwPEVSXrhwDI1RN4joch4V3eFrC0h77a7Cxzjqa1fbl9IJpUKs9FjWoee7iEcg1qN0ef8aPR54TarfHmcOR/o8tx3EcRwfPCx1pajTl+nMc55HxGOhI4VpyHH3+A5DHkOw=

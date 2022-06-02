@@ -2,23 +2,6 @@
 <map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="150" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="304">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <tileset firstgid="83" source="NormalTerrain.tsx"/>
- <objectgroup id="8" name="BackgroundObjects">
-  <object id="288" gid="80" x="0" y="1312" width="1024" height="575"/>
-  <object id="289" gid="80" x="1024" y="1312" width="1024" height="575"/>
-  <object id="290" gid="80" x="2048" y="1312" width="1024" height="575"/>
-  <object id="291" gid="80" x="3072" y="1312" width="1024" height="575"/>
-  <object id="292" gid="80" x="4096" y="1312" width="1024" height="575"/>
-  <object id="294" gid="80" x="5120" y="1312" width="1024" height="575"/>
-  <object id="295" gid="80" x="-1024" y="1312" width="1024" height="575"/>
-  <object id="296" gid="81" x="-1023" y="1600" width="1023" height="288"/>
-  <object id="297" gid="81" x="93" y="1361" width="363" height="49"/>
-  <object id="298" gid="81" x="640" y="1569" width="363" height="258"/>
-  <object id="299" gid="81" x="1314" y="1362" width="363" height="53"/>
-  <object id="300" gid="81" x="2047" y="1601" width="1381" height="259"/>
-  <object id="301" gid="81" x="3825" y="1584" width="363" height="272"/>
-  <object id="302" gid="81" x="4803" y="1602.67" width="1339" height="293.667"/>
-  <object id="303" gid="82" x="-1023.09" y="738" width="7167.09" height="737.242"/>
- </objectgroup>
  <layer id="2" name="BackgroundAssets" width="150" height="50">
   <data encoding="base64" compression="zlib">
    eJzt2klqwzAUxvF3ifZ0XfcQXXfddfem8+gb1sIRFUJ2NFpD/j94BEIwkvP5SSgRAQAAAAAAAAAAAAAAAAAAAAAAAAAAwKV4XurlVK9LPdYdDgagMjU5SuXroeK40K8vcWfKzhcQ6kfW/MzWq1nf1UaHXt2IX8/6rDVAdM9cF119izURsVT/uhX2WyhD58vO2G/NQQ3KPOfZqhHZezDVs+5kvR+Ip/N0bn87yf/ZYu/U2ajKzr1sn3FN1UbXt5A8jZSvvRyRq3D2OheTJ1e+zN9IevAm69jfhVzFMrOUI0e+OWs1Y769Sp9DYFWiJ43Uy1zj3OtbCNs3hNxb8/lNqRaytXf+bt6DJyFXSkqmtu6xz/4jNHup2bL/8xLj3G875rwvXcr3vvV+aK58K5br2cmVra25lqafk5y9/Hqpq9NrqhLff6nKNc/e99YqU3oOKtct7BNsIWtRbOW49keGedrj6Fnr89BnMjVqlrDMpch9vdpa38ul9pmSfS53DkbJlNL6XI5cy1KvkWOuve+tTC3P46he00K/0vMdxVx7ADtKr2m+13R9zt5/5ZovyiuVCfrVZau9th2dq6P8AYVFJ8I=
