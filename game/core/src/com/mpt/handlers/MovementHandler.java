@@ -207,8 +207,8 @@ public class MovementHandler {
             } else wasLastFrameYVelocityZero = true;
         } else wasLastFrameYVelocityZero = false;
 
-        if ((Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) && player.getPlayerStamina() >= 60 && changeState(State.ATTACKING))
-            player.setPlayerStamina(player.getPlayerStamina() - 60);
+        if ((Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) && player.getPlayerStamina() >= 40 && changeState(State.ATTACKING))
+            player.setPlayerStamina(player.getPlayerStamina() - 40);
 
         player.getBody().setLinearVelocity(player.getVelocityX() * player.getPlayerSpeed(), player.getBody().getLinearVelocity().y < 25 ? player.getBody().getLinearVelocity().y : 25);
     }
