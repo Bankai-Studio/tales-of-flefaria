@@ -2,6 +2,7 @@ package com.mpt.handlers;
 
 import com.mpt.objects.GameEntity;
 import com.mpt.objects.enemy.Enemy;
+import com.mpt.objects.enemy.FinalBoss;
 import com.mpt.objects.player.Player;
 
 public class CombatHandler {
@@ -21,8 +22,10 @@ public class CombatHandler {
                 enemy.setEnemyState(Enemy.EnemyState.DYING);
                 enemy.getAnimationHandler().setCurrent("death", false);
             } else {
-                enemy.setEnemyState(Enemy.EnemyState.HURT);
-                enemy.getAnimationHandler().setCurrent("hurt", false);
+                if(!(enemy instanceof FinalBoss)){
+                    enemy.setEnemyState(Enemy.EnemyState.HURT);
+                    enemy.getAnimationHandler().setCurrent("hurt", false);
+                }
             }
         } else if (attacker instanceof Enemy && victim instanceof Player) {
             enemy = (Enemy) attacker;

@@ -10,34 +10,26 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.mpt.handlers.AnimationHandler;
 import com.mpt.handlers.CombatHandler;
 import com.mpt.modules.MusicModule;
-import com.mpt.objects.player.Player;
 import com.mpt.objects.GameEntity;
+import com.mpt.objects.player.Player;
 import com.mpt.platform.GameScreen;
 
 import static com.mpt.constants.Constants.PPM;
 
 public abstract class Enemy extends GameEntity {
+    protected final AnimationHandler animationHandler;
     private final float initialPosX;
     private final float initialPosY;
     private final GameScreen gameScreen;
-    private boolean playerHasBeenSpotted;
+    private final Texture attackTexture;
     public boolean switchDirectionToRight;
     public boolean switchDirectionToLeft;
     protected float walkSpeed;
-    private float attackTimer = 0f;
-
-    private final Texture attackTexture;
-
-
-    // Enemy States
-    public enum EnemyState {
-        IDLE, WALKING, ATTACKING, DYING, HURT
-    }
-
     protected EnemyState enemyState;
     protected String direction;
     protected String enemyName;
-    protected final AnimationHandler animationHandler;
+    private boolean playerHasBeenSpotted;
+    private float attackTimer = 0f;
 
     public Enemy(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
@@ -94,7 +86,7 @@ public abstract class Enemy extends GameEntity {
             batch.draw(currentFrame, tX - width / 2, tY - height / 2, width * 1.8f, height * 1.8f);
         else batch.draw(currentFrame, tX, tY);
         if (playerSpotted(gameScreen.getPlayer()) && !enemyState.equals(EnemyState.DYING))
-            batch.draw(attackTexture, body.getPosition().x * PPM, body.getPosition().y * PPM + height ,(float)attackTexture.getWidth()/40,(float)attackTexture.getHeight()/40);
+            batch.draw(attackTexture, body.getPosition().x * PPM, body.getPosition().y * PPM + height, (float) attackTexture.getWidth() / 40, (float) attackTexture.getHeight() / 40);
     }
 
     public void enemyAttackPlayer(Player player) {
@@ -150,7 +142,10 @@ public abstract class Enemy extends GameEntity {
     }
 
     public boolean playerSpotted(Player player) {
-        playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 6f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 2f && player.getBody().getPosition().y >= this.getBody().getPosition().y - 0.4f;
+        if (this instanceof FinalBoss)
+            playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 6f + width / 2 / PPM;
+        else
+            playerHasBeenSpotted = Math.abs(player.getBody().getPosition().x - body.getPosition().x) < 6f && Math.abs(player.getBody().getPosition().y - body.getPosition().y) < 2f && player.getBody().getPosition().y >= this.getBody().getPosition().y - 0.4f;
         return playerHasBeenSpotted;
     }
 
@@ -258,10 +253,6 @@ public abstract class Enemy extends GameEntity {
         this.animationHandler.setCurrent("walk");
     }
 
-    public void setEnemyState(EnemyState enemyState) {
-        this.enemyState = enemyState;
-    }
-
     public void setFacingLeft() {
         direction = "LEFT";
     }
@@ -270,12 +261,12 @@ public abstract class Enemy extends GameEntity {
         direction = "RIGHT";
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public AnimationHandler getAnimationHandler() {
@@ -284,5 +275,14 @@ public abstract class Enemy extends GameEntity {
 
     public EnemyState getEnemyState() {
         return enemyState;
+    }
+
+    public void setEnemyState(EnemyState enemyState) {
+        this.enemyState = enemyState;
+    }
+
+    // Enemy States
+    public enum EnemyState {
+        IDLE, WALKING, ATTACKING, DYING, HURT
     }
 }
