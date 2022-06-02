@@ -88,7 +88,7 @@ public class Player extends GameEntity {
             state = State.IDLE;
             playerAnimations.setCurrent("idle");
             health = 100;
-            gameScreen.resetHealthLabel();
+            gameScreen.updateHealthBar();
         }
     }
 

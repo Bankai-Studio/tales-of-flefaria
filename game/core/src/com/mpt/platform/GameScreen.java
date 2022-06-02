@@ -15,9 +15,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -30,6 +29,7 @@ import com.mpt.objects.enemy.*;
 import com.mpt.objects.interactables.*;
 import com.mpt.objects.checkpoint.Checkpoint;
 import com.mpt.objects.player.Player;
+import sun.tools.jconsole.Tab;
 
 import java.util.ArrayList;
 
@@ -63,8 +63,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private Label coinValueLabel;
     private Label playerHealthLabel;
     private Image healthImage;
-    private Image healthBar;
-    private Image staminaImage;
+    private Image healthBarBackground;
+    private Image healthBarOvertop;
+    private Image staminaBackground;
     private Image staminaBar;
     private AssetManager assetManager;
     private String currentMap;
@@ -305,21 +306,64 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         Table root = new Table();
         root.setFillParent(true);
 
+
         Table coins = new Table();
+
         Image image = new Image(assetManager.get("interfaceAssets/coins.png", Texture.class));
         image.setScale(2.5f);
-        coinValueLabel = new Label("0", InterfaceModule.setupFont(30, Color.WHITE));
-        coins.add(image);
-        coins.add(coinValueLabel).padLeft(25f).padBottom(30f);
+        image.setOrigin(0, image.getHeight() / 2);
 
-        Table health = new Table();
-        healthBar = new Image(assetManager.get("interfaceAssets/healthBar.png", Texture.class));
-        healthBar.setScaleY(0.8f);
-        healthBar.setScaleX(1.010f);
+        coinValueLabel = new Label("0", InterfaceModule.setupFont(30, Color.WHITE));
+        coinValueLabel.setOrigin(0, coinValueLabel.getHeight() / 2);
+
+        coins.add(image).padRight(image.getWidth() + coinValueLabel.getWidth() + 5f);
+        coins.add(coinValueLabel);
+
+
+        Stack health = new Stack();
+
+        healthBarBackground = new Image(assetManager.get("interfaceAssets/healthBarBackground.png", Texture.class));
         healthImage = new Image(assetManager.get("interfaceAssets/health.png", Texture.class));
-        healthImage.setScaleX(500f);
-        healthImage.setScaleY(0.7f);
-        playerHealthLabel = new Label("100", InterfaceModule.setupFont(30, Color.WHITE));
+        healthBarOvertop = new Image(assetManager.get("interfaceAssets/healthBarOvertop.png", Texture.class));
+
+        healthBarBackground.setScale(1f);
+        healthBarBackground.setOrigin(0, healthBarBackground.getHeight() / 2);
+
+        Table healthTbl = new Table();
+        healthImage.setScaleY(1f);
+        healthImage.setScaleX(1000f);
+        healthImage.setOrigin(0, healthImage.getHeight() / 2);
+        healthTbl.add(healthImage).padLeft(5f).expand().left();
+
+        healthBarOvertop.setScale(1f);
+        healthBarOvertop.setOrigin(0, healthBarOvertop.getHeight() / 2);
+
+        health.add(healthBarBackground);
+        health.add(healthTbl);
+        health.add(healthBarOvertop);
+
+        Stack staminaStack = new Stack();
+        staminaStack.setOrigin(staminaStack.getWidth() / 2, staminaStack.getHeight() / 2);
+
+        staminaBackground = new Image(assetManager.get("interfaceAssets/staminaBar.png", Texture.class));
+        staminaBar = new Image(assetManager.get("interfaceAssets/stamina.png", Texture.class));
+
+        staminaBackground.setScaleY(1f);
+        staminaBackground.setScaleX(200f);
+        staminaBackground.setOrigin(staminaBar.getWidth() / 2, staminaBar.getHeight() / 2);
+
+        Table staminaBarTbl = new Table();
+        staminaBar.setScaleY(1f);
+        staminaBar.setScaleX(200f);
+        staminaBar.setOrigin(0, staminaBar.getHeight() / 2);
+        staminaBarTbl.add(staminaBar).padLeft(-100).expand().left();
+
+        staminaStack.add(staminaBackground);
+        staminaStack.add(staminaBarTbl);
+
+        //health.setDebug(true, true);
+
+        /*
         staminaBar = new Image(assetManager.get("interfaceAssets/staminaBar.png", Texture.class));
         staminaBar.setScaleY(0.7f);
         staminaBar.setScaleX(300f);
@@ -327,15 +371,20 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         staminaImage.setScaleY(0.7f);
         staminaImage.setScaleX(300f);
 
-        health.add(healthBar).padBottom(-10f);
-        health.add(healthImage).padLeft(-1002f).padBottom(-7f);
-        health.add(playerHealthLabel).padLeft(-517f);
-        health.add(staminaBar).padLeft(-800f).padBottom(-100f);
-        health.add(staminaImage).padLeft(-800f).padBottom(-100f);
+        //health.add(healthBarBackground);
+        health.add(healthImage).padLeft(-900f).padBottom(-7f);
+        //health.add(healthBarOvertop);
+        health.add(playerHealthLabel).padLeft(-417f);
+        health.add(staminaBar).padLeft(-700f).padBottom(-100f);
+        health.add(staminaImage).padLeft(-700f).padBottom(-100f);
 
         root.add(coins).padLeft(15f).padTop(10f).expand().top().left();
         root.add(health).padBottom(100f).expand().bottom().left().row();
-
+        */
+        root.add(coins).pad(30f).expand().top().left().row();
+        root.add(health).pad(20f).expand().bottom().row();
+        root.add(staminaStack).pad(20f).bottom();
+        root.setDebug(true, true);
         stage.addActor(root);
     }
 
@@ -346,18 +395,15 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private void loadAssets() {
         assetManager.load("interfaceAssets/coins.png", Texture.class);
         assetManager.load("interfaceAssets/health.png", Texture.class);
-        assetManager.load("interfaceAssets/healthBar.png", Texture.class);
+        assetManager.load("interfaceAssets/healthBarBackground.png", Texture.class);
+        assetManager.load("interfaceAssets/healthBarOvertop.png", Texture.class);
         assetManager.load("interfaceAssets/stamina.png", Texture.class);
         assetManager.load("interfaceAssets/staminaBar.png", Texture.class);
         assetManager.finishLoading();
     }
 
-    public void updateHealthLabel(int currentPlayerHealth, int damageProvided) {
-        playerHealthLabel.setText(Math.max(currentPlayerHealth, 0));
-        float scaleToBeRemoved = healthImage.getScaleX() - (damageProvided * 5f);
-        if ((damageProvided * 5f) > healthImage.getScaleX())
-            scaleToBeRemoved = 0;
-        healthImage.setScaleX(scaleToBeRemoved);
+    public void updateHealthBar() {
+        healthImage.setScaleX(Math.max((float) player.getHealth() * 10f, 0f));
         /*
         Timer.schedule(new Timer.Task() {
             @Override
@@ -375,12 +421,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     public void updateStamina(int stamina) {
-        staminaImage.setScaleX(stamina * 3f);
-    }
-
-    public void resetHealthLabel() {
-        playerHealthLabel.setText(player.getHealth());
-        healthImage.setScaleX(player.getHealth() * 5f);
+        staminaBar.setScaleX(stamina * 2f);
     }
 
     public void loadMap(String mapName, int character) {

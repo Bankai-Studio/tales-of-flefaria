@@ -107,12 +107,11 @@ public class CollisionHandler implements ContactListener {
 
     private void collisionKillBlock(Fixture fixture) {
         Player player = (Player) fixture.getBody().getUserData();
-        int damage = player.getHealth();
         player.setPlayerState(Player.State.DYING);
         player.setPlayerHealth(0);
         MusicModule.getPlayerDeathSound().play(0.1f);
         player.getPlayerAnimations().setCurrent("death");
-        gameScreen.updateHealthLabel(player.getHealth(), damage);
+        gameScreen.updateHealthBar();
     }
 
     private void endLevel() {
