@@ -1,7 +1,10 @@
 package com.mpt.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.Body;
+
+import java.util.ArrayList;
 
 public abstract class GameEntity {
 
@@ -11,6 +14,7 @@ public abstract class GameEntity {
     protected Body body;
     protected float adjustX;
     protected float adjustY;
+    public ArrayList<TextureAtlas> textureAtlases;
     public GameEntity(float width, float height, Body body) {
         x = body.getPosition().x;
         y = body.getPosition().y;
@@ -19,6 +23,11 @@ public abstract class GameEntity {
         this.body = body;
         velocityX = 0;
         velocityY = 0;
+        textureAtlases = new ArrayList<>();
+    }
+
+    public void dispose(){
+        for(TextureAtlas textureAtlas : textureAtlases) textureAtlas.dispose();
     }
 
     public abstract void update(float delta);

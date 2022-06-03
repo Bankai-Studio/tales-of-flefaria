@@ -7,7 +7,7 @@ import static com.mpt.constants.Constants.PPM;
 public class BodyModule {
     public BodyModule() {}
 
-    public static Body createBody(float x, float y, float width, float height, boolean isStatic, boolean isSensor, float friction, float restitution, World world) {
+    public static Body createBody(float x, float y, float width, float height, boolean isStatic, boolean isSensor, float friction, float restitution, short categoryBits, short maskBits, World world) {
         BodyDef bodyDef = new BodyDef();
 
         if(isStatic)
@@ -28,6 +28,8 @@ public class BodyModule {
         fixtureDef.friction = friction;
         fixtureDef.isSensor = isSensor;
         fixtureDef.restitution = restitution;
+        fixtureDef.filter.categoryBits = categoryBits;
+        fixtureDef.filter.maskBits = maskBits;
 
         body.createFixture(fixtureDef);
         polygonShape.dispose();

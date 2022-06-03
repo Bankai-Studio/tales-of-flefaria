@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="18">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="20">
  <tileset firstgid="1" source="ObjectsTileset.tsx"/>
  <objectgroup id="3" name="TileObjects"/>
  <objectgroup id="2" name="Objects">
@@ -12,12 +12,21 @@
   <object id="3" x="3200" y="992">
    <polygon points="0,0 -32,0 -32,-992 0,-992"/>
   </object>
-  <object id="4" name="Player" x="63.3031" y="960.031" width="32" height="32"/>
+  <object id="4" name="Player" x="63.3031" y="960.031" width="22" height="32"/>
   <object id="7" name="Spawnpoint" x="96" y="960" width="32" height="32"/>
   <object id="13" name="GameOver" x="3098.16" y="962.182" width="30" height="30"/>
   <object id="14" name="GhostLeft" x="520.894" y="946.439" width="25" height="43"/>
-  <object id="15" name="GhostLeft" x="1556.35" y="949.5" width="25" height="43"/>
+  <object id="15" name="FinalBoss" x="1446.35" y="876.5" width="155" height="116"/>
   <object id="16" name="GhostLeft" x="2423.53" y="948.955" width="25" height="43"/>
-  <object id="17" name="EndpointLeft" x="40" y="6.66667" width="32" height="64"/>
+  <object id="17" name="EndpointLeft" x="32" y="32.6667" width="32" height="64"/>
+  <object id="18" x="32" y="0">
+   <polygon points="0,0 0,32 3136,32 3136,0"/>
+  </object>
+  <object id="19" name="Checkpoint" x="95.9091" y="927.636" width="32" height="64"/>
  </objectgroup>
+ <layer id="4" name="Platform" width="100" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt28EJwzAUBcFfotyBS0spKc0Yh7SgBc/AQwWsjtKamWPmY/u3npOI4zca9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a7hZr5tz9zt7+/w2+u+8EAADwHhcJ286B
+  </data>
+ </layer>
 </map>

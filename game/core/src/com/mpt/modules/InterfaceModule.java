@@ -27,10 +27,10 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
     protected final InputMultiplexer inputMultiplexer;
 
     public InterfaceModule() {
-        titleStyle = setupFont(72, Color.WHITE, titleFreeTypeFontGenerator);
-        subTitleStyle = setupFont(36, Color.WHITE, textFreeTypeFontGenerator);
-        textStyle = setupFont(18, Color.WHITE, textFreeTypeFontGenerator);
-        smallTextStyle = setupFont(12, Color.WHITE, textFreeTypeFontGenerator);
+        titleStyle = setupFont(72, titleFreeTypeFontGenerator);
+        subTitleStyle = setupFont(36, textFreeTypeFontGenerator);
+        textStyle = setupFont(18, textFreeTypeFontGenerator);
+        smallTextStyle = setupFont(12, textFreeTypeFontGenerator);
 
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = subTitleStyle.font;
@@ -86,7 +86,7 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
         stage.addActor(table);
     }
 
-    private Label.LabelStyle setupFont(int fontSize, Color fontColor, FreeTypeFontGenerator freeTypeFontGenerator) {
+    private Label.LabelStyle setupFont(int fontSize, FreeTypeFontGenerator freeTypeFontGenerator) {
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontParameter.size = fontSize;
         fontParameter.incremental = true;
@@ -94,7 +94,7 @@ public abstract class InterfaceModule extends ScreenAdapter implements InputProc
         Label.LabelStyle fontStyle = new Label.LabelStyle();
         fontStyle.font = freeTypeFontGenerator.generateFont(fontParameter);
         fontStyle.font.setUseIntegerPositions(true);
-        fontStyle.fontColor = fontColor;
+        fontStyle.fontColor = Color.WHITE;
 
         return fontStyle;
     }

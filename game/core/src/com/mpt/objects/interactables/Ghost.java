@@ -15,15 +15,20 @@ public class Ghost extends GameObject {
     private final AnimationHandler animationHandler = new AnimationHandler();
     private boolean touched;
     private boolean isFlipped;
+    private final TextureAtlas charset;
 
     public Ghost(float width, float height, Body body, boolean isFlipped) {
         super(width, height, body);
         body.setUserData(this);
-        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("./ghost/ghost.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("./ghost/ghost.atlas"));
         animationHandler.add("ghost", new Animation<>(1 / 12f, charset.findRegions("ghost")));
         animationHandler.setCurrent("ghost");
         this.isFlipped = isFlipped;
         touched = false;
+    }
+
+    public void dispose(){
+        charset.dispose();
     }
 
     @Override
@@ -39,5 +44,11 @@ public class Ghost extends GameObject {
 
     public void setTouched(boolean touched) {
         this.touched = touched;
+    }
+
+    public boolean isTouched(){
+        if(touched)
+            return true;
+        return false;
     }
 }

@@ -20,7 +20,6 @@ public class LoadingScreen extends InterfaceModule {
     protected void setup() {
         Table main = new Table();
         main.setFillParent(true);
-
         main.add(new Label("< LOADING >", textStyle));
         main.addAction(Actions.fadeOut(0f));
         main.addAction(Actions.sequence(Actions.fadeIn(3f), Actions.fadeOut(3f), Actions.run(() ->  {

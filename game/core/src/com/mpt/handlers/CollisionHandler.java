@@ -5,12 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mpt.modules.MusicModule;
-import com.mpt.objects.checkpoint.Checkpoint;
-import com.mpt.objects.endpoint.Endpoint;
-import com.mpt.objects.interactables.Coin;
-import com.mpt.objects.interactables.GameOver;
-import com.mpt.objects.interactables.Ghost;
-import com.mpt.objects.interactables.KillBlock;
+import com.mpt.objects.block.Block;
+import com.mpt.objects.bullets.Bullet;
+import com.mpt.objects.enemy.Enemy;
+import com.mpt.objects.enemy.FinalBoss;
+import com.mpt.objects.interactables.*;
 import com.mpt.objects.player.Player;
 import com.mpt.platform.GameOverScreen;
 import com.mpt.platform.GameScreen;
@@ -60,17 +59,37 @@ public class CollisionHandler implements ContactListener {
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof KillBlock)
             collisionKillBlock(fixtureB);
         if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Endpoint)
-            endLevel(fixtureA, fixtureB);
+            endLevel();
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Endpoint)
-            endLevel(fixtureB, fixtureA);
+            endLevel();
         if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Ghost)
             hideGhost(fixtureB);
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Ghost)
             hideGhost(fixtureA);
         if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof GameOver)
-            gameOver();
+            gameOver(fixtureB);
         if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof GameOver)
-            gameOver();
+            gameOver(fixtureA);
+        if (fixtureA.getBody().getUserData() instanceof Enemy && (fixtureB.getBody().getUserData() instanceof Block || fixtureB.getBody().getUserData() instanceof Box))
+            collisionWithBlock(fixtureA);
+        if (fixtureB.getBody().getUserData() instanceof Enemy && (fixtureA.getBody().getUserData() instanceof Block || fixtureA.getBody().getUserData() instanceof Box))
+            collisionWithBlock(fixtureB);
+        if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Block)
+            gameScreen.getMovementHandler().calculateFallingDamage();
+        if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Block)
+            gameScreen.getMovementHandler().calculateFallingDamage();
+        if (fixtureA.getBody().getUserData() instanceof Player && fixtureB.getBody().getUserData() instanceof Bullet)
+            hitPlayer(fixtureA, fixtureB);
+        if (fixtureB.getBody().getUserData() instanceof Player && fixtureA.getBody().getUserData() instanceof Bullet)
+            hitPlayer(fixtureB, fixtureA);
+        if (fixtureA.getBody().getUserData() instanceof Bullet && fixtureB.getBody().getUserData() instanceof Block)
+            destroyBullet((Bullet) fixtureA.getBody().getUserData());
+        if (fixtureB.getBody().getUserData() instanceof Bullet && fixtureA.getBody().getUserData() instanceof Block)
+            destroyBullet((Bullet) fixtureB.getBody().getUserData());
+        if (fixtureA.getBody().getUserData() instanceof Enemy && fixtureB.getBody().getUserData() instanceof Bullet)
+            hitEnemy(fixtureA, fixtureB);
+        if (fixtureB.getBody().getUserData() instanceof Enemy && fixtureA.getBody().getUserData() instanceof Bullet)
+            hitEnemy(fixtureB, fixtureA);
     }
 
     private void setNewCheckpoint(Fixture fixtureA, Fixture fixtureB) {
@@ -81,7 +100,7 @@ public class CollisionHandler implements ContactListener {
             MusicModule.getCheckPointMusic().play(0.1f);
             player.setRespawnPosition(checkpointPosition);
             checkpoint.setCheckpointClaimed();
-            for(Checkpoint checkpointChecked : gameScreen.getCheckpoints())
+            for (Checkpoint checkpointChecked : gameScreen.getCheckpoints())
                 if (checkpointChecked.isCheckpointCurrent()) checkpointChecked.setCheckpointCurrent(false);
             checkpoint.setCheckpointCurrent(true);
         }
@@ -92,7 +111,7 @@ public class CollisionHandler implements ContactListener {
         Coin coin = (Coin) fixtureB.getBody().getUserData();
         if (!coin.isCollected()) {
             coin.setIsCollected(true);
-            MusicModule.getCollectCoinSound().play(0.3f);
+            MusicModule.getCollectCoinSound().play(0.1f);
             player.setCollectedCoins(player.getCollectedCoins() + 1);
             gameScreen.updateCoins(player.getCollectedCoins());
         }
@@ -102,23 +121,72 @@ public class CollisionHandler implements ContactListener {
         Player player = (Player) fixture.getBody().getUserData();
         player.setPlayerState(Player.State.DYING);
         player.setPlayerHealth(0);
-        MusicModule.getPlayerDeathSound().play(0.1f);
         player.getPlayerAnimations().setCurrent("death");
+        gameScreen.updateHealthBar();
     }
 
-    private void endLevel(Fixture fixtureA, Fixture fixtureB) {
-        Player player = (Player) fixtureA.getBody().getUserData();
-        Endpoint endpoint = (Endpoint) fixtureB.getBody().getUserData();
+    private void endLevel() {
         MusicModule.getPortalSound().play(0.1f);
         ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadingScreen(gameScreen));
     }
 
-    private void hideGhost(Fixture fixture){
+    private void hideGhost(Fixture fixture) {
         Ghost ghost = (Ghost) fixture.getBody().getUserData();
-        ghost.setTouched(true);
+        if (!ghost.isTouched()) {
+            ghost.setTouched(true);
+            MusicModule.getGhostSound().setVolume(0.4f);
+            MusicModule.getGhostSound().play();
+        }
     }
 
-    private void gameOver(){
-        ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(gameScreen));
+    private void gameOver(Fixture fixture) {
+        GameOver gameOver = (GameOver) fixture.getBody().getUserData();
+        if (gameOver.isVisible()) ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(gameScreen));
+    }
+
+    private void collisionWithBlock(Fixture fixture) {
+        Enemy enemy = (Enemy) fixture.getBody().getUserData();
+        enemy.getBody().setLinearVelocity(0f, enemy.getBody().getLinearVelocity().y);
+    }
+
+    private void hitPlayer(Fixture fixtureA, Fixture fixtureB) {
+        Player player = (Player) fixtureA.getBody().getUserData();
+        Bullet bullet = (Bullet) fixtureB.getBody().getUserData();
+        if(player.getPlayerAnimations().isCurrent("heavyAttack") && player.getPlayerAnimations().isAnimationOverHalf()){
+            bullet.setHitByPlayer(true);
+            bullet.changeDirection();
+            player.setPlayerStamina(0);
+            return;
+        }
+        player.setPlayerHealth(Math.max(player.getHealth() - bullet.DAMAGE, 0));
+        gameScreen.updateHealthBar();
+        if (player.getHealth() <= 0) {
+            player.setPlayerState(Player.State.DYING);
+            player.getPlayerAnimations().setCurrent("death", false);
+        } else {
+            player.setPlayerState(Player.State.HURT);
+            player.getPlayerAnimations().setCurrent("hurt", false);
+        }
+        destroyBullet(bullet);
+    }
+
+    private void destroyBullet(Bullet bullet) {
+        bullet.setRemove(true);
+    }
+
+    private void hitEnemy(Fixture fixtureA, Fixture fixtureB) {
+        Enemy enemy = (Enemy) fixtureA.getBody().getUserData();
+        Bullet bullet = (Bullet) fixtureB.getBody().getUserData();
+        if(bullet.isHitByPlayer()){
+            enemy.setHealth(Math.max(enemy.getHealth() - Bullet.DAMAGE, 0));
+            if (enemy.getHealth() <= 0) {
+                enemy.setEnemyState(Enemy.EnemyState.DYING);
+                enemy.getAnimationHandler().setCurrent("death", false);
+            } else {
+                enemy.setEnemyState(Enemy.EnemyState.HURT);
+                enemy.getAnimationHandler().setCurrent("hurt", false);
+            }
+            destroyBullet(bullet);
+        }
     }
 }
