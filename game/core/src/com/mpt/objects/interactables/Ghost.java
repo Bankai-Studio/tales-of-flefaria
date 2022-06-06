@@ -20,7 +20,7 @@ public class Ghost extends GameObject {
     public Ghost(float width, float height, Body body, boolean isFlipped) {
         super(width, height, body);
         body.setUserData(this);
-        charset = new TextureAtlas(Gdx.files.internal("./ghost/ghost.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("ghost/ghost.atlas"));
         animationHandler.add("ghost", new Animation<>(1 / 12f, charset.findRegions("ghost")));
         animationHandler.setCurrent("ghost");
         this.isFlipped = isFlipped;

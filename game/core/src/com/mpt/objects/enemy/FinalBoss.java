@@ -21,10 +21,10 @@ public class FinalBoss extends Enemy {
         health = 1000;
         enemyName = "FinalBoss";
         loadSprites();
-        straightBulletDark = new Texture(Gdx.files.internal("./enemies/FinalBoss/Bullet1.png"));
-        straightBulletBright = new Texture(Gdx.files.internal("./enemies/FinalBoss/Bullet2.png"));
-        mortarStrikeDark = new Texture(Gdx.files.internal("./enemies/FinalBoss/Bullet3.png"));
-        mortarStrikeBright = new Texture(Gdx.files.internal("./enemies/FinalBoss/Bullet4.png"));
+        straightBulletDark = new Texture(Gdx.files.internal("enemies/FinalBoss/Bullet1.png"));
+        straightBulletBright = new Texture(Gdx.files.internal("enemies/FinalBoss/Bullet2.png"));
+        mortarStrikeDark = new Texture(Gdx.files.internal("enemies/FinalBoss/Bullet3.png"));
+        mortarStrikeBright = new Texture(Gdx.files.internal("enemies/FinalBoss/Bullet4.png"));
     }
 
     public void disposeBullets() {

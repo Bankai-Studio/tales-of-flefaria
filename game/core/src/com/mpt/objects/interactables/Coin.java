@@ -18,7 +18,7 @@ public class Coin extends GameObject {
     public Coin(float width, float height, Body body) {
         super(width, height, body);
         body.setUserData(this);
-        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("./coin/coin.atlas"));
+        TextureAtlas charset = new TextureAtlas(Gdx.files.internal("coin/coin.atlas"));
         animationHandler.add("coin", new Animation<>(1 / 16f, charset.findRegions("coin")));
         animationHandler.setCurrent("coin");
     }

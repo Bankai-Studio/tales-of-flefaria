@@ -24,7 +24,7 @@ public class GameOver extends GameObject {
         super(width, height, body);
         body.setUserData(this);
         animationHandler = new AnimationHandler();
-        charset = new TextureAtlas(Gdx.files.internal("./NPCs/Old_man/idle.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("NPCs/Old_man/idle.atlas"));
         animationHandler.add("idle", new Animation<>(1 / 4f, charset.findRegions("idle")));
         animationHandler.setCurrent("idle");
         visible = false;

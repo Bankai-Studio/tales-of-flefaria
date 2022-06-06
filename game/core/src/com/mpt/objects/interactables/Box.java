@@ -13,7 +13,7 @@ public class Box extends GameObject {
 
     public Box(float width, float height, Body body) {
         super(width, height, body);
-        texture = new Texture(Gdx.files.internal("./box/box.png"));
+        texture = new Texture(Gdx.files.internal("box/box.png"));
     }
 
     @Override
