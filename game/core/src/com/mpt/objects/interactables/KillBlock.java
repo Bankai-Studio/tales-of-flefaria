@@ -14,7 +14,7 @@ public class KillBlock extends GameObject {
     public KillBlock(float width, float height, Body body, String name) {
         super(width, height, body);
         body.setUserData(this);
-        texture = new Texture(Gdx.files.internal("./killBlock/"+name+".png"));
+        texture = new Texture(Gdx.files.internal("killBlock/"+name+".png"));
     }
 
     public void dispose(){

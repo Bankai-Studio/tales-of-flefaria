@@ -33,7 +33,7 @@ public class MusicModule {
         rolloverSound = Gdx.audio.newSound(Gdx.files.internal("audio/ui_sfx/OptionRollover.wav"));
         collectCoinSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/CollectCoin.mp3"));
         checkPointSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Checkpoint.ogg"));
-        gameOverSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/GameOverSound.wav"));
+        gameOverSound = Gdx.audio.newMusic(Gdx.files.internal("audio/game_sfx/GameoverSound.wav"));
         jumpSound1 = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Jump1.mp3"));
         jumpSound2 = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/Jump2.mp3"));
         doubleJumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/game_sfx/doubleJumpSound.mp3"));

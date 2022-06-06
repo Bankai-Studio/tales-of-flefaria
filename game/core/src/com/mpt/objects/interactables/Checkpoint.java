@@ -20,9 +20,9 @@ public class Checkpoint extends GameObject {
         isCheckpointClaimed = false;
         isCheckpointCurrent = false;
         body.setUserData(this);
-        textureUnclaimed = new Texture(Gdx.files.internal("./checkpoint/checkpointUnclaimed.png"));
-        textureClaimed = new Texture(Gdx.files.internal("./checkpoint/checkpointClaimed.png"));
-        textureDead = new Texture(Gdx.files.internal("./checkpoint/checkpointDead.png"));
+        textureUnclaimed = new Texture(Gdx.files.internal("checkpoint/checkpointUnclaimed.png"));
+        textureClaimed = new Texture(Gdx.files.internal("checkpoint/checkpointClaimed.png"));
+        textureDead = new Texture(Gdx.files.internal("checkpoint/checkpointDead.png"));
     }
 
     @Override

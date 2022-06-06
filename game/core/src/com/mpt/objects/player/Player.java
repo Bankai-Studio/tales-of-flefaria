@@ -123,47 +123,47 @@ public class Player extends GameEntity {
         }
         TextureAtlas charset;
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/lightAttack.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/lightAttack.atlas"));
         playerAnimations.add("lightAttack", new Animation<>(1 / 8f, charset.findRegions("lightAttack")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/heavyAttack.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/heavyAttack.atlas"));
         playerAnimations.add("heavyAttack", new Animation<>(1 / 6f, charset.findRegions("heavyAttack")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/climb.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/climb.atlas"));
         playerAnimations.add("climb", new Animation<>(FRAME_TIME, charset.findRegions("climb")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/death.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/death.atlas"));
         playerAnimations.add("death", new Animation<>(1 / 5f, charset.findRegions("death")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/fall.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/fall.atlas"));
         playerAnimations.add("fall", new Animation<>(FRAME_TIME, charset.findRegions("fall")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/hurt.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/hurt.atlas"));
         playerAnimations.add("hurt", new Animation<>(FRAME_TIME, charset.findRegions("hurt")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/idle.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/idle.atlas"));
         playerAnimations.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/jump.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/jump.atlas"));
         playerAnimations.add("jump", new Animation<>(FRAME_TIME, charset.findRegions("jump")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/push.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/push.atlas"));
         playerAnimations.add("push", new Animation<>(FRAME_TIME, charset.findRegions("push")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/run.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/run.atlas"));
         playerAnimations.add("run", new Animation<>(FRAME_TIME, charset.findRegions("run")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./characters/" + characterName + "/walk.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("characters/" + characterName + "/walk.atlas"));
         playerAnimations.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
         textureAtlases.add(charset);
     }

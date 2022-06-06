@@ -212,7 +212,7 @@ public class MovementHandler {
             } else wasLastFrameYVelocityZero = true;
         } else wasLastFrameYVelocityZero = false;
 
-        if ((Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) && player.getPlayerStamina() >= 40 && changeState(State.ATTACKING))
+        if ((Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isKeyPressed(Input.Keys.X) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.C)) && player.getPlayerStamina() >= 40 && changeState(State.ATTACKING))
             player.setPlayerStamina(player.getPlayerStamina() - 40);
 
         player.getBody().setLinearVelocity(player.getVelocityX() * player.getPlayerSpeed(), player.getBody().getLinearVelocity().y < 25 ? player.getBody().getLinearVelocity().y : 25);
@@ -304,7 +304,7 @@ public class MovementHandler {
         }
         if (newState.equals(State.ATTACKING)) {
             if (!currentState.equals(State.RUNNING) && !currentState.equals(State.PUSHING) && !currentState.equals(State.CLIMBING)) {
-                if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) playerAnimations.setCurrent("lightAttack", false);
+                if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isKeyPressed(Input.Keys.X)) playerAnimations.setCurrent("lightAttack", false);
                 else playerAnimations.setCurrent("heavyAttack", false);
                 changed = true;
             }

@@ -18,7 +18,7 @@ public class Endpoint extends GameObject {
     public Endpoint(float width, float height, Body body, boolean isFlipped) {
         super(width, height, body);
         body.setUserData(this);
-        charset = new TextureAtlas(Gdx.files.internal("./portal/portal.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("portal/portal.atlas"));
         animationHandler.add("portal", new Animation<>(1 / 16f, charset.findRegions("portal")));
         animationHandler.setCurrent("portal");
         this.isFlipped = isFlipped;

@@ -46,7 +46,7 @@ public abstract class Enemy extends GameEntity {
         direction = "RIGHT";
         animationHandler = new AnimationHandler();
         enemyState = EnemyState.IDLE;
-        attackTexture = new Texture(Gdx.files.internal("./enemies/exclamationPoint.png"));
+        attackTexture = new Texture(Gdx.files.internal("enemies/exclamationPoint.png"));
     }
 
     @Override
@@ -234,23 +234,23 @@ public abstract class Enemy extends GameEntity {
             return;
         }
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/attack.atlas"));
         this.animationHandler.add("attack", new Animation<>(FRAME_TIME, charset.findRegions("attack")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/death.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/death.atlas"));
         this.animationHandler.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/hurt.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/hurt.atlas"));
         this.animationHandler.add("hurt", new Animation<>(FRAME_TIME, charset.findRegions("hurt")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/idle.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/idle.atlas"));
         this.animationHandler.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/walk.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/walk.atlas"));
         this.animationHandler.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
         textureAtlases.add(charset);
 
@@ -261,31 +261,31 @@ public abstract class Enemy extends GameEntity {
         TextureAtlas charset;
         float FRAME_TIME = 1 / 6f;
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack2.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/attack2.atlas"));
         this.animationHandler.add("attack", new Animation<>(FRAME_TIME, charset.findRegions("attack2")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack3.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/attack3.atlas"));
         this.animationHandler.add("mortarStrike", new Animation<>(FRAME_TIME, charset.findRegions("attack3")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/attack4.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/attack4.atlas"));
         this.animationHandler.add("shoot", new Animation<>(FRAME_TIME, charset.findRegions("attack4")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/death.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/death.atlas"));
         this.animationHandler.add("death", new Animation<>(FRAME_TIME, charset.findRegions("death")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/hurt.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/hurt.atlas"));
         this.animationHandler.add("hurt", new Animation<>(FRAME_TIME, charset.findRegions("hurt")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/idle.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/idle.atlas"));
         this.animationHandler.add("idle", new Animation<>(FRAME_TIME, charset.findRegions("idle")));
         textureAtlases.add(charset);
 
-        charset = new TextureAtlas(Gdx.files.internal("./enemies/" + enemyName + "/walk.atlas"));
+        charset = new TextureAtlas(Gdx.files.internal("enemies/" + enemyName + "/walk.atlas"));
         this.animationHandler.add("walk", new Animation<>(FRAME_TIME, charset.findRegions("walk")));
         textureAtlases.add(charset);
 
