@@ -1,4 +1,4 @@
-# miniature-palm-tree
+# Tales of Flefaria
 
 <p align="right">
     <a href="https://github.com/Bankai-Studio/miniature-palm-tree/actions/workflows/codeql-analysis.yml">
