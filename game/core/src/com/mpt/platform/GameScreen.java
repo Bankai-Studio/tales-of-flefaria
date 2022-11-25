@@ -546,4 +546,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public ArrayList<Bullet> getBullets() {
         return bullets;
     }
+
+    public String getCurrentMap() {
+        return currentMap;
+    }
 }
