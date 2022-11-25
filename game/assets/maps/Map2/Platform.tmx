@@ -204,7 +204,7 @@
   <object id="1089" gid="75" x="2180.5" y="1602" width="27" height="16"/>
  </objectgroup>
  <objectgroup id="2" name="Objects">
-  <object id="5" name="Player" x="64" y="1280" width="22" height="30"/>
+  <object id="5" name="Player" x="64" y="1280" width="20" height="28"/>
   <object id="280" x="0" y="1344">
    <polygon points="0,0 224,0 224,32 0,32"/>
   </object>

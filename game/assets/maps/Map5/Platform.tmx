@@ -12,7 +12,7 @@
   <object id="3" x="3200" y="992">
    <polygon points="0,0 -32,0 -32,-992 0,-992"/>
   </object>
-  <object id="4" name="Player" x="63.3031" y="960.031" width="22" height="32"/>
+  <object id="4" name="Player" x="63.3031" y="960.031" width="20" height="32"/>
   <object id="7" name="Spawnpoint" x="96" y="960" width="32" height="32"/>
   <object id="13" name="GameOver" x="3098.16" y="962.182" width="30" height="30"/>
   <object id="14" name="GhostLeft" x="520.894" y="946.439" width="25" height="43"/>
