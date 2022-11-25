@@ -375,7 +375,7 @@
   <object id="207" name="KillBlock" x="773.333" y="1473" width="19.3333" height="30.6667"/>
   <object id="209" name="KillBlock" x="871.333" y="1407.67" width="19.3333" height="30.6667"/>
   <object id="210" name="KillBlock" x="937.833" y="1312.67" width="19.3333" height="30.6667"/>
-  <object id="216" name="Player" x="192" y="1117" width="22" height="30"/>
+  <object id="216" name="Player" x="192" y="1117" width="20" height="28"/>
   <object id="222" name="Snake" x="191.5" y="1263.5" width="32" height="17"/>
   <object id="226" name="BigBloated" x="1338" y="1214.67" width="32" height="32"/>
   <object id="228" name="BigBloated" x="2496" y="1120" width="32" height="32"/>
